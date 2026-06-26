@@ -371,3 +371,11 @@ Lint automatico (script) su 260 file della wiki fusa.
 - 06 Metodologia e Tool/31 HackTricks (cheat-sheet pentest, citato ~60 pagine in testo piano) e 32 ExploitDB (archivio exploit + searchsploit). Mappa aggiornata.
 - CryptoHack: nessuna pagina/alias necessari (il ref "Mathematics (Modular Math)" risolve gia su Aritmetica Modulare; il [[CryptoHack]] nudo era solo in log dentro backtick).
 - Fix log: link [[Reverse Shell e Bind Shell]] spezzato su due righe ricongiunto.
+
+## [2026-06-26] ingest | Sciame agenti: +4 aree expert, 10 stub completati
+- Sciame di 5 agenti paralleli (isolati per cartella) per colmare i gap dell'analisi.
+- **Stub completati** (10 -> maturo, con fonti reali, ## Lab, nota etica): Malware, GTFOBins, Penetration Testing, TryHackMe, HackTheBox, HackTricks, ExploitDB, Zeek, Suricata, Tool di Rete in Python.
+- **Nuove aree expert** (fase 3-4): `11 Cloud Security` (10), `12 AppSec Avanzato` (11), `13 Reverse Engineering e Exploit Dev` (11), `14 DFIR e Detection Engineering` (11). Ogni pagina: meccanismo + comandi/payload reali + ## Lab + fonti autorevoli.
+- 2 agenti (13, 14) bloccati dal watchdog dopo aver scritto quasi tutto: completate a mano le pagine mancanti `10 Heap Exploitation` e `10 Threat Intelligence (Diamond Model, Pyramid of Pain)`.
+- index.md aggiornato (nav + 4 blocchi aree avanzate). Analisi salvata in `Sintesi/Analisi e Roadmap Expert.md`.
+- Lint: ricongiunti 3 wikilink spezzati su due righe nelle nuove aree. Link rotti residui = marker di pagine future (Malware Analyst, OpenVAS, Logging e Monitoraggio, ecc.).

@@ -33,6 +33,12 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 10. [[00 — Mappa Python|🐍 Python]]
 11. [[00 — Mappa Algoritmi e Strutture Dati|🧮 Algoritmi e Strutture Dati]]
 
+**Aree avanzate (expert):**
+12. [[00 — Mappa Cloud Security|☁️ Cloud Security]]
+13. [[00 — Mappa AppSec Avanzato|🧪 AppSec Avanzato]]
+14. [[00 — Mappa Reverse Engineering e Exploit Dev|🔬 Reverse Engineering e Exploit Dev]]
+15. [[00 — Mappa DFIR e Detection Engineering|🔎 DFIR e Detection Engineering]]
+
 **Percorso consigliato neofita:** Fondamenti → Reti → Linux → Crittografia → Windows → Web → Metodologia → Blue Team → Python.
 **Fondamenti CS (trasversali):** Sistemi Operativi e Algoritmi e Strutture Dati — teoria di supporto, leggibili in parallelo.
 
@@ -77,6 +83,24 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 
 ### 🧮 10 Algoritmi e Strutture Dati
 [[Complessità Computazionale]] · [[Array vs Linked List]] · [[Stack, Queue e Deque]] · [[Hash Table]] · [[Alberi Binari e BST]] · [[Heap e Priority Queue]] · [[Skip List]] · [[Trie]] · [[Grafi]] · [[Algoritmi di Ricerca]] · [[Algoritmi di Ordinamento]] · [[BFS e DFS]] · [[Algoritmo di Dijkstra]] · [[Algoritmo di Bellman-Ford]] · [[Divide et Impera]] · [[Programmazione Dinamica]] · [[Algoritmi Greedy]] · [[Backtracking]] · [[Algoritmi Crittografici]]
+
+---
+
+## 🚀 Aree avanzate (expert)
+
+> Livello fase 3-4. Vedi [[Analisi e Roadmap Expert]].
+
+### ☁️ 11 Cloud Security
+[[Fondamenti Cloud e Shared Responsibility]] · [[IAM Cloud (utenti, ruoli, policy)]] · [[AWS Sicurezza (S3, EC2, IAM, STS)]] · [[Azure e Entra ID Sicurezza]] · [[SSRF e Metadata Service (IMDS)]] · [[Privilege Escalation in Cloud]] · [[Container Security (Docker)]] · [[Kubernetes Security (RBAC, escape)]] · [[Logging e Detection Cloud (CloudTrail)]]
+
+### 🧪 12 AppSec Avanzato
+[[Insecure Deserialization Avanzata (gadget chains)]] · [[Attacchi JWT]] · [[OAuth 2.0 e OpenID Connect Attacks]] · [[SAML e SSO Attacks]] · [[HTTP Request Smuggling]] · [[Prototype Pollution]] · [[Race Condition Web]] · [[GraphQL Security]] · [[Web Cache Poisoning]] · [[SSTI Avanzato e Sandbox Escape]]
+
+### 🔬 13 Reverse Engineering e Exploit Dev
+[[Assembly x86-64 Essenziale]] · [[Analisi Statica con Ghidra]] · [[Analisi Dinamica con GDB e x64dbg]] · [[Malware Analysis (statica e dinamica)]] · [[Tecniche Anti-Analisi e Unpacking]] · [[Stack Buffer Overflow]] · [[ret2libc e ROP]] · [[Bypass Protezioni (ASLR, DEP, Stack Canary, PIE)]] · [[Format String Exploitation]] · [[Heap Exploitation (introduzione)]]
+
+### 🔎 14 DFIR e Detection Engineering
+[[Digital Forensics Fondamenti]] · [[Memory Forensics con Volatility]] · [[Disk Forensics e Timeline Analysis]] · [[Windows Forensics (artefatti)]] · [[Log Analysis Avanzata e Correlazione]] · [[Detection Engineering]] · [[Threat Hunting]] · [[Query di Hunting (KQL e SPL)]] · [[MITRE D3FEND e Purple Teaming]] · [[Threat Intelligence (Diamond Model, Pyramid of Pain)]]
 
 ---
 
