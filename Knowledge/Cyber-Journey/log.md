@@ -272,7 +272,7 @@ Seconda ondata ultra-profonda (Reti). Riscritte:
   numerico, fast retransmit/SACK, flusso vs congestione (slow start/AIMD/CUBIC), macchina a stati
   (TIME_WAIT/CLOSE_WAIT con significato diagnostico), sicurezza estesa (RST injection, SYN flood+cookies,
   ISN prediction), Q&A. ~140 righe.
-Nessuna pagina nuova. Evitato 1 ghost-link ([[IDS e IPS]] inesistente → reso testo). Resto link OK.
+Nessuna pagina nuova. Evitato 1 ghost-link (`IDS e IPS` inesistente → reso testo). Resto link OK.
 Prossima ondata 3 (servizi): DNS + DHCP + NAT.
 
 ## [2026-06-23] ingest | Approfondimento Reti+Linux — ondate 3-6 (sciame di 9 agenti)
@@ -296,7 +296,7 @@ LINUX
 
 Più le 6 pagine fatte a mano nelle ondate 1-2 (OSI, IP, Subnetting, TCP-IP, ARP, TCP). Totale aree
 Reti+Linux ora interamente a livello ultra. Lint link post-sciame: 0 ghost reali nelle pagine (i 64
-"unresolved" sono falsi positivi: regex [[:space:]], test bash [[ ]], alias-in-tabella \|, esempi in
+"unresolved" sono falsi positivi: regex `[[:space:]]`, test bash `[[ ]]`, alias-in-tabella `\|`, esempi in
 WIKI_SCHEMA.md/template, candidati esterni GTFOBins/TryHackMe/Zeek/Suricata). index/MOC invariati (nessuna
 pagina nuova, solo espansioni). Candidati nuove pagine emersi: Zeek, Suricata, fail2ban, GTFOBins, ZTNA.
 
@@ -363,13 +363,13 @@ Lint automatico (script) su 260 file della wiki fusa.
 - 06 Metodologia e Tool/29 TryHackMe, 30 HackTheBox (piattaforme pratica). Mappa aggiornata. Alias "Tool di Rete"->Strumenti di Rete CLI.
 
 ## [2026-06-26] lint | Pulizia: rimosso PROMPTS_AGENTI.md obsoleto
-- Eliminato PROMPTS_AGENTI.md (scaffolding bootstrap della vecchia wiki/, ormai assorbita; referenziava struttura morta wiki/linux/, concept-*.md, tag [[sicurezza]]). -23 link rotti.
+- Eliminato PROMPTS_AGENTI.md (scaffolding bootstrap della vecchia wiki/, ormai assorbita; referenziava struttura morta wiki/linux/, concept-*.md, tag `sicurezza`). -23 link rotti.
 - Verificato: nessuna wiki/ residua, niente schema obsoleto residuo, niente backup .bak/.original. blackhatpython.pdf gia spostato in Risorse/.
 - Link rotti: 79 -> 56 (residui = placeholder in WIKI_SCHEMA.md/Template + single-ref minori, non junk).
 
 ## [2026-06-26] ingest/lint | Stub HackTricks + ExploitDB; fix artefatti log
 - 06 Metodologia e Tool/31 HackTricks (cheat-sheet pentest, citato ~60 pagine in testo piano) e 32 ExploitDB (archivio exploit + searchsploit). Mappa aggiornata.
-- CryptoHack: nessuna pagina/alias necessari (il ref "Mathematics (Modular Math)" risolve gia su Aritmetica Modulare; il [[CryptoHack]] nudo era solo in log dentro backtick).
+- CryptoHack: nessuna pagina/alias necessari (il ref "Mathematics (Modular Math)" risolve gia su Aritmetica Modulare; il `CryptoHack` nudo era solo in log dentro backtick).
 - Fix log: link [[Reverse Shell e Bind Shell]] spezzato su due righe ricongiunto.
 
 ## [2026-06-26] ingest | Sciame agenti: +4 aree expert, 10 stub completati
@@ -379,3 +379,12 @@ Lint automatico (script) su 260 file della wiki fusa.
 - 2 agenti (13, 14) bloccati dal watchdog dopo aver scritto quasi tutto: completate a mano le pagine mancanti `10 Heap Exploitation` e `10 Threat Intelligence (Diamond Model, Pyramid of Pain)`.
 - index.md aggiornato (nav + 4 blocchi aree avanzate). Analisi salvata in `Sintesi/Analisi e Roadmap Expert.md`.
 - Lint: ricongiunti 3 wikilink spezzati su due righe nelle nuove aree. Link rotti residui = marker di pagine future (Malware Analyst, OpenVAS, Logging e Monitoraggio, ecc.).
+
+## [2026-06-26] lint | Lint completo: 0 link rotti
+Risolti tutti i link rotti reali (da ~14 distinti a 0). Falsi positivi confermati e ignorati:
+pipe escapato in tabelle (`\|`), test bash `[[ ]]`, regex POSIX `[[:space:]]`, placeholder template/schema.
+- Alias nome-area aggiunti a 6 MOC: Reti, Linux, Blue Team, Python, Windows e AD, Algoritmi e Strutture Dati
+  (ora `[[Reti]]`, `[[09 Python]]`, ecc. risolvono sulla mappa d'area).
+- Alias `Logging e Monitoraggio` su `Log Analysis Avanzata e Correlazione`.
+- Fix link contestuali: `Malware Analyst` → `Malware Analysis (statica e dinamica)`; `Bash e Scripting` → `Bash Scripting`; `OpenVAS` reso testo (accanto a Nessus).
+- Neutralizzati in backtick i token-esempio nel changelog (IDS e IPS, sicurezza, CryptoHack, :space:).

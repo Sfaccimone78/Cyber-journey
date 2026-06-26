@@ -3,6 +3,7 @@ tipo: sintesi
 tag: [blue, moc]
 aggiornato: 2026-06-22
 stato: attivo
+aliases: ["Blue Team", "07 Blue Team"]
 ---
 
 # Blue Team - Mappa

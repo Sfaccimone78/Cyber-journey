@@ -5,7 +5,7 @@ fase: 3
 fonti: 3
 aggiornato: 2026-06-26
 stato: maturo
-aliases: ["Log Analysis Avanzata e Correlazione", "Correlazione di Log"]
+aliases: ["Log Analysis Avanzata e Correlazione", "Correlazione di Log", "Logging e Monitoraggio"]
 ---
 
 # Log Analysis Avanzata e Correlazione

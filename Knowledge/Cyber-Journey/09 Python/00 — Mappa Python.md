@@ -3,6 +3,7 @@ tipo: sintesi
 tag: [tool, moc]
 aggiornato: 2026-06-21
 stato: attivo
+aliases: ["Python", "09 Python"]
 ---
 
 # Python - Mappa

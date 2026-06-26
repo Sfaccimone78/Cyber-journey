@@ -43,7 +43,7 @@ engineering, physical. Lo scope determina tool e metodologia.
 ## vs concetti vicini
 
 - **Vulnerability Assessment** — *trova* e classifica le vulnerabilità (spesso con scanner come
-  Nessus/[[OpenVAS]]) ma **non le sfrutta**. Più ampio e automatico, meno profondo.
+  Nessus/OpenVAS) ma **non le sfrutta**. Più ampio e automatico, meno profondo.
 - **Red Team** — operazione *goal-oriented* e stealth (es. "raggiungi il domain admin senza essere
   rilevato"): valuta anche la **detection & response** del blue team, non solo le vulnerabilità.
 - **Pentest** — sta in mezzo: trova **e** sfrutta entro uno scope definito, con obiettivo di copertura.

@@ -3,6 +3,7 @@ tipo: sintesi
 tag: [windows, moc]
 aggiornato: 2026-06-22
 stato: attivo
+aliases: ["Windows e AD", "04 Windows e AD"]
 ---
 
 # Windows e AD - Mappa

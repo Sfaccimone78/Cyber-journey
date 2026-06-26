@@ -3,6 +3,7 @@ tipo: sintesi
 tag: [linux, moc]
 aggiornato: 2026-06-22
 stato: attivo
+aliases: ["Linux", "02 Linux"]
 ---
 
 # Linux - Mappa

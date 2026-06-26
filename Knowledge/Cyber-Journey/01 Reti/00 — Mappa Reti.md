@@ -3,6 +3,7 @@ tipo: sintesi
 tag: [reti, moc]
 aggiornato: 2026-06-26
 stato: attivo
+aliases: ["Reti", "01 Reti"]
 ---
 
 # Reti - Mappa

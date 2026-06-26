@@ -3,6 +3,7 @@ tipo: sintesi
 tag: [algoritmi, moc]
 aggiornato: 2026-06-25
 stato: attivo
+aliases: ["Algoritmi e Strutture Dati", "10 Algoritmi e Strutture Dati"]
 ---
 
 # Algoritmi e Strutture Dati - Mappa
