@@ -21,4 +21,4 @@ e a interagire con processi/servizi per l'exploit development ([[pwntools Base]]
 sul target mancano i tool ma c'è Python (da [[Fonte - Black Hat Python]]).
 
 ## Navigazione
-[[00 — Mappa Blue Team|07 Blue Team]] <- [[index|Indice]] -> [[index|Indice]]
+[[00 — Mappa Sistemi Operativi|08 Sistemi Operativi]] <- [[index|Indice]] -> [[00 — Mappa Algoritmi e Strutture Dati|10 Algoritmi e Strutture Dati]]

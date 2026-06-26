@@ -40,4 +40,4 @@ prospettiva sul blue team con [[Logging e Detection Cloud (CloudTrail)]].
 - [[MITRE ATT&CK]] — la matrice Cloud mappa queste tecniche
 
 ## Navigazione
-[[00 — Mappa Algoritmi e Strutture Dati|10 Algoritmi e Strutture Dati]] <- [[index|Indice]]
+[[00 — Mappa Algoritmi e Strutture Dati|10 Algoritmi e Strutture Dati]] <- [[index|Indice]] -> [[00 — Mappa AppSec Avanzato|12 AppSec Avanzato]]

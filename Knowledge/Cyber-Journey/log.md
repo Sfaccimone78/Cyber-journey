@@ -388,3 +388,9 @@ pipe escapato in tabelle (`\|`), test bash `[[ ]]`, regex POSIX `[[:space:]]`, p
 - Alias `Logging e Monitoraggio` su `Log Analysis Avanzata e Correlazione`.
 - Fix link contestuali: `Malware Analyst` → `Malware Analysis (statica e dinamica)`; `Bash e Scripting` → `Bash Scripting`; `OpenVAS` reso testo (accanto a Nessus).
 - Neutralizzati in backtick i token-esempio nel changelog (IDS e IPS, sicurezza, CryptoHack, :space:).
+
+## [2026-06-26] lint | MOC navigation: catena lineare 00→14
+Ricostruita la catena prec/succ di tutte le 15 MOC in ordine numerico.
+- Corretti salti pre-esistenti: 07 Blue Team saltava 08 (ora 06→07→08→09); 09 prec era 07 (ora 08).
+- Aree 11-14 inserite nella catena: …10→11→12→13→14 (14 terminale, nessun succ).
+- Rimossi i link succ "a caso" generati dallo swarm (12→05, 13→10, 14→07).

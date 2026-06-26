@@ -26,4 +26,4 @@ Percorso in ordine d'apprendimento (segui la numerazione):
 Padroneggia prima: [[OWASP Top 10]] · [[Server-Side Template Injection (SSTI)]] · [[Insecure Deserialization]] · [[Cookie e JWT]] · [[Autenticazione e Gestione Sessioni]] · [[Burp Suite]].
 
 ## Navigazione
-[[00 — Mappa Algoritmi e Strutture Dati|10 Algoritmi e Strutture Dati]] <- [[index|Indice]] -> [[00 — Mappa Web OWASP|05 Web OWASP]]
+[[00 — Mappa Cloud Security|11 Cloud Security]] <- [[index|Indice]] -> [[00 — Mappa Reverse Engineering e Exploit Dev|13 Reverse Engineering e Exploit Dev]]
