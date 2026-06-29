@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool]
 fase: 1
 fonti: 2
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Tool di Rete in Python"]
 ---
@@ -178,6 +178,20 @@ permissivi). Il netcat sopra è in modalità *bind*; per la reverse basta invert
   `nc`; il proxy/tunnel per il *pivoting* su box multi-host (THM *Wreath*, HTB Pro Lab *Dante*).
 - **pwn.college** — moduli di networking e pivoting.
 - Ricrea gli script seguendo i capitoli di rete di [[Fonte - Black Hat Python]].
+
+## Domande
+**D: Differenza tra bind shell e reverse shell a livello di socket?**
+R: Nella bind shell il **target** apre una porta in ascolto e l'attaccante si connette; nella reverse
+shell il **target** si connette all'attaccante in ascolto → aggira NAT e firewall che bloccano
+l'inbound ma permettono l'outbound. Vedi [[Reverse Shell e Bind Shell]].
+
+**D: Cosa fa un proxy TCP intercettante e a cosa serve?**
+R: Si interpone tra client e server, inoltra il traffico e permette di ispezionarlo/modificarlo →
+debug di protocolli e analisi di malware/C2 (stesso principio di [[Burp Suite]] per HTTP).
+
+**D: Quando serve il port forwarding / tunnel?**
+R: Per raggiungere servizi non esposti pivotando attraverso un host compromesso (es. accedere a un DB
+interno via un web server). Vedi [[Pivoting]] e [[Port Forwarding]].
 
 ## Collegamenti
 

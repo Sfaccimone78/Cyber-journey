@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool, reti]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-21
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Socket e Port Scanner"]
 ---
@@ -115,6 +115,24 @@ if __name__ == "__main__":
    l'header HTTP (vedi [[HTTP e HTTPS]]) e leggere il server web.
 3. **Avanzato**: aggiungi `argparse` con `--top-ports` (le 100 più comuni) e `--output report.json`
    che salva i risultati in JSON, pronti da consumare in pipeline come fa [[Nmap]] con `-oJ`.
+
+## Lab
+- **TryHackMe** — *Python for Pentesters*. Confronta il tuo scanner con [[Nmap]] (`-sT`) su un target lab.
+- Estendi lo scanner: timeout adattivo, scansione di range, output JSON; poi aggiungi `asyncio` al
+  posto del threading e confronta la velocità.
+
+## Domande
+**D: Differenza tra connect scan e SYN scan?**
+R: Il connect scan completa il 3-way handshake (non serve root, ma è rumoroso e loggato); il SYN scan
+("half-open") invia SYN e non chiude, serve raw socket/privilegi ma è più stealth. Vedi [[Scansione delle Porte]].
+
+**D: Perché il threading accelera un port scanner ma non un calcolo matematico?**
+R: Il collo di bottiglia è la **latenza di rete** (I/O wait), non la CPU; i thread sovrappongono le
+attese. Per CPU-bound il GIL limita i thread → servirebbe multiprocessing.
+
+**D: Cos'è il banner grabbing e a cosa serve?**
+R: Leggere la risposta iniziale di un servizio (es. versione SSH/HTTP) per identificarlo e cercare
+CVE note. Primo passo di enumerazione.
 
 ## Collegamenti
 - [[Scansione delle Porte]] — la teoria dietro lo scanner

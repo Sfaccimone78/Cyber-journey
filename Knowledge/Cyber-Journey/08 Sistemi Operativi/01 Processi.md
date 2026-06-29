@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-25
+fonti: 2
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Processi"]
 ---
@@ -47,8 +47,45 @@ Le API UNIX per creare processi:
 - L'isolamento tra address space e la base della **sicurezza** dei processi; bug nei confini -> [[Privilege Escalation Linux]].
 - Differenza processo/thread/goroutine: vedi [[Concetti dei Sistemi Operativi]].
 
+## Approfondimento sicurezza
+Il modello di processo è anche una superficie d'attacco e di difesa:
+- **Process injection / hollowing** — su Linux via `ptrace(PTRACE_ATTACH)` + scrittura su
+  `/proc/<pid>/mem`, o **`LD_PRELOAD`**/`/etc/ld.so.preload` per dirottare funzioni libc; su Windows
+  `CreateRemoteThread`, APC injection, *process hollowing* (un processo legittimo svuotato e
+  rimpiazzato). MITRE **T1055**.
+- **Abuso di `fork`/`exec`** — la separazione che abilita la redirezione della shell abilita anche le
+  **reverse shell** (`fork` → `dup2` dei fd su un socket → `exec("/bin/sh")`). Vedi
+  [[Reverse Shell e Bind Shell]].
+- **`/proc` come fonte** — `/proc/<pid>/environ` (segreti in env), `/proc/<pid>/cmdline`,
+  `/proc/<pid>/maps` (layout memoria, utile a bypass [[Bypass Protezioni (ASLR, DEP, Stack Canary, PIE)|ASLR]]).
+- **Detection** — `auditd`/`execve` logging, **Sysmon Event ID 1** (process create) e **10**
+  (process access/ptrace), parent-child anomali (es. `word.exe`→`powershell.exe`).
+
+## Lab
+- **OverTheWire Bandit / Leviathan** — esercizi su processi, fd, SUID. Vedi [[OverTheWire Bandit]].
+- **pwn.college** — modulo *Program Interaction / Processes*.
+- Pratica: scrivi un mini-launcher che `fork`+`dup2`+`exec` per replicare la redirezione della shell.
+
+## Domande
+**D: Perché `fork()` ritorna due volte e con valori diversi?**
+R: Crea un duplicato; nel padre ritorna il PID del figlio (per gestirlo con `wait`), nel figlio
+ritorna 0 (per sapere "sono il figlio"). −1 = errore.
+
+**D: A cosa serve separare `fork` ed `exec` invece di una singola `spawn`?**
+R: Tra i due il figlio può modificare il proprio ambiente (chiudere/riaprire fd → redirezione,
+collegare pipe, droppare privilegi) prima di caricare il nuovo programma. È ciò che fa la shell.
+
+**D: Cos'è uno zombie e come si evita?**
+R: Un processo terminato il cui stato non è ancora stato raccolto dal padre. Si evita con
+`wait()`/`waitpid()`; se il padre muore, `init`/`systemd` (PID 1) lo adotta e raccoglie.
+
+**D: Come si rileva una process injection via ptrace?**
+R: Monitorando syscall `ptrace` e accessi a `/proc/<pid>/mem` (Sysmon EID 10 / `auditd`), e
+disabilitando ptrace cross-process con `kernel.yama.ptrace_scope=1`.
+
 ## Collegamenti
 - Vedi anche: [[Scheduling]], [[Concorrenza e Thread]], [[Memoria Virtuale]], [[Concetti dei Sistemi Operativi]]
+- Cross-topic (sicurezza): [[Reverse Shell e Bind Shell]], [[Bypass Protezioni (ASLR, DEP, Stack Canary, PIE)]]
 - Cross-topic (linux): [[Processi Linux]], [[Strumenti di Rete]]
 - Cross-topic (sicurezza): [[Privilege Escalation Linux]]
 
@@ -56,3 +93,4 @@ Le API UNIX per creare processi:
 - [OSTEP, cap. 4 "The Abstraction: The Process", p. 25-33]
 - [OSTEP, cap. 5 "Interlude: Process API", p. 37-45]
 - [OSTEP, cap. 6 "Mechanism: Limited Direct Execution", p. 49-60]
+- MITRE ATT&CK — T1055 Process Injection: https://attack.mitre.org/techniques/T1055/

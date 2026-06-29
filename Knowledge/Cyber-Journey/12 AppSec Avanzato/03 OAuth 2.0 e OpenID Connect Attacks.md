@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["OAuth 2.0 e OpenID Connect Attacks", "OAuth Attacks", "OIDC Attacks"]
 ---
@@ -80,6 +80,19 @@ Account takeover completo (login as victim), accesso non autorizzato a risorse p
 - PortSwigger — OAuth 2.0 authentication vulnerabilities (lab: "Authentication bypass via OAuth implicit flow", "Forced OAuth profile linking", "OAuth account hijacking via redirect_uri", "Stealing OAuth access tokens via an open redirect / via a proxy page", "SSRF via OpenID dynamic client registration", "Flawed CSRF protection"): https://portswigger.net/web-security/oauth
 - PortSwigger — OpenID Connect: https://portswigger.net/web-security/oauth/openid
 - HackTricks — OAuth to account takeover: https://book.hacktricks.xyz/pentesting-web/oauth-to-account-takeover
+
+## Domande
+**D: Perché un `redirect_uri` debole è critico?**
+R: Se il server accetta redirect non esatti (wildcard, open redirect, path traversal), l'attaccante
+dirotta il `code`/token verso un dominio che controlla → account takeover.
+
+**D: A cosa serve il parametro `state`?**
+R: È l'anti-CSRF del flusso OAuth: lega la richiesta alla sessione dell'utente. La sua assenza/mancata
+verifica permette **login CSRF** e account hijacking.
+
+**D: Differenza tra OAuth 2.0 e OpenID Connect?**
+R: OAuth è **autorizzazione** (access token per accedere a risorse); OIDC aggiunge **autenticazione**
+con un `id_token` (un JWT) → eredita anche tutti gli [[Attacchi JWT|attacchi su JWT]].
 
 ## Collegamenti
 - [[Attacchi JWT]]

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, metodologia]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Disk Forensics e Timeline Analysis", "Timeline Analysis", "Disk Forensics"]
 ---
@@ -88,6 +88,19 @@ Lettura della timeline (estratto): la sequenza racconta la storia.
 - **TryHackMe** — *Disk Analysis & Autopsy*, *Windows Forensics 1/2*.
 - **BlueTeamLabs.online** — investigations con artefatti su disco.
 - **Autopsy / TSK** — tool GUI/CLI gratuiti per esercitarsi.
+
+## Domande
+**D: Cos'è una super timeline?**
+R: L'aggregazione cronologica di **tutti** gli artefatti temporali (MFT, log eventi, registry, browser,
+prefetch) in un'unica linea del tempo, generata con `log2timeline`/**plaso** → ricostruisce la sequenza.
+
+**D: Cosa sono i timestamp MACB e quale rischio comportano?**
+R: Modified, Accessed, Changed (MFT), Born/created. Servono a ricostruire l'attività, ma sono
+falsificabili (**timestomping**): la discrepanza tra `$STANDARD_INFORMATION` e `$FILE_NAME` è un IOC.
+
+**D: Cos'è il file carving?**
+R: Recuperare file dai dati grezzi tramite firme (header/footer) **senza** affidarsi ai metadati del
+filesystem → utile per dati cancellati o partizioni corrotte.
 
 ## Collegamenti
 - [[Digital Forensics Fondamenti]]

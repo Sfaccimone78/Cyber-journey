@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["find"]
 
@@ -242,6 +242,12 @@ find / -type f -printf "%T@ %p\n" 2>/dev/null | sort -rn | head -20 | awk '{prin
 - **`/proc` e `/sys`**: contengono pseudofile che possono causare comportamenti anomali (loop, blocchi). Escludili sempre con `-prune` o filtrando l'output con `grep -vE "^/proc|^/sys"`.
 
 ---
+
+## Lab
+
+- **TryHackMe — Linux PrivEsc**: usa `find / -perm -4000` per individuare i binari SUID e sfruttarli via GTFOBins.
+- **OverTheWire — Bandit** (livelli con file per size/owner/permessi): risolvibili direttamente con i predicati di `find`.
+- **HackTheBox — Starting Point**: enumerazione SUID/world-writable in macchine reali.
 
 ## Domande da esame/colloquio
 

@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-25
+fonti: 2
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Virtualizzazione"]
 ---
@@ -54,12 +54,53 @@ Un'app web in **Docker** impacchetta solo userland + dipendenze e condivide il k
 - I container condividono il kernel: una vulnerabilita kernel -> **container escape** -> rilevante per [[Privilege Escalation Linux]] e [[Attacchi di Rete]].
 - L'isolamento si fonda su [[Memoria Virtuale]] (page table annidate) e [[Processi]] (namespaces/cgroups estendono l'astrazione del processo).
 
+## Approfondimento sicurezza
+La virtualizzazione sposta il confine di sicurezza, ma non lo elimina:
+- **VM escape** — bug nell'emulazione device del VMM permettono di uscire dal guest verso l'host:
+  **VENOM** (CVE-2015-3456, floppy controller QEMU), falle in VirtualBox/VMware. Più raro e prezioso
+  del container escape perché rompe l'isolamento "forte".
+- **Container escape** — kernel condiviso → privilegi/mount/socket eccessivi portano sull'host. È il
+  tema di [[Container Security (Docker)]] e [[Kubernetes Security (RBAC, escape)]].
+- **Cross-VM side channel** — cache/TLB condivise tra VM co-residenti abilitano leak (Flush+Reload,
+  L1TF/Foreshadow su Intel). Mitigazioni: core scheduling, disabilitare hyperthreading per workload
+  sensibili, microcode.
+- **Hypervisor & supply chain** — compromettere il VMM = controllo di tutti i guest; nested virt e
+  introspection (VMI) usate sia in difesa (sandbox malware) sia in attacco.
+- **Difesa scelta dell'isolamento** — per multi-tenant non fidato preferire VM/microVM
+  (Firecracker, Kata) ai soli container; defense-in-depth con seccomp/AppArmor anche dentro la VM.
+
+## Lab
+- Crea una VM con KVM/VirtualBox e un container Docker della stessa app; confronta boot time, footprint
+  e isolamento.
+- **TryHackMe** — *Intro to Containerisation*; per l'escape pratico vedi i lab di [[Container Security (Docker)]].
+- Ispeziona i namespace di un container: `lsns`, `cat /proc/<pid>/ns/*`.
+
+## Domande
+**D: Differenza fondamentale tra VM e container?**
+R: La VM virtualizza l'**hardware** e ogni guest ha il proprio kernel (isolamento forte, overhead
+alto); il container virtualizza l'**OS** condividendo il kernel host (leggero, ms di avvio, isolamento
+più debole via namespaces+cgroups).
+
+**D: Cos'è trap-and-emulate e perché serviva la binary translation su x86?**
+R: Il guest gira diretto in modalità non privilegiata; le istruzioni privilegiate trappano
+all'hypervisor che le emula. Su x86 alcune istruzioni sensibili non trappavano → VMware usava binary
+translation, Xen la paravirtualizzazione; VT-x/AMD-V hanno poi risolto in HW.
+
+**D: Perché un container escape è più "probabile" di un VM escape?**
+R: Il container condivide il kernel host: un bug kernel o una config permissiva (privileged, mount,
+socket) basta. La VM ha un confine HW/hypervisor, più difficile da bucare (serve un bug nel VMM).
+
+**D: Per workload multi-tenant non fidato, VM o container?**
+R: VM o microVM (Firecracker/Kata) per l'isolamento forte; i container puri condividono il kernel →
+superficie unica. Idealmente container *dentro* VM leggere.
+
 ## Collegamenti
 - Vedi anche: [[Processi]], [[Memoria Virtuale]], [[I/O e Storage]], [[Concetti dei Sistemi Operativi]]
-- Cross-topic (sicurezza): [[Privilege Escalation Linux]], [[Attacchi di Rete]]
+- Cross-topic (sicurezza): [[Privilege Escalation Linux]], [[Attacchi di Rete]], [[Container Security (Docker)]], [[Kubernetes Security (RBAC, escape)]]
 
 ## Fonti
 - [OSTEP, cap. 2 "Introduction to Operating Systems" (virtualizzazione)]
 - [OSTEP, cap. 6 "Limited Direct Execution" (trap-and-emulate, base dei VMM)]
 - [OSTEP, cap. 15 "Address Translation" (base della memoria virtualizzata)]
 - Tassonomia hypervisor/container: conoscenza generale di sistemi (non in OSTEP v1.00)
+- VENOM (CVE-2015-3456) VM escape — CrowdStrike: https://www.crowdstrike.com/blog/venom-vulnerability-details/

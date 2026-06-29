@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool, web]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-21
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Automazione Offensiva"]
 ---
@@ -128,6 +128,24 @@ scheletro diventa un fuzzer di directory: provi path da una wordlist e segnali q
    più furtivo e aggira spesso il lockout per-account).
 3. **Avanzato**: aggiungi `--delay` tra le richieste e `--proxy` (per instradare via [[Burp Suite]]),
    così da emulare un tool reale che rispetta i rate-limit ed è ispezionabile.
+
+## Lab
+- **TryHackMe** — *Python for Pentesters*. Replica il bruteforcer contro un form di login in lab
+  (DVWA/PortSwigger), poi confrontalo con [[Hydra]].
+- Aggiungi rate-limiting lato client e gestione dei lockout per rendere il tool "OPSEC-aware".
+
+## Domande
+**D: Qual è l'anatomia di un tool offensivo di bruteforce?**
+R: Sorgente di candidati (wordlist) → costruzione richiesta → **discriminante** affidabile di
+successo/fallimento → concorrenza (threading) con rate control → logging dei risultati.
+
+**D: Perché serve un discriminante di successo affidabile e come si sceglie?**
+R: Per evitare falsi positivi: si usa lunghezza/contenuto della risposta, presenza di una parola
+chiave, status code o redirect diverso dal caso "fallito".
+
+**D: Come ci si difende dal credential bruteforce?**
+R: Rate-limiting, account lockout/backoff, MFA, CAPTCHA, e monitoraggio di tentativi anomali
+(detection lato SOC).
 
 ## Collegamenti
 - [[Requests e HTTP]] — il livello di richiesta che questo tool usa

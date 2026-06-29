@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, metodologia]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Detection Engineering"]
 ---
@@ -119,6 +119,19 @@ Invoke-AtomicTest T1003.001 -TestNumbers 1
 - **SigmaHQ** — migliaia di regole reali da studiare e adattare.
 - **Atomic Red Team** (Red Canary) — emulazione TTP per testare le tue detection.
 - **Splunk Attack Range** / **Microsoft Sentinel content hub** — ambienti per detection-as-code.
+
+## Domande
+**D: Qual è il percorso da IOC a detection?**
+R: IOC/ipotesi su una TTP → logica di detection (es. [[Regole Sigma]]) → test su dati reali
+(true/false positive) → deploy → **tuning** continuo per ridurre il rumore.
+
+**D: Perché è meglio rilevare TTP (comportamenti) che IOC atomici?**
+R: Per la [[Threat Intelligence (Diamond Model, Pyramid of Pain)|Pyramid of Pain]]: hash/IP cambiano in
+secondi, i comportamenti (TTP) sono costosi da cambiare → detection più resilienti.
+
+**D: Cos'è il detection-as-code?**
+R: Gestire le regole come codice: versionate in git, testate, integrate in CI → qualità, ripetibilità
+e revisione fra pari.
 
 ## Collegamenti
 - [[Regole Sigma]]

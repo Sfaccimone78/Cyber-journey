@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-25
+fonti: 3
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Filesystem"]
 ---
@@ -56,10 +56,46 @@ Per leggere `/foo/bar`: leggi l'inode della root -> leggi i suoi dati per trovar
 - Il *link count* e gli hard link sono spesso sfruttati in attacchi di tipo **symlink/TOCTOU** -> [[Privilege Escalation Linux]].
 - Lo storage sottostante (HDD/SSD/RAID) e in [[I/O e Storage]].
 
+## Approfondimento sicurezza
+Il filesystem è terreno di occultamento, escalation e **forensics** ([[Disk Forensics e Timeline Analysis]]):
+- **NTFS Alternate Data Streams (ADS)** — `file.txt:hidden.exe` nasconde dati/eseguibili invisibili a
+  `dir`; usati da malware. Si trovano con `dir /R`, Sysinternals `streams`, PowerShell `Get-Item -Stream *`.
+- **Symlink / hard-link attack & TOCTOU** — link verso file privilegiati per dirottare scritture di
+  processi root (vedi [[Concorrenza e Thread]]). `fs.protected_symlinks=1` mitiga.
+- **Timestomping** — alterare i timestamp **MACB** (Modified/Accessed/Changed/Born) per ingannare le
+  timeline; in NTFS lo `$STANDARD_INFORMATION` è falsificabile ma `$FILE_NAME` (in MFT) spesso no →
+  la discrepanza è un IOC. MITRE **T1070.006**.
+- **Recupero & remanence** — un `rm` libera l'inode ma i blocchi restano finché non riusati →
+  **file carving** (`scalpel`, `photorec`). Su **SSD** TRIM + wear-leveling rendono il recupero
+  inaffidabile e il *secure erase* più complesso (la cancellazione "logica" non garantisce quella fisica).
+- **Slack space** e journaling ($LogFile/USN) sono fonti forensi di attività cancellata.
+
+## Lab
+- Crea un ADS su Windows (`echo pwn > f.txt:s.txt`) e ritrovalo con `dir /R` e `Get-Item -Stream *`.
+- Su Linux: cancella un file, poi recuperalo con `extundelete`/`photorec` in una VM di test.
+- **TryHackMe** — room *Windows Forensics*, *Linux Forensics*; **DFIR**: vedi [[Windows Forensics (artefatti)]].
+
+## Domande
+**D: Differenza tra hard link e soft link?**
+R: Hard link = più nomi sullo **stesso inode** (stesso FS, file vivo finché link count > 0); soft link
+= file separato che contiene un **path** (può attraversare FS, si rompe se il target sparisce).
+
+**D: A cosa serve il journaling e in che modo accelera il recovery?**
+R: Scrive l'intenzione (write-ahead log) prima di modificare le strutture finali; dopo un crash basta
+fare **replay** del log invece di scandire tutto il disco come FSCK. Recovery ∝ dimensione log, non disco.
+
+**D: Cosa sono gli ADS di NTFS e perché contano in sicurezza?**
+R: Stream alternati dentro un file; permettono di nascondere dati/eseguibili non visibili con un
+`dir` normale. Usati da malware per evasione; si individuano con `dir /R`/`streams`.
+
+**D: Perché cancellare un file non lo elimina davvero (e quando invece sì)?**
+R: `rm`/delete libera metadati ma i blocchi restano fino al riuso → recuperabili via carving. Su SSD,
+TRIM + garbage collection possono renderli irrecuperabili, complicando sia il recovery sia il secure-wipe.
+
 ## Collegamenti
 - Vedi anche: [[I/O e Storage]], [[Memoria Virtuale]], [[Processi]]
 - Cross-topic (linux): [[Processi Linux]]
-- Cross-topic (sicurezza): [[Privilege Escalation Linux]]
+- Cross-topic (sicurezza): [[Privilege Escalation Linux]], [[Disk Forensics e Timeline Analysis]], [[Windows Forensics (artefatti)]]
 
 ## Fonti
 - [OSTEP, cap. 39 "Interlude: Files and Directories", p. 467-491]
@@ -68,3 +104,4 @@ Per leggere `/foo/bar`: leggi l'inode della root -> leggi i suoi dati per trovar
 - [OSTEP, cap. 42 "Crash Consistency: FSCK and Journaling", p. 525-543]
 - [OSTEP, cap. 43 "Log-structured File Systems", p. 547-560]
 - [The Systems Approach — https://book.systemsapproach.org/]
+- MITRE ATT&CK — T1070.006 Timestomp / T1564.004 NTFS ADS: https://attack.mitre.org/techniques/T1564/004/

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, tool]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Memory Forensics con Volatility", "Memory Forensics"]
 ---
@@ -94,6 +94,19 @@ explorer.exe
 - **TryHackMe** — *Volatility*, *Investigating with Volatility*, percorso *SOC Level 2 / DFIR*.
 - **LetsDefend** — esercizi *Memory Analysis* su incidenti.
 - **Volatility Foundation** — sample images per esercitarsi (Malware Cookbook, MemLabs su GitHub).
+
+## Domande
+**D: Perché la RAM è una fonte forense preziosa?**
+R: Contiene processi in esecuzione, connessioni di rete, chiavi crittografiche, **malware fileless** e
+talvolta password in chiaro — informazioni assenti o cifrate su disco.
+
+**D: Cosa fa il plugin `malfind`?**
+R: Individua regioni di memoria eseguibili e scrivibili (RWX) senza file backing → tipico di code
+injection e di payload **già unpackati** in RAM.
+
+**D: Differenza tra Volatility 2 e 3?**
+R: La v2 richiede un **profilo** (`--profile`) del sistema; la v3 usa symbol table (ISF) e lo rileva
+automaticamente, con sintassi e plugin rinominati.
 
 ## Collegamenti
 - [[Volatility (Memory Forensics)]]

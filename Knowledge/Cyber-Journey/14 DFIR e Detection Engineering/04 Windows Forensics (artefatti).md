@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, windows]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Windows Forensics (artefatti)", "Windows Forensics", "Artefatti Windows"]
 ---
@@ -94,6 +94,19 @@ wevtutil qe Security "/q:*[System[(EventID=4624 or EventID=4625 or EventID=4672)
 - **CyberDefenders** — challenge basate su triage KAPE/EZ Tools.
 - **BlueTeamLabs.online** — investigations su host Windows compromessi.
 - **Eric Zimmerman Tools** + **KAPE** (gratuiti) su immagini di esercizio.
+
+## Domande
+**D: Quali artefatti provano l'esecuzione di un programma?**
+R: **Prefetch**, **Shimcache/AppCompatCache**, **Amcache**, **UserAssist**, **SRUM**. Ognuno con
+granularità e affidabilità diverse; si correlano per confermare esecuzione e timing.
+
+**D: A cosa servono le ShellBags?**
+R: Registrano cartelle visitate/aperte da Explorer → provano l'accesso a directory (anche su supporti
+rimovibili o percorsi poi cancellati).
+
+**D: Dove cercare la persistenza su Windows?**
+R: Chiavi `Run`/`RunOnce`, **scheduled tasks**, servizi, **WMI event subscriptions**, cartella
+Startup. MITRE T1547/T1053/T1543.
 
 ## Collegamenti
 - [[Windows Event Log]]

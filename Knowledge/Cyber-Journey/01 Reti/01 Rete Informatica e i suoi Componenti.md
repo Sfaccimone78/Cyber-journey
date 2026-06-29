@@ -3,7 +3,7 @@ tipo: concetto
 tag: [reti]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Rete Informatica e i suoi Componenti", "Rete Informatica"]
 ---
@@ -184,6 +184,11 @@ Ogni fase è un potenziale punto di attacco: DNS spoofing al passo 2, ARP poison
    La **banda** è la capacità teorica del link; il **throughput** è ciò che viene realmente consegnato. Un DoS volumetrico satura la banda con traffico inutile, riducendo il throughput utile a zero. Un DoS applicativo (slowloris, HTTP flood) satura invece le risorse del server senza necessariamente saturare la banda.
 
 ---
+
+## Lab
+- [[TryHackMe]] — percorso *Pre Security* → *Network Fundamentals* (*What is Networking?*, *Intro to LAN*): mette in pratica componenti, topologie e indirizzamento.
+- [[TryHackMe]] — *Network Services* / *Network Services 2*: enumerazione dei servizi che girano sui nodi.
+- In locale: cattura con [[Wireshark]] il traffico mentre apri un sito e identifica i ruoli dei dispositivi (host, switch, gateway) nel flusso.
 
 ## Collegamenti
 - [[Hardware di Rete]] · [[Modello OSI]] · [[Modello TCP-IP]]

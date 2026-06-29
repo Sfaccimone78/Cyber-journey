@@ -3,7 +3,7 @@ tipo: concetto
 tag: [reti]
 fase: 1
 fonti: 5
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Modello OSI"]
 ---
@@ -154,6 +154,11 @@ la scala evita di indovinare.
    Pacchetto (L3) → Frame (L2) → Bit (L1).
 5. **Perché un frame ha un MTU e cosa succede se lo superi?** Il payload L3 deve entrare nel frame; oltre
    l'MTU il pacchetto si frammenta (IPv4) o viene rifiutato con ICMP (Path MTU Discovery in IPv6).
+
+## Lab
+- [[TryHackMe]] — *OSI Model* (room dedicata, `osimodelzi`): un livello per task.
+- [[TryHackMe]] — *Wireshark: The Basics*: apri un pcap e mappa ogni protocollo al suo livello.
+- In locale: cattura un pacchetto HTTPS con [[Wireshark]] e identifica nel dissector i blocchi Ethernet (L2) → IP (L3) → TCP (L4) → TLS/HTTP (L6/L7).
 
 ## Collegamenti
 - [[Modello TCP-IP]] — l'implementazione reale a 4 livelli

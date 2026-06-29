@@ -3,7 +3,7 @@ tipo: concetto
 tag: [reti]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Indirizzamento IP", "IP"]
 ---
@@ -146,6 +146,11 @@ ip neigh
    fisico/locale/fisso (L2, identifica la scheda nella LAN).
 5. **Cosa indica un indirizzo `169.254.x.x`?** APIPA/link-local: il client non ha ottenuto un IP dal
    DHCP → problema di rete o di server DHCP.
+
+## Lab
+- [[TryHackMe]] — *Subnetting* e *Networking Concepts* (struttura rete/host, range privati, gateway).
+- In locale: `ip addr`, `ip route`, `ip neigh` per leggere IP, default gateway e vicinato; `curl ifconfig.me` per l'IP pubblico post-NAT.
+- `nmap -sn 10.0.0.0/24` su una rete di lab per l'host discovery sull'intero range (vedi [[Nmap]]).
 
 ## Collegamenti
 - [[Modello TCP-IP]] · [[Modello OSI]] — l'IP è il livello 3

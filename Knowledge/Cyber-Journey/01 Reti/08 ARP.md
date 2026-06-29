@@ -3,7 +3,7 @@ tipo: entita
 tag: [reti]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["ARP"]
 ---
@@ -121,6 +121,11 @@ Spesso è il **primo stadio**: seguono [[DNS]] spoofing, SSL stripping, furto cr
    intercettato viene comunque inoltrato a destinazione.
 4. **Qual è l'equivalente di ARP in IPv6?** NDP (Neighbor Discovery) su ICMPv6, con gli stessi rischi.
 5. **Difesa enterprise principale contro l'ARP spoofing?** Dynamic ARP Inspection + DHCP snooping sugli switch.
+
+## Lab
+- [[TryHackMe]] — *Wireshark: The Basics* e *Network Fundamentals* (osservare ARP Request/Reply dal vivo).
+- In locale: `ip neigh` per la cache; `arping -c 3 <gateway>` per forzare una risoluzione; filtra `arp` in [[Wireshark]].
+- > [!warning] Etica — In lab autorizzato isolato: ARP spoofing con `bettercap` (`arp.spoof on`) abilitando `ip_forward`, poi rileva il MAC duplicato con `arpwatch`. Mai su reti di terzi.
 
 ## Collegamenti
 - [[MAC Address]] — ciò che ARP risolve · [[Indirizzamento IP]] — il punto di partenza

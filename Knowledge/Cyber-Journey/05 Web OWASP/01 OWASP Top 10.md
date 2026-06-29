@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 4
-aggiornato: 2026-06-26
+fonti: 5
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["OWASP Top 10", "Web Hacking"]
 ---
@@ -59,6 +59,24 @@ Strumenti complementari: [[sqlmap]] (SQLi), [[Gobuster]]/[[ffuf]] (content disco
 - Sicurezza nel **SDLC**: threat modeling (A04), SAST/DAST in CI/CD, dependency scanning (A06).
 - Pentest periodici con la Top 10 come baseline + WSTG per la profondità.
 
+## Lab
+- **PortSwigger Web Academy** — [[PortSwigger Web Academy]]: percorso "All labs" raggruppato per categoria (Access control, Injection, SSRF, XXE…): copre quasi tutta la Top 10 con lab gratuiti.
+- **TryHackMe** — *OWASP Top 10 (2021)* e *OWASP Juice Shop*: room guidate categoria per categoria.
+- **OWASP Juice Shop** (self-host o su TryHackMe): app deliberatamente vulnerabile mappata 1:1 sulla Top 10, con scoreboard delle challenge.
+
+## Domande
+**D: L'OWASP Top 10 è una lista di vulnerabilità o di rischi?**
+R: Di **categorie di rischio**, non di singoli bug. Ogni voce (es. A03 Injection) raggruppa molte vulnerabilità concrete. Serve come tassonomia e checklist minima, non come elenco esaustivo: per la profondità si usa la WSTG.
+
+**D: Perché A01 Broken Access Control è salito al primo posto nel 2021?**
+R: Perché è la classe di difetti riscontrata con maggiore frequenza nei dati raccolti: il 94% delle app testate presentava qualche forma di access control rotto. Frequenza × impatto la portano in cima.
+
+**D: Che differenza c'è tra usare la Top 10 e la WSTG in un pentest?**
+R: La Top 10 è la baseline ad alto livello (le 10 famiglie più comuni); la **Web Security Testing Guide** è il manuale granulare con i singoli test case. Si parte dalla Top 10 per priorità, si usa la WSTG per la copertura completa.
+
+**D: Cosa copre A04 Insecure Design che le altre categorie non coprono?**
+R: I difetti **architetturali/di progettazione** (mancanza di threat modeling, assenza di controlli per-design) che non sono implementazione errata ma scelte di design insicure: non si correggono con una patch, ma ripensando il flusso.
+
 ## Collegamenti
 - [[SQL Injection]]
 - [[Cross-Site Scripting (XSS)]]
@@ -73,3 +91,4 @@ Strumenti complementari: [[sqlmap]] (SQLi), [[Gobuster]]/[[ffuf]] (content disco
 - OWASP Top 10 2021: https://owasp.org/www-project-top-ten/
 - OWASP Cheat Sheet Series: https://cheatsheetseries.owasp.org/
 - OWASP Web Security Testing Guide: https://owasp.org/www-project-web-security-testing-guide/
+- OWASP ASVS (Application Security Verification Standard): https://owasp.org/www-project-application-security-verification-standard/

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, tool]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Web Cache Poisoning", "Cache Poisoning", "Cache Deception"]
 ---
@@ -75,6 +75,21 @@ XSS/redirect/defacement **serviti a tutti** gli utenti della cache; furto di dat
 - PortSwigger — Web cache deception: https://portswigger.net/web-security/web-cache-deception
 - James Kettle — "Practical Web Cache Poisoning": https://portswigger.net/research/practical-web-cache-poisoning
 - James Kettle — "Web Cache Entanglement: Novel Pathways to Poisoning": https://portswigger.net/research/web-cache-entanglement
+
+## Domande
+**D: Differenza tra cache key e unkeyed input?**
+R: La **cache key** identifica quale risposta servire dalla cache; un **input unkeyed** (es. un header
+non incluso nella key) che però influenza la risposta permette di avvelenare la voce cacheata servita
+a tutti gli utenti.
+
+**D: Differenza tra cache poisoning e cache deception?**
+R: Il **poisoning** inietta contenuto malevolo nella cache condivisa; la **deception** inganna la cache
+a memorizzare contenuto **privato** di un utente (es. richiedendo `/account/profilo.css`) leggibile poi
+da altri.
+
+**D: Come ci si difende?**
+R: Includere nella cache key **tutti** gli input che influenzano la risposta, normalizzare gli input,
+e non cacheare contenuto dinamico/privato (header `Cache-Control` corretti).
 
 ## Collegamenti
 - [[HTTP Request Smuggling]]

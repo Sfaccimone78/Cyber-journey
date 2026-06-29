@@ -112,6 +112,28 @@ aliases: ["Nome senza numero"]   # = titolo canonico senza prefisso NN; rende i 
 `reti` · `linux` · `windows` · `crypto` · `web` / `owasp` · `ad` (Active Directory) ·
 `tool` · `blue-team` · `metodologia`
 
+### Standard Nota Esperto (requisito per `stato: maturo`)
+Lo scopo della wiki è uniforme **profondità da esperto**, non solo ampiezza. Una nota può essere
+`stato: maturo` **solo se** contiene tutte queste sezioni (nell'ordine). Sotto questa soglia →
+`stato: attivo`. Nota-modello di riferimento: **`05 Web OWASP/02 SQL Injection.md`**. Template da
+usare per le nuove: **`Template/template-concetto-pentest.md`**.
+
+1. **In breve** — 2-3 frasi: cos'è, categoria, impatto, dove si colloca.
+2. **Come funziona / Meccanismo** — il processo + il "perché" a basso livello (pacchetti, memoria,
+   parsing, flusso auth).
+3. **Esempi / Walkthrough** — comandi e flag **reali**, copia-incollabili; non un solo esempio.
+4. **Mitigazione e difesa** — in ordine di efficacia.
+5. **`## Lab`** — almeno un lab concreto agganciato ([[PortSwigger Web Academy]], [[TryHackMe]],
+   [[HackTheBox]], CTF, pwn.college…). Nessuna tecnica senza pratica.
+6. **`## Domande`** — 3-5 Q&A secche (auto-test / ripasso / colloquio).
+7. **Approfondimento livello esperto** — la parte che alza la nota: evasion/OPSEC, casi limite,
+   detection engineering (Event ID, Sigma, SPL/KQL, MITRE ATT&CK), troubleshooting.
+8. **`## Collegamenti`** — wikilink correlati.
+9. **`## Fonti`** — **≥2 fonti reali e verificabili** (PortSwigger, HackTricks, MITRE, RFC, paper,
+   vendor docs). `fonti:` nel frontmatter = conteggio reale.
+
+> Quando aggiorni una nota allo standard: aggiorna `fonti:`, `aggiornato:`, `stato:` e la MOC d'area.
+
 ---
 
 ## Appunti dichiarati (esistenti, già nella wiki)

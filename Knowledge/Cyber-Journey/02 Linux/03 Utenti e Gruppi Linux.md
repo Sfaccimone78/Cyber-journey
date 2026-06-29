@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 5
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Utenti e Gruppi Linux"]
 ---
@@ -255,6 +255,12 @@ unlock_time = 600   # sblocca dopo 10 minuti
 | `passwd` rifiuta la password | Policy PAM (`pam_pwquality`) troppo restrittiva | Verifica `/etc/security/pwquality.conf`; root può sempre forzare |
 
 ---
+
+## Lab
+
+- **TryHackMe — Linux PrivEsc** e **Common Linux Privesc**: sfrutta gruppi privilegiati (`docker`, `lxd`, `disk`), hash di `/etc/shadow` e UID 0 duplicati.
+- **OverTheWire — Bandit** (livelli con cambio utente via SUID): pratica `su`, `id`, enumerazione utenti.
+- **HackTheBox — Starting Point** (macchine Linux tier 0-1): enumerazione utenti/gruppi e lettura shadow in scenario reale.
 
 ## Domande da esame / colloquio
 

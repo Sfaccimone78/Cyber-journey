@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 2
 fonti: 7
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Command Injection", "OS Command Injection"]
 ---
@@ -147,6 +147,12 @@ level: high
 3. **OOB non arriva** → egress filtering. Cambia canale (DNS→HTTP→ICMP); verifica che il dominio Collaborator sia raggiungibile dall'esterno.
 4. **Spazi mangiati/payload spezzato** → l'app fa split sugli spazi o li filtra. Usa `${IFS}`, `{a,b}`, o redirection `<`.
 5. **Doppio decoding rompe il payload** → l'app URL-decoda due volte (proxy + app): single-encode i metacaratteri o usa `%250a` per ottenere `%0a` dopo il primo giro.
+
+## Lab
+- **PortSwigger Web Academy** — [[PortSwigger Web Academy]]: percorso *OS command injection* (simple, blind con time delay, blind con OAST, blind con esfiltrazione output). Gratuiti.
+- **TryHackMe** — *Command Injection* e la sezione relativa di *OWASP Top 10*.
+- **DVWA** — modulo *Command Injection* (low→high) per esercitare i bypass dei filtri (`$IFS`, quoting, newline).
+- **HackTheBox** — macchine con feature "ping/lookup" iniettabili (es. challenge web "under construction").
 
 ## Domande da colloquio
 **D: Perché `shell=False`/argv separato elimina la command injection?**

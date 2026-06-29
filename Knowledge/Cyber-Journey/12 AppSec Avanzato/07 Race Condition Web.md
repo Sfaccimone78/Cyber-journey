@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, tool]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Race Condition Web", "Race Conditions"]
 ---
@@ -70,6 +70,19 @@ Frode economica (sconti/saldi/withdraw), bypass di rate limit e 2FA, escalation 
 - PortSwigger — Race conditions (lab: "Limit overrun", "Bypassing rate limits via race conditions", "Multi-endpoint race conditions", "Single-endpoint race conditions", "Partial construction race conditions", "Time-sensitive attacks"): https://portswigger.net/web-security/race-conditions
 - James Kettle — "Smashing the state machine: the true potential of web race conditions": https://portswigger.net/research/smashing-the-state-machine
 - HackTricks — Race Condition: https://book.hacktricks.xyz/pentesting-web/race-condition
+
+## Domande
+**D: Cos'è un limit overrun?**
+R: Sfruttare la finestra TOCTOU per superare un limite applicativo (riusare un coupon, prelevare due
+volte, bypassare un limite di tentativi) inviando più richieste che colpiscono la stessa finestra.
+
+**D: Perché serve "vero" parallelismo e come si ottiene?**
+R: Le richieste devono raggiungere la finestra tra check e use **simultaneamente**. Tecniche:
+**single-packet attack** (HTTP/2, un solo pacchetto con N richieste) o last-byte synchronization (Turbo Intruder).
+
+**D: Come ci si difende?**
+R: Rendere l'operazione atomica a livello DB (transazioni, `SELECT ... FOR UPDATE`, vincoli univoci),
+idempotency key, e locking pessimistico sulle risorse condivise. Vedi anche [[Concorrenza e Thread]].
 
 ## Collegamenti
 - [[HTTP Request Smuggling]]

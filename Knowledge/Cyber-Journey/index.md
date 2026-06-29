@@ -1,7 +1,7 @@
 ---
 tipo: sintesi
 tag: [indice]
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: attivo
 ---
 
@@ -10,7 +10,7 @@ stato: attivo
 Catalogo di tutto il contenuto, organizzato per area. L'LLM lo legge per primo durante le query e lo
 aggiorna a ogni ingestione. Mappa concettuale → `[[overview|Overview]]`. Regole → `WIKI_SCHEMA.md`.
 
-> **~250 pagine** in 11 aree · livello principiante → esperto · italiano.
+> **~360 pagine** in 21 aree · livello principiante → esperto · italiano.
 > Ogni area è una **cartella numerata**; dentro, le note sono numerate in **ordine d'apprendimento**.
 > Per studiare un tema dall'inizio alla fine apri la sua **Mappa** qui sotto e segui i numeri.
 
@@ -38,6 +38,14 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 13. [[00 — Mappa AppSec Avanzato|🧪 AppSec Avanzato]]
 14. [[00 — Mappa Reverse Engineering e Exploit Dev|🔬 Reverse Engineering e Exploit Dev]]
 15. [[00 — Mappa DFIR e Detection Engineering|🔎 DFIR e Detection Engineering]]
+16. [[00 — Mappa Mobile Security|📱 Mobile Security]]
+17. [[00 — Mappa Wireless & Radio|📶 Wireless & Radio]]
+18. [[00 — Mappa API e GraphQL Security|🔌 API e GraphQL Security]]
+19. [[00 — Mappa AI e LLM Security|🤖 AI e LLM Security]]
+20. [[00 — Mappa DevSecOps e Supply Chain|🔁 DevSecOps e Supply Chain]]
+21. [[00 — Mappa GRC e Compliance|📋 GRC e Compliance]]
+
+**Percorsi trasversali:** [[Learning Path]] (curriculum fase 0→4) · [[Matrice Ruolo-Cert]] (studio per ruolo/cert).
 
 **Percorso consigliato neofita:** Fondamenti → Reti → Linux → Crittografia → Windows → Web → Metodologia → Blue Team → Python.
 **Fondamenti CS (trasversali):** Sistemi Operativi e Algoritmi e Strutture Dati — teoria di supporto, leggibili in parallelo.
@@ -64,7 +72,7 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 **Appunti pratici (CryptoHack):** [[Base64]] · [[Bytes e Long]] · [[XOR]] · [[Aritmetica Modulare]]
 
 ### 🪟 04 Windows e AD
-[[Filesystem Windows]] · [[Utenti e Permessi Windows]] · [[Registro di Sistema Windows]] · [[PowerShell]] · [[Windows Event Log]] · [[SMB]] · [[RDP]] · [[Active Directory]] · [[Kerberos]] · [[Privilege Escalation Windows]] · [[Pass-the-Hash]] · [[Kerberoasting]] · [[AS-REP Roasting]] · [[enum4linux]] · [[CrackMapExec]] · [[Impacket]] · [[NTLM]] · [[Mimikatz]] · [[BloodHound]] · [[LAPS]] · [[DCSync]] · [[NTLM Relay]] · [[NetExec]] · [[bloodyAD]] · [[PrinterBug e Coercizione]] · [[PowerUp]] · [[Responder]]
+[[Filesystem Windows]] · [[Utenti e Permessi Windows]] · [[Registro di Sistema Windows]] · [[PowerShell]] · [[Windows Event Log]] · [[SMB]] · [[RDP]] · [[Active Directory]] · [[Kerberos]] · [[Privilege Escalation Windows]] · [[Pass-the-Hash]] · [[Kerberoasting]] · [[AS-REP Roasting]] · [[enum4linux]] · [[CrackMapExec]] · [[Impacket]] · [[NTLM]] · [[Mimikatz]] · [[BloodHound]] · [[LAPS]] · [[DCSync]] · [[NTLM Relay]] · [[NetExec]] · [[bloodyAD]] · [[PrinterBug e Coercizione]] · [[PowerUp]] · [[Responder]] · [[ADCS e Template Vulnerabili (ESC1-ESC8)]] · [[Delegation Kerberos (Unconstrained, Constrained, RBCD)]] · [[Shadow Credentials]] · [[Trust di Dominio e Foresta]]
 
 ### 🕸️ 05 Web / OWASP
 [[OWASP Top 10]] · [[SQL Injection]] · [[Cross-Site Scripting (XSS)]] · [[Cross-Site Request Forgery (CSRF)]] · [[Broken Access Control e IDOR]] · [[Command Injection]] · [[Server-Side Request Forgery (SSRF)]] · [[XML External Entity (XXE)]] · [[File Inclusion (LFI e RFI)]] · [[Vulnerabilità Upload File]] · [[Security Misconfiguration]] · [[Autenticazione e Gestione Sessioni]] · [[Cookie e JWT]] · [[Server-Side Template Injection (SSTI)]] · [[Insecure Deserialization]] · [[CORS Misconfiguration]] · [[Clickjacking]] · [[Cryptographic Failures]] · [[Componenti Vulnerabili]] · [[Insecure Design]] · [[Logging e Monitoring Failures]] · [[Burp Suite]] · [[OWASP ZAP]] · [[sqlmap]] · [[PortSwigger Web Academy]]
@@ -102,10 +110,29 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 ### 🔎 14 DFIR e Detection Engineering
 [[Digital Forensics Fondamenti]] · [[Memory Forensics con Volatility]] · [[Disk Forensics e Timeline Analysis]] · [[Windows Forensics (artefatti)]] · [[Log Analysis Avanzata e Correlazione]] · [[Detection Engineering]] · [[Threat Hunting]] · [[Query di Hunting (KQL e SPL)]] · [[MITRE D3FEND e Purple Teaming]] · [[Threat Intelligence (Diamond Model, Pyramid of Pain)]]
 
+### 📱 15 Mobile Security
+[[Fondamenti Mobile]] · [[Android Pentest]] · [[iOS Pentest]] · [[OWASP MASVS e MASTG]] · [[Intercettazione traffico e API mobile]] · [[Insecure Data Storage e Crypto su mobile]]
+
+### 📶 16 Wireless & Radio
+[[Fondamenti Wireless e 802.11]] · [[WEP, WPA, WPA2 e WPA3]] · [[Attacchi WPA2 (handshake e PMKID)]] · [[Evil Twin e Rogue AP]] · [[Wireless Tooling (aircrack-ng, hashcat)]] · [[Bluetooth, BLE e RFID-NFC]]
+
+### 🔌 17 API e GraphQL Security
+[[Fondamenti API e REST Security]] · [[OWASP API Security Top 10]] · [[BOLA e BFLA]] · [[Autenticazione e Autorizzazione API]] · [[Mass Assignment, SSRF e Rate Limiting API]] · [[API Testing e Tooling]]
+
+### 🤖 18 AI e LLM Security
+[[Fondamenti AI e LLM Security]] · [[OWASP Top 10 for LLM Applications]] · [[Prompt Injection (direct e indirect)]] · [[Data e Model Poisoning]] · [[Insecure Output e Supply Chain LLM]] · [[Difesa e Red Teaming LLM]]
+
+### 🔁 19 DevSecOps e Supply Chain
+[[Fondamenti DevSecOps]] · [[Sicurezza CI-CD Pipeline]] · [[SAST, DAST e SCA]] · [[Supply Chain e Dependency Confusion]] · [[SBOM e SLSA]] · [[Secrets Management e IaC Security]]
+
+### 📋 20 GRC e Compliance
+[[Fondamenti GRC]] · [[ISO 27001 e ISMS]] · [[NIST CSF e 800-53]] · [[Risk Management e Quantificazione]] · [[GDPR Operativo]] · [[Audit e Framework (SOC 2, PCI-DSS)]]
+
 ---
 
 ## 🧭 Sintesi
 - [[overview|Overview]] — mappa principale + tesi in evoluzione
+- [[Learning Path]] — curriculum end-to-end (fase 0→4) · [[Matrice Ruolo-Cert]] — studio per ruolo/cert
 - [[Mappa della Crittografia]] · [[Lo stack di rete]] · [[I tre pezzi dell'OS]] — mappe di dominio
 - [[Big-O Cheatsheet]] · [[Da problema ad algoritmo]] — algoritmi
 - [[Linux Essentials]] — linux

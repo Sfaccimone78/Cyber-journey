@@ -3,7 +3,7 @@ tipo: concetto
 tag: [cloud, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Fondamenti Cloud e Shared Responsibility"]
 ---
@@ -70,6 +70,20 @@ az ad signed-in-user show
 > [!warning] Etica
 > Sperimenta solo su **account cloud di tua proprietà**, su lab dedicati (flaws.cloud, CloudGoat) o
 > con autorizzazione scritta. Enumerare o accedere a risorse cloud di terzi è reato.
+
+## Domande
+**D: Cosa distingue la sicurezza "del" cloud da quella "nel" cloud?**
+R: Il provider protegge l'infrastruttura (hardware, hypervisor, rete fisica); il cliente protegge ciò
+che mette dentro (dati, configurazioni, IAM, OS in IaaS). La linea si sposta verso il provider salendo
+da IaaS → PaaS → SaaS.
+
+**D: Perché la maggioranza dei breach cloud è imputabile al cliente?**
+R: Quasi sempre sono **misconfigurazioni** (bucket pubblici, IAM permissivo, security group aperti) che
+ricadono nella parte di responsabilità del cliente, non in un guasto del provider.
+
+**D: In un modello IaaS, chi applica le patch del sistema operativo?**
+R: Il cliente. Il provider gestisce l'hypervisor e l'hardware, ma OS, runtime e applicazioni sono
+responsabilità di chi li esegue.
 
 ## Collegamenti
 - [[IAM Cloud (utenti, ruoli, policy)]]

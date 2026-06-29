@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, tool]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["HTTP Request Smuggling", "Request Smuggling", "Desync Attacks"]
 ---
@@ -90,6 +90,19 @@ Compromissione **trasversale**: dirottamento di sessioni di altri utenti, furto 
 - PortSwigger — Advanced request smuggling: https://portswigger.net/web-security/request-smuggling/advanced
 - James Kettle — "HTTP Desync Attacks: Request Smuggling Reborn": https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn
 - James Kettle — "HTTP/2: The Sequel is Always Worse": https://portswigger.net/research/http2
+
+## Domande
+**D: Qual è la radice del request smuggling?**
+R: Il disaccordo tra front-end e back-end su **dove finisce** una richiesta, tipicamente per
+interpretazione diversa di `Content-Length` vs `Transfer-Encoding` (CL.TE / TE.CL / TE.TE).
+
+**D: Cosa permette di ottenere?**
+R: Bypass dei controlli del front-end, avvelenamento della cache, cattura delle richieste di altri
+utenti (session/credential theft), e request hijacking.
+
+**D: Come ci si difende?**
+R: Normalizzare/rifiutare richieste ambigue (entrambe CL e TE), usare **HTTP/2 end-to-end** senza
+downgrade, e idealmente lo stesso server per FE e BE.
 
 ## Collegamenti
 - [[Web Cache Poisoning]]

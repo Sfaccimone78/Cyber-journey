@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool, linux]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-21
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Parsing con os e re"]
 ---
@@ -120,6 +120,23 @@ il valore** dopo l'uguale. Usare i gruppi serve a estrarre la parte utile, non i
 3. **Avanzato**: aggiungi `--exclude` per saltare cartelle (es. `node_modules`, `.git`) modificando
    *in-place* la lista `sottocartelle` dentro `os.walk` — è il trucco per **potare** l'albero e non
    discendere in rami inutili.
+
+## Lab
+- Esegui il secret-hunter su una copia di un progetto reale; affina la regex per ridurre i falsi positivi.
+- Confronta il tuo strumento con **trufflehog**/**gitleaks** su un repo di test con segreti finti.
+
+## Domande
+**D: Perché compilare la regex con `re.compile`?**
+R: La compila una sola volta e la riusa nel loop → più efficiente e leggibile quando si applica a
+molti file/righe.
+
+**D: Cosa fa `os.walk` e perché è utile in un security tool?**
+R: Attraversa ricorsivamente l'albero del filesystem (dir, sottodir, file) → base per scanner di
+segreti, file SUID, configurazioni esposte.
+
+**D: A cosa servono i gruppi di cattura `()` in una regex?**
+R: Estraggono porzioni specifiche del match (es. il valore dentro `API_KEY=...`), accessibili con
+`match.group(n)`.
 
 ## Collegamenti
 - [[grep]] — l'equivalente da shell di questo script

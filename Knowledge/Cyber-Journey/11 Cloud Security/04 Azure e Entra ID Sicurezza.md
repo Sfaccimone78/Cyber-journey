@@ -3,7 +3,7 @@ tipo: entita
 tag: [cloud, windows, ad, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Azure e Entra ID Sicurezza"]
 ---
@@ -69,6 +69,20 @@ curl -s -H "Authorization: Bearer <ACCESS_TOKEN>" \
 > [!warning] Etica
 > Enumera Entra ID / Azure e ruba token Managed Identity **solo** sul tuo tenant o lab dedicati
 > (AzureGoat, PurpleCloud). Operazioni su tenant terzi sono illegali e tracciate dall'Activity Log.
+
+## Domande
+**D: Differenza tra Azure (Resource Manager) ed Entra ID?**
+R: Due piani di controllo separati: **Entra ID** gestisce identità/directory (utenti, gruppi, app);
+**Azure RM** gestisce le risorse (VM, storage). Ruoli e privesc sono distinti; un Global Admin di Entra
+può però elevarsi su Azure RM (toggle "access management for Azure resources").
+
+**D: Perché il furto di token è centrale in Azure?**
+R: I token OAuth/refresh (cache di `az cli`, IMDS, device-code phishing) sono riutilizzabili senza
+password né MFA fino alla scadenza → bypassano l'autenticazione forte se rubati.
+
+**D: Cos'è il device code phishing?**
+R: Abuso del *device code flow* OAuth: l'attaccante avvia il flusso e induce la vittima a inserire il
+codice e autenticarsi, ottenendo così i suoi token (incl. refresh token).
 
 ## Collegamenti
 - [[Active Directory]]

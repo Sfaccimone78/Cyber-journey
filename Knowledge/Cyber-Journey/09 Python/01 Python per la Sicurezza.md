@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-21
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Python per la Sicurezza"]
 ---
@@ -120,6 +120,24 @@ if __name__ == "__main__":   # eseguito solo se lanciato direttamente, non se im
 3. **Avanzato**: trasforma lo script in modo che, se `--fix` è passato come argomento (vedi `sys.argv`
    o il modulo `argparse`), installi automaticamente i pacchetti mancanti via
    `subprocess.run([sys.executable, "-m", "pip", "install", ...])`.
+
+## Lab
+- **TryHackMe** — *Python Basics*, *Python for Pentesters*. **Exercism** track Python per le basi.
+- Ricrea il verificatore d'ambiente sopra in un virtualenv pulito; estendilo per leggere variabili
+  sensibili da `os.environ`.
+
+## Domande
+**D: Perché un virtualenv è di fatto obbligatorio?**
+R: Isola le dipendenze per progetto, evita conflitti di versione e di rompere il Python di sistema,
+e rende l'ambiente riproducibile (`requirements.txt`).
+
+**D: Quando conviene Python rispetto a Bash?**
+R: Per logica complessa, parsing strutturato, gestione errori e librerie (requests, scapy, pwntools)
+e portabilità. Bash resta migliore per glue di comandi e one-liner sul sistema.
+
+**D: Cosa rende Python lo standard de-facto del tooling offensivo?**
+R: Ecosistema ricco (requests, scapy, pwntools, impacket), prototipazione rapida e leggibilità: si
+passa dall'idea allo script in pochi minuti.
 
 ## Collegamenti
 - [[Socket e Port Scanner]] — primo uso concreto della rete in Python

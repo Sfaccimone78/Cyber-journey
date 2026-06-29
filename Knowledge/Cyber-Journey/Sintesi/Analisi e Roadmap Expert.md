@@ -13,30 +13,34 @@ aliases: ["Analisi e Roadmap Expert", "Roadmap Expert"]
 Analisi critica dello stato della wiki + piano di lavoro per passare da una solida base
 intermedia a una **knowledge base da expert**. Aggiornare man mano che i gap vengono colmati.
 
-## 1. Stato di salute
+## 1. Stato di salute (rivisto 2026-06-28)
 
 | Metrica | Valore | Lettura |
 |---|---|---|
-| Pagine wiki | ~260 | Base ampia |
-| Stato | 227 maturo · 22 attivo · 10 stub | Buona maturità |
-| **Fonti citate reali** | **8** | 🔴 Criticità #1 |
-| **Pagine fase 4 (expert)** | **0** | 🔴 Criticità #2 |
-| fase 1-2 (base/medio) | 178 | Tutto qui |
-| fase 3 (avanzato) | 22 | Sottile |
-| Aree profonde | [[Reti]], [[Linux]] | Eccellenti |
-| Aree sottili | [[Algoritmi e Strutture Dati]], [[Blue Team]], [[Windows e AD]] | Da rinforzare |
+| Pagine wiki | ~314 file (298 note di contenuto) | Base ampia |
+| Stato | 280 maturo · 28 attivo · 0 stub di contenuto (9 "stub" = solo `Template/`) | Buona maturità |
+| Pagine fase 4 (expert) | **17** | Esistono: aree 11-14 create |
+| fase 0-2 (trasversale/base/medio) | 241 | Grosso del corpo |
+| fase 3 (avanzato) | 46 | Cresciuta |
+| Note con `Approfondimento esperto` | **~30 / 298** | 🔴 Criticità #1: profondità disomogenea |
+| Note con `## Domande` / `## Lab` | **62 / 54** su 298 | 🟠 Auto-test e lab incompleti |
+| Distribuzione `fonti:` | sbilanciata (8 su SQLi, 0-3 su molte) | 🟠 Sourcing disomogeneo |
+| Aree profonde | [[Reti]] (27), [[Web OWASP]] (25), [[Windows e AD]] (27), [[Linux]] (22) | Eccellenti |
+| Aree sottili | [[Sistemi Operativi]] (7), [[Python]] (7), [[Cloud Security]] (9), 12-14 (10) | Da rinforzare |
 
-## 2. Criticità strutturali
+## 2. Criticità strutturali (aggiornate)
 
-1. **🔴 Sourcing quasi assente** — 8 fonti per 260 pagine. La wiki è sintesi non citata: rischio
-   di errori non verificabili. Serve un pass di *source-grounding* (PortSwigger, [[HackTricks]],
-   MITRE ATT&CK, RFC, paper, vendor docs).
-2. **🔴 Soffitto di profondità** — zero contenuti expert (fase 4). Tutto si ferma a intermedio.
-3. **🟠 Conoscenza passiva** — poche pagine linkano a un **lab** concreto ([[TryHackMe]],
-   [[HackTheBox]], PortSwigger, CTF). L'expertise si costruisce con le mani.
-4. **🟠 Squilibrio di copertura** — [[Reti]]/[[Linux]] profondissime; aree offensive/difensive
-   avanzate più sottili. 10 stub da riempire.
-5. **🟡 Nessun auto-test** — manca spaced-repetition / domande di ripasso.
+1. **🔴 Profondità disomogenea** — lo *standard esperto* (vedi `WIKI_SCHEMA.md` → "Standard Nota
+   Esperto", modello `SQL Injection`) esiste solo su ~30/298 note. La maggioranza si ferma a
+   intermedio. È il gap #1: il picco è ottimo, la media no.
+2. **🟠 Sourcing disomogeneo** — non più "8 fonti totali" (dato vecchio): molte note citano fonti,
+   ma la distribuzione è sbilanciata. Obiettivo: ogni nota matura ≥2 fonti reali.
+3. **🟠 Auto-test e lab incompleti** — `## Domande` 62/298, `## Lab` 54/298. Manca spaced-repetition
+   (export Anki, vista ripasso). La conoscenza resta in parte passiva.
+4. **🟠 Squilibrio di copertura** — [[Reti]]/[[Linux]]/[[Web OWASP]]/[[Windows e AD]] profonde; aree
+   11-14 + [[Sistemi Operativi]]/[[Python]] ancora scheletriche rispetto all'ambizione esperto.
+5. **🟡 Gap di dominio residui** — mancano Mobile, Wireless/802.11, OT/ICS, API/GraphQL come area,
+   AI/LLM Security, DevSecOps/Supply-chain, AD-ADCS/ESC, GRC reale.
 
 ## 3. Gap di contenuto (domini mancanti)
 
@@ -74,4 +78,5 @@ intermedia a una **knowledge base da expert**. Aggiornare man mano che i gap ven
 ## Collegamenti
 
 - [[index|Indice]] · [[overview|Overview]] · [[Strumenti da studiare in futuro]]
-- Aree nuove (in costruzione): `11 Cloud Security` · `12 AppSec Avanzato` · `13 Reverse Engineering e Exploit Dev` · `14 DFIR e Detection Engineering`
+- Aree 11-14 (**create**): `11 Cloud Security` · `12 AppSec Avanzato` · `13 Reverse Engineering e Exploit Dev` · `14 DFIR e Detection Engineering` — ora da portare allo Standard Nota Esperto.
+- Prossime aree (da creare, vedi piano): `15 Mobile` · `16 Wireless & Radio` · `17 API & GraphQL` · `18 AI/LLM Security` · `19 DevSecOps & Supply Chain` · `20 GRC & Compliance`.

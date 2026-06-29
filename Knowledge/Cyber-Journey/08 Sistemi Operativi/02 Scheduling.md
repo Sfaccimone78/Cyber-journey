@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-25
+fonti: 2
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Scheduling"]
 ---
@@ -51,6 +51,39 @@ Effetti: i job **interattivi** (cedono spesso per I/O) restano in alto -> ottimo
 - MLFQ e alla base di scheduler reali (Windows, vecchi Solaris/FreeBSD); CFS e il presente di Linux.
 - Legato al [[Processi]] (context switch) e alla [[Concorrenza e Thread]] (scheduling non controllato -> race condition).
 
+## Approfondimento sicurezza
+Lo scheduler tocca la sicurezza per due vie:
+- **Side-channel temporali** — il tempo di esecuzione/contesa è osservabile. Scheduler e cache
+  condivisi permettono **covert channel** tra processi (anche cross-VM) e contribuiscono a leak tipo
+  **Spectre/Meltdown** (la finestra speculativa è schedulata). Mitigazioni: `core scheduling`,
+  isolamento dei core, constant-time crypto.
+- **DoS da esaurimento risorse** — un processo CPU-bound o un **fork bomb** (`:(){ :|:& };:`) saturano
+  scheduler e tabella processi. Difesa: **cgroups** (`cpu.max`, `pids.max`), `ulimit -u`, nice/`cpulimit`,
+  `systemd` `CPUQuota=`. Abuso inverso: alzare la propria priorità (richiede privilegi) o sfruttare
+  `nice`/realtime per starvare i controlli di sicurezza.
+
+## Lab
+- Esperimento: lancia un job CPU-bound e uno I/O-bound, osserva con `htop`/`pidstat` come CFS li tratta.
+- Confina un processo con `systemd-run --scope -p CPUQuota=20%` e misura l'effetto.
+- (Cautela, solo in VM) osserva l'effetto di un fork bomb con `pids.max` impostato per contenerlo.
+
+## Domande
+**D: Differenza tra turnaround time e response time, e quale politica ottimizza quale?**
+R: Turnaround = completamento−arrivo (ottimizzato da SJF/STCF); response = prima esecuzione−arrivo
+(ottimizzato da Round Robin). Sono in tensione: non massimizzabili insieme senza conoscere il futuro.
+
+**D: Come fa MLFQ a "imparare" senza conoscere la durata dei job?**
+R: Osserva il comportamento: chi cede spesso per I/O resta in alto (interattivo), chi consuma il
+quanto scende (CPU-bound). Priority boost periodico evita starvation e gestisce job che cambiano.
+
+**D: Su cosa si basa CFS di Linux per scegliere il prossimo processo?**
+R: Sul **vruntime** minimo (tempo virtuale accumulato, pesato dal `nice`), gestito in un red-black
+tree O(log n).
+
+**D: Perché lo scheduling è rilevante per la sicurezza?**
+R: Abilita side-channel temporali (covert channel, Spectre) e attacchi DoS da esaurimento CPU/PID;
+si mitiga con cgroups, isolamento dei core e limiti di risorsa.
+
 ## Collegamenti
 - Vedi anche: [[Processi]], [[Concorrenza e Thread]], [[Concetti dei Sistemi Operativi]]
 - Cross-topic (linux): [[Processi Linux]]
@@ -59,3 +92,4 @@ Effetti: i job **interattivi** (cedono spesso per I/O) restano in alto -> ottimo
 - [OSTEP, cap. 7 "Scheduling: Introduction", p. 65-75]
 - [OSTEP, cap. 8 "The Multi-Level Feedback Queue", p. 77-87]
 - [OSTEP, cap. 9 "Scheduling: Proportional Share" (CFS), p. 89-101]
+- Linux man — sched(7), cgroups(7): https://man7.org/linux/man-pages/man7/sched.7.html

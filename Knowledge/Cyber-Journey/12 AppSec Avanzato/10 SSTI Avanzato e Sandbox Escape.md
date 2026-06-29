@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, tool]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["SSTI Avanzato e Sandbox Escape", "SSTI Avanzato", "Template Sandbox Escape"]
 ---
@@ -109,6 +109,19 @@ ${__import__('os').popen('id').read()}
 - PortSwigger — Exploiting SSTI: https://portswigger.net/web-security/server-side-template-injection/exploiting
 - HackTricks — SSTI (payload per ogni engine): https://book.hacktricks.xyz/pentesting-web/ssti-server-side-template-injection
 - PayloadsAllTheThings — Server Side Template Injection: https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection
+
+## Domande
+**D: Come distinguere SSTI da XSS?**
+R: L'SSTI esegue nel **template engine lato server** (spesso porta a RCE); l'XSS esegue lato client.
+Test: un payload come `{{7*7}}` che torna `49` indica che l'input è valutato dal template server-side.
+
+**D: Come si arriva a RCE da una sandbox Jinja2?**
+R: Navigando gli oggetti Python via MRO (`__class__`, `__mro__`, `__subclasses__`) fino a una classe
+che dà accesso a `os`/`subprocess` (o `__builtins__`/`__globals__`), bypassando i filtri della sandbox.
+
+**D: Qual è la difesa corretta?**
+R: Non passare mai input utente nel **sorgente** del template; usare engine logic-less o sandbox reali,
+separare dati e template (rendere l'input solo *valore*, mai codice), allowlist di funzioni.
 
 ## Collegamenti
 - [[Server-Side Template Injection (SSTI)]]

@@ -3,7 +3,7 @@ tipo: sintesi
 tag: [os, moc]
 aggiornato: 2026-06-25
 stato: attivo
-aliases: ["Mappa Sistemi Operativi", "Concetti dei Sistemi Operativi"]
+aliases: ["Sistemi Operativi", "Mappa Sistemi Operativi", "Concetti dei Sistemi Operativi"]
 ---
 
 # Sistemi Operativi - Mappa

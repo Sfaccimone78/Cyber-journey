@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, crypto, tool]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Attacchi JWT", "JWT Attacks"]
 ---
@@ -88,6 +88,19 @@ Forgiatura di sessione → **privilege escalation** (utente → admin), imperson
 - PortSwigger — JWT attacks (lab: "JWT authentication bypass via unverified signature", "via flawed signature verification", "weak signing key", "jwk header injection", "jku header injection", "kid header path traversal", "algorithm confusion"): https://portswigger.net/web-security/jwt
 - HackTricks — JWT vulnerabilities: https://book.hacktricks.xyz/pentesting-web/hacking-jwt-json-web-tokens
 - ticarpi/jwt_tool wiki (playbook completo): https://github.com/ticarpi/jwt_tool/wiki
+
+## Domande
+**D: Come funziona l'attacco `alg: none`?**
+R: Si imposta l'header `alg` a `none` e si rimuove la firma; un server che non fissa l'algoritmo
+atteso accetta il token come valido → forgiatura arbitraria di claim.
+
+**D: Cos'è l'algorithm confusion RS256 → HS256?**
+R: Il server verifica con RSA (chiave pubblica nota); l'attaccante firma con **HS256 usando la chiave
+pubblica come secret HMAC**. Se il codice sceglie l'algoritmo dall'header, i token forgiati passano.
+
+**D: Come ci si difende dagli attacchi JWT?**
+R: Fissare server-side l'algoritmo atteso, verificare **sempre** la firma, usare chiavi/secret forti,
+non fidarsi degli header `kid`/`jku`/`jwk`/`x5u` (allowlist), scadenze brevi.
 
 ## Collegamenti
 - [[Cookie e JWT]]

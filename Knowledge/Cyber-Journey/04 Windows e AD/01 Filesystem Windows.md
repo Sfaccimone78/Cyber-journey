@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [windows]
 fase: 1
-fonti: 3
-aggiornato: 2026-06-20
+fonti: 4
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Filesystem Windows"]
 
@@ -46,6 +46,42 @@ Con `dir /r` si vedono tutti gli stream. Lo strumento **Sysinternals Streams** p
 - Monitorare scritture in `System32` e `Temp` da processi non di sistema.
 - Usare strumenti AV/EDR che analizzano gli Alternate Data Streams.
 - Limitare i permessi di scrittura nelle cartelle di sistema tramite [[Utenti e Permessi Windows]].
+
+## Approfondimento sicurezza
+- **Alternate Data Streams (ADS)**: MITRE **T1564.004** (Hide Artifacts: NTFS File Attributes). Sysmon **Event ID 15** (FileCreateStreamHash) registra la creazione di stream alternativi — segnale ad alta fedeltà di payload nascosto in `file.txt:stream`.
+- **Mark-of-the-Web (MotW)**: i file scaricati ricevono lo stream `Zone.Identifier`; la sua rimozione manuale (`Unblock-File` o stream cancellato) su un eseguibile è un segnale di evasione.
+- Scritture in `C:\Windows\System32` / `%TEMP%` da processi non di sistema: Sysmon **Event ID 11** (FileCreate); abbinare l'audit NTFS **Event ID 4663** (accesso a oggetto) tramite SACL.
+
+```yaml
+title: Creazione di Alternate Data Stream sospetto
+logsource: { product: windows, category: file_stream_creation }   # Sysmon EID 15
+detection:
+  selection:
+    TargetFilename|contains: ':'
+  filter:
+    TargetFilename|endswith: ':Zone.Identifier'
+  condition: selection and not filter
+level: medium
+```
+
+## Lab
+- **TryHackMe** — *Windows Fundamentals 1/2/3* (struttura del filesystem, System32, NTFS).
+- **TryHackMe** — *Alternate Data Streams* / room di Windows forensics (`MFT`, recupero file).
+- **HackTheBox** Academy — *Windows Fundamentals* (NTFS, permessi, ADS).
+- Esercizio locale: creare un ADS con `echo payload > file.txt:hidden`, rilevarlo con `dir /r` e `Get-Item file.txt -Stream *`, poi rimuoverlo con Sysinternals `streams.exe -d`.
+
+## Domande
+**D: Cos'è un Alternate Data Stream (ADS) e perché interessa la sicurezza?**
+R: È un flusso di dati aggiuntivo che NTFS permette di legare a un file (`file.txt:stream`), invisibile in Esplora risorse e a `dir` semplice. I malware lo usano per nascondere payload; si rileva con `dir /r`, `Get-Item -Stream *` o Sysinternals Streams.
+
+**D: A cosa serve lo stream `Zone.Identifier`?**
+R: È il Mark-of-the-Web: Windows lo aggiunge ai file scaricati da Internet per attivare i controlli SmartScreen/Protected View. Rimuoverlo (`Unblock-File`) elimina questi controlli ed è un segnale di tentata evasione.
+
+**D: Differenza tra `C:\Windows\System32` e `C:\Windows\SysWOW64`?**
+R: Su un Windows a 64 bit, `System32` contiene i binari/DLL a 64 bit, `SysWOW64` quelli a 32 bit (WoW64 = Windows-on-Windows). Il nome è storicamente fuorviante.
+
+**D: Perché NTFS è preferito a FAT32 in contesti enterprise?**
+R: NTFS supporta ACL granulari (DACL/SACL), journaling, cifratura (EFS), file > 4 GB, hard link e auditing degli accessi — tutte funzioni assenti in FAT32.
 
 ## Collegamenti
 - [[Utenti e Permessi Windows]]

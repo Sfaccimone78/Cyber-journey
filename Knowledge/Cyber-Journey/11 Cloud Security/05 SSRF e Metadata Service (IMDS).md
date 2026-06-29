@@ -3,7 +3,7 @@ tipo: concetto
 tag: [cloud, web, owasp]
 fase: 4
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["SSRF e Metadata Service (IMDS)"]
 ---
@@ -77,6 +77,20 @@ aws ec2 modify-instance-metadata-options --instance-id i-0abc \
 > [!warning] Etica
 > Punta a `169.254.169.254` solo su VM/app **di tua proprietà** o lab (flaws2.cloud, PortSwigger).
 > Lo sfruttamento di SSRF su sistemi terzi è accesso abusivo a sistema informatico.
+
+## Domande
+**D: Cos'è l'IMDS e perché è un bersaglio così prezioso?**
+R: L'Instance Metadata Service (`169.254.169.254`) espone metadati e, soprattutto, le **credenziali
+temporanee del ruolo IAM** dell'istanza. Via [[Server-Side Request Forgery (SSRF)|SSRF]] si leggono e
+si usano da fuori → pivot diretto nell'account cloud.
+
+**D: Differenza tra IMDSv1 e IMDSv2?**
+R: v1 risponde a una semplice GET (sfruttabile da SSRF "ciechi"); v2 richiede prima un **token** via
+PUT con header e TTL/hop-limit, rendendo molto più difficile l'abuso via SSRF. Andrebbe forzato v2.
+
+**D: Oltre a IMDSv2, come si mitiga l'esfiltrazione via IMDS?**
+R: Hop limit = 1 (blocca l'inoltro da container), disabilitare IMDS se non serve, egress filtering, e
+correggere la SSRF a monte (allowlist di destinazioni, blocco di IP link-local).
 
 ## Collegamenti
 - [[Server-Side Request Forgery (SSRF)]]

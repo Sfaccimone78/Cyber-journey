@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, metodologia]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Digital Forensics Fondamenti", "Ordine di Volatilità", "Chain of Custody"]
 ---
@@ -96,6 +96,20 @@ ewfverify /evidence/HOST-12_disk.E01
 - **TryHackMe** — *Digital Forensics Fundamentals*, *DFIR: An Introduction*, percorso *SOC Level 1/2*.
 - **CyberDefenders** — challenge *Packet Detective*, *DumpMe* (catena completa acquisizione→analisi).
 - **BlueTeamLabs.online** — investigations introduttive con gestione delle prove.
+
+## Domande
+**D: Cos'è l'ordine di volatilità e perché si rispetta?**
+R: La sequenza di raccolta dalle prove più effimere a quelle più stabili (registri/cache → RAM → stato
+di rete/processi → disco → log/backup). Si rispetta per non perdere dati volatili che svaniscono allo
+spegnimento.
+
+**D: Cos'è la chain of custody e perché è critica?**
+R: La documentazione tracciabile di chi, quando e come ha maneggiato ogni prova. Garantisce
+**integrità** e **ammissibilità legale**: senza, la prova è contestabile.
+
+**D: Perché si lavora su copie e con hashing/write blocker?**
+R: Si acquisisce un'immagine **bit-a-bit** e si calcola un hash (SHA-256) prima/dopo per provare che
+nulla è stato alterato; il **write blocker** impedisce scritture accidentali sull'originale.
 
 ## Collegamenti
 - [[Incident Response]]

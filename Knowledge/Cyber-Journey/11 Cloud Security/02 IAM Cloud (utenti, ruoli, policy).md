@@ -3,7 +3,7 @@ tipo: concetto
 tag: [cloud, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["IAM Cloud (utenti, ruoli, policy)"]
 ---
@@ -79,6 +79,21 @@ az role assignment list --assignee <objectId> --all -o table
 > [!warning] Etica
 > Esegui enumerazione e abuso di policy solo su account di tua proprietà o lab autorizzati. La
 > sola enumerazione IAM lascia tracce in [[Logging e Detection Cloud (CloudTrail)|CloudTrail]].
+
+## Domande
+**D: Differenza tra utente, ruolo e policy?**
+R: L'**utente** è un'identità persistente con credenziali long-term; il **ruolo** è un'identità
+assumibile temporaneamente (credenziali a scadenza via STS, niente segreti permanenti); la **policy**
+è il documento che concede/nega permessi, allegato a un'identità o a una risorsa.
+
+**D: Cos'è un permesso "tossico" e perché?**
+R: Un permesso che consente di scalare privilegi anche senza essere admin: es. `iam:PassRole`,
+`iam:CreatePolicyVersion`, `sts:AssumeRole`, `lambda:CreateFunction`. Permettono di farsi assegnare o
+eseguire codice con un ruolo più potente.
+
+**D: Come si applica il least privilege in IAM cloud?**
+R: Concedere solo i permessi necessari, preferire ruoli temporanei alle chiavi long-term, usare
+**condition key** (IP, MFA, tag) e revisionare periodicamente con strumenti di policy analysis.
 
 ## Collegamenti
 - [[IAM e Zero Trust]]

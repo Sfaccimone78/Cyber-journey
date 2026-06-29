@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, metodologia]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Threat Hunting"]
 ---
@@ -90,6 +90,19 @@ index=sysmon EventCode=1 Image="*\\rundll32.exe"
 - **TryHackMe** — *Threat Hunting*, *Hunting Evil*, percorso *SOC Level 2 / Threat Hunting*.
 - **CyberDefenders** — challenge di hunting su log reali.
 - **Microsoft Defender / Sentinel** — *advanced hunting* (KQL) su dataset demo.
+
+## Domande
+**D: Cos'è l'hunting basato su ipotesi?**
+R: Partire da un'ipotesi su una TTP specifica (es. "c'è Kerberoasting in corso") e cercarne
+proattivamente le tracce nei dati, invece di attendere un alert.
+
+**D: Differenza tra threat hunting, detection e incident response?**
+R: L'hunting è **proattivo** (cerca minacce non ancora rilevate); la detection è automatica
+(regole/alert); l'IR **risponde** a un incidente già confermato.
+
+**D: Cosa serve per un hunt efficace?**
+R: Un framework (MITRE ATT&CK), una **baseline** dell'ambiente (sapere cos'è normale) e telemetria
+ricca (EDR, log di processo/rete) per far emergere le anomalie.
 
 ## Collegamenti
 - [[Detection Engineering]]

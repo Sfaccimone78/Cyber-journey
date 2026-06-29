@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Prototype Pollution"]
 ---
@@ -83,6 +83,18 @@ constructor[prototype][x]    (forma annidata, bypassa filtri su "__proto__")
 - PortSwigger — Prototype pollution (lab client-side via browser API, via flawed sanitization, via Object.defineProperty; server-side via JSON input, scanning for properties, RCE via child_process): https://portswigger.net/web-security/prototype-pollution
 - PortSwigger — Server-side prototype pollution: https://portswigger.net/web-security/prototype-pollution/server-side
 - HackTricks — Prototype Pollution: https://book.hacktricks.xyz/pentesting-web/deserialization/nodejs-proto-prototype-pollution
+
+## Domande
+**D: Perché avviene la prototype pollution?**
+R: Un merge/clone ricorsivo non sicuro permette di scrivere chiavi come `__proto__` → si modifica
+`Object.prototype` globale, e ogni oggetto eredita le proprietà inquinate.
+
+**D: Quali sono le "chiavi magiche"?**
+R: `__proto__`, `constructor`, `prototype`. Sono i percorsi per raggiungere il prototipo globale.
+
+**D: Quale impatto può avere?**
+R: Client-side: DOM XSS (gadget che leggono proprietà inquinate). Server-side (Node): da DoS a **RCE**
+sfruttando gadget come opzioni di `child_process`/template engine influenzate dalle proprietà inquinate.
 
 ## Collegamenti
 - [[Cross-Site Scripting (XSS)]]

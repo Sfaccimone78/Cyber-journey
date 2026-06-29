@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-25
+fonti: 2
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["I/O e Storage"]
 ---
@@ -61,6 +61,42 @@ Il **small-write problem** (RAID-4/5): aggiornare un blocco richiede leggere vec
 - La gerarchia di prestazioni (registri > cache > RAM > SSD > HDD > rete) guida ogni decisione di caching/buffering nel FS [[Filesystem]] e nello swap [[Memoria Virtuale]].
 - RAID non e un backup: protegge dai guasti hardware, non da cancellazioni/ransomware -> rilevante per la sicurezza.
 
+## Approfondimento sicurezza
+- **DMA attacks** — il DMA scrive in RAM **bypassando la CPU e l'OS**: una periferica malevola
+  (Thunderbolt/PCIe, FireWire storico) può leggere/scrivere memoria arbitraria → dump di chiavi,
+  bypass lockscreen (es. *PCILeech/Inception*). Difesa: **IOMMU** (Intel VT-d / AMD-Vi) che confina il
+  DMA, Kernel DMA Protection, disabilitare porte DMA non fidate.
+- **Firmware / supply chain** — controller di disco e BMC hanno firmware proprio: impianti persistenti
+  sotto l'OS. Rilevante per la sicurezza della **supply chain** hardware/firmware.
+- **Data remanence** — su HDD la cancellazione logica lascia dati (→ degauss/overwrite); su **SSD** il
+  wear-leveling sparge copie e rende l'overwrite mirato inefficace → usare ATA **Secure Erase** /
+  crittografia con distruzione della chiave (crypto-erase).
+- **RAID non è backup** — protegge dai guasti hardware, **non** da ransomware/cancellazione/corruzione
+  logica, che si replicano su tutti i dischi. Serve backup offline 3-2-1.
+
+## Lab
+- Verifica se l'IOMMU è attivo: `dmesg | grep -i -e DMAR -e IOMMU` (Linux).
+- In VM: misura l'asimmetria R/W di un device con `fio`; confronta latenza random vs sequenziale.
+- Esperimento forense: `dd` di una partizione, poi `photorec` per recuperare file cancellati.
+
+## Domande
+**D: Differenza tra polling, interrupt e DMA?**
+R: Polling = la CPU controlla lo status in busy-wait (spreco). Interrupt = il device avvisa la CPU al
+completamento (la CPU fa altro nel frattempo). DMA = un motore HW sposta i dati device↔memoria senza
+la CPU, che è interrotta solo a fine trasferimento.
+
+**D: Perché l'accesso random su HDD è molto più lento del sequenziale?**
+R: Seek time (spostamento testina) + rotational delay dominano e si pagano a ogni accesso sparso; in
+sequenziale si ammortizzano. Sugli SSD la differenza crolla (niente parti mobili).
+
+**D: Cos'è il write amplification / erase-before-write degli SSD?**
+R: L'SSD scrive a pagina ma cancella a blocco; riscrivere richiede erase + GC + wear-leveling →
+scrittura più costosa della lettura e usura delle celle. L'FTL gestisce la mappatura log-structured.
+
+**D: Perché il DMA è un rischio di sicurezza e come si mitiga?**
+R: Accede alla RAM bypassando l'OS → una periferica malevola può leggere segreti/chiavi. Si confina
+con l'**IOMMU** (VT-d/AMD-Vi) e Kernel DMA Protection.
+
 ## Collegamenti
 - Vedi anche: [[Filesystem]], [[Memoria Virtuale]], [[Processi]]
 - Cross-topic (linux): [[Processi Linux]]
@@ -70,3 +106,4 @@ Il **small-write problem** (RAID-4/5): aggiornare un blocco richiede leggere vec
 - [OSTEP, cap. 37 "Hard Disk Drives", p. 433-447]
 - [OSTEP, cap. 38 "RAID", p. 449-465]
 - [OSTEP, cap. 44 "Flash-based SSDs", p. 563-583]
+- DMA attacks / IOMMU — Thunderclap (NDSS 2019): https://thunderclap.io/

@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Comandi Linux di Base"]
 
@@ -305,6 +305,12 @@ find / -perm -4000 -type f 2>/dev/null
 5. **`tail -f` su log non aggiornato** → il processo scrive su un file descriptor già aperto e ha fatto ruotare il log; usa `tail -F` (maiuscolo) che segue anche i rename.
 
 ---
+
+## Lab
+
+- **OverTheWire — Bandit** (livelli 0-12): praticamente tutto il livello base si risolve con i comandi di questa nota (`ls`, `cat`, `file`, `find`, `cut`, `sort`, `grep`). Punto di partenza obbligato: https://overthewire.org/wargames/bandit/
+- **TryHackMe — Linux Fundamentals Part 1/2/3**: percorso guidato su navigazione, lettura file, permessi e processi da terminale.
+- **TryHackMe — Bash Scripting / Linux Strength Training**: consolida espansioni, quoting e uso dei comandi in pipeline.
 
 ## Domande da esame / colloquio
 

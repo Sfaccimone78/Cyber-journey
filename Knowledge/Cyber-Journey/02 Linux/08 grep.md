@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["grep"]
 
@@ -212,6 +212,12 @@ rg "pattern" /var/www/ --type php
 ```
 
 ---
+
+## Lab
+
+- **OverTheWire — Bandit** (livelli 5-12): filtraggio di contenuti e ricerca di pattern in molti file.
+- **TryHackMe — Linux Fundamentals Part 2**: uso di `grep` per analisi file e log.
+- **TryHackMe — Splunk / Intro to Logs**: parte di triage testuale dove `grep` su access/auth log individua attacchi.
 
 ## Domande da esame/colloquio
 

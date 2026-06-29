@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Threat Intelligence (Diamond Model, Pyramid of Pain)", "Diamond Model", "Pyramid of Pain"]
 ---
@@ -74,6 +74,19 @@ Difendere in alto nella piramide costringe l'avversario a uno sforzo molto maggi
 - **TryHackMe**: percorso *Cyber Threat Intelligence*, room *Diamond Model*, *Pyramid of Pain*,
   *MISP*, *OpenCTI*, *Threat Intelligence Tools*.
 - **MISP** + feed pubblici (abuse.ch, AlienVault OTX) per esercitarsi con IOC reali.
+
+## Domande
+**D: Cos'è il Diamond Model?**
+R: Un modello di analisi che lega quattro vertici di un'intrusione — **adversary, capability,
+infrastructure, victim** — per correlare eventi e attribuire campagne.
+
+**D: Cos'è la Pyramid of Pain?**
+R: Una gerarchia di indicatori ordinata per il "dolore" inflitto all'attaccante se bloccati: hash
+(banale) → IP → domini → artefatti host/rete → tool → **TTP** (massimo dolore). Guida dove investire.
+
+**D: Differenza tra IOC e TTP?**
+R: Gli **IOC** sono indicatori atomici osservabili (hash, IP, domini), facili da cambiare; le **TTP**
+sono tattiche/tecniche/procedure (comportamento), più stabili e di valore difensivo duraturo.
 
 ## Collegamenti
 

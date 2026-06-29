@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool, web]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-21
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Requests e HTTP"]
 ---
@@ -120,6 +120,23 @@ Per le API JSON basta `r.json()` → ottieni un `dict` Python pronto da navigare
 3. **Avanzato**: trasforma `sonda` in multithread con `ThreadPoolExecutor` (come in
    [[Socket e Port Scanner]]) e aggiungi un filtro `--filter-size` per nascondere le risposte di una
    data lunghezza (tipica pagina "non trovato" custom).
+
+## Lab
+- **PortSwigger Web Academy** — automatizza un lab (es. brute di password o enumerazione) con `requests`.
+- Scrivi un mini dir-buster con una wordlist che classifica per status code; confrontalo con [[ffuf]]/[[Gobuster]].
+
+## Domande
+**D: A cosa serve `requests.Session()`?**
+R: Persiste cookie, header e connessione (keep-alive) tra richieste → permette login e poi navigazione
+autenticata senza ripassare i cookie a mano.
+
+**D: Come si sfruttano gli status code nel fuzzing/dir-busting?**
+R: Si distinguono 200/301-302/403/404 per dedurre esistenza e accessibilità delle risorse; 403 spesso
+indica una risorsa che esiste ma è protetta.
+
+**D: Perché a volte si imposta `allow_redirects=False`?**
+R: Per osservare il vero comportamento (es. il 302 di un login riuscito) invece di seguire la catena e
+vederne solo la pagina finale.
 
 ## Collegamenti
 - [[HTTP e HTTPS]] — la teoria del protocollo

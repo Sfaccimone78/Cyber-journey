@@ -3,7 +3,7 @@ tipo: concetto
 tag: [reti]
 fase: 1
 fonti: 5
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Modello TCP-IP", "Modello TCP/IP"]
 ---
@@ -117,6 +117,11 @@ in rete, port-security/DAI su L2. Una contromisura al livello sbagliato non serv
    rete; i router solo inoltrano. Implica che la fiducia va costruita end-to-end (TLS).
 5. **Come fa un host a sapere quale protocollo c'è "sopra"?** Demultiplexing via campi: EtherType (L2),
    IP protocol (L3), porta di destinazione (L4).
+
+## Lab
+- [[TryHackMe]] — *Networking Concepts* / *Packets & Frames* (incapsulamento, hop-by-hop vs end-to-end).
+- In locale: `traceroute 8.8.8.8` mentre catturi con [[Wireshark]]; osserva che gli IP src/dst restano costanti e i MAC cambiano a ogni hop.
+- `ping` + `tcpdump -n` per vedere TTL decrescente e fingerprintare l'OS sorgente (64 Linux / 128 Windows).
 
 ## Collegamenti
 - [[Modello OSI]] — il riferimento descrittivo a 7 livelli · [[Indirizzamento IP]]

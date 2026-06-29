@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-25
+fonti: 2
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Concorrenza e Thread"]
 ---
@@ -54,12 +54,49 @@ Thread1 prende `L1` poi `L2`; Thread2 prende `L2` poi `L1`. Se entrambi acquisis
 - Race condition sono anche **vulnerabilita di sicurezza** (TOCTOU, time-of-check/time-of-use) -> cross-link a [[Privilege Escalation Linux]].
 - Differenze thread vs processo vs goroutine vs coroutine: vedi [[Concetti dei Sistemi Operativi]].
 
+## Approfondimento sicurezza
+La race condition non è solo un bug: è una **classe di vulnerabilità** (CWE-362).
+- **TOCTOU (Time-Of-Check to Time-Of-Use)** — tra il controllo (`access()`/stat) e l'uso (`open()`)
+  l'attaccante cambia il target, tipicamente via **symlink** verso un file privilegiato. Classico su
+  programmi **SUID** che validano un path e poi lo scrivono. Mitigazioni: usare i **file descriptor**
+  (`openat`, `O_NOFOLLOW`), operazioni atomiche, droppare i privilegi.
+- **Dirty COW (CVE-2016-5195)** — race nel copy-on-write della [[Memoria Virtuale|memoria virtuale]]
+  che permette scrittura su file read-only mappati → privesc a root. Esempio reale di race nel kernel.
+- **Race web** — la stessa primitiva lato applicativo (doppia spesa di un coupon, bypass limiti):
+  vedi [[Race Condition Web]].
+- **Detection** — difficile a runtime; si previene in design (lock, atomicità) e si trova con
+  fuzzing/sanitizer (**TSan**, ThreadSanitizer).
+
+## Lab
+- **pwn.college** / **OverTheWire** — challenge TOCTOU su binari SUID.
+- Scrivi un programma con `counter++` su 2 thread senza lock, osserva il valore finale variabile;
+  poi correggi con `pthread_mutex` e con atomiche.
+- Compila con `-fsanitize=thread` e fai emergere una data race.
+
+## Domande
+**D: Cosa rende `counter++` non atomico e come si corregge?**
+R: È load+add+store: due thread possono interlacciarsi e perdere aggiornamenti. Si protegge con un
+lock/mutex o un'operazione atomica (fetch-and-add).
+
+**D: Quali sono le 4 condizioni di Coffman per il deadlock e come se ne rompe una in pratica?**
+R: Mutua esclusione, hold-and-wait, no preemption, attesa circolare. In pratica si impone un
+**ordine totale di acquisizione dei lock** (rompe l'attesa circolare).
+
+**D: Perché la condizione di una condition variable va controllata in un `while` e non in un `if`?**
+R: Per i risvegli spuri e la semantica Mesa: al risveglio la condizione potrebbe non essere più
+vera, quindi va ri-verificata in loop.
+
+**D: Cos'è un TOCTOU e perché i programmi SUID ne sono vittime?**
+R: Race tra check e use di una risorsa (es. path): l'attaccante la sostituisce nel mezzo (symlink).
+I SUID girano da root, quindi l'abuso porta a privesc. Si mitiga con fd/`openat`/`O_NOFOLLOW`.
+
 ## Collegamenti
 - Vedi anche: [[Processi]], [[Scheduling]], [[Concetti dei Sistemi Operativi]]
-- Cross-topic (sicurezza): [[Privilege Escalation Linux]]
+- Cross-topic (sicurezza): [[Privilege Escalation Linux]], [[Race Condition Web]]
 
 ## Fonti
 - [OSTEP, cap. 26 "Concurrency: An Introduction", p. 287-299]
 - [OSTEP, cap. 27-28 "Thread API / Locks", p. 303-335]
 - [OSTEP, cap. 30-31 "Condition Variables / Semaphores", p. 351-383]
 - [OSTEP, cap. 32 "Common Concurrency Problems", p. 385-399]
+- MITRE CWE-362 — Race Condition / TOCTOU: https://cwe.mitre.org/data/definitions/362.html

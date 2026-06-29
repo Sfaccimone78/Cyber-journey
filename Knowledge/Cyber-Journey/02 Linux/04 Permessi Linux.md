@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 6
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Permessi Linux", "Permessi dei File"]
 ---
@@ -287,6 +287,12 @@ chmod 440 /etc/sudoers                   # solo root può leggere
 | File con `+` in `ls -l` non accessibile come atteso | ACL override dei permessi base | `getfacl file` per vedere le entry ACL reali |
 
 ---
+
+## Lab
+
+- **TryHackMe — Linux PrivEsc** / **Common Linux Privesc**: esercizi su SUID/SGID, file world-writable e script root scrivibili.
+- **OverTheWire — Bandit** (livelli 10-20): permessi su file e directory, lettura condizionata da `r`/`x`.
+- **HackTheBox — Linux Privilege Escalation** (modulo Academy): pratica completa su permessi deboli e bit speciali.
 
 ## Domande da esame / colloquio
 

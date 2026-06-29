@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-21
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["pwntools Base"]
 ---
@@ -108,6 +108,23 @@ pwntools include molto altro: `cyclic(200)`/`cyclic_find()` per **trovare l'offs
    l'exploit si adatta se il binario viene ricompilato.
 3. **Avanzato**: aggancia il debugger con `gdb.attach(io)` per ispezionare lo stato durante l'exploit,
    e prova un ritorno a una shell con `shellcraft.sh()` invece che a una funzione `win` esistente.
+
+## Lab
+- **pwn.college** / **ROP Emporium** — risolvi le prime challenge interagendo col binario via pwntools.
+- **picoCTF** categoria *Binary Exploitation*. Collega gli script a [[Stack Buffer Overflow]] e [[ret2libc e ROP]].
+
+## Domande
+**D: Cos'è una "tube" in pwntools?**
+R: L'astrazione di un canale I/O (`process`, `remote`, `ssh`) con la stessa API → lo stesso exploit
+gira in locale e da remoto cambiando una riga.
+
+**D: Differenza tra `recvuntil`, `recvline` e `recvn`?**
+R: `recvuntil(delim)` legge fino a un delimitatore arbitrario; `recvline()` fino a newline; `recvn(k)`
+esattamente k byte. Servono a sincronizzarsi col protocollo del servizio.
+
+**D: A cosa servono `p64()`/`u64()`?**
+R: Pack/unpack di interi in little-endian per costruire payload (indirizzi, gadget) e interpretare
+leak di memoria.
 
 ## Collegamenti
 - [[Socket e Port Scanner]] — il livello socket grezzo che pwntools astrae

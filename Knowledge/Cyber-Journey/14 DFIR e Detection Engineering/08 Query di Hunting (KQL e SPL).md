@@ -3,7 +3,7 @@ tipo: entita
 tag: [blue-team, tool]
 fase: 4
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Query di Hunting (KQL e SPL)", "KQL", "SPL"]
 ---
@@ -108,6 +108,19 @@ index=dns | stats dc(src) AS host_distinti count by query
 - **TryHackMe** — *Splunk*, *Investigating with Splunk*, *Microsoft Sentinel*, *KQL*.
 - **Microsoft — KQL tutorial / Advanced Hunting** su dataset demo.
 - **CyberDefenders / LetsDefend** — investigazioni che richiedono query mirate.
+
+## Domande
+**D: Differenza tra KQL e SPL?**
+R: **KQL** è di Microsoft (Sentinel/Defender/ADX); **SPL** è di Splunk. Entrambi sono linguaggi di
+query su log con pipe, filtri e aggregazioni, sintassi diversa ma logica simile.
+
+**D: Come si trova un'anomalia con le aggregazioni?**
+R: Con `summarize`/`stats count by ...` per contare e isolare rarità (processi rari, primo accesso di
+un utente, parent-child inusuali) e individuare outlier.
+
+**D: Cos'è la long-tail analysis?**
+R: Ordinare gli eventi per frequenza e ispezionare la **coda** (i più rari): spesso l'attività
+malevola è infrequente e si nasconde lì, sotto il rumore di fondo comune.
 
 ## Collegamenti
 - [[Splunk]]

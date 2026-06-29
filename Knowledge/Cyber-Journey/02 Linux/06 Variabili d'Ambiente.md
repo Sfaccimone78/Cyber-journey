@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 5
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Variabili d'Ambiente"]
 ---
@@ -309,6 +309,12 @@ Il `secure_path` imposta un PATH fisso per i comandi eseguiti via sudo, bloccand
 | `echo $PATH` mostra path corretto ma `which cmd` fallisce | Binario non eseguibile (`chmod +x` mancante) | `chmod +x /path/cmd` |
 
 ---
+
+## Lab
+
+- **TryHackMe — Linux PrivEsc**: sezioni dedicate a PATH hijacking e `LD_PRELOAD` con `sudo env_keep`.
+- **HackTheBox Academy — Linux Privilege Escalation**: modulo con esercizi su variabili d'ambiente e abuso del dynamic linker.
+- **OverTheWire — Bandit** (livelli con PATH e variabili manipolate): pratica risoluzione comandi e `$PATH`.
 
 ## Domande da esame / colloquio
 

@@ -3,7 +3,7 @@ tipo: entita
 tag: [cloud, tool, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["AWS Sicurezza (S3, EC2, IAM, STS)"]
 ---
@@ -72,6 +72,19 @@ aws sts get-caller-identity
 > [!warning] Etica
 > Usa `--no-sign-request`, `assume-role` e Pacu **solo** su account/bucket di tua proprietà o lab
 > autorizzati. Accedere a bucket altrui anche se "pubblici" può configurare accesso abusivo.
+
+## Domande
+**D: Cosa rende un bucket S3 esposto e come si verifica?**
+R: ACL o bucket policy pubbliche, o "Block Public Access" disabilitato. Si testa senza credenziali con
+`aws s3 ls s3://bucket --no-sign-request` o leggendo gli oggetti via URL.
+
+**D: Differenza tra chiavi IAM long-term e token STS?**
+R: Le chiavi IAM (`AKIA...`) sono permanenti e pericolose se leakate; STS emette credenziali
+**temporanee** (`ASIA...` + session token, con scadenza) → blast radius ridotto. Preferire STS/ruoli.
+
+**D: Cos'è l'instance profile di EC2 e perché è un bersaglio?**
+R: Un ruolo IAM collegato all'istanza; le sue credenziali sono leggibili dal servizio metadata (IMDS).
+Una [[SSRF e Metadata Service (IMDS)|SSRF]] verso `169.254.169.254` le esfiltra.
 
 ## Collegamenti
 - [[IAM Cloud (utenti, ruoli, policy)]]

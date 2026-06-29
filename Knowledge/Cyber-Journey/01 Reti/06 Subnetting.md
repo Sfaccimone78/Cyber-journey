@@ -3,7 +3,7 @@ tipo: concetto
 tag: [reti]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Subnetting"]
 ---
@@ -155,6 +155,11 @@ canonica di una LAN IPv6, richiesta da SLAAC). Niente calcolo di host: una /64 h
 4. **A cosa serve un `/30`?** Link punto-punto router-router (2 host utili); `/31` se si applica RFC 3021.
 5. **Perché il subnetting aiuta la sicurezza?** Segmenta i domini di broadcast e isola i segmenti: un
    firewall tra subnet contiene il movimento laterale.
+
+## Lab
+- subnettingpractice.com / subnetipv4.com: generano esercizi infiniti di network/broadcast/host fino a farli a mente.
+- [[TryHackMe]] — *Subnetting* (room dedicata): calcolo guidato + VLSM.
+- In locale: `ipcalc 192.168.1.64/26` per verificare i tuoi calcoli a mano; `nmap -sn 192.168.10.64/26` per scansionare esattamente un segmento.
 
 ## Collegamenti
 - [[Indirizzamento IP]] — la base rete+host su cui si fonda il calcolo

@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 3
-aggiornato: 2026-06-21
+fonti: 4
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Cross-Site Request Forgery (CSRF)", "CSRF"]
 ---
@@ -59,6 +59,31 @@ XSS **batte** ogni difesa CSRF: se c'è XSS sul sito, l'attaccante legge il toke
 4. Richiedere **ri-autenticazione** o conferma per azioni critiche.
 5. **API stateless con Bearer token** in header (non cookie) → immuni al CSRF classico.
 
+## Approfondimento sicurezza
+**SameSite e i suoi limiti.** Dal 2020 i browser impostano `SameSite=Lax` di default sui cookie senza attributo esplicito: questo blocca l'invio cross-site su POST/iframe/AJAX ma **non** sui GET top-level (navigazione diretta). Quindi un'azione sensibile esposta via GET resta CSRF-able anche con Lax di default. `SameSite=Strict` chiude anche quel caso ma rompe i deep-link da siti esterni. Inoltre Lax ha una finestra di **120 secondi** (in Chrome) in cui i cookie nuovi vengono trattati come "None" per compatibilità: una nicchia sfruttabile.
+
+**Bypass dei token (detection).** Pattern tipici: token non legato all'utente (riuso del proprio), token validato solo se presente (drop del parametro), token duplicato in un cookie e confrontato col body (**double-submit** debole se il sottodominio può settare il cookie), e token leakato via `Referer` verso domini terzi. Una difesa robusta è il pattern **synchronizer token** lato sessione o l'header custom (`X-CSRF-Token`) che CORS impedisce di forgiare cross-origin.
+
+**Detection.** Lato server, log delle richieste state-changing con `Origin`/`Referer` esterni al dominio o assenti su endpoint sensibili → segnale. MITRE ATT&CK: il CSRF si colloca in **T1185** (Browser Session Hijacking) come tecnica di abuso della sessione autenticata.
+
+## Lab
+- **PortSwigger Web Academy** — [[PortSwigger Web Academy]]: percorso *CSRF* (token mancante/non validato, bypass via metodo, SameSite Lax bypass, Referer validation bypass). Lab gratuiti.
+- **TryHackMe** — room *OWASP Top 10* (sezione CSRF) e *Cross-site Request Forgery*.
+- **DVWA** — modulo CSRF (cambio password), livelli low→impossible per vedere l'introduzione progressiva del token.
+
+## Domande
+**D: Perché il CSRF funziona anche senza rubare il cookie?**
+R: Perché sfrutta il fatto che il browser allega **automaticamente** i cookie di sessione a ogni richiesta verso quel dominio, anche se la richiesta parte da un sito attaccante. Non serve leggere il cookie: basta indurre il browser a inviare la richiesta voluta.
+
+**D: Perché un XSS rende inutile ogni difesa CSRF?**
+R: Con un XSS l'attaccante esegue JS nell'origine della vittima: può **leggere il token anti-CSRF dal DOM** e forgiare una richiesta perfettamente valida. Per questo l'XSS va chiuso prima: nessun token lo ferma.
+
+**D: SameSite=Lax basta da solo come difesa?**
+R: No. Lax non protegge le azioni esposte via **GET top-level** e ha finestre di compatibilità. Va combinato con token anti-CSRF e, idealmente, le azioni sensibili non devono mai cambiare stato via GET.
+
+**D: Perché le API stateless con Bearer token in header sono immuni al CSRF classico?**
+R: Perché il token non viene inviato automaticamente dal browser (non è un cookie): va aggiunto esplicitamente in un header via JS, cosa che la same-origin policy impedisce a un sito attaccante. Niente invio automatico, niente CSRF.
+
 ## Collegamenti
 - [[OWASP Top 10]]
 - [[Cross-Site Scripting (XSS)]]
@@ -73,3 +98,4 @@ XSS **batte** ogni difesa CSRF: se c'è XSS sul sito, l'attaccante legge il toke
 - PortSwigger — CSRF: https://portswigger.net/web-security/csrf
 - OWASP — CSRF: https://owasp.org/www-community/attacks/csrf
 - OWASP — CSRF Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html
+- PortSwigger — Bypassing SameSite cookie restrictions: https://portswigger.net/web-security/csrf/bypassing-samesite-restrictions

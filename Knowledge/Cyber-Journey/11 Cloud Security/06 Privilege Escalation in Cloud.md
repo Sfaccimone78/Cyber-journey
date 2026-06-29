@@ -3,7 +3,7 @@ tipo: concetto
 tag: [cloud, metodologia]
 fase: 4
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Privilege Escalation in Cloud"]
 ---
@@ -70,6 +70,20 @@ az role assignment create --assignee <id> --role Owner --scope /subscriptions/<s
 > [!warning] Etica
 > Le primitive qui descritte modificano permessi reali. Eseguile **solo** su account di tua
 > proprietà o lab (CloudGoat/AzureGoat). Su infrastrutture terze costituiscono reato.
+
+## Domande
+**D: Come funziona una privesc via `iam:PassRole`?**
+R: Un'identità con `iam:PassRole` + un servizio che esegue codice (`lambda:CreateFunction`,
+`ec2:RunInstances`, `glue`...) può "passare" un ruolo più privilegiato a una risorsa che controlla e
+farci girare codice → eredita quei permessi.
+
+**D: Perché la privesc cloud è diversa da quella on-prem?**
+R: Raramente sfrutta bug del kernel; abusa di **relazioni di permessi IAM e API** (spesso
+misconfigurazioni "by design"). Si ragiona su grafi di permessi, non su exploit di memoria.
+
+**D: Quali strumenti mappano i percorsi di privesc?**
+R: **Pacu** (exploitation AWS), **PMapper** e **cloudsplaining** (analisi grafo permessi),
+**ScoutSuite**/**Prowler** (audit posture multi-cloud).
 
 ## Collegamenti
 - [[IAM Cloud (utenti, ruoli, policy)]]

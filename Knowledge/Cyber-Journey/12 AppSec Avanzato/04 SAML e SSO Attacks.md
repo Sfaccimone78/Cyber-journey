@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, crypto]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["SAML e SSO Attacks", "SAML Attacks", "SSO Attacks"]
 ---
@@ -83,6 +83,19 @@ Bypass completo dell'autenticazione SSO → impersonificazione di qualsiasi uten
 - HackTricks — SAML attacks (XSW, dettagli varianti): https://book.hacktricks.xyz/pentesting-web/saml-attacks
 - PortSwigger Research — "On Breaking SAML: Be Whoever You Want to Be" (paper fondante XSW): https://www.usenix.org/conference/usenixsecurity12/technical-sessions/presentation/somorovsky
 - HackTheBox: macchine/sfide enterprise con SSO SAML (es. scenari Active Directory federati).
+
+## Domande
+**D: Cos'è XML Signature Wrapping (XSW)?**
+R: Si inserisce un'assertion malevola nel documento mantenendo valida la firma su quella legittima,
+sfruttando l'ambiguità tra **cosa è firmato** e **cosa viene processato** dal SP → impersonificazione.
+
+**D: Perché l'XXE è rilevante in SAML?**
+R: La `SAMLResponse` è XML parsato server-side; se il parser elabora DTD/entità esterne, si ottiene
+lettura file locali e SSRF dal Service Provider.
+
+**D: Quali sono le difese chiave nel SSO SAML?**
+R: Verificare la firma sull'elemento corretto (canonicalization robusta), disabilitare DTD/entità
+esterne, validare `Recipient`/`Audience`/`NotOnOrAfter` (anti-replay) e richiedere sempre la firma.
 
 ## Collegamenti
 - [[OAuth 2.0 e OpenID Connect Attacks]]

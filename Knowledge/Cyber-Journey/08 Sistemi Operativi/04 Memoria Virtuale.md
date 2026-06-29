@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-25
+fonti: 2
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Memoria Virtuale"]
 ---
@@ -46,12 +46,50 @@ Accesso a `array[i]` in un loop: il primo elemento di ogni pagina causa un TLB m
 - TLB e cache sono **canali laterali** sfruttabili da attacchi (timing, Meltdown/Spectre): cross-link a [[Attacchi di Rete]] e alla sicurezza.
 - Legame stretto con [[I/O e Storage]] (lo swap usa il disco) e [[Processi]] (ogni processo ha la sua page table).
 
+## Approfondimento sicurezza
+La memoria virtuale è il fondamento dell'isolamento — e quindi un bersaglio:
+- **ASLR** randomizza la posizione di stack/heap/librerie nello spazio virtuale per rendere non
+  predicibili gli indirizzi: difesa centrale contro l'exploitation. Dettagli e bypass in
+  [[Bypass Protezioni (ASLR, DEP, Stack Canary, PIE)]]. **DEP/NX** usa il bit di protezione delle PTE
+  (`X`) per rendere lo stack non eseguibile.
+- **Attacchi micro-architetturali** — **Meltdown/Spectre** sfruttano l'esecuzione speculativa per
+  leggere memoria oltre i confini di protezione; **Rowhammer** induce bit-flip in DRAM per corrompere
+  page table e ottenere privesc. La TLB/cache sono **canali laterali** di timing.
+- **Page table & `/proc/<pid>/maps`** — leggere la mappa di un processo rivela basi randomizzate
+  (utile dopo un leak per bypassare ASLR). `mprotect` per rendere eseguibile memoria (shellcode JIT).
+- **Difesa** — KASLR, KPTI (isolamento page table kernel/user post-Meltdown), `mmap_min_addr`
+  (contro null-deref), W^X.
+
+## Lab
+- Osserva ASLR: esegui due volte un binario PIE e confronta `/proc/self/maps` (gli indirizzi cambiano).
+  Disabilita con `setarch -R` o `echo 0 > /proc/sys/kernel/randomize_va_space` (solo in lab).
+- **pwn.college** — moduli *Memory Errors / ASLR*.
+- Misura un TLB miss: loop su array grande vs piccolo, confronta i tempi (`perf stat -e dTLB-load-misses`).
+
+## Domande
+**D: Perché si usa il paging invece della segmentazione pura?**
+R: Pagine a dimensione fissa eliminano la frammentazione esterna e semplificano l'allocazione; la
+segmentazione la genera. Il costo (tabelle grandi) si gestisce con page table multi-livello.
+
+**D: Cos'è la TLB e perché è necessaria?**
+R: Cache hardware delle traduzioni VPN→PFN. Senza, ogni accesso a memoria richiederebbe un accesso
+extra alla page table. Sfrutta la località per avere hit rate molto alto.
+
+**D: Cosa succede durante un page fault?**
+R: Il bit present è 0 → trap al kernel, che carica la pagina (da swap/file) in un frame, aggiorna la
+PTE e riprende l'istruzione. Se la RAM è piena, prima fa evict secondo la politica di rimpiazzo.
+
+**D: Come si lega la memoria virtuale alla sicurezza dell'exploitation?**
+R: Fornisce isolamento e le protezioni ASLR/DEP (via randomizzazione e bit PTE); attacchi come
+Meltdown/Spectre/Rowhammer e leak da `/proc/maps` mirano proprio a bucare o aggirare questo strato.
+
 ## Collegamenti
 - Vedi anche: [[Processi]], [[I/O e Storage]], [[Filesystem]], [[Concetti dei Sistemi Operativi]]
-- Cross-topic (sicurezza): [[Privilege Escalation Linux]]
+- Cross-topic (sicurezza): [[Privilege Escalation Linux]], [[Bypass Protezioni (ASLR, DEP, Stack Canary, PIE)]], [[Stack Buffer Overflow]]
 
 ## Fonti
 - [OSTEP, cap. 13 "The Abstraction: Address Spaces", p. 121-127]
 - [OSTEP, cap. 15-16 "Address Translation / Segmentation", p. 141-163]
 - [OSTEP, cap. 18-20 "Paging / TLB / Smaller Tables", p. 185-227]
 - [OSTEP, cap. 21-22 "Beyond Physical Memory: Mechanisms & Policies", p. 231-257]
+- Meltdown/Spectre — https://meltdownattack.com/ ; Rowhammer (Google P0): https://googleprojectzero.blogspot.com/2015/03/exploiting-dram-rowhammer-bug-to-gain.html

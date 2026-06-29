@@ -3,7 +3,7 @@ tipo: concetto
 tag: [reti]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["MAC Address", "Ethernet e MAC"]
 ---
@@ -210,6 +210,11 @@ Il MAC randomizzato ha U/L = 1 (bit localmente amministrato alzato), visibile in
    - **Broadcast** (I/G=1, tutti i bit a 1): `FF:FF:FF:FF:FF:FF` — ricevuto da tutti i dispositivi nel broadcast domain; usato da ARP Request e DHCP Discover.
 
 ---
+
+## Lab
+- In locale: `ip link` per leggere il tuo MAC; `macchanger -r eth0` (lab) per cambiarlo e osservare il bit U/L alzato.
+- [[Wireshark]]: filtra `eth.addr` e `eth.dst == ff:ff:ff:ff:ff:ff` per distinguere unicast da broadcast; fai lookup dell'OUI su macvendors.com.
+- [[TryHackMe]] — *Wireshark: The Basics* (frame Ethernet, MAC sorgente/destinazione, ARP).
 
 ## Collegamenti
 - [[ARP]] · [[DHCP]] · [[Modello OSI]] · [[Indirizzamento IP]]

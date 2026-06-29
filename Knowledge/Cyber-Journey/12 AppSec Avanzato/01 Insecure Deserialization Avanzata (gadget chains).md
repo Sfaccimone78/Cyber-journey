@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, tool]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Insecure Deserialization Avanzata (gadget chains)", "Gadget Chains", "Deserializzazione Avanzata"]
 ---
@@ -112,6 +112,21 @@ Tipicamente **RCE pre-auth** con i privilegi del processo applicativo → compro
 - PortSwigger lab: "Exploiting Java deserialization with Apache Commons": https://portswigger.net/web-security/deserialization/exploiting
 - HackTricks — Deserialization: https://book.hacktricks.xyz/pentesting-web/deserialization
 - HackTheBox: macchine "Time" (Java/Jackson), "JSON" (.NET Json.NET), Pro Labs con catene .NET ViewState.
+
+## Domande
+**D: Cos'è una gadget chain?**
+R: Una sequenza di classi/metodi **già presenti nel classpath** che, concatenati durante la
+deserializzazione, producono un effetto malevolo (tipicamente RCE). Non serve una "classe exploit": si
+riusano gadget esistenti. `ysoserial` li genera per Java.
+
+**D: Perché deserializzare dati non fidati è pericoloso di per sé?**
+R: Il processo invoca metodi "magici" (`readObject`, `__wakeup`, `__reduce__`) su tipi arbitrari
+scelti dall'attaccante → si innescano i gadget. Il bug è accettare *tipi* non controllati, non un
+singolo metodo.
+
+**D: Qual è la difesa primaria?**
+R: Non deserializzare dati non fidati; preferire formati **dati-only** (JSON) con binding esplicito;
+allowlist di classi consentite; integrità/firma del blob serializzato.
 
 ## Collegamenti
 - [[Insecure Deserialization]]

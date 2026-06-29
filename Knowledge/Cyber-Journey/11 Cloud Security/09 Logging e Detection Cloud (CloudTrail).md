@@ -3,7 +3,7 @@ tipo: entita
 tag: [cloud, blue-team, tool]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Logging e Detection Cloud (CloudTrail)"]
 ---
@@ -71,6 +71,19 @@ GCP **Security Command Center**.
 > [!warning] Etica
 > Analizza CloudTrail/Activity Log **solo** dei tuoi account o dei lab. I log contengono dati
 > sensibili (IP, ARN, identità): trattali con la stessa cura dei dati di produzione.
+
+## Domande
+**D: Cosa cattura CloudTrail di default e cosa no?**
+R: Cattura gli eventi **management plane** (chiamate API: chi, cosa, quando, da dove). **Non** cattura
+di default i **data events** ad alto volume (es. S3 `GetObject`, Lambda invoke) — vanno abilitati a parte.
+
+**D: Quali tecniche usano gli attaccanti per evadere il logging cloud?**
+R: `StopLogging`/`DeleteTrail`, alterare o rendere pubblico il bucket dei log, operare in **region non
+monitorate**, o usare credenziali in account non coperti dal trail. MITRE **T1562** (Impair Defenses).
+
+**D: Quali IOC cercare in CloudTrail?**
+R: `CreateUser`/`AttachUserPolicy` anomali, `AssumeRole` inusuali, `GetSecretValue`/`Decrypt` di massa,
+`ConsoleLogin` senza MFA, chiamate da IP/User-Agent inattesi, `StopLogging`.
 
 ## Collegamenti
 - [[Logging e Monitoraggio]]

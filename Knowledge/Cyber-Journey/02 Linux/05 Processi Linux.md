@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Processi Linux", "Processi e Job Control"]
 ---
@@ -253,6 +253,12 @@ ls -la /proc/<PID>/exe                   # binario su disco
 | Processo non killabile con -9 | Stato D (kernel wait) | Solo reboot risolve |
 
 ---
+
+## Lab
+
+- **TryHackMe — Linux Fundamentals Part 2/3**: gestione processi, `ps`, `top`, job control e servizi systemd.
+- **TryHackMe — Intro to Logs / Investigating Windows** (parte Linux IR): individua processi sospetti e reverse shell via `/proc` e `ss`.
+- **OverTheWire — Bandit** (livelli con processi/servizi in background): pratica `ps`, segnali e job control.
 
 ## Domande da esame/colloquio
 

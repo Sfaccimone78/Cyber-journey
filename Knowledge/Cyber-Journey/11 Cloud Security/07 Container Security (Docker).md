@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [cloud, linux, tool]
 fase: 3
-fonti: 3
-aggiornato: 2026-06-26
+fonti: 5
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Container Security (Docker)"]
 ---
@@ -72,6 +72,62 @@ docker run --rm --cap-drop=ALL --security-opt=no-new-privileges \
 > Prova escape e abuso del socket Docker **solo** su host/container di tua proprietà o in lab. Un
 > escape ti dà controllo dell'host: trattalo come un'azione altamente privilegiata.
 
+## Domande
+**D: Perché un container non è una sandbox di sicurezza come una VM?**
+R: Condivide il **kernel** dell'host (isola solo via namespace/cgroups, non un hypervisor). Una
+falla del kernel o una capability/mount eccessivi bypassano l'isolamento → escape sull'host. Per
+isolamento forte servono microVM (Firecracker/Kata) o gVisor.
+
+**D: Trovi `/var/run/docker.sock` montato in un container. Impatto?**
+R: Game over: il socket parla col demone Docker (root sull'host). Avvio un container che monta `/`
+dell'host e faccio `chroot` → controllo totale. È equivalente a root sull'host, non "solo" sul container.
+
+**D: `--cap-drop=ALL` rende il container sicuro?**
+R: Riduce molto la superficie ma non basta da solo: restano mount sensibili, socket, kernel
+condiviso. Va combinato con `no-new-privileges`, seccomp/AppArmor, user namespace remap, `--read-only`,
+utente non-root.
+
+**D: Come capisci a runtime se sei dentro un container e se puoi evadere?**
+R: `cat /proc/1/cgroup` (stringhe `docker`/`kubepods`), `/.dockerenv`, `capsh --print` per le
+capability, `mount`/`fdisk -l` per dischi host montati, presenza di `docker.sock`. `CAP_SYS_ADMIN` o
+`--privileged` = escape probabile.
+
+## Approfondimento livello esperto
+
+### Anatomia dell'escape `--privileged` (perché funziona)
+Un container privilegiato gira con **tutte le capability**, **senza seccomp/AppArmor** e con accesso
+ai **device** dell'host (`/dev`). Da qui i due classici:
+- **Mount del disco host**: `fdisk -l` mostra `/dev/sda*` (visibili perché device non filtrati) →
+  `mount /dev/sda1 /mnt/host && chroot /mnt/host` = filesystem host scrivibile.
+- **release_agent / cgroup-v1 escape**: si crea un cgroup, si imposta `notify_on_release` e un
+  `release_agent` che punta a uno script nel container; alla "release" il kernel lo esegue **come
+  root sull'host**. È la tecnica storica di `--privileged` senza bisogno di device.
+
+### Capability pericolose (mappa rapida)
+| Capability | Abuso |
+|---|---|
+| `CAP_SYS_ADMIN` | mount, namespace, cgroup → la più potente, vicina a root |
+| `CAP_SYS_PTRACE` | ptrace di processi host (se PID host condiviso) → injection |
+| `CAP_SYS_MODULE` | carica kernel module → codice in ring 0 = escape diretto |
+| `CAP_DAC_READ_SEARCH` | bypass permessi lettura → `shocker`/open_by_handle_at → leggi file host |
+| `CAP_NET_RAW` | sniffing/spoofing sulla rete del container |
+
+### Detection engineering
+- **Runtime sensor** (Falco) — regole su: shell spawn in container (`spawned process in container`),
+  scrittura in path sensibili, lettura `/etc/shadow`, uso di `mount`/`nsenter`, accesso a
+  `docker.sock`. Falco aggancia syscall via eBPF.
+- **MITRE ATT&CK**: **T1610** Deploy Container · **T1611** Escape to Host · **T1613** Container &
+  Resource Discovery · **T1552.007** Container API credentials.
+- **Audit host**: `auditd` su `mount`, `unshare`, `setns`; alert su container con `Privileged:true`
+  (query a Docker/K8s API). In K8s, **admission controller** (OPA/Gatekeeper, Pod Security Standards)
+  che blocca `privileged`, `hostPID`, `hostPath`, capability extra **prima** dello scheduling.
+
+### Hardening — supply chain dell'immagine
+Oltre al runtime: **firma** (cosign/Sigstore) + **provenance** (SLSA), **scan** in CI (Trivy/Grype)
+con gate sui CVE critici, base **distroless**/minimal (meno binari = meno GTFO-style), **niente
+segreti nei layer** (controlla con `dive`/`docker history` — i layer sono pubblici), `HEALTHCHECK` e
+`USER` non-root nel Dockerfile. A runtime: rootless Docker / Podman per togliere il demone-root.
+
 ## Collegamenti
 - [[Kubernetes Security (RBAC, escape)]]
 - [[Privilege Escalation Linux]]
@@ -82,3 +138,5 @@ docker run --rm --cap-drop=ALL --security-opt=no-new-privileges \
 - Docker — Security documentation: https://docs.docker.com/engine/security/
 - OWASP — Docker Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Docker_Security_Cheat_Sheet.html
 - HackTricks — Docker Breakout: https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/docker-security/index.html
+- Falco — Container runtime security rules: https://falco.org/docs/
+- MITRE ATT&CK — Containers matrix (T1610/T1611/T1613): https://attack.mitre.org/matrices/enterprise/containers/

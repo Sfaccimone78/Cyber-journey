@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp, tool]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["GraphQL Security", "GraphQL Attacks"]
 ---
@@ -94,6 +94,19 @@ Esfiltrazione massiva di dati, account takeover (reset token/mutation), bypass d
 - PortSwigger — GraphQL API vulnerabilities (lab: "Accessing private GraphQL posts", "Accidental exposure of private GraphQL fields", "Finding a hidden GraphQL endpoint", "Bypassing GraphQL brute force protections", "Performing CSRF over GraphQL"): https://portswigger.net/web-security/graphql
 - HackTricks — GraphQL: https://book.hacktricks.xyz/network-services-pentesting/pentesting-web/graphql
 - OWASP — GraphQL Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/GraphQL_Cheat_Sheet.html
+
+## Domande
+**D: Cos'è l'introspection e perché è un rischio?**
+R: Una query che restituisce l'**intero schema** dell'API (tipi, campi, mutation nascoste). Espone la
+mappa completa all'attaccante → andrebbe disabilitata in produzione (o gestita con cautela).
+
+**D: Cos'è il batching abuse?**
+R: Inviare molte operazioni in una sola richiesta per **aggirare il rate limit** (brute force di
+password/OTP/2FA), perché il contatore lavora per-richiesta e non per-operazione.
+
+**D: Difese chiave per GraphQL?**
+R: Introspection off in prod, **query depth/complexity limit** (anti-DoS), rate limit per-operazione,
+e access control **per-campo** (evita IDOR/broken access control granulare).
 
 ## Collegamenti
 - [[Broken Access Control e IDOR]]

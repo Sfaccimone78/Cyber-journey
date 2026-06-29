@@ -4,7 +4,7 @@ tag: [cloud, moc]
 fase: 3
 aggiornato: 2026-06-26
 stato: maturo
-aliases: ["Mappa Cloud Security"]
+aliases: ["Cloud Security", "Mappa Cloud Security"]
 ---
 
 # Cloud Security - Mappa

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [cloud, linux, tool]
 fase: 4
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Kubernetes Security (RBAC, escape)"]
 ---
@@ -75,6 +75,19 @@ kube-bench    # CIS benchmark
 > [!warning] Etica
 > Esegui enumerazione RBAC, abuso di token SA e pod escape **solo** su cluster di tua proprietà o
 > lab (KubeGoat, minikube). Compromettere cluster terzi è accesso abusivo a sistema informatico.
+
+## Domande
+**D: Cos'è RBAC in Kubernetes e dove sbaglia?**
+R: Role/ClusterRole + RoleBinding decidono chi può fare cosa sulle API. Permessi eccessivi (es.
+`create pods`, `pods/exec`, `secrets get`, impersonate) diventano primitive di privesc nel cluster.
+
+**D: Come si esce da un pod verso il nodo/host?**
+R: Pod **privileged**, **hostPath** che monta il filesystem del nodo, **hostPID/hostNetwork**, o un
+service account token con RBAC ampio. Creare un pod con hostPath `/` = lettura/scrittura sul nodo.
+
+**D: Dove sta il service account token e perché conta?**
+R: Montato di default in `/var/run/secrets/kubernetes.io/serviceaccount/token`. Se il SA ha permessi
+RBAC larghi, chi compromette il pod li eredita → enumerare con `kubectl auth can-i --list`.
 
 ## Collegamenti
 - [[Container Security (Docker)]]

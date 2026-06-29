@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Log Analysis Avanzata e Correlazione", "Correlazione di Log", "Logging e Monitoraggio"]
 ---
@@ -93,6 +93,19 @@ index=sysmon EventCode=1
 - **TryHackMe** — *Splunk 101/201/301*, *Investigating with Splunk*, *Sysmon*.
 - **LetsDefend** — alert investigation con log multi-sorgente.
 - **Microsoft Sentinel** — *KQL training* + content hub per regole di correlazione.
+
+## Domande
+**D: Perché la correlazione tra sorgenti è la chiave?**
+R: Un singolo log raramente racconta l'attacco; correlare auth + processi + rete + proxy ricostruisce
+la **kill chain** e riduce i falsi positivi.
+
+**D: Quali Event ID Windows contano per i logon e cosa rivela il logon type?**
+R: 4624 (logon riuscito), 4625 (fallito), 4672 (privilegi assegnati), 4634/4647 (logoff). Il **logon
+type** indica il vettore: 3 = rete, 10 = RDP, 2 = interattivo, 8 = clear-text.
+
+**D: Cos'è la time normalization e perché serve?**
+R: Portare tutti i timestamp a UTC/stesso formato prima di correlare; senza, sorgenti con fusi/clock
+diversi disallineano la timeline e rompono la correlazione.
 
 ## Collegamenti
 - [[Log Analysis]]

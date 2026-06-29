@@ -394,3 +394,32 @@ Ricostruita la catena prec/succ di tutte le 15 MOC in ordine numerico.
 - Corretti salti pre-esistenti: 07 Blue Team saltava 08 (ora 06→07→08→09); 09 prec era 07 (ora 08).
 - Aree 11-14 inserite nella catena: …10→11→12→13→14 (14 terminale, nessun succ).
 - Rimossi i link succ "a caso" generati dallo swarm (12→05, 13→10, 14→07).
+
+## [2026-06-28] build | Uniformazione profondità + 6 nuove aree (sciame agenti)
+Sessione "verso wiki perfetta" (analisi 10 criticità → rimedi). Due fronti.
+- **Fase 2 — uniformare la profondità** (run precedente, file disgiunti per cartella): aggiunte le
+  sezioni dello Standard Nota Esperto (`## Lab`, `## Domande`, `Approfondimento livello esperto`, +1
+  fonte) alle aree sottili **08 Sistemi Operativi** (7), **09 Python** (7), **11 Cloud** (9),
+  **12 AppSec** (10), **13 RE/Exploit** (10), **14 DFIR** (10), più pass su 01 Reti/02 Linux/05 Web.
+  Codificato lo **Standard Nota Esperto** (9 sezioni) in `WIKI_SCHEMA.md`; aggiornato il meta-doc
+  `Sintesi/Analisi e Roadmap Expert.md` coi numeri reali.
+- **Fase 3 — colmare i gap di dominio** (sciame di **7 agenti paralleli**, una cartella ciascuno,
+  zero collisioni; consolidamento index/log/nav a posteriori dal coordinatore):
+  - **6 nuove aree** (MOC + 6 note esperto l'una, fase 3, standard a 10 sezioni, comandi reali, ≥2 fonti):
+    `15 Mobile Security`, `16 Wireless & Radio`, `17 API e GraphQL Security`, `18 AI e LLM Security`,
+    `19 DevSecOps e Supply Chain`, `20 GRC e Compliance`.
+  - **04 Windows e AD +4 note avanzate**: `28 ADCS e Template Vulnerabili (ESC1-ESC8)`,
+    `29 Delegation Kerberos (Unconstrained, Constrained, RBCD)`, `30 Shadow Credentials`,
+    `31 Trust di Dominio e Foresta`.
+  - GraphQL non duplicato: le note 17 cross-linkano la pagina esistente `12 AppSec/08 GraphQL Security`.
+- **Fase 4 — studio & navigazione**: creati `Sintesi/Learning Path.md` (curriculum fase 0→4 con
+  prerequisiti, milestone, checklist) e `Sintesi/Matrice Ruolo-Cert.md` (cross-walk ruolo/cert→aree).
+- Consolidato `index.md` (aree 15-21 in nav + blocchi contenuto + link Sintesi; conteggio ~360 pagine,
+  data 2026-06-28). Catena MOC estesa 14→15→16→17→18→19→20.
+
+## [2026-06-28] lint | Verifica integrità post-build
+Script `linkcheck.py` (strip code-block + alias-aware) sull'intero vault: **362 file .md** (escluso
+Template). Link rotti reali iniziali = 1 (`[[Reverse Engineering]]`, usato dalle note Mobile) →
+risolto aggiungendo l'alias `Reverse Engineering` alla MOC `13 — Mappa Reverse Engineering e Exploit Dev`.
+Ri-scan: **0 link rotti**. Le 6 nuove MOC hanno alias nome-area (es. `Wireless & Radio`,
+`API & GraphQL Security`) così i cross-link delle altre aree risolvono.

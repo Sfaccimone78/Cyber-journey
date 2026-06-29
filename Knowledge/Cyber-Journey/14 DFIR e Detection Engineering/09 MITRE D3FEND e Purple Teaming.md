@@ -3,7 +3,7 @@ tipo: concetto
 tag: [blue-team, metodologia]
 fase: 4
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["MITRE D3FEND e Purple Teaming", "MITRE D3FEND", "Purple Teaming"]
 ---
@@ -91,6 +91,19 @@ python server.py --insecure
 - **MITRE Caldera** — piattaforma di adversary emulation automatizzata.
 - **TryHackMe** — *MITRE*, *Atomic Red Team*, *Purple/Red vs Blue* rooms.
 - **VECTR** (SecurityRiskAdvisors) — tracking degli esercizi purple team.
+
+## Domande
+**D: Cos'è MITRE D3FEND?**
+R: Una knowledge base delle **contromisure difensive** (tecniche di hardening, detection, isolamento,
+deception), complementare ad ATT&CK che cataloga l'offensiva.
+
+**D: Cos'è il purple teaming?**
+R: La collaborazione strutturata tra red e blue: il red esegue TTP note, il blue verifica e migliora
+la detection **in tempo reale** sugli stessi scenari.
+
+**D: Come si usa la matrice ATT&CK in un esercizio purple?**
+R: Per mappare la **copertura di detection** (quali tecniche sono coperte, parziali o scoperte) e
+prioritizzare dove costruire o migliorare le regole.
 
 ## Collegamenti
 - [[MITRE ATT&CK]]

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [reti]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Hardware di Rete"]
 ---
@@ -189,6 +189,11 @@ In recon, un attaccante mappa questa catena con [[Nmap]] (host discovery, porte 
    Il TTL (Time To Live) è un contatore decrementato da ogni router a ogni hop. Previene i loop di routing: quando arriva a 0, il router scarta il pacchetto e invia un messaggio [[ICMP]] Time Exceeded all'origine. `traceroute` sfrutta questo meccanismo: invia pacchetti con TTL = 1, 2, 3… raccogliendo l'ICMP Time Exceeded di ogni router intermedio per mappare il percorso.
 
 ---
+
+## Lab
+- [[TryHackMe]] — *Network Device Hardening* e *Intro to LAN* (switch, router, VLAN, domini di broadcast).
+- Cisco Packet Tracer / GNS3: costruisci una topologia con switch managed + VLAN e prova port security e DHCP snooping.
+- In lab autorizzato: simula un MAC flooding con `macof` su uno switch e osserva il passaggio a flooding con [[Wireshark]].
 
 ## Collegamenti
 - [[Rete Informatica e i suoi Componenti]] · [[Modello OSI]]

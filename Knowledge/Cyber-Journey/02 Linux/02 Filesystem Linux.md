@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-26
+aggiornato: 2026-06-28
 stato: maturo
 aliases: ["Filesystem Linux"]
 
@@ -280,6 +280,12 @@ mount | awk '{print $5}' | sort -u    # tipi di filesystem presenti
 5. **`mount` con `noexec` ma posso ancora eseguire** → `noexec` blocca `execve()` su file in quel mount, ma `bash ./script.sh` funziona perché l'eseguibile è `bash` (che sta altrove); il file viene letto, non eseguito.
 
 ---
+
+## Lab
+
+- **OverTheWire — Bandit** (livelli 5-15): esercita ricerca su filesystem per dimensione/permessi/owner (`find`), inode e file particolari.
+- **TryHackMe — Linux Fundamentals Part 2**: esplora la gerarchia FHS, `/etc`, `/var`, `/proc` e i percorsi assoluti/relativi.
+- **TryHackMe — Linux PrivEsc**: usa la mappa dei file sensibili (`/etc/passwd`, `/etc/shadow`, cron, SSH key) per l'enumerazione post-exploit.
 
 ## Domande da esame / colloquio
 
