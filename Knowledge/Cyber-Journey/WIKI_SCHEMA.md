@@ -189,6 +189,9 @@ Suggerisci nuove domande da approfondire e nuove fonti. Logga l'evento come `lin
 pre-commit** (`tools/githooks/pre-commit`) sui file in stage. Installazione una-tantum per clone:
 `git config core.hooksPath tools/githooks`. Report completo del vault: `python tools/check_notes.py`
 (`--strict` tratta anche gli avvisi come errori). Se una nota non è ancora pronta → `stato: attivo`.
+I heading `## Collegamenti` e `## Fonti` sono riconosciuti anche con decorazione emoji
+(es. `## 🔗 Collegamenti`, `## 📚 Fonti`); evita invece refusi con spazio dentro la parola
+(`## Collegamen ti` non è un heading valido).
 
 ---
 

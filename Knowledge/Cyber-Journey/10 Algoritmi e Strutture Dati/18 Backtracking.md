@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Backtracking"]
@@ -53,3 +53,4 @@ Sudoku: si sceglie la prima cella vuota, si prova `1`; se è coerente con riga/c
 
 ## Fonti
 - [Erickson, cap. Backtracking]
+- Skiena — *The Algorithm Design Manual* (2ª ed.), §7.1 "Backtracking".

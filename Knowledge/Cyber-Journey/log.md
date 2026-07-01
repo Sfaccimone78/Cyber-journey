@@ -483,3 +483,20 @@ nel corpo, `## Collegamenti`, `## Fonti` con ≥2 voci, presenza nella Mappa d'a
   `## Collegamenti` (Tipi di Hacker, ICMP, Three-Way Handshake, Porte e Protocolli, Aritmetica
   Modulare, Residui Quadratici). Il gate le intercetterà alla prossima modifica.
 - Verifica: hook testato su nota-debito in stage → blocca (exit 1) e ripristino pulito.
+
+## [2026-07-01] lint | Sanitizzazione 27 note-debito → gate pulito su tutto il vault (S-06)
+- **Falsi positivi corretti (non erano isole):**
+  - 3 refusi `## Collegamen ti` (spazio dentro la parola) → `## Collegamenti` in `ICMP`,
+    `Three-Way Handshake TCP`, `Porte e Protocolli Comuni` (bug reale anche in Obsidian).
+  - Gate reso tollerante a heading decorati con emoji (`## 🔗 Collegamenti`, `## 📚 Fonti`):
+    `check_notes.py` ora matcha `^#{2,}[^\n]*\bCollegamenti\b` / `\bFonti\b`. Sblocca
+    `Residui Quadratici` (aveva già 2 fonti + collegamenti, ma con emoji).
+- **Gap reali sanati:**
+  - `Tipi di Hacker` e `Aritmetica Modulare`: aggiunte `## Collegamenti` (wikilink reali verificati)
+    e `## Fonti` (≥2 fonti canoniche).
+  - 21 note con 1 sola fonte: aggiunta **1 fonte canonica reale complementare** ciascuna
+    (RFC, CLRS, Handbook of Applied Cryptography, NIST SP, OWASP Cheat Sheet, MITRE ATT&CK,
+    paper Pugh per Skip List). `fonti:` nel frontmatter riallineato al conteggio reale.
+- **Esito:** `python tools/check_notes.py` → **0 errori** su 321 note (prima: 27 note / 30 errori).
+  Restano solo avvisi non bloccanti (sezioni opzionali In breve/Lab/Domande; ~41 `fonti:` disallineati
+  in note non toccate — hygiene futura). In `WIKI_SCHEMA.md` documentato il refuso-spazio da evitare.

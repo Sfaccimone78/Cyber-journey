@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [carriera]
 fase: 0
-fonti: 1
+fonti: 3
 aggiornato: 2026-06-22
 stato: maturo
 aliases: ["Certificazioni Cybersecurity"]
@@ -52,3 +52,5 @@ Le certificazioni sono **prova verificabile** di competenza: nel mondo offensive
 
 ## Fonti
 - Paul Jerimy — Security Certification Roadmap: https://pauljerimy.com/security-certification-roadmap/
+- CompTIA — obiettivi d'esame Security+ / PenTest+: https://www.comptia.org/certifications
+- Offensive Security — OSCP (PEN-200): https://www.offsec.com/courses/pen-200/

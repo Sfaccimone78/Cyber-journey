@@ -87,7 +87,8 @@ def area_moc_links(area_dir):
 
 
 def fonti_count(text):
-    m = re.search(r"(?mi)^##+\s*Fonti\s*$", text)
+    # heading tollerante: accetta '## Fonti', '## 📚 Fonti', '## Fonti primarie'…
+    m = re.search(r"(?mi)^#{2,}[^\n]*\bFonti\b", text)
     if not m:
         return 0
     tail = text[m.end():]
@@ -120,7 +121,8 @@ def check_note(path):
 
     if not re.search(r"\[\[[^\]]+\]\]", bc):
         errors.append("WIKILINK: nessun [[link]] nel corpo")
-    if not re.search(r"(?mi)^##+\s*Collegamenti\s*$", b):
+    # heading tollerante: accetta '## Collegamenti', '## 🔗 Collegamenti', '## Collegamenti con la teoria'…
+    if not re.search(r"(?mi)^#{2,}[^\n]*\bCollegamenti\b", b):
         errors.append("COLLEG: manca '## Collegamenti'")
     fc = fonti_count(b)
     if fc < 2:

@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [reti, blue-team]
 fase: 1
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Firewall", "Firewall e NAT"]
@@ -91,3 +91,4 @@ i dispositivi con un solo IP pubblico.
 
 ## Fonti
 - Systems Approach — *Computer Networks* (cap. "Network Security — Firewalls"): <https://book.systemsapproach.org/>
+- NIST SP 800-41 Rev.1 — Guidelines on Firewalls and Firewall Policy: https://csrc.nist.gov/pubs/sp/800/41/r1/final

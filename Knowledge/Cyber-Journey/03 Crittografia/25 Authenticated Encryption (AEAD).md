@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [crypto]
 fase: 1
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Authenticated Encryption (AEAD)", "AEAD", "Authenticated Encryption", "GCM"]
@@ -64,3 +64,4 @@ In **TLS 1.3** sono ammessi **solo** cipher suite AEAD (AES-GCM, AES-CCM, ChaCha
 
 ## Fonti
 - [Crypto101, cap. 11, "Authenticated encryption modes" (AEAD/OCB/GCM), pp. 124–129]
+- RFC 5116 — An Interface and Algorithms for Authenticated Encryption: https://datatracker.ietf.org/doc/html/rfc5116

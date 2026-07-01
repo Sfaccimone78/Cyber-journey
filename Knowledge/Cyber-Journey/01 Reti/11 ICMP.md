@@ -276,7 +276,7 @@ Bloccare ICMPv6 integralmente rompe IPv6 completamente (nessun NDP → nessun in
 
 ---
 
-## Collegamen ti
+## Collegamenti
 - [[Indirizzamento IP]] — ICMP viaggia direttamente in IP (proto 1)
 - [[TCP]] — ICMP segnala errori relativi a sessioni TCP
 - [[UDP]] — ICMP Port Unreachable (Type 3/3) è la risposta a UDP su porta chiusa

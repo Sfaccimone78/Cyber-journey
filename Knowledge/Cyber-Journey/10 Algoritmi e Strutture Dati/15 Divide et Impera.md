@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Divide et Impera"]
@@ -55,3 +55,4 @@ Merge sort su `[5,2,8,1]`: divide in `[5,2]` e `[8,1]`, ordina ricorsivamente in
 
 ## Fonti
 - [Erickson, cap. Divide and Conquer / Recurrences]
+- CLRS — *Introduction to Algorithms*, cap. 4 "Divide-and-Conquer" (teorema Master).

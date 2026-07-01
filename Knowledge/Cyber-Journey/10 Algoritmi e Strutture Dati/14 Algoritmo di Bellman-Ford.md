@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Algoritmo di Bellman-Ford", "Bellman-Ford"]
@@ -47,3 +47,4 @@ Confronto con Dijkstra: O(V·E) vs O((V+E) log V). Dijkstra vince su grafi con s
 
 ## Fonti
 - [Erickson, cap. Shortest Paths]
+- CLRS — *Introduction to Algorithms*, §24.1 "The Bellman-Ford algorithm".

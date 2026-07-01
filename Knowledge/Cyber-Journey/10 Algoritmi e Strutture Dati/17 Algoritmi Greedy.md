@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Algoritmi Greedy"]
@@ -59,3 +59,4 @@ Sala conferenze, 5 talk con orari sovrapposti: ordinandoli per orario di fine e 
 
 ## Fonti
 - [Erickson, cap. Greedy Algorithms / Minimum Spanning Trees]
+- CLRS — *Introduction to Algorithms*, cap. 16 "Greedy Algorithms" (+ cap. 23 MST).

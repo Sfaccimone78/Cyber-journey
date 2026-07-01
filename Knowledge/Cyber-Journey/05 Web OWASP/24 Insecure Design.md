@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-26
 stato: maturo
 aliases: ["Insecure Design"]
@@ -51,3 +51,4 @@ Per natura, i difetti di design raramente hanno un CVE puntuale (un CVE è tipic
 
 ## Fonti
 - OWASP Top 10:2025 A06 / 2021 A04 Insecure Design — https://owasp.org/Top10/
+- OWASP — Threat Modeling Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html

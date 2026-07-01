@@ -268,7 +268,7 @@ La regola mnemonica per le porte più comuni in ordine numerico:
 
 ---
 
-## Collegamen ti
+## Collegamenti
 - [[TCP]] — il trasporto connection-oriented su cui vivono la maggior parte delle porte well-known
 - [[UDP]] — le porte UDP (DNS, DHCP, SNMP, NTP) e i loro vettori di attacco
 - [[Three-Way Handshake TCP]] — come si apre una connessione verso una porta

@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [fondamenti]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-20
 stato: maturo
 aliases: ["Tipi di Hacker"]
@@ -33,4 +33,14 @@ Una banca assume un red team esterno per tentare di bucare la rete interna duran
 ## Perché conta
 
 Capire i ruoli ti aiuta a orientarti nella scelta del [[Percorsi di Carriera Pentester vs SOC|percorso di carriera]]: preferisci attaccare (red) o difendere (blue)? Entrambe le strade richiedono competenze tecniche solide, ma mentalità differenti.
+
+## Collegamenti
+- [[La Cyber Kill Chain]] — il red team ne segue le fasi per simulare un attacco reale
+- [[Percorsi di Carriera Pentester vs SOC]] — red (offensive) vs blue (SOC/difesa)
+- [[CVE e CVSS]] — il blue team gestisce e prioritizza le vulnerabilità note
+- [[Cos'è la Sicurezza Informatica]] — inquadramento generale della disciplina
+
+## Fonti
+- NIST SP 800-115 — Technical Guide to Information Security Testing and Assessment: https://csrc.nist.gov/pubs/sp/800/115/final
+- MITRE ATT&CK — framework di tattiche per red/blue/purple teaming: https://attack.mitre.org/
 

@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [metodologia, reti]
 fase: 2
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-26
 stato: maturo
 aliases: ["Attacchi di Rete", "Network Attacks"]
@@ -62,3 +62,4 @@ tcpdump -i eth0 -A 'tcp port 80'
 
 ## Fonti
 - Anderson, *Security Engineering*, cap. 21 — https://www.cl.cam.ac.uk/~rja14/book.html
+- MITRE ATT&CK — Enterprise Matrix (Discovery, Lateral Movement, Credential Access): https://attack.mitre.org/matrices/enterprise/

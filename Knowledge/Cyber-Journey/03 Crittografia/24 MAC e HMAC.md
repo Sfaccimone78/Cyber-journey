@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [crypto]
 fase: 1
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["MAC e HMAC", "MAC", "HMAC", "Poly1305"]
@@ -70,3 +70,4 @@ con `ipad`=0x36 ripetuto e `opad`=0x5c ripetuto (un block-length ciascuno). [Fon
 
 ## Fonti
 - [Crypto101, cap. 11, "Message authentication codes", pp. 111–124]
+- RFC 2104 — HMAC: Keyed-Hashing for Message Authentication: https://datatracker.ietf.org/doc/html/rfc2104

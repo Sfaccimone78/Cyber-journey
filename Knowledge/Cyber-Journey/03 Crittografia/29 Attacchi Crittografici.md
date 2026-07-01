@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [crypto]
 fase: 1
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-26
 stato: maturo
 aliases: ["Attacchi Crittografici", "Crittanalisi"]
@@ -72,3 +72,4 @@ Attacchi sull'**implementazione** anziché sulla matematica astratta.
 
 ## Fonti
 - Crypto 101 (Laurens Van Houtven), capp. 5–14 + App. A/C (attacchi trasversali, DSA `k`, Dual_EC_DRBG, side-channel): https://crypto101.io/
+- Menezes et al. — *Handbook of Applied Cryptography*, §1.8 e cap. 9 (attacchi, note): https://cacr.uwaterloo.ca/hac/

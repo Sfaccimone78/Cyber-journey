@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Programmazione Dinamica"]
@@ -73,3 +73,4 @@ Non c'è un'unica complessità: si misura come **#stati × lavoro/stato**.
 
 ## Fonti
 - [Erickson, cap. Dynamic Programming]
+- CLRS — *Introduction to Algorithms*, cap. 15 "Dynamic Programming".

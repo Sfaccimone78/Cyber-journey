@@ -250,7 +250,7 @@ sysctl net.ipv4.tcp_tw_reuse     # 0 = no reuse, 1 = permetti (client)
 
 ---
 
-## Collegamen ti
+## Collegamenti
 - [[TCP]] — header completo, gestione seq/ack, stati, controllo di flusso
 - [[UDP]] — trasporto senza handshake a confronto
 - [[ICMP]] — risposte di errore che interferiscono con TCP (Unreachable, Time Exceeded)

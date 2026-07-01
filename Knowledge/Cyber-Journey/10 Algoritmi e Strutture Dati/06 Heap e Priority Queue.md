@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Heap e Priority Queue"]
@@ -40,3 +40,4 @@ Una **priority queue** (coda a priorità) è un ADT che mantiene un insieme di e
 
 ## Fonti
 - [ODS, cap. 10 Heaps, pp. 203-214]
+- CLRS — *Introduction to Algorithms*, cap. 6 "Heapsort" e §6.5 "Priority queues".

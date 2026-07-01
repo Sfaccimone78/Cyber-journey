@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [web, owasp, metodologia]
 fase: 2
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-26
 stato: maturo
 aliases: ["Componenti Vulnerabili", "Vulnerable Components", "Software Supply Chain"]
@@ -56,3 +56,4 @@ trivy image myapp:latest       # container + dipendenze OS
 
 ## Fonti
 - OWASP Top 10:2025 A03 Software Supply Chain Failures / 2021 A06 — https://owasp.org/Top10/
+- CISA — Known Exploited Vulnerabilities (KEV) Catalog: https://www.cisa.gov/known-exploited-vulnerabilities-catalog

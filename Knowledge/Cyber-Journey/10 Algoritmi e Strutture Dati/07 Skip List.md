@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Skip List"]
@@ -35,3 +35,4 @@ Sorted set di Redis (ZSET), indici in memoria, strutture concorrenti (`Concurren
 
 ## Fonti
 - [ODS, cap. 4 Skiplists, pp. 83-97]
+- Pugh, W. (1990) — "Skip Lists: A Probabilistic Alternative to Balanced Trees", CACM 33(6): https://doi.org/10.1145/78973.78977

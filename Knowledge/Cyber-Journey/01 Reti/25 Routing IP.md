@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [reti]
 fase: 1
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Routing IP", "Routing", "Instradamento IP", "IP Routing"]
@@ -123,3 +123,4 @@ traceroute 8.8.8.8       # il cammino hop-by-hop
 
 ## Fonti
 - Systems Approach — *Computer Networks* (cap. "Internetworking — IP"; cap. "Routing — link-state, distance-vector, BGP"): <https://book.systemsapproach.org/>
+- RFC 2328 — OSPF v2 (link-state) · RFC 4271 — BGP-4 (path-vector): https://datatracker.ietf.org/doc/html/rfc2328

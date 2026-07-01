@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [crypto]
 fase: 1
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-20
 stato: maturo
 aliases: ["Aritmetica Modulare", "CryptoHack - Mathematics (Modular Math)", "Modular Math", "Massimo Comune Divisore"]
@@ -265,5 +265,11 @@ print(f"Flag: {crt(rimasugli, moduli)}")
 
 ---
 
-> [!note] Fonte
-> Appunti riorganizzati da `Senza nome.md`. Sfide [CryptoHack — Mathematics](https://cryptohack.org/challenges/maths/).
+## Collegamenti
+- [[Residui Quadratici e Simbolo di Legendre]] — radici quadrate modulari, simbolo di Legendre, Tonelli-Shanks
+- [[05 RSA|RSA]] — inverso modulare (Euclide esteso) e CRT sono il cuore di RSA
+- [[Sfida CryptoHack - Adrien's Signs]] — applicazione pratica del simbolo di Legendre
+
+## Fonti
+- CryptoHack — Mathematics (Modular Math): https://cryptohack.org/challenges/maths/
+- Menezes, van Oorschot, Vanstone — *Handbook of Applied Cryptography*, cap. 2 §2.4 "Number theory" (PDF libero): https://cacr.uwaterloo.ca/hac/

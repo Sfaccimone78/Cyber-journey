@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [web, owasp, blue-team]
 fase: 2
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-26
 stato: maturo
 aliases: ["Logging e Monitoring Failures", "Security Logging Failures"]
@@ -53,3 +53,4 @@ Per natura non è un CVE: è un fallimento di processo. Casi emblematici:
 
 ## Fonti
 - OWASP Top 10:2025 A09 Security Logging & Alerting Failures / 2021 A09 — https://owasp.org/Top10/
+- OWASP — Logging Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html

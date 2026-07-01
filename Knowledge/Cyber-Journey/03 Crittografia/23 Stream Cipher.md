@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [crypto]
 fase: 1
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Stream Cipher", "ChaCha20", "RC4", "Salsa20"]
@@ -59,3 +59,4 @@ Proprietà notevoli:
 
 ## Fonti
 - [Crypto101, cap. 7, "Stream ciphers", pp. 41–80]
+- Menezes, van Oorschot, Vanstone — *Handbook of Applied Cryptography*, cap. 6 "Stream Ciphers" (PDF libero): https://cacr.uwaterloo.ca/hac/

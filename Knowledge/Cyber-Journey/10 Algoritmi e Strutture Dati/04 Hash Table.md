@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Hash Table"]
@@ -43,3 +43,4 @@ Dizionario/mappa di un linguaggio (Python `dict`), cache, deduplicazione, indici
 
 ## Fonti
 - [ODS, cap. 5 Hash Tables, pp. 101-122]
+- Cormen, Leiserson, Rivest, Stein — *Introduction to Algorithms* (CLRS), cap. 11 "Hash Tables".

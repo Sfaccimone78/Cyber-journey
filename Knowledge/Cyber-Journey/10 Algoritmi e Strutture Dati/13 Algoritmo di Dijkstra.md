@@ -2,7 +2,7 @@
 tipo: concetto
 tag: [algoritmi]
 fase: 0
-fonti: 1
+fonti: 2
 aggiornato: 2026-06-25
 stato: maturo
 aliases: ["Algoritmo di Dijkstra", "Dijkstra"]
@@ -51,3 +51,4 @@ Best = Avg = Worst (deterministico): la struttura del lavoro non dipende dai val
 
 ## Fonti
 - [Erickson, cap. Shortest Paths]
+- CLRS — *Introduction to Algorithms*, §24.3 "Dijkstra's algorithm".
