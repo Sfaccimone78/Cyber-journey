@@ -451,3 +451,20 @@ Audit completo del vault (384 file .md) → rilevati e corretti i danni del merg
 - **index.md** ripulito dai 3 link ai file rimossi/rinominati (AWS IAM Vettori, Vulnerabilità OAuth, Mettere in Sicurezza Ingress→Sicurezza di Kubernetes Ingress).
 - **Verifica finale:** 0 file non-UTF8, 0 link rotti reali (residui = falsi positivi noti: `\|` in tabelle, placeholder template/schema, `Sintesi/overview`), orfano residuo `Risorse/INDICE.md` (pre-esistente, fuori scope).
 - Backup dei file rimossi/modificati (untracked, non recuperabili da git) in `scratchpad/backup-pre-S01/` e `scratchpad/_TRASH-S01/`.
+
+## [2026-07-01] refactor | index.md derivato da script (S-05)
+Reso `index.md` single source of truth: la sezione "Contenuto per area" ora è **generata** da
+`tools/gen_index.py` (nuovo), tra i marker `<!-- AUTO-INDEX:START/END -->`. Il resto di `index.md`
+(intro, nav mappe, Sintesi, Fonti, Dataview) resta curato a mano.
+- Lo script scansiona le 24 cartelle d'area, elenca le note reali in ordine numerico usando il nome
+  canonico (`alias[0]`, fallback nome-file); il display è **garantito risolvibile** (alias o nome-file,
+  parsing sia inline `[..]` sia a blocco YAML). Modalità: `--check` (deriva, exit≠0) e `--write`.
+- Deriva sanata: **+11 note** erano su disco ma assenti dal catalogo → ora incluse: `Malware`,
+  `GTFOBins`, `Residui Quadratici`, `Adrien's Signs`, `Penetration Testing`, `TryHackMe`, `HackTheBox`,
+  `HackTricks`, `ExploitDB`, `Zeek`, `Suricata`. Corretti anche link-display latenti non risolvibili
+  (es. `[[Percorsi di Carriera Pentester vs SOC]]` ora punta all'alias reale).
+- Conteggio in testa aggiornato dal vero: da "~360 pagine in 21 aree" a **321 pagine in 24 aree**.
+- Nota: le sotto-raggruppazioni editoriali di Crittografia (Primitive/Attacchi/Appunti) sono state
+  appiattite in un unico elenco per area, in ordine numerico.
+- Verifica: `gen_index.py --check` = 0 deriva; controllo strict = index.md 100% risolvibile.
+- Documentato il workflow in `WIKI_SCHEMA.md`. Tool in `tools/gen_index.py` (fuori dal vault).

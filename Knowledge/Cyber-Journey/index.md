@@ -10,7 +10,7 @@ stato: attivo
 Catalogo di tutto il contenuto, organizzato per area. L'LLM lo legge per primo durante le query e lo
 aggiorna a ogni ingestione. Mappa concettuale → `[[overview|Overview]]`. Regole → `WIKI_SCHEMA.md`.
 
-> **~360 pagine** in 21 aree · livello principiante → esperto · italiano.
+> **321 pagine** in 24 aree · livello principiante → esperto · italiano.
 > Ogni area è una **cartella numerata**; dentro, le note sono numerate in **ordine d'apprendimento**.
 > Per studiare un tema dall'inizio alla fine apri la sua **Mappa** qui sotto e segui i numeri.
 
@@ -59,32 +59,30 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 
 > I link sotto usano i nomi senza numero: risolvono comunque grazie agli `aliases` nel frontmatter.
 
+<!-- AUTO-INDEX:START — generato da tools/gen_index.py; non modificare a mano -->
 ### 🟢 00 Fondamenti
-[[Cos'è la Sicurezza Informatica]] · [[Triade CIA]] · [[Tipi di Hacker]] · [[Vulnerabilità Exploit e Minaccia]] · [[Superficie di Attacco]] · [[CVE e CVSS]] · [[Difesa in Profondità]] · [[La Cyber Kill Chain]] · [[Percorsi di Carriera Pentester vs SOC]] · [[Certificazioni Cybersecurity]] · [[Social Engineering e Phishing]] · [[Risk Management e Compliance]] · [[IAM e Zero Trust]] · [[Threat Modeling]] · [[Secure Coding]] · [[Glossario degli Acronimi]]
+[[Cos'è la Sicurezza Informatica]] · [[Triade CIA]] · [[Tipi di Hacker]] · [[Vulnerabilità Exploit e Minaccia]] · [[Superficie di Attacco]] · [[CVE e CVSS]] · [[Difesa in Profondità]] · [[La Cyber Kill Chain]] · [[Percorsi di Carriera Pentester vs SOC]] · [[Certificazioni Cybersecurity]] · [[Social Engineering e Phishing]] · [[Risk Management e Compliance]] · [[IAM e Zero Trust]] · [[Glossario degli Acronimi]] · [[Threat Modeling]] · [[Secure Coding]] · [[Malware]]
 
 ### 🌐 01 Reti
 [[Rete Informatica e i suoi Componenti]] · [[Hardware di Rete]] · [[Modello OSI]] · [[Modello TCP-IP]] · [[Indirizzamento IP]] · [[Subnetting]] · [[MAC Address]] · [[ARP]] · [[TCP]] · [[UDP]] · [[ICMP]] · [[Three-Way Handshake TCP]] · [[Porte e Protocolli Comuni]] · [[DNS]] · [[DHCP]] · [[NAT]] · [[HTTP e HTTPS]] · [[Modello Client-Server]] · [[VPN]] · [[Wireshark]] · [[SSH]] · [[Man-in-the-Middle (MITM)]] · [[DoS e DDoS]] · [[Ping e Traceroute]] · [[Routing IP]] · [[Firewall]] · [[Socket Programming]] · [[Network Segmentation e Zero Trust]]
 
 ### 🐧 02 Linux
-[[Comandi Linux di Base]] · [[Filesystem Linux]] · [[Utenti e Gruppi Linux]] · [[Permessi Linux]] · [[Processi Linux]] · [[Variabili d'Ambiente]] · [[Pipe e Redirezione]] · [[grep]] · [[find]] · [[awk]] · [[sed]] · [[sudo]] · [[Cron e Job Pianificati]] · [[Bash Scripting]] · [[SUID e SGID]] · [[Privilege Escalation Linux]] · [[OverTheWire Bandit]] · [[Capabilities Linux]] · [[Gestione Pacchetti]] · [[Strumenti di Rete CLI]] · [[Vim e Nano]]
+[[Comandi Linux di Base]] · [[Filesystem Linux]] · [[Utenti e Gruppi Linux]] · [[Permessi Linux]] · [[Processi Linux]] · [[Variabili d'Ambiente]] · [[Pipe e Redirezione]] · [[grep]] · [[find]] · [[awk]] · [[sed]] · [[sudo]] · [[Cron e Job Pianificati]] · [[Bash Scripting]] · [[SUID e SGID]] · [[Privilege Escalation Linux]] · [[OverTheWire Bandit]] · [[Capabilities]] · [[Gestione Pacchetti]] · [[Strumenti di Rete CLI]] · [[Vim e Nano]] · [[GTFOBins]]
 
 ### 🔐 03 Crittografia
-[[Encoding vs Encryption]] · [[Crittografia Simmetrica]] · [[Crittografia Asimmetrica]] · [[AES]] · [[RSA]] · [[Funzioni di Hash]] · [[Hashing delle Password e Salting]] · [[Scambio di Chiavi Diffie-Hellman]] · [[Firma Digitale]] · [[Certificati Digitali e CA]] · [[TLS e SSL]] · [[OpenSSL]] · [[CyberChef]] · [[Hashcat]] · [[John the Ripper]] · [[Crittografia a Curve Ellittiche (ECC)]] · [[GPG]]
-**Primitive e modalità:** [[Modi Operativi dei Block Cipher]] · [[Stream Cipher]] · [[MAC e HMAC]] · [[Authenticated Encryption (AEAD)]] · [[Crittografia Post-Quantistica]]
-**Attacchi:** [[Padding Oracle Attack]] · [[Attacchi Crittografici]]
-**Appunti pratici (CryptoHack):** [[Base64]] · [[Bytes e Long]] · [[XOR]] · [[Aritmetica Modulare]]
+[[Encoding vs Encryption]] · [[Crittografia Simmetrica]] · [[Crittografia Asimmetrica]] · [[AES]] · [[RSA]] · [[Funzioni di Hash]] · [[Hashing delle Password e Salting]] · [[Scambio di Chiavi Diffie-Hellman]] · [[Firma Digitale]] · [[Certificati Digitali e CA]] · [[TLS e SSL]] · [[OpenSSL]] · [[CyberChef]] · [[Hashcat]] · [[John the Ripper]] · [[Base64]] · [[Bytes e Long]] · [[XOR]] · [[Aritmetica Modulare]] · [[Crittografia a Curve Ellittiche (ECC)]] · [[Residui Quadratici]] · [[Modi Operativi dei Block Cipher]] · [[Stream Cipher]] · [[MAC e HMAC]] · [[Authenticated Encryption (AEAD)]] · [[Crittografia Post-Quantistica]] · [[Padding Oracle Attack]] · [[GPG]] · [[Attacchi Crittografici]] · [[Adrien's Signs]]
 
 ### 🪟 04 Windows e AD
-[[Filesystem Windows]] · [[Utenti e Permessi Windows]] · [[Registro di Sistema Windows]] · [[PowerShell]] · [[Windows Event Log]] · [[SMB]] · [[RDP]] · [[Active Directory]] · [[Kerberos]] · [[Privilege Escalation Windows]] · [[Pass-the-Hash]] · [[Kerberoasting]] · [[AS-REP Roasting]] · [[enum4linux]] · [[CrackMapExec]] · [[Impacket]] · [[NTLM]] · [[Mimikatz]] · [[BloodHound]] · [[LAPS]] · [[DCSync]] · [[NTLM Relay]] · [[NetExec]] · [[bloodyAD]] · [[PrinterBug e Coercizione]] · [[PowerUp]] · [[Responder]] · [[ADCS e Template Vulnerabili (ESC1-ESC8)]] · [[Delegation Kerberos (Unconstrained, Constrained, RBCD)]] · [[Shadow Credentials]] · [[Trust di Dominio e Foresta]] · [[Hardening di Active Directory]]
+[[Filesystem Windows]] · [[Utenti e Permessi Windows]] · [[Registro di Sistema Windows]] · [[PowerShell]] · [[Windows Event Log]] · [[SMB]] · [[RDP]] · [[Active Directory]] · [[Kerberos]] · [[Privilege Escalation Windows]] · [[Pass-the-Hash]] · [[Kerberoasting]] · [[AS-REP Roasting]] · [[enum4linux]] · [[CrackMapExec]] · [[Impacket]] · [[NTLM]] · [[Mimikatz]] · [[BloodHound]] · [[LAPS]] · [[DCSync]] · [[NTLM Relay]] · [[NetExec]] · [[bloodyAD]] · [[PrinterBug]] · [[PowerUp]] · [[Responder]] · [[ADCS e Template Vulnerabili (ESC1-ESC8)]] · [[Delegation Kerberos (Unconstrained, Constrained, RBCD)]] · [[Shadow Credentials]] · [[Trust di Dominio e Foresta]] · [[Hardening di Active Directory]]
 
 ### 🕸️ 05 Web / OWASP
-[[OWASP Top 10]] · [[SQL Injection]] · [[Cross-Site Scripting (XSS)]] · [[Cross-Site Request Forgery (CSRF)]] · [[Broken Access Control e IDOR]] · [[Command Injection]] · [[Server-Side Request Forgery (SSRF)]] · [[XML External Entity (XXE)]] · [[File Inclusion (LFI e RFI)]] · [[Vulnerabilità Upload File]] · [[Security Misconfiguration]] · [[Autenticazione e Gestione Sessioni]] · [[Cookie e JWT]] · [[Server-Side Template Injection (SSTI)]] · [[Insecure Deserialization]] · [[CORS Misconfiguration]] · [[Clickjacking]] · [[Cryptographic Failures]] · [[Componenti Vulnerabili]] · [[Insecure Design]] · [[Logging e Monitoring Failures]] · [[Burp Suite]] · [[OWASP ZAP]] · [[sqlmap]] · [[PortSwigger Web Academy]]
+[[OWASP Top 10]] · [[SQL Injection]] · [[Cross-Site Scripting (XSS)]] · [[Cross-Site Request Forgery (CSRF)]] · [[Broken Access Control e IDOR]] · [[Command Injection]] · [[Server-Side Request Forgery (SSRF)]] · [[XML External Entity (XXE)]] · [[File Inclusion (LFI e RFI)]] · [[Vulnerabilità Upload File]] · [[Security Misconfiguration]] · [[Autenticazione e Gestione Sessioni]] · [[Cookie e JWT]] · [[Burp Suite]] · [[OWASP ZAP]] · [[sqlmap]] · [[PortSwigger Web Academy]] · [[Server-Side Template Injection (SSTI)]] · [[Insecure Deserialization]] · [[CORS Misconfiguration]] · [[Clickjacking]] · [[Cryptographic Failures]] · [[Componenti Vulnerabili]] · [[Insecure Design]] · [[Logging e Monitoring Failures]]
 
 ### 🎯 06 Metodologia e Tool
-[[Metodologia del Pentest]] · [[Ricognizione (Recon)]] · [[OSINT]] · [[Scansione delle Porte]] · [[Enumerazione]] · [[Exploitation]] · [[Post-Exploitation]] · [[Reverse Shell e Bind Shell]] · [[Nmap]] · [[Gobuster]] · [[ffuf]] · [[Nikto]] · [[Hydra]] · [[netcat]] · [[Metasploit]] · [[Kali Linux]] · [[Lateral Movement]] · [[Pivoting]] · [[Port Forwarding]] · [[Reporting Pentest]] · [[PEAS]] · [[Meterpreter]] · [[msfvenom]] · [[Metodologia CTF]] · [[Privilege Escalation (Concetti)]] · [[Attacchi di Rete]] · [[Strumenti da studiare in futuro]]
+[[Metodologia del Pentest]] · [[Ricognizione (Recon)]] · [[OSINT]] · [[Scansione delle Porte]] · [[Enumerazione]] · [[Exploitation]] · [[Post-Exploitation]] · [[Reverse Shell e Bind Shell]] · [[Nmap]] · [[Gobuster]] · [[ffuf]] · [[Nikto]] · [[Hydra]] · [[netcat]] · [[Metasploit]] · [[Kali Linux]] · [[Lateral Movement]] · [[Pivoting]] · [[Port Forwarding]] · [[Reporting Pentest]] · [[PEAS]] · [[Meterpreter]] · [[msfvenom]] · [[Strumenti da studiare in futuro]] · [[Metodologia CTF]] · [[Privilege Escalation (Concetti)]] · [[Attacchi di Rete]] · [[Penetration Testing]] · [[TryHackMe]] · [[HackTheBox]] · [[HackTricks]] · [[ExploitDB]]
 
 ### 🛡️ 07 Blue Team
-[[SIEM]] · [[Log Analysis]] · [[Detection di Attacchi]] · [[Triage degli Alert]] · [[Incident Response]] · [[Indicatori di Compromissione (IOC)]] · [[Threat Intelligence]] · [[MITRE ATT&CK]] · [[Analisi Malware di Base]] · [[Splunk]] · [[VirusTotal]] · [[Any.run]] · [[MITRE ATT&CK Navigator]] · [[LetsDefend]] · [[Sysmon]] · [[YARA]] · [[Regole Sigma]] · [[Volatility (Memory Forensics)]] · [[EDR e XDR]]
+[[SIEM]] · [[Log Analysis]] · [[Detection di Attacchi]] · [[Triage degli Alert]] · [[Incident Response]] · [[Indicatori di Compromissione (IOC)]] · [[Threat Intelligence]] · [[MITRE ATT&CK]] · [[Analisi Malware di Base]] · [[Splunk]] · [[VirusTotal]] · [[Any.run]] · [[MITRE ATT&CK Navigator]] · [[LetsDefend]] · [[Sysmon]] · [[YARA]] · [[Regole Sigma]] · [[Volatility (Memory Forensics)]] · [[EDR e XDR]] · [[Zeek]] · [[Suricata]]
 
 ### ⚙️ 08 Sistemi Operativi
 [[Processi]] · [[Scheduling]] · [[Concorrenza e Thread]] · [[Memoria Virtuale]] · [[Filesystem]] · [[I/O e Storage]] · [[Virtualizzazione]]
@@ -133,10 +131,13 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 
 ### 🕵️ 21 OSINT e Social Engineering
 [[Sicurezza Operativa per le Indagini OSINT]]
+
 ### 📟 22 Hardware e IoT Security
 [[Hardware Hacking 101]]
-### 🚩 23 Laboratori e CTF
 
+### 🚩 23 Laboratori e CTF
+*(area in costruzione — vedi la Mappa)*
+<!-- AUTO-INDEX:END -->
 
 ---
 

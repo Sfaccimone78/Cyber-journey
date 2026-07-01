@@ -190,6 +190,11 @@ Suggerisci nuove domande da approfondire e nuove fonti. Logga l'evento come `lin
 - **`index.md`** è orientato ai *contenuti*: catalogo di ogni pagina con link, breve riassunto e
   metadati, organizzato per categoria. Aggiornalo a ogni ingestione. Leggilo per primo in query.
   Contiene anche blocchi Dataview che si auto-popolano dal frontmatter.
+  - **La sezione "Contenuto per area" è generata**: la regione tra i marker
+    `<!-- AUTO-INDEX:START -->` e `<!-- AUTO-INDEX:END -->` è prodotta da **`tools/gen_index.py`**
+    (scansiona le cartelle d'area, elenca le note reali via alias). Non modificarla a mano.
+    Dopo aver aggiunto/rinominato/spostato note: esegui `python tools/gen_index.py` (verifica la deriva,
+    esce ≠0 se ce n'è) e `python tools/gen_index.py --write` (rigenera regione + conteggio in testa).
 - **`log.md`** è orientato agli *eventi*: cronologia append-only. Ogni voce inizia con prefisso
   coerente per essere grep-abile:
   ```
