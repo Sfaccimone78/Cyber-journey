@@ -65,6 +65,22 @@ explorer.exe
          └─ rundll32.exe   ← malfind segnala RWX + shellcode (Cobalt Strike beacon)
 ```
 
+> [!tip] Parentela "attesa" dei processi di sistema
+> Molti IOC emergono da relazioni padre-figlio anomale. Alcune àncore: `services.exe`,
+> `lsass.exe` e `wininit.exe` nascono da `wininit.exe`/`smss.exe` (mai da `explorer.exe`);
+> `svchost.exe` ha sempre `services.exe` come padre. Un `services.exe` generato da un PID
+> sconosciuto, o nomi con typo-squatting (`svchostt.exe`, `lsasss.exe`), sono red flag immediati.
+
+## Recupero chiavi di cifratura (ransomware attivo)
+Se il dump è preso mentre il ransomware sta cifrando (o poco dopo), la **chiave simmetrica**
+(spesso AES-256) resta nello spazio del processo di cifratura. Si estrae la memoria del processo e
+si cercano i *key schedule* (pattern di round key):
+```bash
+vol -f memory.raw -o out/ windows.memmap --dump --pid <PID_cifratura>   # dump memoria del processo
+aeskeyfind out/pid.<PID>.dmp                                            # localizza chiavi AES a 128/256 bit
+```
+Con la chiave recuperata si possono decifrare i file della vittima **senza pagare il riscatto**.
+
 ## Plugin chiave (Volatility 3) — riferimento rapido
 | Obiettivo | Plugin |
 |---|---|

@@ -12,7 +12,7 @@ aliases: ["Reti", "01 Reti"]
 
 Percorso in ordine d'apprendimento (segui la numerazione):
 
-[[Rete Informatica e i suoi Componenti]] . [[Hardware di Rete]] . [[Modello OSI]] . [[Modello TCP-IP]] . [[Indirizzamento IP]] . [[Subnetting]] . [[MAC Address]] . [[ARP]] . [[TCP]] . [[UDP]] . [[ICMP]] . [[Three-Way Handshake TCP]] . [[Porte e Protocolli Comuni]] . [[DNS]] . [[DHCP]] . [[NAT]] . [[HTTP e HTTPS]] . [[Modello Client-Server]] . [[VPN]] . [[Wireshark]] . [[SSH]] . [[Man-in-the-Middle (MITM)]] . [[DoS e DDoS]] . [[Ping e Traceroute]] . [[Routing IP]] . [[Firewall]] . [[Socket Programming]]
+[[Rete Informatica e i suoi Componenti]] . [[Hardware di Rete]] . [[Modello OSI]] . [[Modello TCP-IP]] . [[Indirizzamento IP]] . [[Subnetting]] . [[MAC Address]] . [[ARP]] . [[TCP]] . [[UDP]] . [[ICMP]] . [[Three-Way Handshake TCP]] . [[Porte e Protocolli Comuni]] . [[DNS]] . [[DHCP]] . [[NAT]] . [[HTTP e HTTPS]] . [[Modello Client-Server]] . [[VPN]] . [[Wireshark]] . [[SSH]] . [[Man-in-the-Middle (MITM)]] . [[DoS e DDoS]] . [[Ping e Traceroute]] . [[Routing IP]] . [[Firewall]] . [[Socket Programming]] . [[Network Segmentation e Zero Trust]]
 
 ## Navigazione
 [[00 — Mappa Fondamenti|00 Fondamenti]] <- [[index|Indice]] -> [[00 — Mappa Linux|02 Linux]]

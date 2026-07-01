@@ -32,6 +32,7 @@ prospettiva sul blue team con [[Logging e Detection Cloud (CloudTrail)]].
 7. [[Container Security (Docker)]] — immagini, namespace, capabilities, escape
 8. [[Kubernetes Security (RBAC, escape)]] — RBAC, pod escape, lateral movement
 9. [[Logging e Detection Cloud (CloudTrail)]] — telemetria, detection, threat hunting cloud
+10. [[Sicurezza di Kubernetes Ingress]] — SSRF via Ingress, host header injection, NetworkPolicy egress
 
 ## Collegamenti trasversali
 - [[IAM e Zero Trust]] — fondamento teorico dell'identità

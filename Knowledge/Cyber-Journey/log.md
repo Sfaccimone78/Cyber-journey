@@ -423,3 +423,31 @@ Template). Link rotti reali iniziali = 1 (`[[Reverse Engineering]]`, usato dalle
 risolto aggiungendo l'alias `Reverse Engineering` alla MOC `13 — Mappa Reverse Engineering e Exploit Dev`.
 Ri-scan: **0 link rotti**. Le 6 nuove MOC hanno alias nome-area (es. `Wireless & Radio`,
 `API & GraphQL Security`) così i cross-link delle altre aree risolvono.
+
+## [2026-06-29] refactor | Fusione directory Wiki/ e bonifica file
+Eseguita l'assimilazione della cartella ribelle `Wiki/` creata dall'orchestrator.
+I file markdown sono stati migrati nelle cartelle numerate canoniche in `Knowledge/Cyber-Journey/`, rinominati con il prefisso `NN `, dotati di frontmatter YAML (`tipo`, `tag`, `fase`, `stato`, `fonti`, `aliases`) e indicizzati nei rispettivi MOC e in `index.md`. I PDF e l'indice PDF sono stati spostati in `Risorse/`. La cartella `Wiki/` è stata eliminata. Creata la regola globale in `.agents/AGENTS.md` per prevenire la generazione di strutture parallele da parte di futuri agenti.
+
+## [2026-07-01] lint | Bonifica merge 2026-06-29 (S-01) + riparazione catena MOC (S-02)
+Audit completo del vault (384 file .md) → rilevati e corretti i danni del merge `.agents/` del 2026-06-29.
+- **8 MOC-doppione rimosse** (`00 - Mappa …` con trattino ASCII, frammenti senza frontmatter/nav, una in cp1252):
+  aree 01, 04, 11, 12, 13, 16, 21, 22. Restano solo le MOC canoniche `00 — Mappa …` (em-dash).
+- **4 duplicati di contenuto risolti:**
+  - `14 DFIR/11 Memory Forensics con Volatility` (titolo identico a `02`) → travasate le parti uniche
+    (recupero chiavi AES ransomware con `windows.memmap`+`aeskeyfind`; mappa parent-child attesa) in `02`, poi rimosso.
+  - `12 AppSec/11 Vulnerabilità OAuth e OIDC` → travasato il pattern BFF in `03 OAuth 2.0 e OpenID Connect Attacks`, poi rimosso.
+  - `11 Cloud/10 Vettori di Privilege Escalation in AWS IAM` → travasati `iam:CreatePolicyVersion` e l'ordine di
+    valutazione delle policy IAM in `06 Privilege Escalation in Cloud`, poi rimosso.
+  - `11 Cloud/11 Mettere in Sicurezza Kubernetes Ingress` (topic distinto, tenuto) → rinominato `10 Sicurezza di Kubernetes Ingress`.
+- **8 note-merge superstiti bonificate** (erano `maturo` ma con 0 wikilink, 0 `## Collegamenti`, 0 `## Fonti`):
+  alias accorciato, aggiunte sezioni `## Collegamenti` + `## Fonti` (2-3 fonti reali ciascuna), `fonti:` allineato.
+  File: `01 Reti/28 Network Segmentation`, `04 AD/32 Hardening di AD`, `13 RE/11 ELF`, `13 RE/12 Windows API Hooking`,
+  `16 Wireless/07 OSINT in Radiofrequenza`, `21 OSINT/01 Sicurezza Operativa`, `22 Hardware/01 Hardware Hacking 101`, `11 Cloud/10 Ingress`.
+- **MOC canoniche sincronizzate** coi note prima assenti: Reti (+Network Segmentation), Windows (+Hardening AD),
+  RE (+ELF, +API Hooking), Wireless (+OSINT RF), Cloud (+Ingress come voce 10).
+- **S-02 — catena prec/succ riparata:** aggiunto `-> 15` a DFIR (14) e `-> 21` a GRC (20); riscritte le MOC
+  21/22/23 allo standard (`tipo: sintesi`, tag `moc`, alias, nav prec/succ). Catena ora lineare **00→23** senza interruzioni.
+  23 Laboratori e CTF marcata 🚧 in costruzione (0 note proprie, rimanda a Metodologia CTF/THM/HTB).
+- **index.md** ripulito dai 3 link ai file rimossi/rinominati (AWS IAM Vettori, Vulnerabilità OAuth, Mettere in Sicurezza Ingress→Sicurezza di Kubernetes Ingress).
+- **Verifica finale:** 0 file non-UTF8, 0 link rotti reali (residui = falsi positivi noti: `\|` in tabelle, placeholder template/schema, `Sintesi/overview`), orfano residuo `Risorse/INDICE.md` (pre-esistente, fuori scope).
+- Backup dei file rimossi/modificati (untracked, non recuperabili da git) in `scratchpad/backup-pre-S01/` e `scratchpad/_TRASH-S01/`.

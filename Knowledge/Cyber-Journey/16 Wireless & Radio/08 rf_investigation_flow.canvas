@@ -1,0 +1,102 @@
+{
+  "nodes": [
+    {
+      "id": "node-1",
+      "type": "text",
+      "text": "# RF Investigation Start\nIdentify the target transmission or frequency of interest (e.g., 1090 MHz for ADS-B, 162 MHz for AIS).",
+      "x": -400,
+      "y": 0,
+      "width": 250,
+      "height": 120
+    },
+    {
+      "id": "node-2",
+      "type": "text",
+      "text": "# Hardware Selection\nSelect appropriate SDR receiver (e.g., RTL-SDR, HackRF) and antenna tuned to the target wavelength.",
+      "x": -100,
+      "y": 0,
+      "width": 250,
+      "height": 120
+    },
+    {
+      "id": "node-3",
+      "type": "text",
+      "text": "# Signal Discovery\nUse software (GQRX, SDR#) to visualize the spectrum. Monitor the FFT and Waterfall displays for active peaks.",
+      "x": 200,
+      "y": 0,
+      "width": 250,
+      "height": 120
+    },
+    {
+      "id": "node-4",
+      "type": "text",
+      "text": "# Modulation Identification\nAnalyze the signal shape. Determine if it is Analog (AM, FM) or Digital (ASK, FSK, PSK).",
+      "x": 500,
+      "y": -100,
+      "width": 250,
+      "height": 120
+    },
+    {
+      "id": "node-5",
+      "type": "text",
+      "text": "# Demodulation & Decoding\nPipe raw audio/IQ data to decoder tools (e.g., dump1090, multimon-ng, rtl_433).",
+      "x": 500,
+      "y": 100,
+      "width": 250,
+      "height": 120
+    },
+    {
+      "id": "node-6",
+      "type": "text",
+      "text": "# Intelligence Extraction\nExtract and log final telemetry data: vessel names, flight routes, sensor values, or message payloads.",
+      "x": 800,
+      "y": 0,
+      "width": 250,
+      "height": 120
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-1",
+      "fromNode": "node-1",
+      "fromSide": "right",
+      "toNode": "node-2",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-2",
+      "fromNode": "node-2",
+      "fromSide": "right",
+      "toNode": "node-3",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-3",
+      "fromNode": "node-3",
+      "fromSide": "right",
+      "toNode": "node-4",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-4",
+      "fromNode": "node-3",
+      "fromSide": "right",
+      "toNode": "node-5",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-5",
+      "fromNode": "node-4",
+      "fromSide": "right",
+      "toNode": "node-6",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-6",
+      "fromNode": "node-5",
+      "fromSide": "right",
+      "toNode": "node-6",
+      "toSide": "left"
+    }
+  ]
+}

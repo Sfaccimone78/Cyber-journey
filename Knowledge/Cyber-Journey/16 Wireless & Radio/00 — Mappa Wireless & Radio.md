@@ -33,6 +33,7 @@ che condividono lo stesso problema di fondo.
 4. [[Evil Twin e Rogue AP]] — AP fasullo, deauth, captive portal, KARMA
 5. [[Wireless Tooling (aircrack-ng, hashcat)]] — suite aircrack-ng, hcxtools, hashcat -m 22000
 6. [[Bluetooth, BLE e RFID-NFC]] — pairing, GATT, sniffing BLE, clonazione RFID/NFC
+7. [[OSINT in Radiofrequenza]] — SDR (RTL-SDR/HackRF), ricognizione dello spettro, identificazione segnali
 
 ## Collegamenti trasversali
 - [[Modello OSI]] — il wireless vive su L1/L2, ma gli attacchi risalgono tutto lo stack

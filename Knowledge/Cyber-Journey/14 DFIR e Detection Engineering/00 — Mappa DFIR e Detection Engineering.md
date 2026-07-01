@@ -40,4 +40,4 @@ detection** misurabili.
 - [[Incident Response]] → la forensics di quest'area alimenta le fasi Detection e Eradication dell'IR.
 
 ## Navigazione
-[[00 — Mappa Reverse Engineering e Exploit Dev|13 Reverse Engineering e Exploit Dev]] <- [[index|Indice]]
+[[00 — Mappa Reverse Engineering e Exploit Dev|13 Reverse Engineering e Exploit Dev]] <- [[index|Indice]] -> [[00 — Mappa Mobile Security|15 Mobile Security]]

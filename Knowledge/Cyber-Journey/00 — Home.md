@@ -67,3 +67,11 @@ WHERE tipo = "concetto" OR tipo = "entita"
 SORT file.mtime DESC
 LIMIT 7
 ```
+
+## ⚠️ Note da Revisionare (Più vecchie di 1 anno)
+
+```dataview
+LIST
+WHERE (tipo = "concetto" OR tipo = "entita") AND file.mtime < date(today) - dur(1 year)
+SORT file.mtime ASC
+```

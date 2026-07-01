@@ -18,12 +18,19 @@ binari SUID**, ma **permessi IAM mal configurati**: la scalata è una catena di 
 
 ## Meccanismo: le primitive
 Quasi tutte le tecniche AWS ricadono in poche famiglie (riferimento: Rhino Security, 24 metodi):
-- **Modifica della propria policy**: `iam:PutUserPolicy`, `iam:AttachUserPolicy` → ti dai `AdministratorAccess`.
+- **Modifica della propria policy**: `iam:PutUserPolicy`, `iam:AttachUserPolicy`, `iam:CreatePolicyVersion`
+  (crei una nuova versione `Action:*`/`Resource:*` di una policy già collegata e la imposti come default) → ti dai `AdministratorAccess`.
 - **Creazione credenziali per altri**: `iam:CreateAccessKey`, `iam:CreateLoginProfile`, `iam:UpdateLoginProfile`.
 - **PassRole + servizio di esecuzione**: `iam:PassRole` con `ec2:RunInstances` / `lambda:CreateFunction`
   / `glue` / `cloudformation` → esegui codice con un ruolo più potente e ne rubi il token.
 - **AssumeRole**: `sts:AssumeRole` su un ruolo con trust policy troppo aperta.
 - **Data/backdoor**: modifica di resource policy (es. bucket, KMS key) per concedersi accesso.
+
+> [!note] Ordine di valutazione delle policy AWS (perché una primitiva funziona)
+> IAM è **default-deny** e valuta in quest'ordine: **explicit Deny** (vince sempre) → **SCP**
+> (Organizations) → **resource policy** → **permission boundary** → **session policy** → **identity
+> policy**. Un `Deny` esplicito o un boundary/SCP battono qualsiasi `Allow`: per questo i **permission
+> boundary** e le **SCP** sono la difesa più forte contro l'auto-escalation.
 
 ## Esempio pratico — privesc via PassRole
 ```bash

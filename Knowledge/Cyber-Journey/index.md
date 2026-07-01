@@ -44,6 +44,9 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 19. [[00 — Mappa AI e LLM Security|🤖 AI e LLM Security]]
 20. [[00 — Mappa DevSecOps e Supply Chain|🔁 DevSecOps e Supply Chain]]
 21. [[00 — Mappa GRC e Compliance|📋 GRC e Compliance]]
+22. [[00 — Mappa OSINT e Social Engineering|🕵️ OSINT e Social Engineering]]
+23. [[00 — Mappa Hardware e IoT Security|📟 Hardware e IoT Security]]
+24. [[00 — Mappa Laboratori e CTF|🚩 Laboratori e CTF]]
 
 **Percorsi trasversali:** [[Learning Path]] (curriculum fase 0→4) · [[Matrice Ruolo-Cert]] (studio per ruolo/cert).
 
@@ -60,7 +63,7 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 [[Cos'è la Sicurezza Informatica]] · [[Triade CIA]] · [[Tipi di Hacker]] · [[Vulnerabilità Exploit e Minaccia]] · [[Superficie di Attacco]] · [[CVE e CVSS]] · [[Difesa in Profondità]] · [[La Cyber Kill Chain]] · [[Percorsi di Carriera Pentester vs SOC]] · [[Certificazioni Cybersecurity]] · [[Social Engineering e Phishing]] · [[Risk Management e Compliance]] · [[IAM e Zero Trust]] · [[Threat Modeling]] · [[Secure Coding]] · [[Glossario degli Acronimi]]
 
 ### 🌐 01 Reti
-[[Rete Informatica e i suoi Componenti]] · [[Hardware di Rete]] · [[Modello OSI]] · [[Modello TCP-IP]] · [[Indirizzamento IP]] · [[Subnetting]] · [[MAC Address]] · [[ARP]] · [[TCP]] · [[UDP]] · [[ICMP]] · [[Three-Way Handshake TCP]] · [[Porte e Protocolli Comuni]] · [[DNS]] · [[DHCP]] · [[NAT]] · [[HTTP e HTTPS]] · [[Modello Client-Server]] · [[VPN]] · [[Wireshark]] · [[SSH]] · [[Man-in-the-Middle (MITM)]] · [[DoS e DDoS]] · [[Ping e Traceroute]] · [[Routing IP]] · [[Firewall]] · [[Socket Programming]]
+[[Rete Informatica e i suoi Componenti]] · [[Hardware di Rete]] · [[Modello OSI]] · [[Modello TCP-IP]] · [[Indirizzamento IP]] · [[Subnetting]] · [[MAC Address]] · [[ARP]] · [[TCP]] · [[UDP]] · [[ICMP]] · [[Three-Way Handshake TCP]] · [[Porte e Protocolli Comuni]] · [[DNS]] · [[DHCP]] · [[NAT]] · [[HTTP e HTTPS]] · [[Modello Client-Server]] · [[VPN]] · [[Wireshark]] · [[SSH]] · [[Man-in-the-Middle (MITM)]] · [[DoS e DDoS]] · [[Ping e Traceroute]] · [[Routing IP]] · [[Firewall]] · [[Socket Programming]] · [[Network Segmentation e Zero Trust]]
 
 ### 🐧 02 Linux
 [[Comandi Linux di Base]] · [[Filesystem Linux]] · [[Utenti e Gruppi Linux]] · [[Permessi Linux]] · [[Processi Linux]] · [[Variabili d'Ambiente]] · [[Pipe e Redirezione]] · [[grep]] · [[find]] · [[awk]] · [[sed]] · [[sudo]] · [[Cron e Job Pianificati]] · [[Bash Scripting]] · [[SUID e SGID]] · [[Privilege Escalation Linux]] · [[OverTheWire Bandit]] · [[Capabilities Linux]] · [[Gestione Pacchetti]] · [[Strumenti di Rete CLI]] · [[Vim e Nano]]
@@ -72,7 +75,7 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 **Appunti pratici (CryptoHack):** [[Base64]] · [[Bytes e Long]] · [[XOR]] · [[Aritmetica Modulare]]
 
 ### 🪟 04 Windows e AD
-[[Filesystem Windows]] · [[Utenti e Permessi Windows]] · [[Registro di Sistema Windows]] · [[PowerShell]] · [[Windows Event Log]] · [[SMB]] · [[RDP]] · [[Active Directory]] · [[Kerberos]] · [[Privilege Escalation Windows]] · [[Pass-the-Hash]] · [[Kerberoasting]] · [[AS-REP Roasting]] · [[enum4linux]] · [[CrackMapExec]] · [[Impacket]] · [[NTLM]] · [[Mimikatz]] · [[BloodHound]] · [[LAPS]] · [[DCSync]] · [[NTLM Relay]] · [[NetExec]] · [[bloodyAD]] · [[PrinterBug e Coercizione]] · [[PowerUp]] · [[Responder]] · [[ADCS e Template Vulnerabili (ESC1-ESC8)]] · [[Delegation Kerberos (Unconstrained, Constrained, RBCD)]] · [[Shadow Credentials]] · [[Trust di Dominio e Foresta]]
+[[Filesystem Windows]] · [[Utenti e Permessi Windows]] · [[Registro di Sistema Windows]] · [[PowerShell]] · [[Windows Event Log]] · [[SMB]] · [[RDP]] · [[Active Directory]] · [[Kerberos]] · [[Privilege Escalation Windows]] · [[Pass-the-Hash]] · [[Kerberoasting]] · [[AS-REP Roasting]] · [[enum4linux]] · [[CrackMapExec]] · [[Impacket]] · [[NTLM]] · [[Mimikatz]] · [[BloodHound]] · [[LAPS]] · [[DCSync]] · [[NTLM Relay]] · [[NetExec]] · [[bloodyAD]] · [[PrinterBug e Coercizione]] · [[PowerUp]] · [[Responder]] · [[ADCS e Template Vulnerabili (ESC1-ESC8)]] · [[Delegation Kerberos (Unconstrained, Constrained, RBCD)]] · [[Shadow Credentials]] · [[Trust di Dominio e Foresta]] · [[Hardening di Active Directory]]
 
 ### 🕸️ 05 Web / OWASP
 [[OWASP Top 10]] · [[SQL Injection]] · [[Cross-Site Scripting (XSS)]] · [[Cross-Site Request Forgery (CSRF)]] · [[Broken Access Control e IDOR]] · [[Command Injection]] · [[Server-Side Request Forgery (SSRF)]] · [[XML External Entity (XXE)]] · [[File Inclusion (LFI e RFI)]] · [[Vulnerabilità Upload File]] · [[Security Misconfiguration]] · [[Autenticazione e Gestione Sessioni]] · [[Cookie e JWT]] · [[Server-Side Template Injection (SSTI)]] · [[Insecure Deserialization]] · [[CORS Misconfiguration]] · [[Clickjacking]] · [[Cryptographic Failures]] · [[Componenti Vulnerabili]] · [[Insecure Design]] · [[Logging e Monitoring Failures]] · [[Burp Suite]] · [[OWASP ZAP]] · [[sqlmap]] · [[PortSwigger Web Academy]]
@@ -99,13 +102,13 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 > Livello fase 3-4. Vedi [[Analisi e Roadmap Expert]].
 
 ### ☁️ 11 Cloud Security
-[[Fondamenti Cloud e Shared Responsibility]] · [[IAM Cloud (utenti, ruoli, policy)]] · [[AWS Sicurezza (S3, EC2, IAM, STS)]] · [[Azure e Entra ID Sicurezza]] · [[SSRF e Metadata Service (IMDS)]] · [[Privilege Escalation in Cloud]] · [[Container Security (Docker)]] · [[Kubernetes Security (RBAC, escape)]] · [[Logging e Detection Cloud (CloudTrail)]]
+[[Fondamenti Cloud e Shared Responsibility]] · [[IAM Cloud (utenti, ruoli, policy)]] · [[AWS Sicurezza (S3, EC2, IAM, STS)]] · [[Azure e Entra ID Sicurezza]] · [[SSRF e Metadata Service (IMDS)]] · [[Privilege Escalation in Cloud]] · [[Container Security (Docker)]] · [[Kubernetes Security (RBAC, escape)]] · [[Logging e Detection Cloud (CloudTrail)]] · [[Sicurezza di Kubernetes Ingress]]
 
 ### 🧪 12 AppSec Avanzato
 [[Insecure Deserialization Avanzata (gadget chains)]] · [[Attacchi JWT]] · [[OAuth 2.0 e OpenID Connect Attacks]] · [[SAML e SSO Attacks]] · [[HTTP Request Smuggling]] · [[Prototype Pollution]] · [[Race Condition Web]] · [[GraphQL Security]] · [[Web Cache Poisoning]] · [[SSTI Avanzato e Sandbox Escape]]
 
 ### 🔬 13 Reverse Engineering e Exploit Dev
-[[Assembly x86-64 Essenziale]] · [[Analisi Statica con Ghidra]] · [[Analisi Dinamica con GDB e x64dbg]] · [[Malware Analysis (statica e dinamica)]] · [[Tecniche Anti-Analisi e Unpacking]] · [[Stack Buffer Overflow]] · [[ret2libc e ROP]] · [[Bypass Protezioni (ASLR, DEP, Stack Canary, PIE)]] · [[Format String Exploitation]] · [[Heap Exploitation (introduzione)]]
+[[Assembly x86-64 Essenziale]] · [[Analisi Statica con Ghidra]] · [[Analisi Dinamica con GDB e x64dbg]] · [[Malware Analysis (statica e dinamica)]] · [[Tecniche Anti-Analisi e Unpacking]] · [[Stack Buffer Overflow]] · [[ret2libc e ROP]] · [[Bypass Protezioni (ASLR, DEP, Stack Canary, PIE)]] · [[Format String Exploitation]] · [[Heap Exploitation (introduzione)]] · [[Reverse Engineering degli ELF su Linux]] · [[Windows API Hooking]]
 
 ### 🔎 14 DFIR e Detection Engineering
 [[Digital Forensics Fondamenti]] · [[Memory Forensics con Volatility]] · [[Disk Forensics e Timeline Analysis]] · [[Windows Forensics (artefatti)]] · [[Log Analysis Avanzata e Correlazione]] · [[Detection Engineering]] · [[Threat Hunting]] · [[Query di Hunting (KQL e SPL)]] · [[MITRE D3FEND e Purple Teaming]] · [[Threat Intelligence (Diamond Model, Pyramid of Pain)]]
@@ -114,7 +117,7 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 [[Fondamenti Mobile]] · [[Android Pentest]] · [[iOS Pentest]] · [[OWASP MASVS e MASTG]] · [[Intercettazione traffico e API mobile]] · [[Insecure Data Storage e Crypto su mobile]]
 
 ### 📶 16 Wireless & Radio
-[[Fondamenti Wireless e 802.11]] · [[WEP, WPA, WPA2 e WPA3]] · [[Attacchi WPA2 (handshake e PMKID)]] · [[Evil Twin e Rogue AP]] · [[Wireless Tooling (aircrack-ng, hashcat)]] · [[Bluetooth, BLE e RFID-NFC]]
+[[Fondamenti Wireless e 802.11]] · [[WEP, WPA, WPA2 e WPA3]] · [[Attacchi WPA2 (handshake e PMKID)]] · [[Evil Twin e Rogue AP]] · [[Wireless Tooling (aircrack-ng, hashcat)]] · [[Bluetooth, BLE e RFID-NFC]] · [[OSINT in Radiofrequenza]]
 
 ### 🔌 17 API e GraphQL Security
 [[Fondamenti API e REST Security]] · [[OWASP API Security Top 10]] · [[BOLA e BFLA]] · [[Autenticazione e Autorizzazione API]] · [[Mass Assignment, SSRF e Rate Limiting API]] · [[API Testing e Tooling]]
@@ -127,6 +130,13 @@ Ogni mappa elenca le pagine dell'area in ordine, con navigazione ← prec / succ
 
 ### 📋 20 GRC e Compliance
 [[Fondamenti GRC]] · [[ISO 27001 e ISMS]] · [[NIST CSF e 800-53]] · [[Risk Management e Quantificazione]] · [[GDPR Operativo]] · [[Audit e Framework (SOC 2, PCI-DSS)]]
+
+### 🕵️ 21 OSINT e Social Engineering
+[[Sicurezza Operativa per le Indagini OSINT]]
+### 📟 22 Hardware e IoT Security
+[[Hardware Hacking 101]]
+### 🚩 23 Laboratori e CTF
+
 
 ---
 

@@ -75,6 +75,7 @@ Account takeover completo (login as victim), accesso non autorizzato a risorse p
 5. OIDC: validare firma, **`iss`**, **`aud`**, **`exp`**, **`nonce`** dell'id_token; non fidarsi di `alg` dichiarato.
 6. Allow-list per `jwks_uri`/`request_uri`; bloccare host interni (anti-SSRF).
 7. Evitare il flusso implicit; preferire authorization code + PKCE.
+8. **Storage sicuro dei token nelle SPA**: non tenere gli `access_token` in `localStorage` (esposti a XSS). Usare il pattern **Backend-For-Frontend (BFF)** — i token restano lato server e il browser riceve solo un cookie di sessione `HttpOnly`, `Secure`, `SameSite`.
 
 ## Lab
 - PortSwigger — OAuth 2.0 authentication vulnerabilities (lab: "Authentication bypass via OAuth implicit flow", "Forced OAuth profile linking", "OAuth account hijacking via redirect_uri", "Stealing OAuth access tokens via an open redirect / via a proxy page", "SSRF via OpenID dynamic client registration", "Flawed CSRF protection"): https://portswigger.net/web-security/oauth

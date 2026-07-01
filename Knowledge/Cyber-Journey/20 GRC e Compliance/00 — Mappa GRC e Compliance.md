@@ -28,4 +28,4 @@ La sicurezza tecnica non vive nel vuoto: ogni controllo, ogni patch e ogni alert
 
 ## Navigazione
 
-[[00 — Mappa DevSecOps e Supply Chain|19 DevSecOps e Supply Chain]] <- [[index|Indice]]
+[[00 — Mappa DevSecOps e Supply Chain|19 DevSecOps e Supply Chain]] <- [[index|Indice]] -> [[00 — Mappa OSINT e Social Engineering|21 OSINT e Social Engineering]]
