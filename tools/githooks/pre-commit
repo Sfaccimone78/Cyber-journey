@@ -1,0 +1,19 @@
+#!/bin/sh
+# S-03 — Gate "Definition of Done" anti-islands.
+# Valida le note 'stato: maturo' (tipo concetto/entita) presenti nello stage.
+# Installazione (una volta per clone):  git config core.hooksPath tools/githooks
+
+if command -v python >/dev/null 2>&1; then PY=python; else PY=py; fi
+
+"$PY" tools/check_notes.py --staged
+status=$?
+
+if [ "$status" -ne 0 ]; then
+  echo ""
+  echo "Commit bloccato dal gate note (S-03)."
+  echo "  - completa le sezioni mancanti (## Collegamenti, >=2 fonti, wikilink, presenza in MOC), oppure"
+  echo "  - abbassa 'stato: attivo' se la nota non e' ancora pronta, oppure"
+  echo "  - bypassa con: git commit --no-verify   (sconsigliato)"
+fi
+
+exit "$status"

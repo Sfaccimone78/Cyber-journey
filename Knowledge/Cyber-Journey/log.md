@@ -468,3 +468,18 @@ Reso `index.md` single source of truth: la sezione "Contenuto per area" ora è *
   appiattite in un unico elenco per area, in ordine numerico.
 - Verifica: `gen_index.py --check` = 0 deriva; controllo strict = index.md 100% risolvibile.
 - Documentato il workflow in `WIKI_SCHEMA.md`. Tool in `tools/gen_index.py` (fuori dal vault).
+
+## [2026-07-01] build | Gate "Definition of Done" anti-islands (S-03)
+Creato `tools/check_notes.py` + hook `tools/githooks/pre-commit`: nessuna nota `stato: maturo`
+(tipo `concetto`/`entita`) può essere committata se è un'isola. Regole bloccanti: ≥1 `[[wikilink]]`
+nel corpo, `## Collegamenti`, `## Fonti` con ≥2 voci, presenza nella Mappa d'area. Avvisi
+(non bloccanti): sezioni In breve/Lab/Domande, `fonti:` non allineato. Hook attivato con
+`git config core.hooksPath tools/githooks` (locale, va rifatto a ogni clone; documentato nello schema).
+- **IN-MOC risolto:** il gate ha scoperto 3 note AD (`Delegation Kerberos`, `Shadow Credentials`,
+  `Trust di Dominio e Foresta`) mai aggiunte alla Mappa Windows dal build 2026-06-28 → aggiunte
+  (con `ADCS`) alla MOC 04 in ordine 28→32.
+- **Debito residuo emerso (non bloccato, da sanare — candidato S-06):** 27 note `maturo` non
+  conformi — 24 con <2 fonti (molte in `10 Algoritmi`, alcune Crypto/Web/Fondamenti) e 6 senza
+  `## Collegamenti` (Tipi di Hacker, ICMP, Three-Way Handshake, Porte e Protocolli, Aritmetica
+  Modulare, Residui Quadratici). Il gate le intercetterà alla prossima modifica.
+- Verifica: hook testato su nota-debito in stage → blocca (exit 1) e ripristino pulito.

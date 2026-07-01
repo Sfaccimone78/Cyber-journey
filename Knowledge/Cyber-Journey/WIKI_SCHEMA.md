@@ -183,6 +183,13 @@ Trigger utente: *"fai il lint della wiki"*. Cerca e riporta:
 - **Lacune** colmabili con ricerca web.
 Suggerisci nuove domande da approfondire e nuove fonti. Logga l'evento come `lint`.
 
+**Gate automatico (Definition of Done):** `tools/check_notes.py` verifica che ogni nota
+`stato: maturo` (tipo `concetto`/`entita`) non sia un'isola: ≥1 `[[wikilink]]`, sezione
+`## Collegamenti`, `## Fonti` con ≥2 voci, e presenza nella Mappa d'area. Gira come **hook
+pre-commit** (`tools/githooks/pre-commit`) sui file in stage. Installazione una-tantum per clone:
+`git config core.hooksPath tools/githooks`. Report completo del vault: `python tools/check_notes.py`
+(`--strict` tratta anche gli avvisi come errori). Se una nota non è ancora pronta → `stato: attivo`.
+
 ---
 
 ## index.md e log.md
