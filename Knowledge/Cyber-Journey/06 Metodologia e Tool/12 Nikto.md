@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Nikto"]
 
@@ -11,7 +11,7 @@ aliases: ["Nikto"]
 
 # Nikto
 
-## Cos'è
+## In breve
 
 **Nikto** è uno scanner open source per server web. Analizza automaticamente un sito alla ricerca di configurazioni errate, file pericolosi, versioni obsolete di software, header HTTP mancanti e oltre 6700 vulnerabilità note. È uno strumento "noisy" — non cerca di essere silenzioso — ma è estremamente rapido per avere un quadro iniziale della sicurezza di un'applicazione web. Si usa nella fase di [[Enumerazione]].
 
@@ -86,6 +86,20 @@ nikto -update
 - Non trova tutto: Nikto non sostituisce un test manuale o tool come [[ffuf]] e [[Gobuster]] per la discovery di contenuti.
 - I risultati vanno **verificati manualmente**: molti sono falsi positivi. Ogni finding va confermato nel browser o con `curl`.
 - Per aggiungere l'output di Nikto a [[Metasploit]]: Nikto supporta output XML che può essere importato.
+
+## Lab
+
+- **[[TryHackMe]] — "Nikto" e le room web del Jr Penetration Tester path**: fanno lanciare Nikto contro un server di test e interpretare i finding (file di default, header mancanti, software obsoleto).
+- **[[HackTheBox]] — Starting Point con web server (es. *Markup*, *Included*)**: usa `nikto -h http://<ip>` come prima passata automatica per individuare i "frutti bassi" prima dell'analisi manuale.
+- **[[PortSwigger Web Academy]] — categoria *Information disclosure*** (lab APPRENTICE): dopo che Nikto segnala header/file sospetti, verifica manualmente il finding con `curl` o nel browser, esercitando la conferma dei falsi positivi.
+
+## Domande
+
+1. **D:** Che tipo di problemi cerca Nikto su un server web?  **R:** Configurazioni errate, file pericolosi/di default, software obsoleto, header HTTP mancanti e oltre 6700 vulnerabilità note.
+2. **D:** Perché Nikto non è adatto quando serve stealth?  **R:** Perché genera migliaia di richieste HTTP in pochi minuti, facilmente rilevabili nei log del server.
+3. **D:** Perché i finding di Nikto vanno sempre verificati manualmente?  **R:** Perché produce molti falsi positivi; ogni risultato va confermato nel browser o con `curl`.
+4. **D:** A cosa serve l'opzione `-Tuning`?  **R:** A selezionare le categorie di test da eseguire (es. injection, misconfiguration, information disclosure) invece di lanciarle tutte.
+5. **D:** Come si fa passare il traffico di Nikto attraverso Burp Suite?  **R:** Con `-useproxy http://127.0.0.1:8080`, indirizzando le richieste al proxy in ascolto.
 
 ## Collegamenti
 

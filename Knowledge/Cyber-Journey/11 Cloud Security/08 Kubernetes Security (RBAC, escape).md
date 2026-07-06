@@ -3,12 +3,15 @@ tipo: concetto
 tag: [cloud, linux, tool]
 fase: 4
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Kubernetes Security (RBAC, escape)"]
 ---
 
 # Kubernetes Security (RBAC, escape)
+
+## In breve
+**Kubernetes** orchestra container su un cluster (control plane + worker node che eseguono pod) e offre una superficie d'attacco ampia: API server esposto, **RBAC** mal configurato, **service account token** montati nei pod, secrets in chiaro in etcd. La catena tipica è: token SA con verbi pericolosi (`create pods`, `pods/exec`, `secrets`) → pod privilegiato che monta il filesystem del nodo → **pod → node escape** → control plane. La difesa cardine sono least privilege RBAC e Pod Security Admission.
 
 ## Definizione
 **Kubernetes (K8s)** orchestra container su un cluster: un **control plane** (API server, etcd,

@@ -3,7 +3,7 @@ tipo: entita
 tag: [crypto, tool, forensics]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["CyberChef"]
 
@@ -11,7 +11,7 @@ aliases: ["CyberChef"]
 
 # CyberChef
 
-## Cos'è
+## In breve
 
 **CyberChef** è un'applicazione web open-source sviluppata dal GCHQ (agenzia di intelligence britannica) che permette di eseguire centinaia di operazioni su dati — encoding, decoding, cifratura, hashing, compressione, analisi — attraverso un'interfaccia visuale **drag-and-drop**. Viene chiamata "il coltellino svizzero del cyber": non richiede installazione, funziona nel browser e supporta l'encatenamento di operazioni ("ricette"). Disponibile online su https://gchq.github.io/CyberChef/ o in locale.
 
@@ -59,6 +59,20 @@ chef.bake({
 - Puoi caricare file binari (immagini, ZIP) oltre al testo.
 - Per uso offline: scarica la release da GitHub, è un singolo file HTML che funziona senza server: https://github.com/gchq/CyberChef/releases
 - Alternativa CLI potente: [[OpenSSL]] per operazioni crittografiche specifiche.
+
+## Lab
+
+- **Pratica libera su https://gchq.github.io/CyberChef/**: incolla una stringa Base64 e costruisci una ricetta `From Base64`; poi concatena più livelli (es. `From Base64` → `From Hex` → `XOR`) su un payload multi-encoded per allenare l'occhio a riconoscere le codifiche annidate.
+- **Usa la bacchetta *Magic*** su un input di formato ignoto: fai indovinare a CyberChef l'encoding e verifica il risultato. Esercizio ideale per i task di decoding di PicoCTF e dei CTF *forensics*.
+- **CTF *forensics* / malware analysis**: prendi uno script offuscato (Base64 + XOR + gzip) e ricostruisci il payload originale con una singola ricetta, salvandola come URL condivisibile. Collega il flusso a [[Encoding vs Encryption]] e [[XOR]].
+
+## Domande
+
+1. **D:** Chi ha sviluppato CyberChef e come si usa? **R:** Il GCHQ (intelligence britannica); si usa nel browser tramite un'interfaccia drag-and-drop che concatena operazioni in "ricette".
+2. **D:** A cosa serve l'operazione *Magic*? **R:** Analizza l'input e suggerisce automaticamente come decodificarlo, utile quando non si conosce il formato di partenza.
+3. **D:** Perché CyberChef è prezioso in analisi malware/forensics? **R:** Permette di decodificare rapidamente payload offuscati in Base64, hex, XOR e simili, concatenando più passaggi senza scrivere codice.
+4. **D:** Le ricette di CyberChef si possono condividere? **R:** Sì, come URL o file JSON, comode per team e CTF collaborativi.
+5. **D:** CyberChef richiede una connessione o un server? **R:** No: può girare offline come singolo file HTML scaricabile da GitHub.
 
 ## Collegamenti
 

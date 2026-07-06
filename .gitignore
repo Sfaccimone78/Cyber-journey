@@ -22,3 +22,10 @@ $RECYCLE.BIN/
 # Config app + codice plugin Obsidian (per-macchina, non necessari nel repo)
 .obsidian/
 .vscode/
+
+# === Python (tooling in tools/) ===
+__pycache__/
+*.pyc
+
+# === Stato run agenti IA (scaffolding effimero, non contenuto vault) ===
+.agents/

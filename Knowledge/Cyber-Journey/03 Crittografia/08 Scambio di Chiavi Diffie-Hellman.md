@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto]
 fase: 1
 fonti: 5
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Scambio di Chiavi Diffie-Hellman", "Diffie-Hellman"]
 ---
@@ -73,6 +73,20 @@ DH funziona anche sul problema del log discreto **su curva ellittica** (ECDLP). 
 - **Minaccia quantistica**: l'**algoritmo di Shor** risolve anche il logaritmo discreto (classico ed ellittico) → DH ed ECDH **cadono** col quantum computing. Vedi [[Crittografia Post-Quantistica]].
 - Implementazioni reali: **ECDHE** in TLS 1.2/1.3, **X25519** (DH su Curve25519) in TLS 1.3, OpenSSH, Signal, WireGuard; **OTR** usa DH autenticato per messaggistica con PFS. [Fonte: Crypto101, cap. 8 e 17]
 - [[CryptoHack - Mathematics (Modular Math)]] copre i fondamenti matematici necessari per capire il protocollo in profondità.
+
+## Lab
+
+- **CryptoHack → sezione *Diffie-Hellman*** (https://cryptohack.org/challenges/diffie-hellman/): il percorso `Starter` fa costruire lo scambio passo passo (parametri `p`, `g`, calcolo di `g^a mod p` e del segreto condiviso). Sfide come *Parameter Injection* e *Export-grade* praticano MITM su DH non autenticato e parametri deboli (Logjam).
+- **[[OpenSSL]] — pratica locale**: genera parametri con `openssl dhparam -out dhparam.pem 2048` e ispezionali con `-text -noout`; poi crea coppie ECDH su P-256 (comandi negli esempi) e osserva le dimensioni delle chiavi rispetto al DH classico.
+- **PicoCTF → challenge sul logaritmo discreto** (categoria Cryptography): sfide che chiedono di recuperare l'esponente segreto quando `p` è piccolo, per toccare con mano su cosa poggia la sicurezza di DH.
+
+## Domande
+
+1. **D:** Su quale problema matematico si basa la sicurezza di Diffie-Hellman? **R:** Sul problema del **logaritmo discreto**: dato `g^a mod p`, è impraticabile ricavare `a`.
+2. **D:** Cosa calcolano Alice e Bob come chiave condivisa e perché coincide? **R:** `K = B^a mod p = A^b mod p = g^(ab) mod p`: entrambe le vie danno lo stesso valore grazie alle proprietà dell'esponenziazione modulare.
+3. **D:** Perché DH da solo è vulnerabile al MITM? **R:** Non autentica i peer: un attaccante attivo (Mallory) può eseguire DH separatamente con Alice e con Bob, ottenendo due segreti e intercettando tutto. Serve autenticare lo scambio (firme/certificati).
+4. **D:** Cos'è la Perfect Forward Secrecy e come la ottiene TLS? **R:** La proprietà per cui compromettere la chiave a lungo termine non espone le sessioni passate; si ottiene con DH effimero (DHE/ECDHE), una nuova coppia per sessione scartata dopo l'uso.
+5. **D:** Perché ECDH usa chiavi molto più corte a parità di sicurezza? **R:** I migliori attacchi al log discreto su curva ellittica (ECDLP) sono `O(√n)`, più lenti del number field sieve del caso classico: 256 bit ECC ≈ 3072 bit DH classico.
 
 ## Collegamenti
 

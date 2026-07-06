@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Gobuster"]
 
@@ -11,7 +11,7 @@ aliases: ["Gobuster"]
 
 # Gobuster
 
-## Cos'è
+## In breve
 
 **Gobuster** è un tool open source scritto in Go per il **brute-force di directory e file web**, sottodomini DNS e virtual host. Dato un URL e una wordlist, tenta ogni parola della lista come path e riporta le risorse che restituiscono risposte HTTP valide (tipicamente codici 200, 301, 302). È uno strumento fondamentale per la fase di [[Enumerazione]] web.
 
@@ -67,6 +67,20 @@ gobuster dir -u http://target.lab -w /usr/share/wordlists/dirb/common.txt -o ris
 - Se Gobuster è troppo rumoroso, considerare [[ffuf]] che offre più opzioni di filtro output.
 - Con `-x php,html,txt` il numero di richieste moltiplica: una wordlist di 2000 parole con 3 estensioni fa 8000 richieste. Regolare i thread di conseguenza.
 - L'errore `invalid certificate` su HTTPS si bypassa con il flag `-k` (skip TLS verification).
+
+## Lab
+
+- **[[TryHackMe]] — "Content Discovery"**: allena il directory/file busting e la vhost discovery esattamente con l'approccio di Gobuster (URL + wordlist), confrontandolo con altri tool.
+- **[[PortSwigger Web Academy]] — categoria *Information disclosure*** e i lab su file/percorsi nascosti: pratica il *perché* si cercano directory dimenticate (backup, config, endpoint admin).
+- **[[HackTheBox]] — Starting Point con servizi web**: usa `gobuster dir -u ... -w directory-list-2.3-medium.txt -x php,txt,bak` per trovare l'endpoint che apre la macchina.
+
+## Domande
+
+1. **D:** A cosa serve Gobuster e in quale fase del pentest si usa?  **R:** Al brute-force di directory/file web, sottodomini DNS e virtual host; si usa nella fase di enumerazione.
+2. **D:** Da cosa dipende soprattutto la qualità dei risultati?  **R:** Dalla wordlist scelta (es. SecLists), che determina quali path vengono tentati.
+3. **D:** Cosa fa il flag `-x` e che effetto ha sul numero di richieste?  **R:** Aggiunge estensioni (es. `php,txt,bak`) a ogni parola, moltiplicando le richieste per il numero di estensioni.
+4. **D:** Come si gestisce un certificato TLS non valido su un target HTTPS?  **R:** Con il flag `-k` (salta la verifica del certificato).
+5. **D:** Perché a volte si preferisce [[ffuf]] a Gobuster?  **R:** Perché ffuf offre più opzioni di filtro dell'output (per size, codice, parole), utile quando Gobuster è troppo rumoroso.
 
 ## Collegamenti
 

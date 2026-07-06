@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 2
-aggiornato: 2026-06-25
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Strumenti di Rete CLI", "Strumenti di Rete", "Tool di Rete"]
 ---
@@ -111,6 +111,21 @@ curl -s https://api.github.com/zen    # body silenzioso (no progress bar)
 - **Enumerazione (pentest)**: `nc` come banner-grabber e port-scanner minimale quando manca nmap; `curl`/`wget` per scaricare tool sul target o esfiltrare; `ss`/`ip` per mappare la rete interna durante il pivoting.
 
 ---
+
+## Lab
+
+- **[[OverTheWire Bandit]] – livelli 14-16**: uso pratico di `nc` (connessione a servizio locale, submit password), `openssl s_client` (connessione TLS) e `nmap` (port scan locale per trovare la porta giusta). È la palestra CLI di rete più diretta.
+- **[[TryHackMe]] – Linux Fundamentals Part 3 / Introductory Networking**: applica `ping`, `traceroute`, `dig`/`nslookup`, `curl`/`wget` su host reali; utile per la diagnostica "dall'alto verso il basso".
+- **Esercizio locale (triage di sicurezza)**: su una VM esegui `ss -tulpn` e annota ogni porta in ascolto con il processo proprietario; poi avvia un listener (`nc -lvnp 4444`) e verifica che ricompaia in `ss`. Ricostruisci il servizio con `lsof -i :4444`. Serve a riconoscere una porta anomala (es. reverse shell) rispetto alla baseline.
+- **Esercizio DNS**: isola i livelli con `ping 8.8.8.8` (IP) vs `ping google.com` (nome) e conferma con `dig +short google.com` e `/etc/resolv.conf` che il problema, quando c'è, è il resolver.
+
+## Domande
+
+1. **D:** Perché si preferisce la suite iproute2 (`ip`, `ss`) a `ifconfig`/`netstat`/`route`?  **R:** Perché `ifconfig`/`netstat`/`route` sono deprecati, spesso assenti nelle immagini minimali e nei container, mentre `ss` è più veloce e dettagliato e `ip` espone l'intera gamma di feature del kernel.
+2. **D:** Qual è il primo comando di triage per scoprire cosa è in ascolto su una macchina, e cosa mostra?  **R:** `ss -tulpn`: elenca ogni porta TCP/UDP in ascolto insieme al **processo proprietario**, permettendo di confrontarla con ciò che dovrebbe essere esposto e di individuare servizi indesiderati o reverse shell.
+3. **D:** Se `ping 8.8.8.8` funziona ma `ping google.com` no, dov'è il problema?  **R:** Nella risoluzione **DNS**: la connettività IP è OK ma il resolver non traduce i nomi. Si verifica con `dig` e ispezionando `/etc/resolv.conf`.
+4. **D:** Perché per trasferire file si preferiscono `scp`/`sftp`/`rsync -e ssh` a FTP/Telnet?  **R:** FTP e Telnet trasmettono dati e credenziali in **chiaro**, catturabili da chi sniffa la rete (MITM); la suite SSH cifra il canale.
+5. **D:** Cosa fa l'opzione `-k`/`--insecure` di `curl` e perché è rischiosa?  **R:** Disabilita la verifica del certificato TLS: la connessione non autentica più il server, aprendo a un attacco Man-in-the-Middle. Va usata solo in test consapevoli.
 
 ## Collegamenti
 

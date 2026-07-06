@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto]
 fase: 1
 fonti: 8
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Funzioni di Hash", "Funzioni Hash"]
 ---
@@ -140,6 +140,12 @@ john --format=raw-sha256 hash.txt
 - *Cos'è il length extension e cosa lo previene?* — sfrutta che il digest Merkle–Damgård è lo stato interno; HMAC e SHA-3 lo impediscono.
 - *MD5 è "rotto" — significa che posso invertirlo?* — No: è rotto sulle **collisioni** (e quindi inadatto a firme), ma il preimage resta costoso. Il cracking password sfrutta la velocità + wordlist, non un'inversione.
 - *Differenza tra hash e MAC?* — l'hash è senza chiave (chiunque lo ricalcola); il MAC usa una chiave segreta → garantisce **autenticità**, non solo integrità.
+
+## Lab
+
+- **CryptoHack → sezione *Hashing*** (https://cryptohack.org/challenges/hashing/): sfide come *Jack's Birthday Hash* (paradosso del compleanno), *Length Extension* e *No Difference* praticano collisioni, length extension e proprietà delle funzioni di hash direttamente sul codice.
+- **Length extension in pratica**: dato un MAC `hash(secret‖msg)` con `hash_extender` (o `hashpump`), forgia `hash(secret‖msg‖padding‖"&admin=true")` senza conoscere il segreto — riproduce l'attacco #2 dello strato esperto e mostra perché serve HMAC.
+- **PicoCTF → categoria *Cryptography / Forensics***: challenge che chiedono di identificare l'algoritmo di un hash (`hashid`) e di crackarlo con wordlist tramite [[Hashcat]]/[[John the Ripper]] — utile per interiorizzare che il cracking calcola milioni di hash, non "inverte" nulla.
 
 ## Collegamenti
 - [[Hashing delle Password e Salting]] — applicazione critica

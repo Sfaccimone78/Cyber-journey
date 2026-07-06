@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 4
-aggiornato: 2026-06-26
+fonti: 3
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Broken Access Control e IDOR", "Broken Access Control", "IDOR"]
 ---
@@ -55,6 +55,18 @@ Con due account (A e B) e [[Burp Suite]]: catturi una richiesta di A, la **ripet
 - **CVE-2019-11510** (Pulse Secure VPN) — path traversal che legge file arbitrari, classica falla di access control sfruttata massivamente per furto credenziali.
 - **CVE-2023-22515** (Atlassian Confluence) — broken access control che consente la creazione di account admin (privilege escalation).
 - **CVE-2021-22205** (GitLab) — catena che include bypass di access control non autenticato.
+
+## Lab
+- **[[PortSwigger Web Academy]]** — categoria *Access control vulnerabilities*: parti dai lab APPRENTICE (IDOR su parametro `id`, admin panel via forced browsing/URL predicibile), poi PRACTITIONER (privilege escalation orizzontale/verticale, parameter tampering su `roleid`, `X-Original-URL`/method override, GraphQL/multi-step). Pratica il flusso "cattura richiesta di A → rigioca col token di B".
+- **DVWA** — modulo *Insecure Direct Object Reference* e le pagine admin-only per esercitare orizzontale e verticale (low→high).
+- **TryHackMe** — room *IDOR* e la sezione *Broken Access Control* di *OWASP Top 10 (2021)*: enumerazione di ID e forced browsing guidati.
+
+## Domande
+1. **D:** Qual è la differenza tra IDOR orizzontale e verticale? **R:** Orizzontale = accedi ai dati di un altro utente con lo **stesso** ruolo cambiando l'identificatore; verticale = un utente normale raggiunge funzioni riservate a un ruolo superiore (es. admin).
+2. **D:** Perché usare UUID non enumerabili non è una difesa sufficiente? **R:** Rende più difficile *indovinare* il riferimento, ma non verifica la **proprietà**: senza controllo di ownership server-side, chi conosce/intercetta l'ID accede comunque. È mitigazione, non sostituto del controllo.
+3. **D:** Come si testa un IDOR in pratica con Burp? **R:** Con due account A e B: catturi una richiesta di A, la **ripeti col token di B** (o senza token) e osservi se l'accesso passa; l'estensione Autorize automatizza il confronto e Intruder enumera gli ID.
+4. **D:** Cos'è il mass assignment e perché è un fallimento di access control? **R:** Il backend lega ciecamente ai campi dell'oggetto tutti i parametri ricevuti: inviando un campo extra come `"isAdmin":true` si scala privilegio perché non c'è controllo su quali attributi l'utente può modificare.
+5. **D:** Qual è il principio di mitigazione primario? **R:** **Deny-by-default** con controllo di autorizzazione **server-side su ogni richiesta** e verifica di ownership della risorsa; mai fidarsi dell'ID o del ruolo forniti dal client.
 
 ## Collegamenti
 - [[OWASP Top 10]]

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Hashing delle Password e Salting"]
 
@@ -60,6 +60,20 @@ echo -n "password123${SALT}" | openssl dgst -sha256
 - **Credential stuffing**: password uniche e salt diversi limitano l'impatto.
 - **Tool di attacco**: [[Hashcat]] e [[John the Ripper]] sono usati dai penetration tester per verificare la robustezza degli hash.
 - **Errore comune**: usare MD5 o SHA-1 senza salt — ancora diffuso in sistemi legacy.
+
+## Lab
+
+- **[[Hashcat]] — cracking con `rockyou.txt`**: prendi un hash MD5/SHA-1 non salato e craccalo con `hashcat -m 0 -a 0 hash.txt rockyou.txt`; poi genera un hash bcrypt e ritenta con `-m 3200`. Misurare la differenza di velocità (hash/s) dimostra sul campo perché le password vogliono funzioni lente.
+- **PicoCTF → challenge di password cracking** (categoria Cryptography/General): sfide che forniscono un dump di hash da recuperare con wordlist — ottimo per capire l'impatto del salt sulle rainbow table.
+- **HackTheBox → [[HackTheBox]]** modulo *Password Attacks* / macchine con hash `/etc/shadow`: estrai gli hash con `unshadow` e crackali con [[John the Ripper]] (`john --format=sha512crypt`), applicando salt e funzione lenta in uno scenario realistico.
+
+## Domande
+
+1. **D:** Perché non si memorizza mai la password in chiaro nel database? **R:** Così, se il database viene rubato, l'attaccante non ottiene direttamente le password; deve craccare gli hash.
+2. **D:** A cosa serve il salt e perché è unico per utente? **R:** Aggiunge un valore casuale prima dell'hash, così due utenti con la stessa password ottengono hash diversi e le rainbow table precompilate diventano inutili.
+3. **D:** Il salt deve essere segreto? **R:** No, può essere memorizzato in chiaro accanto all'hash; il suo scopo è impedire tabelle precomputate e riuso, non la segretezza.
+4. **D:** Perché SHA-256 da solo non è adatto alle password? **R:** È troppo veloce: un attaccante ne calcola miliardi al secondo. Servono funzioni deliberatamente lente come bcrypt, scrypt, Argon2 o PBKDF2.
+5. **D:** Quale algoritmo di password hashing è raccomandato da OWASP e ha vinto la Password Hashing Competition 2015? **R:** Argon2.
 
 ## Collegamenti
 

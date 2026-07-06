@@ -3,12 +3,15 @@ tipo: concetto
 tag: [cloud, metodologia]
 fase: 4
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Privilege Escalation in Cloud"]
 ---
 
 # Privilege Escalation in Cloud
+
+## In breve
+La **privilege escalation in cloud** è il passaggio da un accesso a basso privilegio (utente IAM limitato, ruolo istanza, service account) al controllo dell'intero account/tenant. A differenza dell'on-prem non sfrutta kernel o binari SUID, ma **permessi IAM mal configurati**: la scalata è una catena di chiamate API legittime. Le primitive tipiche (AWS) sono modifica della propria policy, creazione credenziali per altri, `iam:PassRole` + servizio di esecuzione e `sts:AssumeRole`; la difesa più forte sono **permission boundary** e **SCP**.
 
 ## Definizione
 La **privilege escalation in cloud** è il passaggio da un accesso a basso privilegio (un utente IAM

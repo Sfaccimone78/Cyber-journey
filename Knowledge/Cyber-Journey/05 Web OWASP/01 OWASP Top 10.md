@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 5
-aggiornato: 2026-06-28
+fonti: 4
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["OWASP Top 10", "Web Hacking"]
 ---

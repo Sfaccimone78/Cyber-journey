@@ -1,7 +1,7 @@
 ﻿---
 tipo: sintesi
-tag: [web, moc]
-aggiornato: 2026-06-28
+tag: [web, owasp, moc]
+aggiornato: 2026-07-02
 stato: attivo
 aliases: ["Web OWASP", "Mappa Web OWASP"]
 ---

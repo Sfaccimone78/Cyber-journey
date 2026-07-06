@@ -3,12 +3,14 @@ tipo: entita
 tag: [linux, tool, metodologia]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["GTFOBins"]
 ---
 
 # GTFOBins
+
+## In breve
 
 **GTFOBins** (*Get The F*** Out Binaries*) = catalogo online di **binari Unix legittimi** che possono
 essere abusati per bypassare restrizioni locali ed effettuare [[Privilege Escalation Linux|privilege escalation]],
@@ -88,6 +90,14 @@ awk 'BEGIN {system("/bin/sh")}'
 - **HackTheBox**: box Linux "easy/medium" con vettori sudo/SUID (es. *Lame*, *Shocker*, *Bashed*),
   **HTB Academy** modulo *Linux Privilege Escalation*.
 - **pwn.college** — modulo *Program Misuse* (sfruttamento sistematico di binari SUID).
+
+## Domande
+
+1. **D:** Cos'è GTFOBins e a quale domanda operativa risponde durante un pentest?  **R:** È un catalogo di binari Unix legittimi abusabili per bypassare restrizioni, scalare privilegi, evadere shell ristrette o esfiltrare dati. Risponde alla domanda "quale binario posso sfruttare?" nella fase di enumerazione post-foothold. L'equivalente Windows è LOLBAS.
+2. **D:** Quali sono i tre vettori principali che vai a incrociare con GTFOBins e con quali comandi li enumeri?  **R:** `sudo -l` (voci sudo, anche NOPASSWD), `find / -perm -4000 -type f 2>/dev/null` (bit SUID) e `getcap -r / 2>/dev/null` (capabilities). Per ognuno cerchi il binario su GTFOBins nella funzione corrispondente.
+3. **D:** Perché nello sfruttamento di un binario SUID si lancia `/bin/sh -p` invece di `/bin/sh`?  **R:** Bash e dash, all'avvio, **droppano** l'euid privilegiato se non ricevono `-p`; senza `-p` la shell torna all'uid reale e l'escalation fallisce, mentre `-p` preserva l'euid (spesso root).
+4. **D:** Un binario compare in GTFOBins solo sotto la funzione *File read*: cosa puoi e cosa non puoi fare?  **R:** Puoi **leggere** file protetti (es. `/etc/shadow`, da craccare offline), ma non ottieni direttamente una shell o la scrittura: la primitiva disponibile dipende dalla funzione elencata (Shell, SUID, Sudo, File read, File write, Capabilities, Shell escape…).
+5. **D:** Perché GTFOBins funziona, cioè qual è l'idea di fondo?  **R:** Molti binari standard espongono funzioni "innocue" (eseguire un comando, leggere/scrivere file, aprire una shell interna) che diventano pericolose quando il binario gira con **privilegi elevati** (via sudo, SUID o capabilities): GTFOBins indicizza binario → funzione abusabile → tecnica.
 
 ## Collegamenti
 

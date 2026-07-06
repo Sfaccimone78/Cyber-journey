@@ -1,9 +1,9 @@
 ﻿---
 tipo: sintesi
-tag: [blue, moc]
-aggiornato: 2026-06-22
+tag: [blue-team, moc]
+aggiornato: 2026-07-02
 stato: attivo
-aliases: ["Blue Team", "07 Blue Team"]
+aliases: ["Blue Team", "Mappa Blue Team"]
 ---
 
 # Blue Team - Mappa

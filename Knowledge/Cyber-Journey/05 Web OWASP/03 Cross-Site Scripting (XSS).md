@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 8
-aggiornato: 2026-06-26
+fonti: 7
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Cross-Site Scripting (XSS)", "XSS"]
 ---

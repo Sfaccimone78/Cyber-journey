@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 2
-aggiornato: 2026-06-25
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Vim e Nano", "Vim", "nano", "Vim e Editor"]
 ---
@@ -116,6 +116,21 @@ echo "set nocompatible" >> ~/.vimrc
 - Alternative moderne (Neovim, Helix, micro) offrono UX migliori, ma la portabilità di `vi`/`nano` resta imbattuta su sistemi non controllati da te.
 
 ---
+
+## Lab
+
+- **`vimtutor`** (integrato in ogni installazione Vim): tutorial interattivo guidato di ~30 minuti che copre movimento, insert, delete/yank/put, ricerca-sostituzione e i comandi `:`. È il modo canonico per imparare le basi prima di dover editare una config in produzione.
+- **[[OverTheWire Bandit]] – livelli 25-26**: shell escape da una shell ristretta passando per `more` → `vim` → `:set shell=/bin/bash` → `:shell`. Applica direttamente la nota di sicurezza su Vim come vettore di evasione.
+- **[[TryHackMe]] – Linux PrivEsc** (`tryhackme.com/room/linuxprivesc`): tra i binari sfruttabili via `sudo`/SUID compaiono `nano` e `vim`; pratica l'escape a shell root (`sudo vim -c ':!/bin/sh'`, `nano` → `^R^X`).
+- **Esercizio locale**: apri `~/.bashrc` con nano (`^O`/`^X`) e la stessa modifica con Vim (`/`, `cw`, `:wq`) per confrontare i due flussi; poi imposta `git config --global core.editor "vim"` e prova un commit per vedere l'editor invocato.
+
+## Domande
+
+1. **D:** Cosa significa che Vim è un editor "modale" e quali sono le modalità principali?  **R:** I tasti fanno cose diverse a seconda della modalità attiva. Le principali: **Normal** (comandi, default, si entra con `Esc`), **Insert** (`i`/`a`/`o`, per digitare testo), **Visual** (`v`/`V`/`Ctrl-v`, per selezionare) e **Command-line/ex** (`:`, per salvare/uscire/sostituire).
+2. **D:** Sei "perso" dentro Vim: come esci salvando e come esci scartando le modifiche?  **R:** Premi `Esc` (due volte per sicurezza) per tornare in Normal mode, poi `:wq` (o `ZZ`) per salvare ed uscire, oppure `:q!` per uscire scartando tutte le modifiche.
+3. **D:** Perché vale la pena imparare almeno il minimo di Vim invece di affidarsi solo a nano?  **R:** Perché lo standard **POSIX** garantisce la presenza di `vi`, mentre nano non è universale: su un server headless, in un container minimale o via SSH potresti trovare *solo* `vi`, quindi saper entrare/uscire e fare una modifica base è una competenza di sopravvivenza.
+4. **D:** In che modo un editor come Vim o nano diventa un vettore di privilege escalation?  **R:** Se è eseguibile via `sudo` o ha il bit SUID, il suo comando di shell escape gira con privilegi elevati: in Vim `:!sh` o `:set shell=/bin/sh` poi `:shell`; in nano `^R^X` (read/execute command). Da qui si ottiene una shell root.
+5. **D:** Cosa fa il comando `:%s/vecchio/nuovo/gc` in Vim?  **R:** Sostituisce `vecchio` con `nuovo` in **tutto** il file (`%`), su tutte le occorrenze di ogni riga (`g`), chiedendo **conferma** a ciascuna occorrenza (`c`).
 
 ## Collegamenti
 

@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool]
 fase: 2
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Metasploit"]
 
@@ -11,7 +11,7 @@ aliases: ["Metasploit"]
 
 # Metasploit
 
-## Cos'è
+## In breve
 
 **Metasploit Framework** è la piattaforma open source per penetration testing più diffusa al mondo, mantenuta da Rapid7. Raccoglie centinaia di exploit, payload, moduli ausiliari e strumenti di post-exploitation in un'unica interfaccia. Semplifica enormemente la fase di [[Exploitation]] e [[Post-Exploitation]], permettendo di selezionare un exploit, configurarlo e lanciarlo in pochi comandi. L'interfaccia principale è `msfconsole`.
 
@@ -182,6 +182,12 @@ meterpreter > portfwd add -l 3389 -p 3389 -r 10.10.20.5
 2. **Cos'è Meterpreter e perché evade molti AV?** Payload in-memory iniettato via reflective DLL, comunicazione cifrata TLS, non scrive su disco ed è estendibile a runtime: niente file da firmare. EDR moderni però lo rilevano in memoria/rete.
 3. **Come pivoti verso una rete interna con Metasploit?** `run autoroute -s <subnet>` instrada i moduli MSF attraverso la sessione; per tool esterni avvii `auxiliary/server/socks_proxy` e li lanci con proxychains; `portfwd` espone una singola porta interna in locale.
 4. **Perché conviene saper exploitare senza Metasploit?** Per esami che lo limitano (OSCP), per capire il meccanismo della vulnerabilità, e perché in scenari stealth i payload Metasploit sono immediatamente rilevati dagli EDR.
+
+## Lab
+
+- **[[TryHackMe]] — modulo Metasploit ("Metasploit: Introduction", "Metasploit: Exploitation", "Meterpreter")**: percorso che copre `search`/`use`/`set`/`run`, i tipi di modulo e le sessioni Meterpreter esattamente come in questa nota.
+- **[[TryHackMe]] — "Blue"**: sfrutta EternalBlue (`ms17_010_eternalblue`) con Metasploit fino a una sessione SYSTEM, ottimo per il workflow `db_import` → `use` → `set PAYLOAD` → `run`.
+- **[[HackTheBox]] — Starting Point (es. *Lame*, *Blue*)**: applica exploit e moduli `auxiliary` su servizi reali; utile anche per esercitare `multi/handler` con payload generati da [[msfvenom]].
 
 ## Collegamenti
 

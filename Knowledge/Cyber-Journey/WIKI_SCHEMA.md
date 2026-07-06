@@ -234,3 +234,36 @@ script di ricerca custom. Aggiorna questo schema quando lo introduci.
 ## Plugin Obsidian disponibili
 `dataview` (query frontmatter) · `templater` (template in `Template/`) · `excalidraw` (diagrammi) ·
 `editing-toolbar`. Graph view = miglior modo per vedere hub, orfani e struttura.
+
+---
+
+## Vocabolario canonico e validazione
+
+Riferimento per il gate `tools/check_notes.py`. Serve a tenere il frontmatter e gli heading
+allineati allo schema, così Dataview e le mappe d'area restano affidabili.
+
+### Valori ammessi nel frontmatter
+- **`tipo:`** → uno tra **`concetto`** · **`entita`** · **`fonte`** · **`sintesi`**.
+- **`stato:`** → uno tra **`stub`** · **`attivo`** · **`maturo`**.
+
+Ogni nota non-MOC / non-template con frontmatter è validata: un valore fuori da questi insiemi è un
+**ERRORE** (`TIPO-OFFSCHEMA` / `STATO-OFFSCHEMA`), a prescindere dallo `stato`. Il controllo scatta
+di default, non solo sulle note `maturo` (evita stati/tipi improvvisati tipo `lab`/`completato`).
+
+### Heading canonici e alias accettati
+Nel verificare le sezioni minime, il gate riconosce come equivalenti:
+
+| Heading canonico | Alias accettato |
+|------------------|-----------------|
+| `## In breve`    | `## Panoramica` |
+| `## Lab`         | `## Esercizi`   |
+| `## Domande`     | — (nessun alias) |
+
+Usare la variante alias **non** fa scattare l'avviso di "sezione assente".
+
+### Flag `--dod` (Definition of Done stretta, opt-in)
+`python tools/check_notes.py --dod` promuove ad **ERRORE** ciò che di default resta AVVISO su una
+nota `maturo`: sezioni `## In breve` / `## Lab` / `## Domande` mancanti e mismatch tra `fonti:` nel
+frontmatter e il conteggio reale delle voci in `## Fonti`. **Senza** `--dod` il comportamento è
+invariato (restano avvisi non bloccanti), così l'hook pre-commit resta verde durante l'arricchimento
+in corso. Usa `--dod` per audit periodici della qualità, non nel gate di commit.

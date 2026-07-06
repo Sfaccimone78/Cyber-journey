@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["sed"]
 
@@ -11,7 +11,7 @@ aliases: ["sed"]
 
 # sed
 
-## Cos'è
+## In breve
 
 **sed** (Stream EDitor) è un editor di testo non interattivo che legge l'input riga per riga, applica trasformazioni tramite un mini-linguaggio di comandi (basato su espressioni regolari), e scrive il risultato sullo stdout. A differenza di [[awk]], sed lavora su righe intere e su pattern di testo, non su colonne. Il suo punto di forza è la **sostituzione in massa** e la **trasformazione di flussi di testo** in pipeline.
 
@@ -285,6 +285,12 @@ sed -i "s/DB_PASS=.*/DB_PASS=${NEW_PASS}/" /etc/app/config.env
 - **Newline nel replace**: per inserire un newline nel testo di sostituzione, in BRE usa `\n`; in alcuni sed antichi serve un backslash seguito da newline letterale.
 
 ---
+
+## Lab
+
+- **HackerRank — Linux Shell → Text Processing / "Sed"**: sfide (`sed-1` … `sed-5`) su sostituzione con e senza `g`, N-esima occorrenza, gruppi catturati `\(...\)`/`\1` e indirizzi di riga — copre esattamente il comando `s///` e i suoi flag.
+- **OverTheWire — Bandit** (livelli di manipolazione testo): usa `sed` per ripulire l'output e isolare la stringa utile prima di passarla al comando successivo in pipeline.
+- **Lab pratico locale**: prendi un `sshd_config` o un `.env` e allena i casi reali della nota — `sed '/^#/d; /^$/d'` per ripulire i commenti, `sed -i.bak 's/^PasswordAuthentication yes/PasswordAuthentication no/'` per l'hardening (sempre con backup `.bak`).
 
 ## Domande da esame/colloquio
 

@@ -1,9 +1,9 @@
 ﻿---
 tipo: sintesi
-tag: [windows, moc]
-aggiornato: 2026-06-22
+tag: [windows, ad, moc]
+aggiornato: 2026-07-02
 stato: attivo
-aliases: ["Windows e AD", "04 Windows e AD"]
+aliases: ["Windows e AD", "Mappa Windows e AD"]
 ---
 
 # Windows e AD - Mappa

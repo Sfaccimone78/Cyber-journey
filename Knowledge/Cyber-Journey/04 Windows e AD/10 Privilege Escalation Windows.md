@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows]
 fase: 2
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Privilege Escalation Windows"]
 
@@ -223,6 +223,11 @@ R: Unquoted path sfrutta il modo in cui Windows risolve un path con spazi non qu
 
 **D: UAC è un confine di sicurezza? Perché ha tanti bypass?**
 R: Microsoft afferma ufficialmente che **UAC non è un security boundary**: è un convenience prompt per ridurre l'esecuzione admin involontaria. Per questo i bypass (auto-elevate + registry hijack) non sono trattati come vulnerabilità da patchare con urgenza. Vale solo se sei già admin: non trasforma un utente standard in admin.
+
+## Lab
+- [[TryHackMe]] → room **Windows PrivEsc** (e **Windows PrivEsc Arena**): pratica tutti i vettori di questa nota — servizi weak-perm, unquoted path, AlwaysInstallElevated, token impersonation — con WinPEAS e [[PowerUp]].
+- [[TryHackMe]] → room **Post-Exploitation Basics**: enumerazione post-accesso, dump credenziali e uso di [[PowerUp]]/WinPEAS in un contesto di dominio.
+- Lab locale (VM Windows): configura un servizio con binario scrivibile da `Users`, poi eleva con `sc config binPath=` e verifica nel [[Windows Event Log]] la comparsa dell'**Event ID 7045** (nuovo servizio) o **4697**. Riproduci il bypass fodhelper e correla con la regola Sigma inclusa (parent `fodhelper.exe`).
 
 ## Collegamenti
 

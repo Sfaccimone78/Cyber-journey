@@ -11,7 +11,7 @@ aliases: ["Kali Linux"]
 
 # Kali Linux
 
-## Cos'è
+## In breve
 
 **Kali Linux** è una distribuzione Linux basata su Debian, mantenuta da Offensive Security, progettata specificamente per il penetration testing e la sicurezza informatica offensiva. Viene fornita con oltre 600 tool preinstallati per [[Ricognizione (Recon)]], [[Scansione delle Porte]], [[Enumerazione]], [[Exploitation]], [[Post-Exploitation]], analisi forense, cracking di password e wireless security. È lo standard de facto nel settore del pentesting.
 

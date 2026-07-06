@@ -2,13 +2,14 @@
 tipo: concetto
 tag: [fondamenti]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-22
+fonti: 2
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Difesa in Profondità"]
 ---
 # Difesa in Profondità
 
+## In breve
 La **difesa in profondità** (defense in depth) è la strategia di sovrapporre **più controlli
 indipendenti**, così che il fallimento di uno non comprometta l'intero sistema. Il presupposto è
 realistico e severo: *nessun singolo controllo è infallibile*. Si progetta quindi perché l'attaccante
@@ -63,6 +64,18 @@ La difesa in profondità trasforma una *singola* vulnerabilità da "game over" a
 È il principio operativo del Blue Team e il contraltare difensivo della [[La Cyber Kill Chain]]
 (spezzare l'anello a più fasi possibili) e della [[Superficie di Attacco]] (ridurre + presidiare ciò
 che resta).
+
+## Lab
+- **[[TryHackMe]]** → room *Defensive Security Intro* e *Security Principles*: identifica, in uno scenario, quali controlli sono preventivi, detettivi e correttivi.
+- **[[TryHackMe]]** → percorso *SOC Level 1* (SIEM, log analysis): pratica il livello *detettivo* di questa nota, quello che spesso manca nei modelli "solo prevenzione".
+- Esercizio di progettazione: per un'app web esposta, disegna gli 8 strati (perimetro → dati → identità → persone → monitoraggio) e assegna ad ognuno almeno un controllo preventivo E uno detettivo.
+
+## Domande
+1. **D:** Qual è il presupposto alla base della difesa in profondità? **R:** Che *nessun singolo controllo è infallibile*: si sovrappongono più controlli indipendenti così che il fallimento di uno non comprometta l'intero sistema.
+2. **D:** Quali sono i tre tipi di controllo e cosa fa ciascuno? **R:** Preventivi (impediscono l'attacco: firewall, MFA, cifratura), detettivi (rilevano ciò che è passato: SIEM, IDS, EDR) e correttivi/reattivi (limitano il danno e ripristinano: IR, backup, isolamento).
+3. **D:** Qual è l'errore classico nell'applicare la difesa in profondità? **R:** Puntare tutto sulla prevenzione: senza il livello detettivo un attaccante che supera il perimetro resta invisibile per mesi (dwell time).
+4. **D:** Defense in Depth e Zero Trust sono opposti? **R:** No: Zero Trust supera la fiducia implicita "dentro la rete" ed è il *modo* con cui si implementano gli strati di identità/rete in un'architettura DiD moderna senza perimetro.
+5. **D:** Cosa significa la mentalità "assume breach"? **R:** Progettare partendo dal presupposto che l'attaccante sia già dentro, rendendo obbligatori (non opzionali) segmentazione, minimo privilegio e monitoraggio.
 
 ## Collegamenti
 - [[Superficie di Attacco]] · [[La Cyber Kill Chain]] · [[IAM e Zero Trust]] · [[Triade CIA]]

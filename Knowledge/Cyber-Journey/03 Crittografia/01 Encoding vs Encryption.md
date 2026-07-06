@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Encoding vs Encryption"]
 
@@ -52,6 +52,20 @@ openssl enc -aes-256-cbc -pbkdf2 -d -in segreto.enc -out segreto.txt -k miachiav
 - **Bug comune**: sviluppatori che usano Base64 come "protezione" — non è sicurezza, è solo encoding.
 - **CTF e analisi malware**: riconoscere encoding (Base64, hex, URL encoding) è fondamentale per decodificare payload e dati nascosti. Tool utile: [[CyberChef]].
 - **HTTPS**: usa encryption (TLS), non encoding, per proteggere il traffico.
+
+## Lab
+
+- **CryptoHack → sezione *Introduction / General → Encoding*** (https://cryptohack.org): le sfide `ASCII`, `Hex`, `Base64`, `Bytes and Long` insegnano a riconoscere e convertire i vari encoding. Sono il punto di partenza ideale per non confondere trasformazione di formato e cifratura.
+- **[[CyberChef]] — pratica libera**: incolla una stringa Base64 e usa la ricetta *From Base64* per verificare che nessuna chiave sia richiesta; poi confronta con *AES Encrypt/Decrypt* per toccare con mano la differenza (l'AES fallisce senza la chiave corretta, il Base64 no).
+- **PicoCTF → categoria *Cryptography* (livello base)**: sfide come *Mod 26* e le challenge di decoding chiedono di riconoscere l'encoding prima di tentare la "decifratura" — esercizio classico sul distinguere i due concetti.
+
+## Domande
+
+1. **D:** Perché usare Base64 per "nascondere" una password è un errore di sicurezza? **R:** Perché Base64 è solo encoding: usa uno schema pubblico e reversibile senza segreto, quindi chiunque può decodificarlo con `base64 -d`. Non fornisce alcuna riservatezza.
+2. **D:** Quale proprietà distingue l'encryption dall'encoding? **R:** L'encryption richiede una chiave segreta: senza di essa i dati sono incomprensibili. L'encoding non ha alcun segreto.
+3. **D:** L'hashing è reversibile come l'encoding? **R:** No, l'hashing è una trasformazione a senso unico e non è né encoding né encryption; serve a integrità/verifica.
+4. **D:** In un'analisi malware, perché è importante riconoscere Base64 o hex? **R:** Perché i payload sono spesso solo codificati (non cifrati): riconoscere l'encoding permette di decodificarli direttamente senza bisogno di alcuna chiave.
+5. **D:** HTTPS protegge il traffico con encoding o encryption? **R:** Con encryption (TLS), non con encoding.
 
 ## Collegamenti
 

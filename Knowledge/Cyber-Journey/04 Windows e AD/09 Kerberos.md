@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows, ad]
 fase: 2
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Kerberos"]
 ---
@@ -62,6 +62,18 @@ I tipi di cifratura contano: gli attaccanti spesso forzano **RC4 (etype 23)** pe
 - Proteggere e **ruotare `krbtgt`** (due volte) → invalida i Golden Ticket.
 - Disabilitare RC4, forzare **AES**.
 - Monitorare **Event ID 4768** (TGT) e **4769** (TGS): molti 4769 con etype 0x17 (RC4) da un solo utente = Kerberoasting.
+
+## Lab
+- [[TryHackMe]] → room **Attacking Kerberos**: percorso completo su un DC di lab — enumerazione con Rubeus/Kerbrute, [[AS-REP Roasting]], [[Kerberoasting]], Pass-the-Ticket e forgiatura di Golden/Silver Ticket.
+- **GOAD (Game of Active Directory)**: pratica il flusso Kerberos end-to-end (richiesta TGT, TGS, delegation) in una foresta vulnerabile self-hosted.
+- Lab locale: cattura il traffico AS-REQ/AS-REP con Wireshark filtrando `kerberos`, poi forza RC4 con `impacket-GetUserSPNs -request` e osserva nel [[Windows Event Log]] del DC il picco di **Event ID 4769 con Ticket Encryption Type 0x17**.
+
+## Domande
+1. **D:** Con quale hash è cifrato il TGT e cosa consente di forgiare chi lo conosce?  **R:** Con l'hash dell'account `krbtgt`; consente di forgiare un Golden Ticket (TGT arbitrari).
+2. **D:** Con quale hash è cifrato un Service Ticket (TGS) e quale attacco offline abilita?  **R:** Con l'hash dell'account di servizio; abilita il [[Kerberoasting]] (cracking offline del TGS).
+3. **D:** Cosa contiene il PAC e a cosa serve?  **R:** I gruppi/SID dell'utente; il servizio lo usa per autorizzare l'accesso.
+4. **D:** Quale condizione di un account abilita l'AS-REP Roasting?  **R:** La pre-autenticazione Kerberos disabilitata.
+5. **D:** Perché gli attaccanti forzano l'encryption type RC4 (etype 23)?  **R:** Perché il materiale craccabile è direttamente l'NT hash, più veloce da brute-forzare rispetto ad AES.
 
 ## Collegamenti
 - [[Active Directory]]

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Vulnerabilità Upload File", "Vulnerabilita Upload File", "File Upload", "Unrestricted File Upload"]
 ---
@@ -54,7 +54,20 @@ Un upload non validato resta dannoso anche se non esegui codice:
 6. Limita dimensione e numero; scansione AV.
 
 ## Lab
-TryHackMe *Upload Vulnerabilities*, PortSwigger *File upload* ([[PortSwigger Web Academy]]). Strumento chiave: [[Burp Suite]] per intercettare e manipolare la richiesta multipart.
+- [[PortSwigger Web Academy]] → categoria **File upload vulnerabilities**. Percorso dal livello APPRENTICE:
+  - *Remote code execution via web shell upload* — caricare una `.php` e ottenere RCE.
+  - *Web shell upload via Content-Type restriction bypass* — falsificare l'header `Content-Type`.
+  - *...via extension blacklist bypass* (`.phtml`) e *...via path traversal* nel filename.
+  - *...via polyglot web shell upload* — file valido come immagine e come PHP insieme (magic bytes `GIF89a`).
+- TryHackMe → room *Upload Vulnerabilities* / *Upload Attacks*: esercita blacklist/whitelist bypass, doppia estensione e magic bytes.
+- Strumento chiave: [[Burp Suite]] per intercettare e manipolare la richiesta **multipart** (filename, Content-Type, contenuto).
+
+## Domande
+1. **D:** Quali tre condizioni devono verificarsi insieme perché un upload diventi RCE?  **R:** Il **cosa** (si carica codice eseguibile), il **dove** (finisce in un path raggiungibile via web) e il **come** (il server interpreta quel file, es. PHP attivo in `/uploads`).
+2. **D:** Perché il controllo del `Content-Type` è debole?  **R:** Il MIME è impostato dal client e si falsifica facilmente con Burp o curl; non riflette il contenuto reale del file.
+3. **D:** Come si aggira un controllo sui magic bytes che richiede un'immagine?  **R:** Con un **polyglot**: si prepende `GIF89a;` (o l'header dell'immagine attesa) e si accoda il codice PHP nello stesso file, così passa il check di firma ma resta eseguibile.
+4. **D:** In che modo un upload è dannoso anche senza RCE?  **R:** XSS stored via SVG/HTML, SSRF/XXE via file processati dal server, DoS con file enormi/zip-bomb, e overwrite di file legittimi (es. `.htaccess`) via path traversal nel filename.
+5. **D:** Qual è la difesa più efficace contro le web shell caricate?  **R:** Ri-codificare il file lato server con una libreria di image processing (distrugge payload nascosti), rinominarlo in modo random e salvarlo fuori dal webroot in una cartella `noexec`.
 
 ## Collegamenti
 - [[OWASP Top 10]]

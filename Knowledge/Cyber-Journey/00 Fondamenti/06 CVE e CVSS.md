@@ -2,13 +2,14 @@
 tipo: concetto
 tag: [fondamenti]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-22
+fonti: 2
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["CVE e CVSS"]
 ---
 # CVE e CVSS
 
+## In breve
 CVE e CVSS rispondono a due domande diverse: **"di quale vulnerabilità stiamo parlando?"** (CVE, un
 *nome*) e **"quanto è grave?"** (CVSS, un *punteggio*). Insieme formano il linguaggio comune con cui
 ricercatori, vendor, scanner e difensori si capiscono senza ambiguità.
@@ -75,6 +76,18 @@ Aggancio diretto a [[Vulnerabilità Exploit e Minaccia]] (Rischio = Minaccia × 
 Scanner come [[Nmap]] (script `vuln`), [[Nikto]], [[OWASP ZAP]] e i vulnerability manager mappano i
 servizi trovati su CVE noti; `searchsploit`/ExploitDB cercano exploit per un CVE; [[Threat Intelligence]]
 correla CVE ↔ campagne d'attacco reali.
+
+## Lab
+- **Calcolatore CVSS di FIRST.org**: apri il *CVSS v3.1 Calculator* e ricostruisci il vector string di Log4Shell (`AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H`), poi cambia una metrica alla volta e osserva come varia il Base Score.
+- **Consultazione NVD + CISA KEV**: cerca su `nvd.nist.gov` un CVE recente, leggi vector, CWE e CPE, poi verifica se è presente nel catalogo CISA KEV e nel dataset EPSS per capire la priorità reale.
+- **[[TryHackMe]]** → room *CVE* / *Vulnerabilities 101*: collega un CVE noto al relativo exploit e pratica la ricerca con `searchsploit`.
+
+## Domande
+1. **D:** A quali due domande diverse rispondono CVE e CVSS? **R:** Il CVE dice *di quale* vulnerabilità si parla (un nome univoco); il CVSS dice *quanto è grave* (un punteggio 0.0–10.0).
+2. **D:** Chi assegna l'ID CVE e chi lo arricchisce con CVSS/CWE/CPE? **R:** Una CNA (CVE Numbering Authority, es. Microsoft/Red Hat/GitHub) assegna l'ID, MITRE mantiene il registro grezzo e il NVD (NIST) lo arricchisce.
+3. **D:** Cosa si legge di più utile in un CVSS: il numero finale o il vector string? **R:** Il vector string, perché mostra *perché* la vuln è grave (AV, AC, PR, UI, Scope, impatto su C/I/A).
+4. **D:** Perché "gravità ≠ priorità" e quali due correttivi si usano? **R:** Il CVSS misura la gravità teorica, non la probabilità di sfruttamento reale; si usano EPSS (probabilità di sfruttamento a 30 giorni) e CISA KEV (vuln già sfruttate in the wild).
+5. **D:** Se un CVE è nel catalogo CISA KEV, come ci si comporta? **R:** Si patcha subito, qualunque sia il punteggio CVSS, perché significa che è già sfruttato attivamente.
 
 ## Collegamenti
 - [[Vulnerabilità Exploit e Minaccia]] · [[Superficie di Attacco]] · [[Triade CIA]] · [[Threat Intelligence]]

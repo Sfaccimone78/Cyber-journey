@@ -3,12 +3,15 @@ tipo: entita
 tag: [cloud, tool, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["AWS Sicurezza (S3, EC2, IAM, STS)"]
 ---
 
 # AWS Sicurezza (S3, EC2, IAM, STS)
+
+## In breve
+**AWS** è il cloud provider dominante e quattro servizi concentrano la maggior parte degli incidenti: **S3** (storage, bucket pubblici), **EC2** (compute, user-data e IMDS), **IAM** (identità e policy) e **STS** (token temporanei per assumere ruoli). Padroneggiare i loro abusi tipici — enumerazione anonima di bucket, furto di segreti da user-data, `AssumeRole` per l'escalation — copre la gran parte degli scenari di pentest AWS.
 
 ## Definizione
 **Amazon Web Services (AWS)** è il cloud provider dominante. Quattro servizi concentrano la maggior

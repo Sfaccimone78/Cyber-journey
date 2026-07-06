@@ -3,12 +3,15 @@ tipo: entita
 tag: [cloud, windows, ad, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Azure e Entra ID Sicurezza"]
 ---
 
 # Azure e Entra ID Sicurezza
+
+## In breve
+**Azure** è il cloud più intrecciato col mondo enterprise Windows; la sua identità è **Entra ID** (ex Azure AD), da non confondere con [[Active Directory]] on-prem ma spesso sincronizzata con essa (Entra Connect), il che crea un ponte d'attacco ibrido. Esistono due piani di controllo separati — **Azure RBAC** (risorse) ed **Entra ID** (identità/directory role) — e i vettori chiave ruotano attorno al **furto di token**: Managed Identity via SSRF, service principal over-privileged su Graph, consent/device-code phishing.
 
 ## Definizione
 **Microsoft Azure** è il secondo cloud per quota di mercato e quello più intrecciato con il mondo

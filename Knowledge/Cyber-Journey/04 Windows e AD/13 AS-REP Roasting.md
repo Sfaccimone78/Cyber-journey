@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows, ad]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["AS-REP Roasting"]
 
@@ -54,6 +54,18 @@ hashcat -m 18200 asrep_hashes.txt /usr/share/wordlists/rockyou.txt
 - Usare password lunghe e complesse per gli account che per motivi legacy devono tenere la pre-auth disabilitata.
 - Monitorare Event ID **4768** (TGT request) nel [[Windows Event Log]] per richieste da host non noti.
 - Collocare gli account vulnerabili nel gruppo **Protected Users** quando possibile.
+
+## Lab
+- [[TryHackMe]] → room **Attacking Kerberos**: sezione AS-REP Roasting — individua gli account con pre-auth disabilitata e cracca gli hash `$krb5asrep$` con Hashcat mode 18200.
+- **GOAD (Game of Active Directory)**: contiene account con `DONT_REQ_PREAUTH` attivo; pratica `impacket-GetNPUsers` sia con lista utenti (`-no-pass`) sia autenticato (enumerazione via LDAP).
+- Lab locale: su un utente di test abilita "Do not require Kerberos preauthentication", esegui `impacket-GetNPUsers corp.local/ -usersfile users.txt -no-pass -format hashcat` e verifica nel [[Windows Event Log]] la richiesta **Event ID 4768** senza pre-auth (Pre-Authentication Type 0).
+
+## Domande
+1. **D:** Quale flag/impostazione dell'account rende un utente vulnerabile all'AS-REP Roasting?  **R:** "Do not require Kerberos preauthentication" (flag `DONT_REQ_PREAUTH`).
+2. **D:** Perché l'attacco può funzionare anche senza un account di dominio?  **R:** Il DC risponde all'AS-REQ senza verificare l'identità del richiedente; basta conoscere/indovinare gli username.
+3. **D:** Quale mode di Hashcat cracca gli hash AS-REP?  **R:** Il mode 18200 (formato `$krb5asrep$23$...`).
+4. **D:** Qual è la differenza chiave rispetto al [[Kerberoasting]]?  **R:** L'AS-REP Roasting non richiede nemmeno un account di dominio valido; il Kerberoasting sì.
+5. **D:** Con quale comando PowerShell trovi gli account a rischio?  **R:** `Get-ADUser -Filter {DoesNotRequirePreAuth -eq $true} -Properties DoesNotRequirePreAuth`.
 
 ## Collegamenti
 

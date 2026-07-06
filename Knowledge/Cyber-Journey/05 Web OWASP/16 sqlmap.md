@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool, web, sql]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["sqlmap"]
 
@@ -13,7 +13,7 @@ aliases: ["sqlmap"]
 
 > **Nota etica**: sqlmap va usato esclusivamente su applicazioni proprie o su ambienti autorizzati (DVWA, [[PortSwigger Web Academy]], macchine HackTheBox/TryHackMe). Usarlo su sistemi reali senza permesso esplicito è illegale e perseguibile penalmente.
 
-## Cos'è
+## In breve
 
 **sqlmap** è uno strumento open source a riga di comando che **automatizza il rilevamento e lo sfruttamento di vulnerabilità SQL Injection**. Supporta tutti i principali database (MySQL, PostgreSQL, MSSQL, Oracle, SQLite, ecc.) e tecniche di injection (in-band, blind boolean, blind time-based, out-of-band). È lo standard de facto per il testing di SQLi.
 
@@ -76,6 +76,19 @@ Parametri chiave:
 - `--random-agent` cambia lo User-Agent ad ogni richiesta
 - I risultati vengono salvati in `~/.local/share/sqlmap/output/<target>/`
 - sqlmap può essere molto rumoroso nei log del server: in ambienti reali (autorizzati) questo è rilevato facilmente dai SIEM
+
+## Lab
+- [[PortSwigger Web Academy]] → categoria **SQL injection**: i lab *UNION attacks* e soprattutto quelli **blind** (*conditional responses*, *time delays*) sono ideali per far lavorare sqlmap. Cattura la richiesta con [[Burp Suite]] (Save item → `req.txt`) e passala con `sqlmap -r req.txt -p <param>`.
+- TryHackMe → room *SQLMap* / *SQL Injection*: bersagli guidati per praticare `--dbs`, `--dump`, `--os-shell`.
+- Target locali: **DVWA** (livelli low→high per vedere l'effetto di `--level`/`--risk`) e machine di HackTheBox/TryHackMe autorizzate.
+- Cosa esercitare: partire da rilevazione base, poi enumerazione progressiva (`--dbs` → `-D … --tables` → `--dump`) e infine escalation (`--os-shell`, `--tamper` contro un WAF).
+
+## Domande
+1. **D:** Perché conviene usare `-r richiesta.txt` invece di `-u`?  **R:** Il file contiene la richiesta HTTP reale (header, cookie, body) catturata con Burp: sqlmap testa esattamente il contesto autenticato e i punti d'iniezione (anche header/cookie) che con `-u` non verrebbero coperti.
+2. **D:** Cosa controllano `--level` e `--risk`?  **R:** `--level` (1-5) amplia i punti testati (anche header e cookie ai livelli alti); `--risk` (1-3) abilita payload progressivamente più aggressivi/potenzialmente dannosi. Si parte da 1/1 per essere meno invasivi.
+3. **D:** A cosa servono gli script `--tamper`?  **R:** Applicano trasformazioni di evasione WAF ai payload (es. `space2comment` sostituisce gli spazi con commenti SQL) senza cambiare la semantica della query.
+4. **D:** Quando `--os-shell` può funzionare?  **R:** Solo se il DBMS espone primitivi OS e l'utente del DB ha privilegi adeguati (es. `xp_cmdshell` su MSSQL, `COPY … TO PROGRAM` su Postgres, webshell via `INTO OUTFILE` su MySQL).
+5. **D:** Perché sqlmap è "rumoroso" e cosa implica in un test reale?  **R:** Invia moltissime richieste con pattern di injection riconoscibili; nei log e nei SIEM è facilmente rilevabile, quindi va usato solo in ambienti autorizzati e, se serve OPSEC, con `--delay`/`--random-agent`/`--tor`.
 
 ## Collegamenti
 

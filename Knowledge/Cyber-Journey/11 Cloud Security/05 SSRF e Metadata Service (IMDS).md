@@ -3,12 +3,15 @@ tipo: concetto
 tag: [cloud, web, owasp]
 fase: 4
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["SSRF e Metadata Service (IMDS)"]
 ---
 
 # SSRF e Metadata Service (IMDS)
+
+## In breve
+Il **metadata service** (IMDS) è un endpoint HTTP link-local `169.254.169.254` raggiungibile solo dall'interno di una VM cloud, che espone metadati e — punto critico — le **credenziali temporanee** del ruolo associato. Una [[Server-Side Request Forgery (SSRF)|SSRF]] sull'app che gira su quella VM la costringe a interrogare l'IMDS *dall'interno*, esfiltrando quelle credenziali: è l'anello che salda una vulnerabilità web a una compromissione cloud completa (caso scuola: Capital One 2019). La difesa cardine è forzare **IMDSv2** (token via PUT + header, hop-limit 1).
 
 ## Definizione
 Il **metadata service** è un endpoint HTTP non instradabile (link-local `169.254.169.254`)

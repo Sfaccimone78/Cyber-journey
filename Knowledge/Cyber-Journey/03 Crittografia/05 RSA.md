@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto]
 fase: 1
 fonti: 8
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["RSA"]
 ---
@@ -150,6 +150,12 @@ Se il server rivela (anche via timing/errore distinto) se un ciphertext si decif
 - *Conoscere `φ(n)` equivale a fattorizzare `n`?* — Sì: da `n` e `φ=n-(p+q)+1` ricavi `p+q`, e con `p·q=n` risolvi l'equazione di secondo grado → `p,q`.
 - *Perché RSA testuale è malleabile e perché è un problema?* — `Enc(m₁)·Enc(m₂) = Enc(m₁·m₂)`: un attaccante manipola il ciphertext senza la chiave (es. cambia un voto/importo). OAEP rompe questa omomorfia.
 - *Cosa rompe RSA su un computer quantistico?* — L'algoritmo di **Shor** fattorizza in tempo polinomiale → migrazione alla crittografia post-quantistica (es. ML-KEM/Kyber).
+
+## Lab
+
+- **CryptoHack → sezione *RSA*** (https://cryptohack.org/challenges/rsa/): il percorso più completo sul tema. Parti da *RSA Starter 1–6* (esponenziazione modulare, chiave pubblica/privata), poi affronta *Factoring*, *Monoprime*, *Manyprime*, *Salty* (`e=1`), *Modulus Inutilis* (cube root), *Crossed Wires* e *Everything is Big* (Wiener). Ogni sfida mappa un attacco della tabella qui sopra.
+- **PicoCTF → challenge *Sum-O-Primes*, *Mind your Ps and Qs*, *Dachshund Attacks*** (categoria Cryptography): fattorizzazione con primi vicini (Fermat), moduli deboli e small-`d` (Wiener) su ciphertext reali.
+- **Pratica con `RsaCtfTool` + FactorDB**: dato `(n, e, c)`, prova `RsaCtfTool --publickey key.pem --uncipher c` per automatizzare fattorizzazione e recupero di `m`; utile per riconoscere quale attacco applica il tool su una chiave debole.
 
 ## Collegamenti
 - [[Crittografia Asimmetrica]] — RSA è l'implementazione più nota

@@ -2,13 +2,16 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 3
-aggiornato: 2026-06-28
+fonti: 7
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Filesystem"]
 ---
 
 # File System: inode, Journaling, ext4, NTFS
+
+## In breve
+Un **file system** organizza i dati di un dispositivo a blocchi nelle astrazioni di file e directory, tenendo i metadati negli **inode** (ext4) o nella MFT (NTFS). I temi chiave sono il layout su disco, la località (FFS/block group) e la **crash consistency** via FSCK o journaling. È anche terreno di sicurezza e forensics: ADS di NTFS, attacchi symlink/TOCTOU, timestomping e recupero di dati cancellati.
 
 ## Definizione
 Un **file system** organizza i dati su un dispositivo a blocchi in due astrazioni: il **file** (sequenza lineare di byte con un nome) e la **directory** (contenitore che mappa nomi -> riferimenti a file/sottodirectory, formando un albero). Internamente ogni file e identificato da un numero: l'**inode number**. *Crux: come costruire un file system semplice — quali strutture su disco, cosa tracciano, come si accedono?* [Fonte: OSTEP, cap. 39-40]

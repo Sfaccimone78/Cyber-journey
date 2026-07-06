@@ -3,12 +3,13 @@ tipo: concetto
 tag: [fondamenti]
 fase: 0
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Risk Management e Compliance"]
 ---
 # Risk Management e Compliance
 
+## In breve
 La sicurezza non è solo tecnica: è soprattutto **gestione del rischio**. Il **Risk Management** è il processo di identificare, valutare e trattare i rischi informatici in modo proporzionato. La **Compliance** è l'aderenza a normative e standard (GDPR, ISO 27001, NIST). Insieme formano la **GRC** (Governance, Risk, Compliance), il linguaggio con cui la sicurezza dialoga col business.
 
 ## Concetti chiave
@@ -31,6 +32,18 @@ Un'azienda valuta il rischio "ransomware su file server": impatto Alto, probabil
 
 ## Perché conta
 Senza risk management si spende male: troppi controlli dove non serve, nessuno dove serve. La compliance, inoltre, è spesso **obbligatoria** e le sanzioni (es. GDPR) sono pesanti. È la base dei ruoli **GRC** e propedeutica a certificazioni come CISSP/CISM (vedi [[Certificazioni Cybersecurity]]).
+
+## Lab
+- **[[TryHackMe]]** → room *Governance & Regulation* e *Risk Management* (percorso *Security Engineer* / *Pre Security*): pratica classificazione dei rischi e mappatura ai controlli.
+- **Esercizio con NIST CSF 2.0**: costruisci un piccolo **registro dei rischi** per un asset (es. file server), calcola Probabilità × Impatto, scegli il trattamento (mitiga/trasferisci/accetta/evita) e mappa i controlli sulle 5 funzioni Identify/Protect/Detect/Respond/Recover.
+- **Gap assessment CIS Controls**: prendi 5 CIS Controls e verifica quali sono implementati in un ambiente di studio, annotando il rischio residuo.
+
+## Domande
+1. **D:** Come si compone il rischio in questa nota? **R:** Rischio = Probabilità × Impatto, valutato su asset, minacce e vulnerabilità.
+2. **D:** Quali sono le quattro strategie di trattamento del rischio? **R:** Mitigare (controlli), trasferire (assicurazione), accettare (entro soglia), evitare (eliminare l'attività).
+3. **D:** Cos'è il rischio residuo? **R:** Ciò che resta del rischio dopo aver applicato i controlli.
+4. **D:** Quali sono le 5 funzioni del NIST Cybersecurity Framework? **R:** Identify, Protect, Detect, Respond, Recover.
+5. **D:** Entro quanto il GDPR impone di notificare un data breach? **R:** Entro 72 ore.
 
 ## Collegamenti
 - [[Triade CIA]]

@@ -2,15 +2,15 @@
 tipo: entita
 tag: [blue-team, tool]
 fase: 4
-fonti: 3
-aggiornato: 2026-06-28
+fonti: 4
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Query di Hunting (KQL e SPL)", "KQL", "SPL"]
 ---
 
 # Query di Hunting (KQL e SPL)
 
-## Cosa sono
+## In breve
 **SPL** (Search Processing Language) è il linguaggio di [[Splunk]]; **KQL** (Kusto Query Language)
 è quello di **Microsoft Sentinel / Defender** (e Azure Data Explorer). Sono i due dialetti più
 diffusi per [[Detection Engineering]] e [[Threat Hunting]]. Padroneggiarli significa saper

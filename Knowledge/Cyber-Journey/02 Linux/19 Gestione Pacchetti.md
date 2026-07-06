@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-25
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Gestione Pacchetti"]
 ---
@@ -100,6 +100,20 @@ rpm -qf /usr/bin/vim          # Red Hat
 - **AUR su Arch**: i pacchetti AUR sono build-script di utenti non vettati — leggi il `PKGBUILD` prima di compilare. Per **Flatpak/Snap/Nix** valgono cautele analoghe ma con sandboxing e verifica crittografica aggiuntiva.
 
 ---
+
+## Lab
+
+- **[[TryHackMe]] – Linux Fundamentals Part 2** (`tryhackme.com/room/linuxfundamentalspart2`): il task sull'installazione di pacchetti fa usare `apt`/`dpkg` in pratica (update, install, verifica sorgenti), la base di questa nota su una macchina reale.
+- **[[OverTheWire Bandit]] – livello 12** (indiretto): la decompressione multipla (`gzip`/`bzip2`/`tar`) allena a riconoscere i formati che stanno *dentro* i pacchetti (`.deb` = archivio `ar`, `.rpm` = cpio) e a manipolarli.
+- **Esercizio locale (VM/ container Ubuntu)**: (1) `dpkg -l | wc -l` per contare i pacchetti, (2) scegli un binario sospetto e risaline al pacchetto con `dpkg -S $(which nmap)`, (3) enumera versioni con `apt list --installed` e incrocia una versione datata con una CVE nota, (4) abilita `unattended-upgrades` limitato al canale *security* e verifica in `/var/log/unattended-upgrades/`.
+
+## Domande
+
+1. **D:** Qual è la differenza tra un gestore *low-level* (`dpkg`/`rpm`) e uno *high-level* (`apt`/`dnf`/`pacman`)?  **R:** Il low-level installa/rimuove un singolo file di pacchetto **senza** risolvere le dipendenze (esce con errore se ne manca una); l'high-level interroga i metadata dei repository, **risolve automaticamente le dipendenze** e scarica tutto il necessario.
+2. **D:** Perché non si deve mai disabilitare la verifica della firma GPG dei repository?  **R:** Perché la verifica crittografica della firma è ciò che distingue un upgrade di routine da un incidente di supply-chain: garantisce che i pacchetti provengano davvero dal distributore e non siano stati manomessi.
+3. **D:** Come mappi un binario sospetto al pacchetto che lo ha installato?  **R:** Con `dpkg -S <file>` su Debian/Ubuntu, `rpm -qf <file>` su Red Hat, `pacman -Qo <file>` su Arch.
+4. **D:** Perché in un pentest interessa la versione dei pacchetti installati?  **R:** Perché una versione datata (`dpkg -l`, `rpm -qa`) rivela software vulnerabile a CVE note, che diventano vettori di exploit o di [[Privilege Escalation Linux]].
+5. **D:** Perché i pacchetti AUR di Arch e gli script `curl ... | sh` richiedono cautela extra?  **R:** L'AUR contiene build-script (`PKGBUILD`) di utenti non vettati e gli script `curl|sh` provengono spesso da fonti non fidate: entrambi eseguono codice arbitrario senza la verifica di firma dei repo ufficiali, aumentando la superficie di fiducia.
 
 ## Collegamenti
 

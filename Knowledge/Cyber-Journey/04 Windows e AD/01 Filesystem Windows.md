@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [windows]
 fase: 1
-fonti: 4
-aggiornato: 2026-06-28
+fonti: 3
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Filesystem Windows"]
 

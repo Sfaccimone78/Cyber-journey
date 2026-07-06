@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows, ad]
 fase: 2
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Active Directory"]
 ---
@@ -261,6 +261,12 @@ R: Configuro RBCD: scrivo nell'attributo `msDS-AllowedToActOnBehalfOfOtherIdenti
 
 **D: Perché RC4 è la "spia" dei roasting?**
 R: Perché con etype 23 (RC4) il materiale craccabile è direttamente l'NT hash dell'account, molto più veloce da brute-forzare di AES. Gli attaccanti spesso **declassano** la richiesta a RC4, quindi un boom di Event 4769/4768 con etype 0x17 verso account di servizio è la firma del Kerberoasting/AS-REP Roasting.
+
+## Lab
+- **GOAD (Game of Active Directory)**: il lab di riferimento self-hosted per praticare l'intera kill chain AD (enumerazione con [[BloodHound]], [[Kerberoasting]], [[AS-REP Roasting]], ACL abuse, delegation, [[DCSync]]). Deploybile con Vagrant/Ansible; ricrea una foresta multi-dominio vulnerabile per design.
+- [[TryHackMe]] → percorso **Attacking Active Directory** e room **Attacking Kerberos**: dall'enumerazione autenticata alla compromissione del DC, riproducendo gli step 3-7 della kill chain di questa nota.
+- [[HackTheBox]] → macchine AD (es. laboratori "Dante"/"Pro Labs" e box a tema dominio): pratica end-to-end da foothold a Domain Admin su ambienti realistici.
+- Verifica difensiva: sul DC di lab controlla `ms-DS-MachineAccountQuota` e riproduci la regola Sigma DCSync generando un `secretsdump` da host non-DC, poi conferma l'**Event ID 4662** con i GUID di replica.
 
 ## Collegamenti
 - [[Kerberos]]

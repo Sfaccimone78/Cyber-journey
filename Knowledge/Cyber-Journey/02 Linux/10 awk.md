@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["awk"]
 
@@ -11,7 +11,7 @@ aliases: ["awk"]
 
 # awk
 
-## Cos'è
+## In breve
 
 **awk** è un linguaggio di scripting orientato al testo strutturato in colonne. Legge l'input riga per riga, divide ogni riga in **campi** (field) e applica blocchi di codice condizionati da pattern. Il nome deriva dai cognomi dei suoi creatori: **A**ho, **W**einberger, **K**ernighan (Bell Labs, 1977). Su Linux si usa quasi sempre GNU awk (`gawk`), chiamato semplicemente `awk`.
 
@@ -264,6 +264,12 @@ awk -F'"' '/"ip"/ {for(i=1;i<=NF;i++) if($i=="ip") print $(i+2)}' access_json.lo
 - **OFMT e CONVFMT**: awk usa `OFMT="%.6g"` per la rappresentazione dei float in output e `CONVFMT` per le conversioni interne. Se hai bisogno di precisione esplicita, usa `printf "%.2f"`.
 
 ---
+
+## Lab
+
+- **HackerRank — Linux Shell → Text Processing / "Awk"**: serie di sfide (`awk-1` … `awk-4`) che chiedono di stampare campi, filtrare per condizione su colonna e aggregare — allena `$N`, `NR`, `FS`/`OFS` e i blocchi `BEGIN`/`END`.
+- **OverTheWire — Bandit** (livelli con dati in colonne, es. filtraggio per campo): usa `awk -F` per isolare la colonna con la password nascosta tra molte righe.
+- **TryHackMe — Linux Fundamentals Part 2 / log-analysis room**: pratica reale su `access.log`/`auth.log` — conta richieste per IP con `awk '{c[$1]++} END{for(i in c) print c[i],i}' | sort -rn` e filtra gli status `4xx/5xx` su `$9`.
 
 ## Domande da esame/colloquio
 

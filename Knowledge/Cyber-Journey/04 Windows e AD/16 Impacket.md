@@ -3,7 +3,7 @@ tipo: entita
 tag: [windows, tool, ad]
 fase: 2
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Impacket"]
 
@@ -13,7 +13,7 @@ aliases: ["Impacket"]
 
 > Nota etica: Impacket implementa protocolli Windows a basso livello e può causare danni seri se usato su sistemi non autorizzati. Usare esclusivamente in ambienti lab con permesso esplicito.
 
-## Cos'è
+## In breve
 
 Impacket è una collezione di classi Python per lavorare con protocolli di rete Windows a basso livello: SMB, MSRPC, LDAP, Kerberos, NTLM, WMI e altri. Fornisce una serie di **script pronti all'uso** (nella cartella `examples/`) che implementano tecniche di attacco e amministrazione su ambienti Windows e [[Active Directory]]. È la base su cui si appoggiano molti altri tool del settore.
 
@@ -61,6 +61,18 @@ Impacket copre quasi tutte le fasi del pentest Windows/AD:
 - `psexec` crea un servizio Windows visibile e lascia tracce evidenti nei log. `wmiexec` è più silenzioso.
 - Impacket supporta autenticazione Kerberos con ticket `.ccache` (ottenuti da [[CrackMapExec]] o da ticket dump): `export KRB5CCNAME=ticket.ccache`.
 - Installazione: `pip install impacket` oppure pre-installato in Kali/ParrotOS.
+
+## Lab
+- [[TryHackMe]] → room **Attacking Kerberos** e **Post-Exploitation Basics**: `GetUserSPNs`, `GetNPUsers`, `secretsdump` e `wmiexec`/`psexec` contro un dominio di lab.
+- [[HackTheBox]] → macchine AD e **GOAD**: catena completa con `impacket-GetUserSPNs -request` → `secretsdump -just-dc-user krbtgt` → `ticketer` per il Golden Ticket.
+- Lab locale: da Domain Admin esegui `impacket-secretsdump corp.local/Administrator@<DC>` per il DCSync e confronta le tracce con `impacket-psexec` (crea servizio → **Event ID 7045**) vs `impacket-wmiexec` (parent `wmiprvse.exe` → **Event ID 4688**).
+
+## Domande
+1. **D:** In che linguaggio è scritto Impacket e cosa fornisce oltre alle classi?  **R:** In Python; fornisce anche script pronti all'uso (in `examples/`, in Kali come `impacket-<nome>`).
+2. **D:** Quale script si usa per il DCSync / dump di NTDS.dit?  **R:** `secretsdump`.
+3. **D:** Perché `wmiexec` è preferibile a `psexec` per l'OPSEC?  **R:** `psexec` crea un servizio Windows visibile (Event ID 7045) e lascia un binario su disco; `wmiexec` è più silenzioso.
+4. **D:** Come si fa autenticare Impacket con un ticket Kerberos già ottenuto?  **R:** Esportando il ccache: `export KRB5CCNAME=ticket.ccache` e usando `-k -no-pass`.
+5. **D:** Quale script implementa l'NTLM Relay?  **R:** `ntlmrelayx`.
 
 ## Collegamenti
 

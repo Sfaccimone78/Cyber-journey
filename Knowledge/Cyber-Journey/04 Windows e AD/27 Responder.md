@@ -2,8 +2,8 @@
 tipo: entita
 tag: [tool, windows, ad]
 fase: 3
-fonti: 2
-aggiornato: 2026-06-21
+fonti: 3
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Responder"]
 ---
@@ -41,6 +41,20 @@ hashcat -m 5600 hash.txt rockyou.txt
 - **SMB signing** obbligatorio → spezza il relay a valle.
 - Detection: host che risponde a **molte** query LLMNR/NBT-NS; trappola **honeytoken** (richiesta a un nome inesistente: se qualcuno risponde, c'è un poisoner).
 - MITRE: **T1557.001** (LLMNR/NBT-NS Poisoning and SMB Relay).
+
+## Lab
+- [[TryHackMe]] — room *Responder* / *Attacktive Directory*: avvelenamento LLMNR/NBT-NS e cattura di NetNTLMv2 in un dominio realistico.
+- [[TryHackMe]] — *Post-Exploitation Basics* e i moduli MITM: pratica la catena Responder → crack con [[Hashcat]] (`-m 5600`).
+- [[HackTheBox]] — macchine AD dove il foothold parte da un poisoning LLMNR (es. traccia *Dante*/AD, box *Active*-like). Pratica: catturare un hash da una share inesistente digitata da un client.
+- Lab locale **GOAD** (Game of Active Directory): esegui `responder -I eth0 -wv`, genera traffico da un client Windows, poi cracca l'hash raccolto in `/usr/share/responder/logs/`.
+- Cosa praticare: distinguere quando *craccare* l'hash e quando *rilanciarlo* con [[NTLM Relay]] (spegnendo SMB/HTTP in `Responder.conf`).
+
+## Domande
+1. **D:** Quali protocolli avvelena Responder e perché sono sfruttabili?  **R:** LLMNR, NBT-NS e mDNS, i meccanismi di *fallback* usati da Windows quando il DNS non risolve un nome: sono query in broadcast senza autenticazione, così Responder può rispondere "sono io" e ricevere l'auth NTLM del client.
+2. **D:** Che tipo di hash cattura tipicamente Responder e come si cracca?  **R:** Una challenge-response **NetNTLMv2**, craccabile offline con [[Hashcat]] `-m 5600` (o [[John the Ripper]]); non è un hash NT riutilizzabile in [[Pass-the-Hash]].
+3. **D:** Perché per la catena Responder → NTLM Relay bisogna disattivare i server SMB/HTTP di Responder?  **R:** Perché altrimenti Responder "cattura" da sé le autenticazioni; spegnendoli (`SMB = Off`, `HTTP = Off`) le auth vengono lasciate passare a `ntlmrelayx` per il relay verso un target.
+4. **D:** Qual è la mitigazione più efficace alla radice?  **R:** Disabilitare LLMNR (GPO *Turn off multicast name resolution*) e NBT-NS: elimina la fonte del fallback; in aggiunta, SMB signing obbligatorio spezza il relay a valle.
+5. **D:** Quale tecnica MITRE ATT&CK descrive questo attacco?  **R:** T1557.001 — LLMNR/NBT-NS Poisoning and SMB Relay.
 
 ## Collegamenti
 - [[NTLM]] · [[NTLM Relay]] — uso degli hash catturati

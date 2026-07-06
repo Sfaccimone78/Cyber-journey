@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 6
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Bash Scripting", "Scripting Bash", "Shell e Bash"]
 ---
@@ -215,6 +215,13 @@ Non costruire path prevedibili tipo `/tmp/miofile.$$`: sono vulnerabili a race c
 3. **`/dev/tcp: No such file`** → stai girando sotto `dash`/`sh`, non bash. Usa `#!/bin/bash` o `bash s.sh`.
 4. **Loop ping lentissimo** → manca il `&` per il parallelismo o il `wait`; aggiungi `-W1` per il timeout.
 5. **`Permission denied` lanciando `./s.sh`** → manca `chmod +x`, oppure il mount è `noexec`: aggira con `bash s.sh`.
+
+## Lab
+
+- **[[OverTheWire Bandit]] – livelli 24-26**: il livello 24 richiede uno script Bash che fa brute force di un PIN a 4 cifre via `nc` (`for i in $(seq -w 0000 9999)`), i livelli 25-26 lo shell escape da shell ristretta. È la palestra migliore per loop, `seq`, pipe e quoting reali.
+- **[[TryHackMe]] – Bash Scripting** (`tryhackme.com/room/bashscripting`): room dedicata che copre variabili, condizioni, cicli, argomenti posizionali e la scrittura di script di enumerazione — esattamente i costrutti di questa nota.
+- **[[TryHackMe]] – Linux PrivEsc**: applica lo scripting al pentest (loop di enumerazione SUID/capabilities/sudo, one-liner `/dev/tcp`).
+- **Esercizio locale**: scrivi uno script che esegua `find / -perm -4000`, `getcap -r /` e `sudo -l` e stampi un report; poi passalo a `shellcheck` e correggi ogni warning (quoting, `[[ ]]`, `mapfile`). Serve a interiorizzare i gotcha di word splitting e CRLF.
 
 ## Domande da colloquio
 > **D: Come apriresti una reverse shell se sul target manca netcat?**

@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Hydra"]
 
@@ -11,7 +11,7 @@ aliases: ["Hydra"]
 
 # Hydra
 
-## Cos'è
+## In breve
 
 **Hydra** (o THC-Hydra) è un tool open source per il **brute-force e dictionary attack** su protocolli di autenticazione. Supporta oltre 50 protocolli: SSH, FTP, HTTP, HTTPS, SMB, RDP, MySQL, SMTP, Telnet e molti altri. Data una lista di username e una lista di password, testa automaticamente tutte le combinazioni fino a trovare le credenziali valide. È uno strumento fondamentale nella fase di [[Exploitation]] quando si individua un servizio con autenticazione debole.
 
@@ -86,6 +86,20 @@ hydra -l admin -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.10 -o hydra_o
 - Configurare rate limiting e account lockout dopo pochi tentativi falliti.
 - Usare password lunghe e complesse (o passphrase).
 - Monitorare i log di autenticazione con [[SIEM]] per rilevare picchi di tentativi falliti.
+
+## Lab
+
+- **[[TryHackMe]] — "Hydra"**: room dedicata che fa costruire i comandi contro SSH e form HTTP POST, incluso il formato `http-post-form` con `^USER^`/`^PASS^` e stringa di fallimento.
+- **[[TryHackMe]] — "Vulnversity"** e altre room del Jr Penetration Tester path: usano Hydra per il brute-force di credenziali su servizi esposti dopo l'enumerazione.
+- **[[PortSwigger Web Academy]] — categoria *Authentication*** (lab APPRENTICE): pratica il concetto di brute-force di login web e account lockout (con Hydra o Burp Intruder) e come distinguere risposta di successo/fallimento.
+
+## Domande
+
+1. **D:** Che tipo di attacco esegue Hydra e su cosa?  **R:** Brute-force e dictionary attack su servizi con autenticazione (SSH, FTP, HTTP, SMB, RDP, ecc.), provando combinazioni di username/password.
+2. **D:** Perché conviene limitare i thread (`-t 4`) su SSH?  **R:** Perché SSH ha rate limiting integrato: troppi tentativi paralleli causano blocchi o rallentano fortemente l'attacco.
+3. **D:** Cosa rappresentano `^USER^` e `^PASS^` nella sintassi `http-post-form`?  **R:** I segnaposto dove Hydra inserisce rispettivamente lo username e la password ad ogni tentativo.
+4. **D:** A cosa serve la terza parte della stringa nel formato `http-post-form`?  **R:** È la stringa di fallimento: se compare nella risposta, il tentativo è considerato errato (login non riuscito).
+5. **D:** Quali difese rendono inefficace un brute-force con Hydra?  **R:** MFA, rate limiting, account lockout dopo pochi tentativi e password lunghe/complesse.
 
 ## Collegamenti
 

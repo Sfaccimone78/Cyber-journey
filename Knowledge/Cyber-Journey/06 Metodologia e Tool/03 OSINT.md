@@ -3,7 +3,7 @@ tipo: concetto
 tag: [metodologia]
 fase: 2
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["OSINT"]
 
@@ -72,12 +72,21 @@ theHarvester -d example.com -b all
 - Controllare regolarmente i propri repository GitHub con tool come `git-secrets` o `truffleHog`.
 - Rimuovere i metadata dai documenti prima di pubblicarli (`exiftool -all= file.pdf`).
 - Monitorare HaveIBeenPwned per le email aziendali.
-
-## Mitigazione e difesa
-
-- Tenere privati i dati WHOIS.
-- Esaminare i metadata dei file prima della pubblicazione.
 - Eseguire periodicamente OSINT sulla propria organizzazione per scoprire esposizioni involontarie.
+
+## Lab
+
+- **[[TryHackMe]] — "OhSINT" e "Sakura Room"**: due room interamente OSINT. In *OhSINT* parti da una singola immagine ed estrai metadata, geolocalizzazione e account collegati; *Sakura Room* è un'indagine OSINT più ampia su un attore reale.
+- **[[TryHackMe]] — "Google Dorking"**: pratica gli operatori di ricerca avanzata per trovare risorse esposte.
+- **theHarvester su [[Kali Linux]]**: esegui `theHarvester -d <dominio-di-tua-proprietà> -b all` e confronta i risultati con quanto trovi manualmente su `crt.sh` e Shodan, per capire quante fonti aggrega uno strumento automatico.
+
+## Domande
+
+1. **D:** Cosa significa OSINT e su quali fonti si basa?  **R:** Open Source INTelligence: raccolta e analisi di informazioni da fonti pubblicamente accessibili (siti, social, DNS, breach, motori di ricerca).
+2. **D:** A cosa servono i Certificate Transparency Logs in fase OSINT?  **R:** A scoprire tutti i certificati SSL emessi per un dominio e quindi anche sotto-domini altrimenti nascosti.
+3. **D:** Perché GitHub è una fonte OSINT preziosa?  **R:** Perché sviluppatori committano accidentalmente credenziali e chiavi API in repository pubblici.
+4. **D:** Come si rimuovono i metadata da un documento prima di pubblicarlo?  **R:** Con `exiftool -all= file.pdf`.
+5. **D:** Quando l'OSINT può comunque violare la legge nonostante usi fonti pubbliche?  **R:** Quando la raccolta massiva di dati personali viola il GDPR in Europa.
 
 ## Collegamenti
 

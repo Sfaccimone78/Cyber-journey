@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 4
-aggiornato: 2026-06-26
+fonti: 3
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Security Misconfiguration"]
 
@@ -71,6 +71,21 @@ aws s3 ls s3://company-backups --no-sign-request   # bucket S3 pubblico
 ## CVE / casi reali
 - **CVE-2021-44228 "Log4Shell"** — pur essendo un bug ([[Componenti Vulnerabili]]), è stata catastrofica anche per **misconfig** (JNDI lookup abilitato di default, logging di input non fidato).
 - **Capital One (2019)** — **misconfig di WAF/IAM** in AWS ([[Server-Side Request Forgery (SSRF)]] + ruolo IAM troppo permissivo) → esfiltrazione di 100M record. Esempio canonico di misconfiguration cloud.
+
+## Lab
+- [[PortSwigger Web Academy]] → categoria **Information disclosure** (la faccia sfruttabile della misconfig). Dal livello APPRENTICE:
+  - *Information disclosure in error messages* — messaggi d'errore verbosi che rivelano versioni/stack.
+  - *Information disclosure on debug page* — pagina di debug lasciata esposta.
+  - *Source code disclosure via backup files* — file `.bak`/sorgenti serviti (come l'esempio `config.php.bak` sopra).
+  - *Information disclosure in version control history* — repository `.git` esposto.
+- Cosa esercitare: recon di endpoint di default (`/.git/config`, `/actuator/env`, `/server-status`) con [[Burp Suite]] e scanner come `nikto`; verificare gli header di sicurezza mancanti.
+
+## Domande
+1. **D:** Perché la Security Misconfiguration è considerata una categoria trasversale e non un singolo attacco?  **R:** Non descrive una tecnica ma un difetto di configurazione che può emergere a ogni livello dello stack (web server, framework, cloud, container), abilitando attacchi diversi.
+2. **D:** Come può un directory listing attivo portare a compromissione?  **R:** Espone file non pensati per essere pubblici (es. `config.php.bak`, dump SQL); l'attaccante li scarica via HTTP e ne estrae credenziali in chiaro.
+3. **D:** Cosa rischia di esporre un Spring Boot Actuator non protetto?  **R:** Endpoint come `/actuator/env` che restituiscono variabili d'ambiente e segreti dell'applicazione.
+4. **D:** Quali header HTTP di sicurezza andrebbero configurati e come si verificano?  **R:** `Content-Security-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`/`frame-ancestors`, CORS restrittivo; verificabili con securityheaders.com o [[OWASP ZAP]].
+5. **D:** Qual è l'approccio sistematico per ridurre le misconfiguration?  **R:** Applicare una baseline di hardening ripetibile (CIS Benchmarks) via IaC, rimuovere servizi/account non necessari, cambiare le credenziali di default e separare gli ambienti dev/staging/prod.
 
 ## Collegamenti
 

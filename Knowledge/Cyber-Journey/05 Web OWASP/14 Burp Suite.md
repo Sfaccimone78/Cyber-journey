@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool, web, proxy]
 fase: 2
 fonti: 5
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Burp Suite"]
 
@@ -13,7 +13,7 @@ aliases: ["Burp Suite"]
 
 > **Nota etica**: Burp Suite va usato solo su applicazioni proprie o su ambienti autorizzati come [[PortSwigger Web Academy]]. Intercettare traffico senza autorizzazione è illegale.
 
-## Cos'è
+## In breve
 
 **Burp Suite** è la piattaforma di test per la sicurezza web più usata dai penetration tester. Sviluppata da PortSwigger, agisce come **proxy HTTP/S intercettante**: si posiziona tra il browser e il server, permettendo di ispezionare, modificare e riprodurre ogni richiesta e risposta. Esiste in versione Community (gratuita) e Professional (a pagamento).
 
@@ -185,6 +185,15 @@ R: Con una Session Handling Rule + macro: Burp fa un GET preliminare, estrae il 
 
 **D: Perché lo Scanner attivo non va lanciato a cuor leggero in produzione?**
 R: Invia payload reali (injection, fuzz) che possono creare/cancellare record, inviare email, triggerare azioni o causare DoS. Va usato solo in scope autorizzato, idealmente in staging, con il cliente avvisato.
+
+## Lab
+- [[PortSwigger Web Academy]] è il terreno di pratica nativo di Burp (stesso autore): ogni categoria di lab si risolve intercettando e modificando le richieste con Burp.
+  - *Percorso "Apprentice"*: risolvi i primi lab di **SQL injection** e **XSS** usando **Repeater** (un payload alla volta) e **Intruder** (Sniper) per il fuzzing.
+  - *Authentication*: pratica il brute force con **Intruder** (attacchi *Pitchfork*/*Cluster bomb*) sui lab di login.
+  - *SSRF/blind*: usa **Burp Collaborator** sui lab di SSRF cieca e blind [[SQL Injection]].
+  - *Access control*: installa **Autorize** e rigioca i lab IDOR con una seconda sessione.
+- TryHackMe → room *Burp Suite: The Basics* / *Burp Suite: Repeater/Intruder* per il setup guidato (proxy, CA, Intercept).
+- Cosa esercitare: configurare proxy + CA, definire lo **Scope**, e completare un flusso Proxy → Repeater → Intruder su un lab reale.
 
 ## Collegamenti
 

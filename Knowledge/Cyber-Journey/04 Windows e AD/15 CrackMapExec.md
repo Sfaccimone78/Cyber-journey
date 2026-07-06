@@ -3,7 +3,7 @@ tipo: entita
 tag: [windows, tool, ad]
 fase: 2
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["CrackMapExec"]
 
@@ -13,7 +13,7 @@ aliases: ["CrackMapExec"]
 
 > Nota etica: CrackMapExec è un tool offensivo potente. Usare solo su reti proprie o con autorizzazione scritta esplicita. L'uso non autorizzato è illegale.
 
-## Cos'è
+## In breve
 
 CrackMapExec (CME, ora rinominato **NetExec** - `nxc`) è un framework di post-exploitation e auditing di sicurezza per reti Windows e [[Active Directory]]. Permette di testare credenziali su larga scala, enumerare risorse, eseguire comandi da remoto e raccogliere informazioni di dominio, tutto tramite protocolli come [[SMB]], [[RDP]], WinRM, LDAP e MSSQL.
 
@@ -59,6 +59,18 @@ CrackMapExec si usa nelle fasi di:
 - Il flag `--local-auth` forza l'autenticazione locale (non di dominio): utile per testare account locali come Administrator.
 - Combinare con [[Impacket]] per exploit più avanzati dopo aver identificato i target con CME.
 - Il database locale CME (`~/.cme/`) memorizza automaticamente le credenziali valide trovate.
+
+## Lab
+- [[TryHackMe]] → room **Attacking Kerberos** e **Post-Exploitation Basics**: usa CME/`nxc` per validare credenziali, enumerare share e fare [[Pass-the-Hash]] su un dominio di lab.
+- [[HackTheBox]] → macchine AD e **GOAD**: password spray con `crackmapexec smb <rete> -u users.txt -p 'Password1' --continue-on-success`, individuazione dei box dove esce `(Pwn3d!)` e dump `--sam`/`--lsa`.
+- Lab locale: con credenziali valide esegui `crackmapexec smb <rete> --shares --users --pass-pol`, poi `--sam` su un host dove sei admin; osserva nel [[Windows Event Log]] gli **Event ID 4624 Type 3** generati dallo spray su più host.
+
+## Domande
+1. **D:** Qual è il nome attuale del progetto e il comando associato?  **R:** NetExec, comando `nxc` (CrackMapExec/`cme` è deprecato ma equivalente).
+2. **D:** Cosa indica l'output `(Pwn3d!)`?  **R:** Che l'utente testato ha privilegi di amministratore locale su quell'host.
+3. **D:** A cosa serve il flag `--local-auth`?  **R:** Forza l'autenticazione contro il SAM locale invece che contro il dominio (per account locali come Administrator).
+4. **D:** Quali protocolli supporta oltre a SMB?  **R:** RDP, WinRM, LDAP e MSSQL (tra gli altri).
+5. **D:** Come si esegue il [[Pass-the-Hash]] su un'intera subnet?  **R:** `crackmapexec smb <rete> -u Administrator -H <LM:NT>` (aggiungendo `--local-auth` per account locali).
 
 ## Collegamenti
 

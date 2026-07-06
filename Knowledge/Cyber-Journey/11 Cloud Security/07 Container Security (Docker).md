@@ -3,12 +3,15 @@ tipo: concetto
 tag: [cloud, linux, tool]
 fase: 3
 fonti: 5
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Container Security (Docker)"]
 ---
 
 # Container Security (Docker)
+
+## In breve
+Un **container** è un processo isolato dal resto del sistema tramite namespace (vista) e cgroups (risorse), più capabilities e seccomp/AppArmor per restringere le syscall. **Non è una VM**: condivide il kernel dell'host, quindi la sua sicurezza è in ultima analisi sicurezza del kernel condiviso e un **container escape** porta direttamente sull'host. I punti di rottura tipici sono `--privileged`, il socket `docker.sock` montato, capabilities pericolose (`CAP_SYS_ADMIN`) e mount sensibili.
 
 ## Definizione
 Un **container** è un processo isolato dal resto del sistema tramite primitive del kernel Linux —

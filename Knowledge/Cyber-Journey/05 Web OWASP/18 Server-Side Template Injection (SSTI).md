@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Server-Side Template Injection (SSTI)", "SSTI"]
 ---
@@ -56,12 +56,28 @@ Da qui → [[Reverse Shell e Bind Shell]]. **tplmap** automatizza detection ed e
 3. Template **logic-less** (Mustache) dove il contenuto utente non può essere codice.
 4. Minimo privilegio per contenere l'RCE.
 
+## Lab
+- [[PortSwigger Web Academy]] → categoria **Server-side template injection**. Percorso dal livello APPRENTICE:
+  - *Basic server-side template injection* — motore noto, RCE diretta.
+  - *...(code context)* — l'input finisce in un contesto di codice del template.
+  - *Server-side template injection using documentation* — identificare il motore e costruire il payload leggendone la doc.
+  - *...in an unknown language with a documented exploit* e *...with information disclosure via user-supplied objects* (PRACTITIONER).
+- Cosa esercitare: seguire il metodo **detect → identify → exploit** (`{{7*7}}` vs `{{7*'7'}}`), poi salire a RCE con i payload per motore; `tplmap` automatizza detection ed exploit. Usa [[Burp Suite]] Repeater per iterare i payload.
+
+## Domande
+1. **D:** Perché la SSTI porta spesso a RCE mentre l'XSS no?  **R:** Il template è eseguito **lato server** dal motore, che può invocare funzioni di sistema (`os.popen`, `system`); l'XSS esegue solo nel browser della vittima (lato client).
+2. **D:** Come si distingue una SSTI da un XSS con un test rapido?  **R:** Si invia un'espressione matematica come `{{7*7}}`: se torna `49` (calcolata dal server) è SSTI; se torna letterale ma interpretata dal browser è XSS.
+3. **D:** A cosa serve il payload `{{7*'7'}}` nella fase di *identify*?  **R:** A distinguere il motore: in Jinja2 dà `7777777` (moltiplicazione stringa), in Twig dà `49`.
+4. **D:** Qual è la mitigazione primaria contro la SSTI?  **R:** Non concatenare mai input nel template; passarlo come **variabile di contesto** (`render_template("t.html", name=name)`), non come parte della stringa-template.
+5. **D:** Perché la sandbox del motore (es. `SandboxedEnvironment` di Jinja2) non basta da sola?  **R:** Le sandbox sono utili ma storicamente **bypassabili**; vanno affiancate a input non concatenato, template logic-less e minimo privilegio.
+
 ## Collegamenti
 - [[OWASP Top 10]]
 - [[Command Injection]]
 - [[Cross-Site Scripting (XSS)]]
 - [[Reverse Shell e Bind Shell]]
 - [[Burp Suite]]
+- [[PortSwigger Web Academy]]
 
 ## Fonti
 - PortSwigger — Server-side template injection: https://portswigger.net/web-security/server-side-template-injection

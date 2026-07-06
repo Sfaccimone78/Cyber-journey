@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows, blue-team]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Windows Event Log"]
 
@@ -50,6 +50,18 @@ Output: mostra ogni tentativo di login fallito con username, workstation sorgent
 - Centralizzare i log su un [[SIEM]] (es. Splunk, Elastic, Microsoft Sentinel) per non perderli se un attaccante li cancella localmente.
 - Monitorare Event ID **1102** (Security log cancellato) e **4719** (System audit policy modificata) come segnali di tamper.
 - Aumentare la dimensione massima del log Security a ≥1 GB.
+
+## Lab
+- [[TryHackMe]] → room **Windows Event Logs**: navigazione dell'Event Viewer, filtri XPath e uso di `Get-WinEvent`/`wevtutil` per estrarre eventi rilevanti da un file `.evtx` d'indagine.
+- [[TryHackMe]] → room **Investigating Windows**: caccia agli artefatti di compromissione tramite log di sicurezza (login sospetti 4624/4625, creazione account 4720, cancellazione log 1102).
+- Lab locale (VM Windows): genera login falliti da un'altra macchina e rilevali con la query `Get-WinEvent -FilterHashtable @{LogName='Security';Id=4625}`; poi cancella il log Security e verifica la comparsa dell'**Event ID 1102** come indicatore di tampering.
+
+## Domande
+1. **D:** Quale coppia di Event ID distingue un login riuscito da uno fallito?  **R:** 4624 (login riuscito) e 4625 (login fallito).
+2. **D:** Quale Event ID segnala che il log di sicurezza è stato cancellato?  **R:** L'Event ID 1102.
+3. **D:** Dove vengono salvati fisicamente i file di log e con quale estensione?  **R:** In `%SystemRoot%\System32\winevt\Logs\` con estensione `.evtx`.
+4. **D:** Perché è importante centralizzare i log su un [[SIEM]]?  **R:** Per non perderli se un attaccante cancella i log locali sulla macchina compromessa.
+5. **D:** Quale Event ID indica la creazione di un nuovo processo e quale la creazione di un account?  **R:** 4688 (processo creato) e 4720 (account creato).
 
 ## Collegamenti
 

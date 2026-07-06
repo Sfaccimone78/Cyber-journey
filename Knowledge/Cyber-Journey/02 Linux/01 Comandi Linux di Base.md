@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Comandi Linux di Base"]
 
@@ -11,7 +11,7 @@ aliases: ["Comandi Linux di Base"]
 
 # Comandi Linux di Base
 
-## Cos'è
+## In breve
 
 I **comandi Linux di base** sono gli strumenti essenziali per navigare il [[Filesystem Linux]], gestire file e directory, e leggere la documentazione dal terminale. Sono il punto di partenza assoluto per qualunque attività su un sistema Linux — dalla semplice navigazione all'enumerazione offensiva durante un pentest.
 

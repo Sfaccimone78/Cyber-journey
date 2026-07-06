@@ -3,7 +3,7 @@ tipo: entita
 tag: [windows]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["RDP"]
 
@@ -13,7 +13,7 @@ aliases: ["RDP"]
 
 > Nota etica: gli attacchi RDP sono spiegati a scopo difensivo. Usare solo in ambienti lab autorizzati.
 
-## Cos'è
+## In breve
 
 RDP (Remote Desktop Protocol) è il protocollo Microsoft per il controllo remoto grafico di un computer Windows. Gira sulla porta **3389/TCP** (e opzionalmente UDP). Permette di vedere e interagire con il desktop del sistema remoto come se si fosse fisicamente presenti. È ampiamente usato per amministrazione remota ma è anche uno dei vettori di attacco più sfruttati: esposto su internet è spesso bersaglio di brute-force, spraying di credenziali e vulnerabilità critiche come **BlueKeep** (CVE-2019-0708).
 
@@ -52,6 +52,18 @@ crackmapexec rdp 192.168.1.10 -u utenti.txt -p password.txt
 - Event ID **4624** (Logon Type 10 = RemoteInteractive) nel [[Windows Event Log]] registra ogni accesso RDP.
 - Cambiare la porta da 3389 non è sicurezza reale (security by obscurity): usare invece VPN o jump host.
 - Tenere aggiornato Windows: BlueKeep e DejaBlue sono vulnerabilità critiche RDP senza autenticazione.
+
+## Lab
+- [[TryHackMe]] → room **Post-Exploitation Basics**: uso di RDP e di sessioni remote come parte del movimento laterale dopo aver ottenuto credenziali valide in dominio.
+- [[HackTheBox]] → macchine Windows dove l'accesso finale avviene via `xfreerdp` con credenziali recuperate; pratica anche il PtH con `/pth:` quando è abilitato il Restricted Admin Mode.
+- Lab locale (VM Windows): abilita RDP, connettiti da un'altra macchina e verifica nel [[Windows Event Log]] la comparsa dell'**Event ID 4624 con Logon Type 10** (RemoteInteractive); prova poi ad abilitare/disabilitare NLA e osserva la differenza nel flusso di autenticazione.
+
+## Domande
+1. **D:** Su quale porta gira RDP di default?  **R:** 3389/TCP (opzionalmente anche UDP).
+2. **D:** Quale Logon Type dell'Event ID 4624 identifica un accesso RDP?  **R:** Logon Type 10 (RemoteInteractive).
+3. **D:** Cosa fa Network Level Authentication (NLA)?  **R:** Richiede l'autenticazione prima che la sessione grafica venga stabilita, riducendo la superficie di attacco.
+4. **D:** Qual è la vulnerabilità RDP critica pre-autenticazione più nota e il suo CVE?  **R:** BlueKeep, CVE-2019-0708.
+5. **D:** Perché cambiare la porta 3389 non è una vera misura di sicurezza?  **R:** È security by obscurity; la protezione reale si ottiene con VPN o jump host.
 
 ## Collegamenti
 

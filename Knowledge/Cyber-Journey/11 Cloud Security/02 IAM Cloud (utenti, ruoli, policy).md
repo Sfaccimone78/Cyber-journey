@@ -3,12 +3,15 @@ tipo: concetto
 tag: [cloud, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["IAM Cloud (utenti, ruoli, policy)"]
 ---
 
 # IAM Cloud (utenti, ruoli, policy)
+
+## In breve
+**IAM** è il sottosistema che decide *chi* (principal) può fare *cosa* (action) su *quale risorsa*, sotto *quali condizioni*. Nel cloud l'IAM **è** il perimetro: chi controlla l'identità controlla l'infrastruttura. I mattoni sono principal, credenziali (meglio token temporanei STS/OAuth delle access key long-lived), policy e ruoli assumibili; alcuni permessi sono "tossici" perché permettono di scalare a admin (`iam:PassRole`, `sts:AssumeRole`, `iam:CreateAccessKey`).
 
 ## Definizione
 **IAM** (Identity and Access Management) è il sottosistema che decide *chi* (principal) può fare

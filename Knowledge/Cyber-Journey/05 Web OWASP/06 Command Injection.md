@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 7
-aggiornato: 2026-06-28
+fonti: 6
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Command Injection", "OS Command Injection"]
 ---

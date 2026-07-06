@@ -3,7 +3,7 @@ tipo: concetto
 tag: [metodologia]
 fase: 2
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Enumerazione"]
 ---
@@ -147,6 +147,11 @@ Cosa cerchi: validazione utenti via `VRFY`/`EXPN`/`RCPT TO` (lista username per 
 2. **Cos'è una null session SMB e perché è pericolosa?** Una connessione SMB senza username/password (`-u '' -p ''`): su sistemi mal configurati permette di elencare utenti, gruppi, share e policy password senza credenziali — punto di partenza per spray/brute.
 3. **Perché `no_root_squash` su un export NFS è critico?** Disabilita il mapping di root remoto a `nobody`: montando l'export puoi creare file come root, inclusi binari **SUID** → privilege escalation locale sul server.
 4. **Come enumeri utenti via SMTP e perché serve?** Con `VRFY`/`EXPN`/`RCPT TO` il server conferma se un indirizzo esiste: ottieni una lista di username validi per password spraying o brute-force su altri servizi.
+
+## Lab
+- **[[TryHackMe]] — "Network Services" e "Network Services 2"**: fanno praticare l'enumerazione servizio per servizio (SMB con `enum4linux`/`smbclient`, Telnet, FTP, NFS, SMTP, MySQL) esattamente come nella tabella sopra.
+- **[[TryHackMe]] — "Content Discovery"**: allena l'enumerazione web (directory, vhost, file nascosti) con [[Gobuster]] e [[ffuf]].
+- **[[HackTheBox]] — Starting Point (es. *Included*, *Markup*, *Base*)**: macchine che si risolvono soprattutto "enumerando harder" — trovare un file, uno share o un parametro nascosto è la chiave.
 
 ## Collegamenti
 - [[Ricognizione (Recon)]]

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows, ad]
 fase: 2
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Kerberoasting"]
 
@@ -51,6 +51,18 @@ hashcat -m 13100 tickets.txt /usr/share/wordlists/rockyou.txt
 - Applicare il principio del minimo privilegio agli account di servizio: non devono essere Domain Admins.
 - Monitorare Event ID **4769** (TGS request) nel [[Windows Event Log]]: molte richieste TGS in breve tempo da un solo utente sono sospette.
 - Rilevare con strumenti come Microsoft Defender for Identity (MDI).
+
+## Lab
+- [[TryHackMe]] → room **Attacking Kerberos**: sezione Kerberoasting — enumerazione SPN con Rubeus/GetUserSPNs, richiesta dei TGS e cracking con Hashcat mode 13100.
+- **GOAD (Game of Active Directory)**: gli account di servizio con SPN e password deboli sono presenti per design; pratica `impacket-GetUserSPNs -request` e il Targeted Kerberoasting quando hai `GenericWrite` su un utente.
+- Lab locale: crea un account di servizio, assegnagli uno SPN con `setspn -A http/srv corp\svc`, dagli una password da dizionario, poi esegui il roast e osserva nel [[Windows Event Log]] del DC il picco di **Event ID 4769 con Ticket Encryption Type 0x17 (RC4)** — la firma del Kerberoasting.
+
+## Domande
+1. **D:** Con quale hash è cifrato il TGS che si cracca nel Kerberoasting?  **R:** Con l'hash NTLM dell'account che esegue il servizio (l'account associato allo SPN).
+2. **D:** Quali privilegi servono per lanciare l'attacco?  **R:** Nessun privilegio elevato: basta un account di dominio valido.
+3. **D:** Quale mode di Hashcat si usa per i TGS Kerberoast?  **R:** Il mode 13100 (formato `$krb5tgs$23$...`).
+4. **D:** Perché il cracking non genera allarmi sul DC?  **R:** Avviene interamente offline; il DC non vede tentativi di password falliti.
+5. **D:** Qual è la mitigazione più efficace e perché?  **R:** Password lunghe/casuali (≥25 char) o gMSA (240 caratteri a rotazione), che rendono il cracking offline impraticabile.
 
 ## Collegamenti
 

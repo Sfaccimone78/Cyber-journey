@@ -2,13 +2,16 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-28
+fonti: 5
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Memoria Virtuale"]
 ---
 
 # Memoria Virtuale: Paging, TLB, Page Fault
+
+## In breve
+La **memoria virtuale** dà a ogni processo l'illusione di uno spazio di indirizzi privato e contiguo, tradotto dall'MMU in memoria fisica a ogni accesso. Poggia su paging, page table (multi-livello), **TLB** come cache delle traduzioni e page fault/swap con politiche di rimpiazzo. È il fondamento dell'**isolamento** tra processi e la base delle difese di exploitation (ASLR, DEP/NX), oltre a essere bersaglio di attacchi micro-architetturali come Meltdown/Spectre e Rowhammer.
 
 ## Definizione
 La **memoria virtuale** da a ogni processo l'illusione di uno **spazio di indirizzi** privato, grande e contiguo, che parte da 0 — mentre la memoria fisica e condivisa e frammentata. Obiettivi: **trasparenza** (il processo non sa di essere virtualizzato), **efficienza** (poco overhead di tempo/spazio), **protezione** (un processo non puo accedere alla memoria di un altro o del kernel). [Fonte: OSTEP, cap. 13]

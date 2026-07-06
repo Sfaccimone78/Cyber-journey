@@ -3,7 +3,7 @@ tipo: concetto
 tag: [carriera]
 fase: 0
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Certificazioni Cybersecurity"]
 ---
@@ -44,6 +44,18 @@ Le certificazioni sono **prova verificabile** di competenza: nel mondo offensive
 - **Non collezionare sigle**: una cert pratica + portfolio batte tre quiz.
 - **Allinea al [[Risk Management e Compliance|contesto lavorativo]]**: in azienda/PA contano Security+, CISSP; in pentest puro contano OSCP, PNPT.
 - Verifica sempre il **costo del retake** e la **validità** (alcune scadono e vanno rinnovate).
+
+## Lab
+- **[[TryHackMe]]** → percorso *Jr Penetration Tester* come preparazione hands-on all'eJPT; percorso *SOC Level 1* come base per BTL1/CySA+.
+- **[[HackTheBox]]** → moduli Academy dei percorsi *CPTS* (offensive) e *CDSA* (blue): esame pratico con report, allineato allo stile OSCP/PNPT.
+- Costruisci il **portfolio** che accompagna la cert: risolvi 5-10 macchine/room e pubblica i writeup (blog o GitHub) — vale quanto la sigla nel filtro HR.
+
+## Domande
+1. **D:** Perché nel mondo offensive/blue contano di più le certificazioni hands-on? **R:** Perché dimostrano competenza pratica in un lab reale, molto più delle certificazioni solo a quiz; una cert pratica + portfolio batte tre quiz.
+2. **D:** Quale certificazione è indicata come ideale primo traguardo offensive e perché? **R:** L'eJPT (INE/eLearnSecurity): è entry-level, pratica e senza prerequisiti.
+3. **D:** Qual è considerata lo "standard di settore" del pentest e come è strutturato l'esame? **R:** L'OSCP di OffSec: 24 ore di lab pratico più report.
+4. **D:** Cita due certificazioni blue team entry-level. **R:** BTL1 (Security Blue Team, pratica) e CySA+ (CompTIA, a quiz); anche CDSA di HackTheBox lato hands-on.
+5. **D:** Oltre al costo dell'esame, cosa conviene sempre verificare prima di scegliere una cert? **R:** Il costo del retake e la validità/scadenza (alcune vanno rinnovate).
 
 ## Collegamenti
 - [[Pentester vs SOC]] — i due percorsi a cui mappare le cert

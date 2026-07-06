@@ -1,10 +1,10 @@
 ---
-tipo: lab
+tipo: concetto
 tag: [crypto, residui-quadratici, legendre, cryptohack, adriens-signs]
 fase: 1
-fonti: 1
-aggiornato: 2026-06-23
-stato: completato
+fonti: 2
+aggiornato: 2026-07-02
+stato: attivo
 aliases: ["Adrien's Signs", "Sfida CryptoHack - Adrien's Signs"]
 ---
 
@@ -120,3 +120,12 @@ crypto{p4tterns_1n_re5idu3s}
 - **Criterio di Eulero:** È un metodo efficiente $O(\log p)$ per calcolare il simbolo di Legendre ed esaminare la quadratic residuosity di un intero modulo un primo $p$.
 - **Leaking di Informazione:** Se una cifratura dipende dal segno modulare di un elemento e il modulo soddisfa $p \equiv 3 \pmod 4$, la quadratic residuosity viene ribaltata per il segno negativo, permettendo la decifratura deterministica di singoli bit.
 - **Importanza della Scelta del Modulo:** L'uso di operazioni condizionate sul segno modulare (come $-n \pmod p$) introduce seri problemi di leakage di canali laterali matematici (quadratic residuosity leakage).
+
+## Collegamenti
+- [[Residui Quadratici e Simbolo di Legendre]] — la teoria matematica sfruttata in questa sfida
+- [[XOR]] · [[Bytes e Long]] — manipolazione di bit e byte usata nello script
+- [[Crittografia Asimmetrica]] — dove residui quadratici e problemi modulari sono centrali
+
+## Fonti
+- CryptoHack — sfida *Adrien's Signs* (categoria Mathematics): https://cryptohack.org/
+- Wikipedia — Legendre symbol / Euler's criterion: https://en.wikipedia.org/wiki/Legendre_symbol

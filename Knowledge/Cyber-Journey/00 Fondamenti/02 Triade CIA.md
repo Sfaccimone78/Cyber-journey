@@ -2,13 +2,14 @@
 tipo: concetto
 tag: [fondamenti]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-26
+fonti: 3
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Triade CIA"]
 ---
 # Triade CIA
 
+## In breve
 La **Triade CIA** non è uno slogan: è la **griglia di classificazione** con cui si decide *cosa* un
 controllo di sicurezza sta proteggendo e *contro cosa*. Ogni vulnerabilità, ogni exploit, ogni difesa
 si proietta su almeno uno dei tre assi — **C**onfidentiality (Riservatezza), **I**ntegrity (Integrità),
@@ -84,6 +85,18 @@ Oltre ai tre pilastri, due estensioni ricorrenti:
 
 Un attacco può colpire un asse, due o tutti e tre insieme (il ransomware è l'esempio classico di
 attacco doppio C+A).
+
+## Lab
+- **[[TryHackMe]]** → room *Security Principles* (percorso *SOC Level 1*): classifica scenari reali sui tre assi C/I/A e sul modello AAA.
+- **[[PortSwigger Web Academy]]** → categoria *SQL injection* e *Cross-site scripting*: esegui un dump di dati (violazione di **C**) e un furto di cookie di sessione, poi mappa ciascun attacco sull'asse CIA colpito.
+- Esercizio: prendi un incidente ransomware "double extortion" e spiega perché viola **C** *e* **A**; ripeti per un attacco DDoS (solo **A**) e per l'alterazione di un log (**I**).
+
+## Domande
+1. **D:** A cosa serve la Triade CIA nel lavoro quotidiano di sicurezza? **R:** È la griglia di classificazione per decidere *cosa* protegge un controllo e *contro cosa*; ogni vulnerabilità/exploit/difesa si proietta su almeno uno dei tre assi.
+2. **D:** Perché la cifratura da sola non garantisce la riservatezza? **R:** Senza controllo d'accesso chiunque possieda la chiave legge il dato; servono cifratura *e* controllo d'accesso insieme.
+3. **D:** Che differenza c'è tra un hash semplice e un HMAC/firma digitale per l'integrità? **R:** L'hash prova solo che il dato non è cambiato, ma un attaccante può ricalcolarlo dopo la modifica; HMAC/firma aggiungono *autenticità* dell'origine grazie a una chiave.
+4. **D:** Perché i tre assi sono "in tensione"? **R:** Massimizzarne uno spesso erode gli altri (es. cifratura aggressiva + backup offline aumentano C/I ma rallentano il ripristino, riducendo A): la sicurezza è un bilanciamento.
+5. **D:** Quale attacco è l'esempio canonico di violazione di più pilastri e quali colpisce? **R:** Il ransomware "double extortion": esfiltra i dati (viola **C**) e poi li cifra (viola **A**).
 
 ## Collegamenti
 - [[Cos'è la Sicurezza Informatica]] · [[Difesa in Profondità]] · [[Vulnerabilità Exploit e Minaccia]]

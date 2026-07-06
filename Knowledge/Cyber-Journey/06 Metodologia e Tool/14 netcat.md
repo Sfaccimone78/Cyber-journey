@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["netcat"]
 
@@ -11,7 +11,7 @@ aliases: ["netcat"]
 
 # netcat
 
-## Cos'è
+## In breve
 
 **netcat** (abbreviato `nc`) è un'utility di rete definita il "coltellino svizzero del networking". Permette di aprire connessioni TCP/UDP, mettere porte in ascolto, trasferire file, fare banner grabbing e molto altro. È lo strumento base per ricevere [[Reverse Shell e Bind Shell]] durante un pentest. Disponibile su Linux, macOS e Windows, è spesso preinstallato sui sistemi target — il che lo rende utile anche in [[Post-Exploitation]].
 
@@ -86,6 +86,20 @@ nc -zv 192.168.1.10 20-80
 - Rimuovere netcat dai sistemi di produzione se non necessario.
 - Monitorare i processi che aprono porte di ascolto insolite.
 - Usare IDS/IPS per rilevare traffico anomalo su porte non standard.
+
+## Lab
+
+- **[[TryHackMe]] — "What the Shell" (introtoshells)**: fa usare `nc -lvnp` come listener, la bind/reverse shell e il trick `mkfifo` quando `nc` non supporta `-e`.
+- **[[TryHackMe]] — "Learn Linux" / room base di networking**: pratica banner grabbing (`nc -w 1 host porta`) e trasferimento file tra due macchine con netcat.
+- **[[HackTheBox]] — Starting Point**: dopo una RCE, ricevi la reverse shell con netcat e stabilizzala (vedi [[Reverse Shell e Bind Shell]]), esercitando il flusso completo su una macchina reale.
+
+## Domande
+
+1. **D:** Perché netcat è chiamato "coltellino svizzero del networking"?  **R:** Perché con un solo tool si aprono connessioni TCP/UDP, si mettono porte in ascolto, si trasferiscono file, si fa banner grabbing e port scanning.
+2. **D:** Quale comando mette netcat in ascolto per ricevere una reverse shell?  **R:** `nc -lvnp 4444` (listen, verbose, no DNS, porta 4444).
+3. **D:** Perché la versione OpenBSD di nc su Kali non permette `nc -e /bin/bash`?  **R:** Perché l'opzione `-e` non è compilata in quella build; per una shell serve il trick `mkfifo` o usare `ncat`.
+4. **D:** Come si trasferisce un file con netcat?  **R:** Sul ricevente `nc -lvnp 4444 > file` e sul mittente `nc <ip> 4444 < file`.
+5. **D:** Cosa fa la flag `-z` e in quale scenario è utile?  **R:** Attiva la modalità zero-I/O (solo scansione, nessun dato inviato), utile per un port scan rapido senza Nmap: `nc -zv host 20-80`.
 
 ## Collegamenti
 

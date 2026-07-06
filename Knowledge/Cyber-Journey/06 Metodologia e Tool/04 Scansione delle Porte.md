@@ -3,7 +3,7 @@ tipo: concetto
 tag: [metodologia]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Scansione delle Porte"]
 
@@ -74,6 +74,20 @@ nmap -sS -T2 10.10.10.5
 - Cambiare le porte default dei servizi critici (es. SSH su porta non-22) riduce la visibilità nelle scansioni rapide.
 - Deployare un IDS/IPS (es. Snort, Suricata) per rilevare scansioni aggressive.
 - Esporre il minimo numero di servizi su Internet (superficie di attacco ridotta).
+
+## Lab
+
+- **[[TryHackMe]] — "Nmap" (furthernmap)**: room dedicata che fa praticare tutti i tipi di scansione (SYN, connect, UDP, `-sV`, `-sC`) e l'interpretazione delle risposte SYN-ACK/RST/filtrato.
+- **[[TryHackMe]] — "Nmap Live Host Discovery"**: allena la fase precedente alla scansione porte (ARP/ICMP/ping sweep) per capire quali host sono vivi.
+- **[[HackTheBox]] — Starting Point (es. *Meow*, *Fawn*)**: fai la prima scansione `nmap -sV -sC` su una macchina reale e verifica come le porte aperte guidano l'enumerazione successiva.
+
+## Domande
+
+1. **D:** Cosa distingue una porta "chiusa" da una "filtrata" durante una scansione TCP?  **R:** La porta chiusa risponde con un RST (host raggiungibile, nessun servizio); la filtrata non risponde affatto perché un firewall blocca il pacchetto.
+2. **D:** Perché la SYN scan (`-sS`) è detta "half-open"?  **R:** Perché invia SYN, riceve SYN-ACK e risponde subito con RST senza completare il three-way handshake, risultando più veloce e silenziosa.
+3. **D:** Perché la scansione UDP è molto più lenta di quella TCP?  **R:** Perché UDP non ha handshake: le porte aperte spesso non rispondono e lo scanner deve attendere timeout o risposte ICMP "port unreachable".
+4. **D:** A cosa serve il flag `-sV`?  **R:** A identificare servizio e versione in ascolto sulle porte aperte, informazione essenziale per cercare exploit mirati.
+5. **D:** Come si riduce la rumorosità di una scansione contro un IDS?  **R:** Abbassando il timing template (es. `-T1`/`-T2`), che rallenta l'invio dei pacchetti rendendo la scansione meno evidente.
 
 ## Collegamenti
 

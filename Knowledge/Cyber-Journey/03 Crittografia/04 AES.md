@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto]
 fase: 1
 fonti: 7
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["AES", "Block Cipher e AES"]
 ---
@@ -143,6 +143,12 @@ Con PKCS#7 + CBC, se il server rivela se il padding decifrato è valido, recuper
 - *CBC vs CTR: differenza pratica?* — CBC è un block mode con padding e dipendenza seriale (non parallelizza in cifra); CTR trasforma AES in stream (XOR con keystream), parallelo e senza padding, ma richiede nonce unici e nessuna autenticazione intrinseca.
 - *Perché GCM è raccomandato?* — è **AEAD**: cifra e autentica in un colpo, rilevando manomissioni; evita la trappola "cifrato ma non autenticato" di CBC/CTR.
 - *Cosa rende possibile il CBC bit-flipping?* — la relazione `Pᵢ = Dec(Cᵢ) ⊕ Cᵢ₋₁`: il plaintext dipende linearmente dal ciphertext precedente, quindi modifiche controllate al ciphertext si riflettono nel plaintext.
+
+## Lab
+
+- **Cryptopals — Set 1 e Set 2** (https://cryptopals.com): il percorso classico su AES. *Set 1 challenge 7* (AES in ECB) e *8* (detect ECB) per capire i blocchi; *Set 2 challenge 10* (implementa CBC), *11* (oracolo ECB/CBC), *12* (byte-at-a-time ECB decryption), *16* (CBC bit-flipping). Riproducono passo-passo gli attacchi descritti nello strato esperto.
+- **Cryptopals — Set 3 challenge 17** (*The CBC padding oracle*): implementazione completa del padding oracle su AES-CBC + PKCS#7 — collega direttamente a [[Padding Oracle Attack]].
+- **CryptoHack → sezione *Symmetric Ciphers* / *AES*** (https://cryptohack.org): sfide come *Modes of Operation Starter*, *Passwords as Keys*, *ECB CBC WTF*, *ECB Oracle* e *Flipping Cookie* praticano modi operativi, derivazione chiave da password debole e bit-flipping in ambiente guidato.
 
 ## Collegamenti
 

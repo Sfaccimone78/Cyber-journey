@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 2
 fonti: 7
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Privilege Escalation Linux"]
 ---
@@ -273,6 +273,14 @@ Hardening preventivo: `nosuid,nodev` sui mount utente (`/tmp`,`/home`,`/dev/shm`
 
 > **D: Come scaleresti i privilegi con una capability `cap_setuid+ep` su python?**
 > `cap_setuid` consente di chiamare `setuid(0)` senza essere root. `python3 -c 'import os; os.setuid(0); os.system("/bin/sh")'` imposta l'UID a 0 e apre una shell root. Il suffisso `+ep` (effective+permitted) significa che la capability è già attiva all'exec.
+
+## Lab
+
+- **[[TryHackMe]] – Linux PrivEsc** (`tryhackme.com/room/linuxprivesc`): la room di riferimento per questa nota. Copre in sequenza SUID, sudo/GTFOBins, LD_PRELOAD, capabilities, cron (path/wildcard/overwrite), PATH hijack e file scrivibili — esattamente i vettori V1–V11.
+- **[[TryHackMe]] – Common Linux Privesc / Linux Privilege Escalation**: percorso *Jr Penetration Tester*, altri box con enumerazione LinPEAS/pspy end-to-end.
+- **[[HackTheBox]] – Starting Point + box "easy"** (es. *Shocker*, *Bashed*, *Lame*) e **HTB Academy – modulo *Linux Privilege Escalation***: enumerazione realistica su macchine complete, non solo il singolo vettore isolato.
+- **pwn.college – *Program Misuse***: allena in modo sistematico l'abuso di binari SUID/capabilities.
+- **Metodo consigliato**: per ogni box, fai prima l'enumerazione **manuale** della checklist (V1→V11), poi conferma con `linpeas.sh`; annota quale riga RED/YELLOW corrispondeva al vettore reale, per calibrare il rumore dello strumento.
 
 ## Collegamenti
 - [[SUID e SGID]]

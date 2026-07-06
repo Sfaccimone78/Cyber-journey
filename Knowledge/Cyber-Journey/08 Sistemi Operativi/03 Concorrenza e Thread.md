@@ -2,13 +2,16 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-28
+fonti: 5
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Concorrenza e Thread"]
 ---
 
 # Concorrenza e Thread: Mutex, Semafori, Deadlock
+
+## In breve
+Un **thread** è un flusso di esecuzione dentro un processo con PC, registri e stack propri ma memoria condivisa: da qui nascono sia il parallelismo sia le **race condition**. Il tema copre le primitive di sincronizzazione (lock/mutex, condition variable, semafori), i bug classici (atomicity/order violation, deadlock alla Coffman) e le loro implicazioni di sicurezza (TOCTOU, Dirty COW). È il terreno dei bug non deterministici più insidiosi e di un'intera classe di vulnerabilità (CWE-362).
 
 ## Definizione
 Un **thread** e un flusso di esecuzione indipendente *dentro* un processo: ogni thread ha **PC e registri e stack propri**, ma **condivide** address space (code, heap, dati globali) e file aperti con gli altri thread del processo. La condivisione e la fonte sia della potenza sia dei pericoli. [Fonte: OSTEP, cap. 26]

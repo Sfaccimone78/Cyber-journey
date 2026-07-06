@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 5
-aggiornato: 2026-06-26
+fonti: 4
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Autenticazione e Gestione Sessioni", "Authentication Failures"]
 
@@ -76,6 +76,21 @@ L'attaccante usa quel cookie per impersonare la vittima.
 
 > [!note] Numerazione OWASP
 > Categoria **A07** sia nella 2021 ("Identification and Authentication Failures") sia nella bozza 2025 ("Authentication Failures").
+
+## Lab
+- [[PortSwigger Web Academy]] → categoria **Authentication**. Percorso dal livello APPRENTICE:
+  - *Username enumeration via different responses* — inferire username validi da messaggi/tempi diversi.
+  - *Password brute-force via password change* e *2FA simple bypass* — logica di autenticazione fragile.
+  - *Broken brute-force protection, IP block* — bypass del rate limiting.
+  - *Brute-forcing a stay-logged-in cookie* — token "Remember Me" prevedibile.
+- Cosa esercitare: automatizzare il brute force con [[Burp Suite]] Intruder (attacco *Cluster bomb*/*Sniper*), analizzare le differenze di risposta per l'enumerazione username. Per i JWT vedi [[Cookie e JWT]].
+
+## Domande
+1. **D:** Differenza tra credential stuffing e brute force?  **R:** Il brute force prova molte password (dizionario) contro un account; il credential stuffing riusa coppie username/password già trapelate da altri breach, contando sul riuso delle credenziali.
+2. **D:** Cos'è la session fixation e come si previene?  **R:** L'attaccante forza la vittima a usare un Session ID che lui conosce prima del login; si previene **rigenerando il Session ID dopo l'autenticazione**.
+3. **D:** Perché l'MFA è la difesa più efficace contro brute force e credential stuffing?  **R:** Anche con la password corretta l'attaccante manca del secondo fattore, quindi le credenziali rubate o indovinate da sole non bastano ad autenticarsi.
+4. **D:** Quali attributi rendono sicuro un cookie di sessione?  **R:** `HttpOnly` (non leggibile da JS, mitiga il furto via XSS), `Secure` (solo su HTTPS) e `SameSite=Strict/Lax` (mitiga CSRF).
+5. **D:** Perché un Session ID va generato con le funzioni del framework e non "a mano"?  **R:** Gli ID fatti a mano rischiano di essere prevedibili (incrementali, timestamp), permettendo di indovinare sessioni altrui; le funzioni del framework usano generatori casuali crittografici lunghi.
 
 ## Collegamenti
 

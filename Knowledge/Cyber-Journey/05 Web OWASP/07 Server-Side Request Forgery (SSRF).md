@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [web, owasp]
 fase: 2
-fonti: 4
-aggiornato: 2026-06-26
+fonti: 3
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Server-Side Request Forgery (SSRF)", "SSRF"]
 ---
@@ -59,6 +59,21 @@ POST /api/fetch-image  {"url": ".../iam/security-credentials/ec2-role"}
 ## CVE / casi reali
 - **Capital One (2019)** — SSRF su un WAF mal configurato che ha letto le credenziali IAM dal metadata endpoint AWS → **100M record** esfiltrati. Caso di studio canonico di SSRF + misconfig cloud → [[Security Misconfiguration]].
 - **CVE-2021-26855 "ProxyLogon"** (Microsoft Exchange) — SSRF pre-auth usata come primo anello di una catena che porta a RCE; sfruttata massivamente in the wild.
+
+## Lab
+- [[PortSwigger Web Academy]] → categoria **SSRF**. Percorso consigliato dal livello APPRENTICE:
+  - *Basic SSRF against the local server* — fetch di `http://localhost/admin` per raggiungere un pannello solo-interno.
+  - *SSRF against another back-end system* — enumerare l'IP interno (es. `192.168.0.X`) per trovare un servizio admin.
+  - *SSRF with blacklist-based input filter bypass* — praticare le notazioni alternative di `127.0.0.1` (`127.1`, encoding, doppio URL-encode).
+  - *Blind SSRF with out-of-band detection* — confermare una SSRF cieca con **Burp Collaborator** (canale DNS/HTTP).
+- Cosa esercitare: usare [[Burp Suite]] Repeater per manipolare il parametro `url`, e Collaborator per la variante blind.
+
+## Domande
+1. **D:** Perché una SSRF su un'istanza cloud è particolarmente grave?  **R:** Il server può raggiungere l'endpoint di metadati (`169.254.169.254`) e leggerne le credenziali IAM, portando spesso al takeover dell'account cloud (caso Capital One 2019).
+2. **D:** Come si conferma una SSRF **cieca**, senza output in pagina?  **R:** Con tecniche OAST: si punta l'URL a un dominio controllato (Burp Collaborator) e si osserva l'arrivo della richiesta DNS/HTTP.
+3. **D:** Perché l'allowlist è preferibile alla blacklist per mitigare la SSRF?  **R:** La blacklist di `localhost`/`127.0.0.1` si aggira con notazioni alternative (`127.1`, `0x7f000001`, IPv6, DNS rebinding); un'allowlist di destinazioni ammesse chiude tutte queste varianti.
+4. **D:** Cos'è il DNS rebinding e perché batte la validazione dell'URL?  **R:** Un dominio che risolve prima a un IP pubblico (supera il check) e poi a `127.0.0.1` al momento della fetch: la validazione avviene prima della risoluzione effettiva usata dalla richiesta.
+5. **D:** Come mitiga IMDSv2 la SSRF verso i metadati AWS?  **R:** Richiede un token ottenuto con una richiesta PUT preventiva e header specifici, che una SSRF semplice basata su GET non può fornire.
 
 ## Collegamenti
 - [[OWASP Top 10]]

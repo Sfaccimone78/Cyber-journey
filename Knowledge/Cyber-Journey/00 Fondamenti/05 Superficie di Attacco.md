@@ -2,13 +2,14 @@
 tipo: concetto
 tag: [fondamenti]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-22
+fonti: 2
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Superficie di Attacco"]
 ---
 # Superficie di Attacco
 
+## In breve
 La **superficie di attacco** è l'insieme di **tutti i punti** attraverso cui un attaccante può tentare
 di entrare o estrarre dati. È una proprietà *misurabile* e *riducibile*: meno punti esposti → meno
 opportunità. Per il pentester la fase di [[Ricognizione (Recon)]] serve esattamente a **mapparla**;
@@ -57,6 +58,18 @@ dimenticato, e dipendenti con password riusate. `nmap` rivela le porte; un sotto
 (`staging.azienda.com`) emerge da certificate transparency; il WordPress di test diventa il **vettore**;
 le credenziali riusate permettono il [[Lateral Movement|movimento laterale]]. Ogni elemento è un pezzo
 di superficie che *non serviva* essere lì.
+
+## Lab
+- **[[TryHackMe]]** → room *Passive Recon* e *Active Recon* (percorso *Jr Penetration Tester*): mappa la superficie digitale di un target con WHOIS, DNS, `nmap` e navigazione dei servizi esposti.
+- **[[Nmap]] su target autorizzato** (`scanme.nmap.org`): `nmap -sV -sC scanme.nmap.org` per enumerare porte e servizi in ascolto; ogni riga di output è un pezzo di superficie.
+- **Shodan / Certificate Transparency**: cerca i sottodomini di un dominio di test tramite `crt.sh` e interroga Shodan su un IP di tua proprietà, per capire la superficie visibile dall'esterno (EASM/shadow IT).
+
+## Domande
+1. **D:** Qual è la differenza tra superficie di attacco e vettore di attacco? **R:** La superficie è l'insieme di *tutti* i punti esposti (le porte dell'edificio); il vettore è il percorso specifico effettivamente usato in un attacco (la porta da cui sono entrato).
+2. **D:** Quali sono le tre dimensioni della superficie di attacco? **R:** Digitale (rete/software), fisica (USB, accesso ai server, badge) e umana/sociale (le persone manipolabili tramite social engineering).
+3. **D:** Perché la superficie va monitorata di continuo e non una tantum? **R:** Perché cambia costantemente (nuovi deploy, porte aperte per debug e mai richiuse, certificati scaduti): lo snapshot di ieri non vale oggi.
+4. **D:** Cos'è lo shadow IT e perché è pericoloso? **R:** Asset dimenticati o non censiti (server di test lasciati online): sono superficie che non stai nemmeno difendendo, causa di moltissime compromissioni reali.
+5. **D:** Elenca due principi concreti per ridurre la superficie. **R:** Minimizzazione (disattivare servizi/porte/feature non necessari) e minimo privilegio; anche segmentazione, patch/hardening e chiusura dello shadow IT.
 
 ## Collegamenti
 - [[Ricognizione (Recon)]] · [[OSINT]] · [[Scansione delle Porte]] · [[Nmap]]

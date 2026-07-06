@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto, network]
 fase: 1
 fonti: 8
-aggiornato: 2026-06-26
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["TLS e SSL", "TLS", "SSL", "TLS/SSL"]
 ---
@@ -127,6 +127,20 @@ Filo conduttore: quasi tutti sfruttano **modi vecchi (CBC), key exchange RSA, do
 - *Perché TLS 1.3 è più sicuro **e** più veloce?* — rimuove primitive deboli (CBC, RC4, RSA-KE, compressione) e riduce a 1-RTT (0-RTT in resumption).
 - *A cosa serve il messaggio `Finished`?* — è un HMAC/MAC su tutto l'handshake: garantisce che nessun MITM abbia alterato la negoziazione (anti-downgrade).
 - *Heartbleed era un difetto del protocollo TLS?* — No: era un bug d'**implementazione** in OpenSSL (lettura fuori buffer nel Heartbeat); il protocollo TLS era integro.
+
+## Lab
+
+- **[[OpenSSL]] + `testssl.sh` — audit di una configurazione TLS**: usa `openssl s_client -connect host:443 -tls1_3` per vedere versione, cipher e catena; poi enumera le cipher suite con `nmap --script ssl-enum-ciphers -p 443 host`. Confronta un sito moderno (solo TLS 1.3) con uno legacy per riconoscere configurazioni deboli.
+- **badssl.com — pratica libera** (https://badssl.com): visita i sottodomini `tls-v1-0.`, `rc4.`, `dh512.`, `expired.` e collega ciascuno all'attacco storico corrispondente della tabella (POODLE/BEAST su TLS 1.0, cipher deboli, Logjam, cert scaduto).
+- **[[TryHackMe]] → percorso su networking sicuro / HTTPS** e *The Illustrated TLS 1.3 Connection* (https://tls13.xargs.org): segui l'handshake byte per byte per interiorizzare ClientHello, key_share e i messaggi cifrati dopo ServerHello.
+
+## Domande
+
+1. **D:** Quali due fasi compongono una connessione TLS? **R:** L'**handshake** (negoziazione di versione/cipher, scambio certificati e derivazione della chiave di sessione) e il **Record Protocol** (cifratura simmetrica dei dati, es. AES-GCM).
+2. **D:** Quale versione di TLS è raccomandata oggi e perché è più veloce? **R:** TLS 1.3: rimuove primitive deboli (CBC, RC4, RSA key exchange, compressione) e riduce l'handshake a 1-RTT (0-RTT in resumption).
+3. **D:** Cos'è la forward secrecy e quale meccanismo la fornisce? **R:** La proprietà per cui rubare la chiave privata a lungo termine non decifra il traffico passato registrato; la fornisce lo scambio (EC)DHE con chiavi effimere, non l'RSA key exchange.
+4. **D:** Heartbleed era un difetto del protocollo TLS? **R:** No, era un bug d'implementazione di OpenSSL (lettura fuori buffer nel Heartbeat); il protocollo era integro.
+5. **D:** A cosa serve il messaggio `Finished` nell'handshake? **R:** È un MAC su tutta la negoziazione: garantisce che nessun MITM l'abbia alterata (protezione anti-downgrade).
 
 ## Collegamenti
 

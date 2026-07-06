@@ -3,14 +3,14 @@ tipo: entita
 tag: [tool]
 fase: 2
 fonti: 7
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Nmap"]
 ---
 
 # Nmap
 
-## Cos'è
+## In breve
 **Nmap** (Network Mapper) è lo scanner di rete open source di riferimento: scopre host attivi, porte aperte, servizi e versioni, OS, e con gli script **NSE** esegue enumerazione e controlli di vulnerabilità. Preinstallato su [[Kali Linux]], è il primo strumento della [[Scansione delle Porte]] e dell'[[Enumerazione]].
 
 > **Nota etica**: solo su sistemi autorizzati. Scansionare host altrui senza permesso è reato in molte giurisdizioni.
@@ -210,6 +210,11 @@ che lo faccia un attaccante (vedi [[Superficie di Attacco]]).
 2. **Perché FIN/NULL/Xmas non funzionano contro Windows?** Si basano sul comportamento RFC 793 (porta chiusa → `RST`, aperta → silenzio). Lo stack Windows risponde `RST` a *qualsiasi* probe verso porte chiuse e aperte, rendendo indistinguibili gli stati.
 3. **A cosa serve `-sA` se non trova porte aperte?** A mappare il firewall: distingue porte `filtered` (nessuna risposta = firewall stateful) da `unfiltered` (`RST`). È ricognizione delle regole, non dei servizi.
 4. **Come renderesti uno scan più silenzioso e quanto è efficace?** Rallentando (`-T1`, `--scan-delay`), riducendo le porte, usando `--source-port 443`. Frammentazione e decoy contro IDS moderni sono per lo più inefficaci (riassemblaggio); il fattore vero è il volume/velocità del traffico.
+
+## Lab
+- **[[TryHackMe]] — "Nmap" (furthernmap)**: la room di riferimento per allenare tutti i tipi di scansione, `-sV`, NSE e l'interpretazione degli stati porta; ripercorre esattamente i flag di questa nota.
+- **[[TryHackMe]] — "Nmap Live Host Discovery"**: dedicata alla fase 1 (host discovery) con ARP/ICMP/`-sn` e all'uso di `-Pn`.
+- **[[HackTheBox]] — Starting Point**: applica il workflow "discovery larga → enum profonda mirata" (`-p-` per trovare le porte, poi `-sC -sV` sulle aperte) su macchine reali.
 
 ## Collegamenti
 - [[Scansione delle Porte]]

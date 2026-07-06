@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["ffuf"]
 
@@ -11,7 +11,7 @@ aliases: ["ffuf"]
 
 # ffuf
 
-## Cos'è
+## In breve
 
 **ffuf** (Fuzz Faster U Fool) è un web fuzzer scritto in Go, molto veloce e flessibile. A differenza di [[Gobuster]], ffuf permette di posizionare la parola da testare *ovunque* nell'URL, negli header o nel body della richiesta usando il placeholder `FUZZ`. Eccelle nel fuzzing di parametri, valori di cookie, header HTTP e sottodomini, oltre alla classica enumerazione di directory.
 
@@ -78,6 +78,20 @@ ffuf -u http://target.lab/FUZZ -w wordlist.txt -o risultati.json -of json
 - Per evitare di sovraccaricare il server target (e rendersi meno visibili), usare `-rate 50` o `-t 20`.
 - La modalità **interattiva** (tasto `p` durante l'esecuzione) mette in pausa il fuzzing senza terminarlo.
 - Combinare con [[Gobuster]] nella pratica: Gobuster per la prima passata veloce, ffuf per fuzzing parametri e filtri fini.
+
+## Lab
+
+- **[[TryHackMe]] — "ffuf"**: room dedicata che fa praticare directory busting, fuzzing di parametri GET/POST, header e vhost con il placeholder `FUZZ` e i filtri `-fc`/`-fs`/`-mc`.
+- **[[TryHackMe]] — "Content Discovery"**: applica il fuzzing web accanto ad altri tool per capire quando conviene ffuf.
+- **[[PortSwigger Web Academy]] — categorie *Authentication* e *SQL injection*** (lab APPRENTICE): usa ffuf per il fuzzing di parametri e il brute-force di credenziali contro form di login, sfruttando i filtri per distinguere successo da fallimento.
+
+## Domande
+
+1. **D:** Qual è la differenza principale tra ffuf e [[Gobuster]]?  **R:** ffuf permette di posizionare il placeholder `FUZZ` ovunque nella richiesta (URL, header, body), mentre Gobuster è più limitato; ffuf offre inoltre filtri più fini.
+2. **D:** Come si esclude dal risultato tutto ciò che restituisce 404?  **R:** Con il flag `-fc 404` (filter code).
+3. **D:** Come si fuzza un parametro POST di un form di login?  **R:** Con `-X POST -d "username=admin&password=FUZZ"` più la wordlist e l'header `Content-Type` opportuno.
+4. **D:** A cosa serve `-fs`?  **R:** A filtrare (escludere) le risposte in base alla loro dimensione in byte, utile per eliminare i soft-404.
+5. **D:** Come si riduce il carico sul server e la visibilità durante il fuzzing?  **R:** Limitando la velocità con `-rate` (es. `-rate 50`) o riducendo i thread con `-t`.
 
 ## Collegamenti
 

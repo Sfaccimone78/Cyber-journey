@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["find"]
 
@@ -11,7 +11,7 @@ aliases: ["find"]
 
 # find
 
-## Cos'è
+## In breve
 
 **find** è il comando Linux per cercare file e directory nel filesystem in base a uno o più criteri: nome, tipo, permessi, proprietario, dimensione, data di modifica e altro. A differenza di `locate` (che usa un database pre-compilato), find interroga il filesystem in tempo reale e può eseguire azioni sui risultati tramite `-exec`. È uno strumento fondamentale per l'[[Enumerazione]] e per la fase di [[Privilege Escalation Linux]].
 

@@ -20,6 +20,7 @@ dispositivi embedded, dove il confine tra software e hardware sparisce.
 ## Percorso in ordine d'apprendimento
 
 1. [[Hardware Hacking 101]] — interfacce di debug, estrazione firmware, toolkit di base
+2. [[Analisi del Firmware]] — dump, entropia, binwalk, caccia ai segreti nel rootfs, emulazione QEMU/FirmAE
 
 ## Collegamenti trasversali
 - [[Bluetooth, BLE e RFID-NFC]] — i protocolli radio dei dispositivi IoT

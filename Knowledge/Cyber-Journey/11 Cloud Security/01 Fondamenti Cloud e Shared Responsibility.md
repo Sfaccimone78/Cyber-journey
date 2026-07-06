@@ -3,12 +3,15 @@ tipo: concetto
 tag: [cloud, metodologia]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Fondamenti Cloud e Shared Responsibility"]
 ---
 
 # Fondamenti Cloud e Shared Responsibility
+
+## In breve
+Il **cloud** eroga compute, storage e servizi gestiti on-demand: cambia il perimetro di sicurezza, che non è più un firewall di confine ma la somma di configurazioni di identità e servizi. Lo **Shared Responsibility Model** divide chi mette in sicurezza cosa — il provider protegge la sicurezza *del* cloud, il cliente quella *nel* cloud (identità, config e dati restano **sempre** al cliente). Il rischio dominante non è la CVE ma la **misconfigurazione**.
 
 ## Definizione
 Il **cloud computing** è l'erogazione on-demand di risorse di calcolo (compute, storage, rete,

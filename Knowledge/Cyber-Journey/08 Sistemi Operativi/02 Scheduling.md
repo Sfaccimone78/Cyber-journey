@@ -2,13 +2,16 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-28
+fonti: 4
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Scheduling"]
 ---
 
 # Scheduling: FIFO, SJF, STCF, Round Robin, MLFQ, CFS
+
+## In breve
+Lo **scheduler** è la politica con cui l'OS decide quale processo *ready* eseguire e per quanto tempo, bilanciando due metriche in tensione: **turnaround** (batch) e **response time** (interattivo). Dalle politiche classiche (FIFO, SJF, STCF, Round Robin) si arriva a MLFQ e a **CFS**, lo scheduler di default di Linux basato sul *vruntime*. È un componente critico anche per la sicurezza, perché tocca side-channel temporali e DoS da esaurimento risorse.
 
 ## Definizione
 Lo **scheduler** e la politica con cui l'OS decide *quale* processo ready eseguire e *per quanto*. Due metriche fondamentali in tensione: [Fonte: OSTEP, cap. 7]

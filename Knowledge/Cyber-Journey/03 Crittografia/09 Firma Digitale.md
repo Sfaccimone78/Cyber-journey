@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Firma Digitale"]
 
@@ -60,6 +60,20 @@ openssl dgst -sha256 -verify chiave_pubblica.pem -signature firma.bin documento.
 - **Email**: standard come S/MIME e PGP usano firme digitali per autenticare le email.
 - **Blockchain**: le transazioni Bitcoin/Ethereum sono autorizzate da firme ECDSA.
 - **Attacchi**: se la chiave privata viene rubata, l'attaccante può firmare documenti a nome della vittima.
+
+## Lab
+
+- **[[OpenSSL]] — firma e verifica**: genera una coppia RSA, firma `documento.txt` con `openssl dgst -sha256 -sign` e verifica con `-verify` (comandi negli esempi). Poi modifica un byte del file e ri-verifica: l'output diventa *Verification Failure*, mostrando come la firma protegge l'integrità.
+- **CryptoHack → sezioni *ECC* e *RSA* (sfide di firma)** (https://cryptohack.org): challenge come *Nonce-Sense* / firme ECDSA con nonce riusato fanno recuperare la chiave privata da due firme, esercizio classico sulle debolezze implementative delle firme (stesso bug del PS3 di Sony).
+- **CryptoPals → Set 6 challenge 42–43** (https://cryptopals.com): *Bleichenbacher's e=3 RSA signature forgery* e *DSA nonce recovery* — forgiatura di firme RSA con verifica debole e recupero della chiave DSA da nonce prevedibile.
+
+## Domande
+
+1. **D:** Quali tre proprietà garantisce una firma digitale? **R:** Autenticità (viene da chi dichiara di firmare), integrità (il documento non è stato alterato) e non ripudio (il firmatario non può negare la firma).
+2. **D:** Cosa viene effettivamente firmato: il documento o il suo hash? **R:** L'**hash** del documento (es. SHA-256), non il documento intero — più efficiente e di dimensione fissa.
+3. **D:** Con quale chiave si firma e con quale si verifica? **R:** Si firma con la chiave **privata** del mittente; si verifica con la sua chiave **pubblica**.
+4. **D:** Cosa succede se la chiave privata di firma viene rubata? **R:** L'attaccante può firmare documenti a nome della vittima, spacciandoli per autentici.
+5. **D:** Cita tre algoritmi di firma comuni. **R:** RSA-PSS, ECDSA (usato in TLS e Bitcoin) e EdDSA (Ed25519).
 
 ## Collegamenti
 

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [tool]
 fase: 1
 fonti: 2
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Tool di Rete in Python"]
 ---
@@ -14,6 +14,9 @@ aliases: ["Tool di Rete in Python"]
 > Questi tool si usano **solo** su sistemi tuoi o in lab/CTF autorizzati ([[TryHackMe]],
 > [[HackTheBox]], pwn.college). Usarli contro terzi senza autorizzazione scritta è reato. Vedi
 > [[Penetration Testing]].
+
+## In breve
+Quando sul target manca l'arsenale ma c'è l'interprete Python, la sola **standard library** (`socket`, `subprocess`, `threading`, `argparse`) basta a ricostruire al volo i tool di rete essenziali. Questa nota mostra tre mattoni reali e funzionanti in Python 3 — un **netcat replacement**, un **proxy TCP intercettante** e un **port forward via SSH** — usati per foothold, analisi di protocollo e pivoting in lab/CTF autorizzati.
 
 Python è un **moltiplicatore** quando sul target manca l'arsenale ma c'è l'interprete: si
 ricostruiscono al volo i tool di rete essenziali con la sola standard library (`socket`,

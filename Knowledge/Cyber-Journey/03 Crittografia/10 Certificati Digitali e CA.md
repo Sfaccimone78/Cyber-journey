@@ -3,7 +3,7 @@ tipo: concetto
 tag: [crypto, network]
 fase: 1
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Certificati Digitali e CA"]
 
@@ -53,6 +53,20 @@ openssl s_client -connect wikipedia.org:443 -showcerts </dev/null
 - Attacchi **Man-in-the-Middle** possono essere rilevati proprio grazie ai certificati.
 - Alcune CA sono state compromesse nel passato (es. DigiNotar, 2011), dimostrandone il valore critico.
 - I certificati **Let's Encrypt** hanno reso gratuita l'adozione di HTTPS per tutti.
+
+## Lab
+
+- **[[OpenSSL]] — ispeziona un certificato reale**: esegui `openssl s_client -connect wikipedia.org:443` e leggi subject, issuer e validità con `openssl x509 -noout -text`; poi genera una CSR (`openssl req -new`) e auto-firmala per capire il ruolo della CA. Ottimo per vedere la struttura X.509 dal vivo.
+- **[[TryHackMe]] → room *Certificate Authority* / percorso su HTTPS e PKI**: guide interattive che ricostruiscono la catena di fiducia (root → intermediate → leaf) e mostrano gli errori del browser su certificati scaduti o self-signed.
+- **badssl.com — pratica libera** (https://badssl.com): apri i sottodomini `expired.`, `self-signed.`, `wrong.host.` e osserva quale errore il browser mostra in ciascun caso; collega ogni errore alla parte del certificato che lo causa.
+
+## Domande
+
+1. **D:** Cosa associa un certificato digitale? **R:** Una chiave pubblica all'identità del suo proprietario (dominio, organizzazione o persona).
+2. **D:** Qual è il ruolo della CA? **R:** È un'entità fidata che verifica l'identità del richiedente e **firma** il certificato con la propria chiave privata, garantendone l'autenticità.
+3. **D:** Perché il browser si fida di un certificato firmato da una CA? **R:** Perché i certificati root delle CA sono preinstallati nel sistema operativo/browser: verificando la firma della CA sul certificato, la fiducia si propaga al sito.
+4. **D:** Cosa contiene una CSR? **R:** La chiave pubblica del richiedente e i suoi dati identificativi, inviati alla CA per ottenere un certificato firmato.
+5. **D:** Perché la compromissione di una CA (es. DigiNotar 2011) è così grave? **R:** Una CA compromessa può emettere certificati fraudolenti considerati validi da tutti i browser, abilitando attacchi MITM su larga scala.
 
 ## Collegamenti
 

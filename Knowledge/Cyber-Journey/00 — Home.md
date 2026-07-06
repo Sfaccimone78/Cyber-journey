@@ -47,7 +47,63 @@ Accedi a queste aree solo dopo aver consolidato i Fondamentali qui sopra.
 
 ---
 
-## 🛠️ 3. I TUOI STRUMENTI PER LO STUDIO
+## 🧭 3. LE AREE AVANZATE E DI SPECIALIZZAZIONE (Mappa completa)
+
+> ⚠️ **Prima i Fondamentali!** Le aree qui sotto sono avanzate: affrontale solo dopo aver consolidato i 5 pilastri della Sezione 1. Non è un percorso lineare — scegli il *track* più vicino ai tuoi obiettivi (Red Team, Blue Team, Cloud, GRC...) e non aver paura di saltare tra i binari.
+
+### 🧮 Fondamenti CS (prerequisiti trasversali)
+
+*I mattoni informatici che stanno sotto ogni specializzazione.*
+
+*   **[[00 — Mappa Sistemi Operativi|🧩 Sistemi Operativi]]** — come funzionano davvero processi, memoria e kernel sotto il cofano.
+*   **[[00 — Mappa Algoritmi e Strutture Dati|🧮 Algoritmi e Strutture Dati]]** — logica, complessità e strutture dati per ragionare (e scriptare) meglio.
+
+### ⚔️ Offensive avanzato
+
+*Dal trovare bug al costruire exploit veri e propri.*
+
+*   **[[00 — Mappa AppSec Avanzato|🐞 AppSec Avanzato]]** — vulnerabilità applicative oltre la OWASP Top 10.
+*   **[[00 — Mappa Reverse Engineering e Exploit Dev|🔬 Reverse Engineering & Exploit Dev]]** — smontare binari e sviluppare exploit partendo da zero.
+*   **[[00 — Mappa API e GraphQL Security|🔌 API e GraphQL Security]]** — attaccare e mettere in sicurezza API REST e GraphQL.
+
+### 🛡️ Difesa & Forensics
+
+*Rilevare, investigare e rispondere agli incidenti.*
+
+*   **[[00 — Mappa DFIR e Detection Engineering|🔎 DFIR e Detection Engineering]]** — digital forensics, incident response e scrittura di regole di detection. *(Prosegue naturalmente dal [[00 — Mappa Blue Team|🛡️ Blue Team]] della Sezione 2.)*
+
+### ☁️ Cloud & DevSecOps
+
+*Sicurezza dove ormai gira tutto: cloud e pipeline.*
+
+*   **[[00 — Mappa Cloud Security|☁️ Cloud Security]]** — mettere in sicurezza AWS, Azure e GCP.
+*   **[[00 — Mappa DevSecOps e Supply Chain|♾️ DevSecOps e Supply Chain]]** — integrare la sicurezza nelle pipeline CI/CD e proteggere la catena di fornitura.
+
+### 📡 Specializzazioni
+
+*Percorsi verticali per chi vuole un dominio di nicchia.*
+
+*   **[[00 — Mappa Mobile Security|📱 Mobile Security]]** — sicurezza di app e dispositivi Android/iOS.
+*   **[[00 — Mappa Wireless & Radio|📶 Wireless & Radio]]** — Wi-Fi, Bluetooth e segnali radio (SDR).
+*   **[[00 — Mappa AI e LLM Security|🤖 AI e LLM Security]]** — attacchi e difese su modelli di machine learning e LLM.
+*   **[[00 — Mappa OSINT e Social Engineering|🕵️ OSINT e Social Engineering]]** — raccolta di informazioni da fonti aperte e fattore umano.
+*   **[[00 — Mappa Hardware e IoT Security|🔧 Hardware e IoT Security]]** — dispositivi fisici, firmware e Internet of Things.
+
+### 📋 Governance
+
+*La cybersecurity vista da processi, rischio e norme.*
+
+*   **[[00 — Mappa GRC e Compliance|📋 GRC e Compliance]]** — governance, gestione del rischio e conformità (ISO, NIST, GDPR).
+
+### 🚩 Pratica
+
+*Il ponte tra teoria e mani sulla tastiera.*
+
+*   **[[00 — Mappa Laboratori e CTF|🚩 Laboratori e CTF]]** — ambienti di pratica, macchine vulnerabili e Capture The Flag per allenarti sul serio.
+
+---
+
+## 🛠️ 4. I TUOI STRUMENTI PER LO STUDIO
 
 *   **I tuoi Template per nuove note (nella cartella `Template/`):**
     *   Usa `template-teoria-base.md` per riassumere nuovi concetti teorici usando parole semplici ed analogie.

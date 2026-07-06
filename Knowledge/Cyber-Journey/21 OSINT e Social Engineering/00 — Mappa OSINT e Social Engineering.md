@@ -2,7 +2,7 @@
 tipo: sintesi
 tag: [osint, moc]
 fase: 3
-aggiornato: 2026-07-01
+aggiornato: 2026-07-02
 stato: attivo
 aliases: ["OSINT e Social Engineering", "Mappa OSINT e Social Engineering"]
 ---
@@ -15,12 +15,17 @@ fattore umano ([[Social Engineering e Phishing|social engineering]]). Il filo co
 prima di entrare nelle tecniche di raccolta vere e proprie.
 
 > [!info] Area in espansione
-> Al momento contiene la nota fondativa sull'OPSEC delle indagini. Prossime note candidate:
-> ricognizione su persone e aziende, OSINT su social/domini/email, pretexting e vishing.
+> Copre l'OPSEC dell'investigatore e le principali tecniche di raccolta (motori di ricerca,
+> persone, domini/infrastruttura, framework). Prossime note candidate: pretexting e vishing,
+> OSINT su social media, geolocalizzazione.
 
 ## Percorso in ordine d'apprendimento
 
 1. [[Sicurezza Operativa per le Indagini OSINT]] — sock puppet, isolamento, tracce e attribuzione
+2. [[02 Motori di Ricerca e Google Dorking]] — operatori avanzati, GHDB, motori per dispositivi
+3. [[03 OSINT su Persone e Username]] — pivoting, correlazione identità, EXIF, reverse image
+4. [[04 OSINT su Domini e Infrastruttura]] — DNS, WHOIS, Certificate Transparency, sottodomini
+5. [[05 Framework OSINT (Maltego, SpiderFoot, theHarvester)]] — automazione e link analysis
 
 ## Collegamenti trasversali
 - [[OSINT]] — la fase di ricognizione passiva nel pentest

@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [linux]
 fase: 1
-fonti: 4
-aggiornato: 2026-06-28
+fonti: 5
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Processi Linux", "Processi e Job Control"]
 ---

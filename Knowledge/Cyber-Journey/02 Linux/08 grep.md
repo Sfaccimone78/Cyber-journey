@@ -3,7 +3,7 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["grep"]
 
@@ -11,7 +11,7 @@ aliases: ["grep"]
 
 # grep
 
-## Cos'è
+## In breve
 
 **grep** (Global Regular Expression Print) è un comando Linux per cercare righe che corrispondono a un pattern di testo (o espressione regolare) all'interno di uno o più file, oppure nell'output di altri comandi tramite [[Pipe e Redirezione]]. È uno degli strumenti più usati nell'analisi di log, nell'[[Enumerazione]] di sistemi e nei CTF.
 

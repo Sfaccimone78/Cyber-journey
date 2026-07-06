@@ -2,13 +2,16 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-28
+fonti: 4
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Processi"]
 ---
 
 # Processi: PCB, Context Switch, fork/exec
+
+## In breve
+Un **processo** è l'astrazione di un programma in esecuzione: l'istanza viva con spazio di indirizzi, registri e file aperti, descritta dal kernel nel **PCB**. È il mattone con cui l'OS virtualizza la CPU (time-sharing) e il confine di **isolamento** su cui poggia la sicurezza del sistema. Comprenderne il ciclo di vita (`fork`/`exec`/`wait`, context switch) è prerequisito per capire scheduling, memoria e le tecniche di process injection.
 
 ## Definizione
 Un **processo** e l'astrazione di un programma in esecuzione: non il file su disco, ma l'istanza viva con il suo stato. Lo stato di un processo (*machine state*) comprende: lo **spazio di indirizzi** (memoria: code, heap, stack), i **registri** della CPU (in particolare il **Program Counter/PC** e lo **stack pointer**), e l'insieme dei **file aperti** (descrittori I/O). [Fonte: OSTEP, cap. 4]

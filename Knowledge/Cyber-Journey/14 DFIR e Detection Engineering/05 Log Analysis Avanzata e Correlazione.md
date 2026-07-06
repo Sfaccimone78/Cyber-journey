@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [blue-team, metodologia]
 fase: 3
-fonti: 3
-aggiornato: 2026-06-28
+fonti: 4
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Log Analysis Avanzata e Correlazione", "Correlazione di Log", "Logging e Monitoraggio"]
 ---

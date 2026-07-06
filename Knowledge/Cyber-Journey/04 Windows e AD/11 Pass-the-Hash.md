@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows, ad]
 fase: 2
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Pass-the-Hash", "PtH"]
 ---
@@ -159,6 +159,11 @@ R: Perché il PtH "esplode" quando la **stessa** password (quindi lo stesso hash
 
 **D: Come distingui un 4624 NTLM legittimo da uno di un attacco PtH?**
 R: Il singolo evento è ambiguo; conta la correlazione: stesso account privilegiato, Logon Type 3, AuthPackage NTLM, su molti host non correlati in finestra breve, spesso da un host "pivot". Aggiungi contesto con 4776 sul DC e dump-LSASS (Sysmon 10) a monte.
+
+## Lab
+- [[TryHackMe]] → room **Lateral Movement and Pivoting**: PtH, Pass-the-Ticket e Overpass-the-Hash con [[Impacket]] e [[CrackMapExec]] in un dominio di lab.
+- [[HackTheBox]] → macchine AD dove si dumpano hash locali (SAM/LSASS) e si fa spray con `nxc smb <rete> -u Administrator -H <hash> --local-auth`; e **GOAD** per riprodurre il movimento laterale di massa in assenza di [[LAPS]].
+- Lab locale: con due VM Windows unite al dominio e stessa password local Administrator, dumpa l'hash con [[Mimikatz]] (`sekurlsa::logonpasswords`), riusalo con `impacket-wmiexec -hashes :<NT>` e osserva nel [[Windows Event Log]] gli **Event ID 4624 Logon Type 3 / NTLM** correlati e il **4776** sul DC.
 
 ## Collegamenti
 - [[Impacket]]

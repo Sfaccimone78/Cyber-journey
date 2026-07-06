@@ -2,13 +2,14 @@
 tipo: concetto
 tag: [fondamenti]
 fase: 0
-fonti: 1
-aggiornato: 2026-06-22
+fonti: 2
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["La Cyber Kill Chain"]
 ---
 # La Cyber Kill Chain
 
+## In breve
 La **Cyber Kill Chain** (Lockheed Martin, 2011) modella un attacco come una **sequenza di 7 fasi**
 dipendenti l'una dall'altra. L'idea operativa è una sola e potente: l'attaccante deve completarle
 *tutte*; al difensore basta **spezzare un anello** per far fallire l'intera catena. Più presto lo
@@ -64,6 +65,18 @@ Recon: trovata l'email del CFO via LinkedIn. Weaponization: Excel con macro + RA
 mirata (spear phishing). Exploitation: la vittima abilita le macro. Installation: il RAT crea una
 chiave di persistenza. C2: il PC chiama il server dell'attaccante. Objectives: esfiltrazione dei dati
 finanziari. Un EDR che blocca l'esecuzione della macro (fase 4) avrebbe fermato tutto il resto.
+
+## Lab
+- **[[TryHackMe]]** → room *Cyber Kill Chain* e *Unified Kill Chain*: mappa le fasi di un attacco simulato dalla ricognizione alle actions on objectives.
+- **[[TryHackMe]]** → room *MITRE* / uso del *ATT&CK Navigator*: traduci le fasi astratte della Kill Chain in tecniche ATT&CK concrete (es. T1059) su cui costruire detection.
+- Esercizio: prendi il report di una campagna reale (es. un writeup di ransomware) e colloca ogni azione nelle 7 fasi, indicando in quale fase la detection sarebbe costata di meno.
+
+## Domande
+1. **D:** Qual è l'idea operativa centrale della Kill Chain per il difensore? **R:** L'attaccante deve completare *tutte* le fasi; al difensore basta spezzare *un* anello per far fallire l'intera catena, e prima lo spezza meno costa.
+2. **D:** Perché la fase di Weaponization non è direttamente osservabile? **R:** Perché avviene dal lato attaccante (accoppiamento exploit+payload); ci si prepara con la Threat Intelligence sui TTP noti.
+3. **D:** Cosa significa "spostare la detection a sinistra" e perché conta? **R:** Rilevare l'attacco nelle fasi iniziali (es. Delivery, un filtro mail) costa molto meno che nella fase 7, quando i dati sono già usciti.
+4. **D:** Quali sono i principali limiti della Kill Chain? **R:** È perimetro-centrica (inutile contro insider/credenziali rubate), lineare (un'intrusione reale itera) e vaga sul post-compromise (tutto compresso nella fase 7).
+5. **D:** Quando usare Kill Chain e quando MITRE ATT&CK? **R:** La Kill Chain per raccontare *la storia* di un attacco e dove tagliarlo; ATT&CK per costruire *detection e regole* concrete basate su tecniche reali.
 
 ## Collegamenti
 - [[MITRE ATT&CK]] · [[Difesa in Profondità]] · [[Social Engineering e Phishing]] · [[Threat Intelligence]]

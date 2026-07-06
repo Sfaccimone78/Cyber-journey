@@ -2,13 +2,16 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-28
+fonti: 5
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Virtualizzazione"]
 ---
 
 # Virtualizzazione: VM, Container, Hypervisor tipo 1/2
+
+## In breve
+La **virtualizzazione** astrae una risorsa fisica per fornirne copie multiple, isolate e gestibili. Un **hypervisor** virtualizza l'intera macchina (più OS *guest* sullo stesso hardware, ognuno col proprio kernel); i **container** virtualizzano l'OS condividendo il kernel host (namespaces + cgroups). È il fondamento di cloud, isolamento e sandboxing, ma **sposta — non elimina** — il confine di sicurezza: VM escape, container escape e side-channel cross-VM restano superfici d'attacco.
 
 ## Definizione
 La **virtualizzazione** crea un'astrazione di una risorsa fisica per fornirne copie multiple, isolate e gestibili. In OSTEP e il tema portante: l'OS *virtualizza* CPU e memoria per i processi. Estendendo l'idea un livello sopra, un **Virtual Machine Monitor (VMM)** / **hypervisor** virtualizza l'**intera macchina**, permettendo a piu sistemi operativi *guest* di girare sullo stesso hardware. [Fonte: OSTEP, cap. 2; intro VMM cap. 1]

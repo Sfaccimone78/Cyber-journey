@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["XML External Entity (XXE)", "XXE"]
 ---
@@ -53,6 +53,21 @@ Nessun output in pagina → esfiltra via DNS/HTTP verso un tuo server (OAST), co
    - .NET: `XmlReaderSettings.DtdProcessing = Prohibit`
 2. Preferire **JSON** dove possibile; validare con **XSD** rigido.
 3. Minimo privilegio sul processo di parsing; WAF come strato extra.
+
+## Lab
+- [[PortSwigger Web Academy]] → categoria **XML external entity (XXE) injection**. Percorso dal livello APPRENTICE:
+  - *Exploiting XXE using external entities to retrieve files* — leggere `/etc/passwd` riflesso nella risposta.
+  - *Exploiting XXE to perform SSRF attacks* — pivotare verso il metadata endpoint interno (ponte XXE→[[Server-Side Request Forgery (SSRF)]]).
+  - *Blind XXE with out-of-band interaction* — esfiltrazione OAST via DTD esterno e **Burp Collaborator**.
+  - *Exploiting XXE to retrieve data by repurposing a local DTD* — tecnica avanzata quando le entità esterne sono bloccate ma esiste un DTD locale.
+- Cosa esercitare: intercettare un body `application/xml` con [[Burp Suite]], inserire il `<!DOCTYPE>` con l'entità e osservare il riflesso; per il blind, ospitare `evil.dtd` e leggere il canale Collaborator.
+
+## Domande
+1. **D:** Cos'è un'entità esterna XML e perché è pericolosa?  **R:** È una variabile definita nel DTD che punta a una risorsa fuori dal documento (`file://`, `http://`); un parser che la risolve senza restrizioni esegue la richiesta con i privilegi del server, permettendo lettura file e SSRF.
+2. **D:** Come si legge un file che contiene caratteri che romperebbero l'XML?  **R:** Con il wrapper PHP `php://filter/convert.base64-encode/resource=/etc/passwd`, che restituisce il contenuto in base64 sicuro da riflettere.
+3. **D:** Come funziona una XXE **blind** out-of-band?  **R:** Si carica un DTD esterno controllato che legge un file locale e lo accoda come parametro a un URL dell'attaccante, esfiltrando il dato via DNS/HTTP (OAST).
+4. **D:** Qual è la mitigazione primaria contro la XXE?  **R:** Disabilitare DTD ed entità esterne nel parser (es. `disallow-doctype-decl` in Java, `DtdProcessing = Prohibit` in .NET), non affidarsi solo a filtri o WAF.
+5. **D:** Quali formati/endpoint sono bersagli tipici di XXE?  **R:** API SOAP, upload di documenti che sono XML sotto il cofano (DOCX, SVG) e qualunque endpoint che accetta `Content-Type: application/xml`.
 
 ## Collegamenti
 - [[OWASP Top 10]]

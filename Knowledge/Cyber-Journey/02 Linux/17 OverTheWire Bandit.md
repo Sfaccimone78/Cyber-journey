@@ -3,13 +3,17 @@ tipo: entita
 tag: [linux, ctf, wargame]
 fase: 1
 fonti: 2
-aggiornato: 2026-06-22
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["OverTheWire Bandit"]
 
 ---
 
 # OverTheWire Bandit
+
+## In breve
+
+**OverTheWire Bandit** è un wargame online gratuito e sempre disponibile (34 livelli via SSH) pensato per chi parte da zero con Linux e la sicurezza. È il punto d'ingresso classico prima di [[TryHackMe]] e [[HackTheBox]]: allena in modo incrementale comandi, pipe, codifiche, rete e le basi di [[Privilege Escalation Linux|privesc]] risolvendo un livello per trovare la password del successivo.
 
 ## Cos'è
 
@@ -258,6 +262,16 @@ Chi difende un sistema deve sapere cosa cerca un attaccante — Bandit lo insegn
 > Insegna lo **shell escape da shell ristretta**: quando un utente è forzato a usare `more` come shell, premere `v` apre `vim`; da vim si può impostare `:set shell=/bin/bash` e poi `:shell` per ottenere una bash completa. Tecnica applicabile in contesti reali di restricted shell bypass.
 
 ---
+
+## Lab
+
+Bandit **è** il lab: praticalo direttamente su `overthewire.org/wargames/bandit/` con questo piano.
+
+- **Sessione 1 — livelli 0-10**: connessione SSH (`-p 2220`), lettura file con nomi ostili, `find` per size/owner/permessi, `grep`, `sort | uniq -u`, `strings`, `base64 -d`. Obiettivo: fluidità coi [[Comandi Linux di Base]] e le [[Pipe e Redirezione]].
+- **Sessione 2 — livelli 11-20**: `tr` (ROT13), decompressione multipla (`file`/`xxd` → gzip/bzip2/tar), chiavi SSH, `nc`/`openssl s_client`, `nmap` locale, e i primi [[SUID e SGID]] (livelli 19-20).
+- **Sessione 3 — livelli 21-34**: [[Cron e Job Pianificati]] (21-23), brute force in [[Bash Scripting|Bash]] (24), shell escape da `more`/uppercase shell (25-26, 32), Git per la security (27-31).
+- **Metodo**: prova ≥15 min da solo, usa `man`/`--help`, tieni un diario password+comando, e solo dopo leggi i writeup per approcci alternativi.
+- **Dopo Bandit**: prosegui su [[OverTheWire Bandit|OverTheWire]] Natas/Leviathan, poi [[TryHackMe]] (Pre-Security / Jr Penetration Tester) e [[HackTheBox]] Starting Point.
 
 ## Collegamenti
 

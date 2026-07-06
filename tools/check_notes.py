@@ -12,12 +12,20 @@ ERRORI (bloccano il commit) su una nota `maturo`:
   - FONTI    : manca `## Fonti` oppure ha < 2 voci fonte.
   - IN-MOC   : la nota non è linkata dalla Mappa (MOC) della sua area.
 
+Inoltre, per OGNI nota non-MOC/non-template con frontmatter valida il vocabolario canonico:
+  - TIPO-OFFSCHEMA  : `tipo:` presente ma non in {concetto, entita, fonte, sintesi}.
+  - STATO-OFFSCHEMA : `stato:` presente ma non in {stub, attivo, maturo}.
+
 AVVISI (non bloccano): sezioni In breve / Lab / Domande assenti; `fonti:` != conteggio reale.
+Gli heading accettano alias canonici: `## Panoramica` = `## In breve`, `## Esercizi` = `## Lab`.
 
 Uso:
   python tools/check_notes.py             # report su tutto il vault
   python tools/check_notes.py --staged    # solo i .md in stage (hook pre-commit)
-  python tools/check_notes.py --strict     # tratta anche gli AVVISI come errori
+  python tools/check_notes.py --strict    # tratta anche gli AVVISI come errori
+  python tools/check_notes.py --dod       # Definition of Done stretta (opt-in): le sezioni
+                                          # In breve/Lab/Domande mancanti su una nota `maturo` e
+                                          # il mismatch `fonti:` diventano ERRORI (di default restano AVVISI)
 Esce ≠0 se c'è almeno un ERRORE (o un AVVISO in --strict).
 """
 import os, re, sys, io, subprocess
@@ -75,6 +83,12 @@ def strip_code(t):
     return re.sub(r"`[^`]*`", "", t)
 
 
+def link_target(inner):
+    """Target canonico (lowercase) dal testo interno di un [[...]].
+    Normalizza la pipe di tabella escapata: `Indirizzamento IP\\|IP` -> `indirizzamento ip`."""
+    return inner.replace("\\|", "|").split("|")[0].split("#")[0].strip().lower()
+
+
 def area_moc_links(area_dir):
     """Insieme (lowercase) dei target [[..]] presenti in TUTTE le mappe 00— dell'area."""
     links = set()
@@ -82,7 +96,7 @@ def area_moc_links(area_dir):
         if re.match(r"^00\s*[-—]", f) and f.endswith(".md"):
             txt = read(os.path.join(area_dir, f))
             for m in re.findall(r"\[\[([^\]]+?)\]\]", txt):
-                links.add(m.split("|")[0].split("#")[0].strip().lower())
+                links.add(link_target(m))
     return links
 
 
@@ -100,24 +114,50 @@ def fonti_count(text):
     return n
 
 
-def check_note(path):
-    """Ritorna (errors, warnings) per una nota. Salta MOC/template/non-maturo."""
+# Vocabolario canonico (WIKI_SCHEMA.md): valori ammessi per tipo/stato.
+VOCAB_TIPO = ("concetto", "entita", "fonte", "sintesi")
+VOCAB_STATO = ("stub", "attivo", "maturo")
+
+# Heading canonici -> varianti accettate: l'alias non fa scattare l'avviso di sezione assente.
+SECTION_ALIASES = [
+    ("In breve", ("In breve", "Panoramica")),
+    ("Lab",      ("Lab", "Esercizi")),
+    ("Domande",  ("Domande",)),
+]
+
+
+def has_section(text, variants):
+    """True se esiste un heading '## <v>' per una qualunque delle varianti accettate."""
+    return any(re.search(r"(?mi)^##+\s*" + re.escape(v) + r"\b", text) for v in variants)
+
+
+def check_note(path, dod=False):
+    """Ritorna (errors, warnings) per una nota. Salta MOC/template.
+    Con dod=True le sezioni In breve/Lab/Domande mancanti su una nota `maturo` e il mismatch
+    `fonti:` diventano ERRORI invece che avvisi (Definition of Done stretta, opt-in)."""
     name = os.path.basename(path)
     if re.match(r"^00\s*[-—]", name) or "template" in path.lower():
         return [], []
     txt = read(path)
     fm = frontmatter(txt)
-    st = re.search(r"(?m)^stato\s*:\s*(\w+)", fm)
-    if not st or st.group(1) != "maturo":
-        return [], []
-    # il gate vale solo per le note-contenuto (concetto/entita); sintesi/fonte/MOC esclusi
+    errors, warns = [], []
+
+    # VALIDAZIONE VOCABOLARIO: vale per OGNI nota con frontmatter, non solo le maturo.
     tp = re.search(r"(?m)^tipo\s*:\s*(\w+)", fm)
+    if tp and tp.group(1) not in VOCAB_TIPO:
+        errors.append(f"TIPO-OFFSCHEMA: tipo:{tp.group(1)} non ammesso (usa {'/'.join(VOCAB_TIPO)})")
+    st = re.search(r"(?m)^stato\s*:\s*(\w+)", fm)
+    if st and st.group(1) not in VOCAB_STATO:
+        errors.append(f"STATO-OFFSCHEMA: stato:{st.group(1)} non ammesso (usa {'/'.join(VOCAB_STATO)})")
+
+    # il gate DoD vale solo per le note-contenuto (concetto/entita) mature; il resto si ferma qui.
+    if not st or st.group(1) != "maturo":
+        return errors, warns
     if not tp or tp.group(1) not in ("concetto", "entita"):
-        return [], []
+        return errors, warns
 
     b = body(txt)
     bc = strip_code(b)
-    errors, warns = [], []
 
     if not re.search(r"\[\[[^\]]+\]\]", bc):
         errors.append("WIKILINK: nessun [[link]] nel corpo")
@@ -138,13 +178,14 @@ def check_note(path):
         if moc and not (names & moc):
             errors.append("IN-MOC: non linkata dalla Mappa d'area")
 
-    # avvisi (non bloccanti)
-    for sec in ("In breve", "Lab", "Domande"):
-        if not re.search(r"(?mi)^##+\s*" + re.escape(sec) + r"\b", b):
-            warns.append(f"sezione '## {sec}' assente")
+    # sezioni minime + coerenza fonti: avvisi per default, ERRORI con --dod (DoD stretta).
+    sink = errors if dod else warns
+    for canon, variants in SECTION_ALIASES:
+        if not has_section(b, variants):
+            sink.append(f"sezione '## {canon}' assente")
     mf = re.search(r"(?m)^fonti\s*:\s*(\d+)", fm)
     if mf and fc and int(mf.group(1)) != fc:
-        warns.append(f"frontmatter fonti:{mf.group(1)} != {fc} voci reali")
+        sink.append(f"frontmatter fonti:{mf.group(1)} != {fc} voci reali")
 
     return errors, warns
 
@@ -173,12 +214,13 @@ def all_notes():
 
 if __name__ == "__main__":
     strict = "--strict" in sys.argv
+    dod = "--dod" in sys.argv
     targets = staged_files() if "--staged" in sys.argv else all_notes()
     n_err = n_warn = n_bad = 0
     for p in sorted(targets):
         if not os.path.exists(p):
             continue
-        errs, warns = check_note(p)
+        errs, warns = check_note(p, dod=dod)
         if errs or (warns and strict):
             n_bad += 1
             rel = os.path.relpath(p, ROOT)

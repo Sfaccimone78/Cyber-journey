@@ -3,7 +3,7 @@ tipo: concetto
 tag: [metodologia]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Ricognizione (Recon)", "Reconnaissance", "Recon"]
 
@@ -67,6 +67,20 @@ HEAD / HTTP/1.0
 - Limitare le informazioni pubbliche: ridurre i dati nei record WHOIS (privacy proxy), non pubblicare strutture interne nei metadati.
 - Monitorare Shodan periodicamente per capire cosa è esposto del proprio perimetro.
 - Usare servizi di **Attack Surface Management** (es. Censys, SecurityTrails) per vedere cosa vede un attaccante.
+
+## Lab
+
+- **[[TryHackMe]] — "Passive Reconnaissance" e "Active Reconnaissance"**: le due room del Jr Penetration Tester path che fanno praticare esattamente la distinzione passiva/attiva, con `whois`, `nslookup`, `dig` da un lato e ping/traceroute/banner grabbing dall'altro.
+- **[[TryHackMe]] — "Google Dorking"**: allena la ricerca mirata con operatori (`site:`, `filetype:`, `intitle:`) per trovare file e pagine esposti.
+- **Shodan (piano free)**: esercitati a interrogare `https://www.shodan.io` con filtri come `org:`, `port:`, `product:` su un tuo dominio o su asset di test per vedere concretamente cosa espone un perimetro.
+
+## Domande
+
+1. **D:** Qual è la differenza chiave tra recon passiva e attiva?  **R:** La passiva non invia alcun pacchetto al bersaglio (usa solo fonti pubbliche), l'attiva interagisce direttamente col target inviando traffico.
+2. **D:** Perché la recon passiva è quasi sempre legale mentre l'attiva richiede autorizzazione?  **R:** Perché la passiva usa dati già pubblici, mentre l'attiva invia traffico verso il bersaglio, azione che senza consenso può configurare accesso abusivo.
+3. **D:** Cita tre fonti tipiche di recon passiva.  **R:** WHOIS/DNS pubblici, Google Dorking, Shodan (anche social/LinkedIn e Archive.org).
+4. **D:** A cosa serve il banner grabbing?  **R:** A leggere le risposte dei servizi per identificarne versione e tipo di software.
+5. **D:** Perché conviene raccogliere molte informazioni in fase di recon?  **R:** Più dati si raccolgono ora, meno tempo si perde nelle fasi successive di enumerazione ed exploitation.
 
 ## Collegamenti
 

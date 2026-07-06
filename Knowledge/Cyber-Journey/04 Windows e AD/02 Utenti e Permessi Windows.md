@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows]
 fase: 1
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Utenti e Permessi Windows"]
 
@@ -55,6 +55,19 @@ BUILTIN\Administrators:(I)(F)
 - Controllare regolarmente i membri del gruppo `Administrators`.
 - Monitorare escalation di privilegi tramite [[Windows Event Log]] (Event ID 4672 – privilegi speciali assegnati).
 - Non disabilitare l'UAC.
+
+## Lab
+- [[TryHackMe]] — *Windows Fundamentals 1/2/3*: account locali/di dominio, gruppi built-in, UAC e permessi NTFS.
+- [[HackTheBox]] Academy — modulo *Windows Fundamentals* / *Windows Privilege Escalation*: enumerare ACL con `icacls` e trovare permessi deboli su file/servizi.
+- Lab locale: con `whoami /priv`, `whoami /groups` e `icacls` ispeziona i tuoi privilegi e i permessi di una cartella; poi crea un file e osserva la DACL con `Get-Acl`.
+- Cosa praticare: riconoscere una DACL "debole" (utente non privilegiato con Full Control su binari/cartelle di sistema) come vettore di [[Privilege Escalation Windows]].
+
+## Domande
+1. **D:** Che differenza c'è tra DACL e SACL in un Security Descriptor?  **R:** La DACL definisce *chi* può accedere all'oggetto e con quali permessi; la SACL definisce *quali accessi vengono auditati* e finiscono nel [[Windows Event Log]].
+2. **D:** Perché l'account `SYSTEM` è un obiettivo primario in una escalation?  **R:** È un account di sistema con privilegi massimi sulla macchina, superiori anche a un normale Administrator: ottenerne il token dà controllo totale del host.
+3. **D:** Cosa indica `F` nell'output di `icacls` e perché è pericoloso su `System32`?  **R:** `F` = Full Control; se un utente non privilegiato lo avesse su `System32` potrebbe sostituire binari di sistema ed elevare i privilegi.
+4. **D:** A cosa serve l'UAC e perché è rilevante per gli attaccanti?  **R:** L'UAC fa lavorare anche gli admin con un token ridotto, richiedendo elevazione esplicita; molte tecniche di privesc puntano a *bypassare* l'UAC per ottenere il token completo.
+5. **D:** Qual è il principio cardine per limitare l'impatto di un account compromesso?  **R:** Il minimo privilegio: assegnare a ogni utente/gruppo solo i permessi strettamente necessari e rivedere periodicamente i membri di `Administrators`.
 
 ## Collegamenti
 - [[Filesystem Windows]]

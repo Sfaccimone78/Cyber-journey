@@ -3,7 +3,7 @@ tipo: entita
 tag: [tool, web, proxy, scanner]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["OWASP ZAP"]
 
@@ -13,7 +13,7 @@ aliases: ["OWASP ZAP"]
 
 > **Nota etica**: OWASP ZAP va usato solo su applicazioni proprie o su ambienti autorizzati. Scansionare sistemi senza permesso è illegale.
 
-## Cos'è
+## In breve
 
 **OWASP ZAP (Zed Attack Proxy)** è uno scanner di sicurezza web **open source e gratuito** mantenuto da OWASP. Come [[Burp Suite]], agisce da proxy intercettante tra browser e server, ma è orientato all'automazione e alla scansione attiva. È lo strumento ideale per chi inizia (interfaccia più guidata) e per l'integrazione in pipeline CI/CD.
 
@@ -68,6 +68,19 @@ docker run -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py \
 - Lo **Spider AJAX** gestisce applicazioni Single Page Application (React, Angular) che il classico spider non riesce a esplorare
 - I falsi positivi sono più frequenti rispetto a [[Burp Suite]] Pro — verificare manualmente le alert critiche
 - ZAP salva le sessioni come file `.session` riapribli in seguito
+
+## Lab
+- **Target di pratica deliberatamente vulnerabili** (dove puntare ZAP senza rischi legali): **OWASP Juice Shop** e **DVWA** in locale — avvia lo *Spider*/*AJAX Spider* e poi l'*Active Scan*, quindi confronta le Alert con le vulnerabilità reali dell'app.
+- [[PortSwigger Web Academy]] → i lab (categoria *SQL injection*, *XSS*, *Information disclosure*) possono essere navigati col proxy ZAP e ri-testati manualmente dal *Manual Request Editor*.
+- TryHackMe → room *OWASP ZAP* per il setup guidato (proxy, CA, spider, active scan) e l'interpretazione delle Alert.
+- Cosa esercitare: eseguire un *ZAP Full Scan* via Docker su un bersaglio autorizzato, generare il `report.html` e triare i falsi positivi.
+
+## Domande
+1. **D:** In cosa ZAP si differenzia da [[Burp Suite]]?  **R:** ZAP è open source e gratuito, orientato all'automazione e alla scansione attiva/CI-CD; Burp ha un ecosistema di estensioni e uno scanner più preciso (nella versione Pro). Entrambi sono proxy intercettanti.
+2. **D:** Cos'è il DAST e come lo realizza ZAP?  **R:** Dynamic Application Security Testing: testa l'app **in esecuzione** inviando richieste reali; ZAP lo fa combinando Spider (mappatura) e Active Scan (invio di payload).
+3. **D:** Come si integra ZAP in una pipeline CI/CD?  **R:** In modalità headless/daemon controllata via API REST, o con le immagini Docker `zap-baseline`/`zap-full-scan` che producono un report ad ogni deploy.
+4. **D:** Perché serve l'AJAX Spider per le Single Page Application?  **R:** Lo spider classico segue solo i link HTML statici; le SPA (React/Angular) generano contenuto via JavaScript, che solo l'AJAX Spider (browser reale) riesce a esplorare.
+5. **D:** Perché le Alert critiche di ZAP vanno verificate a mano?  **R:** ZAP tende a produrre più falsi positivi di Burp Pro; ogni alert ad alta gravità va confermata manualmente prima di riportarla.
 
 ## Collegamenti
 

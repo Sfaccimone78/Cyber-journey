@@ -2,8 +2,8 @@
 tipo: concetto
 tag: [linux]
 fase: 2
-fonti: 2
-aggiornato: 2026-06-22
+fonti: 3
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Capabilities", "Capabilities Linux", "Linux Capabilities"]
 ---
@@ -277,6 +277,13 @@ Con `getcap -r / 2>/dev/null`. Cerco capabilities pericolose su binari sfruttabi
 Si usa `setcap -r /path/to/binary` (richiede root). Per il monitoraggio: auditd con una regola sulla syscall `setxattr` con chiave `security.capability` registra ogni modifica alle file capabilities. Strumenti di file integrity come AIDE rilevano le modifiche agli xattr dei binari critici.
 
 ---
+
+## Lab
+
+- **[[TryHackMe]] – Linux PrivEsc** (`tryhackme.com/room/linuxprivesc`): il task **Capabilities** parte da `getcap -r / 2>/dev/null`, individua un interprete con `cap_setuid+ep` e lo sfrutta con `setuid(0)` — l'exploit centrale di questa nota.
+- **[[GTFOBins]]** (funzione *Capabilities*): dopo aver enumerato con `getcap -r /`, cerca ogni binario trovato sotto la categoria *Capabilities* e applica il payload esatto (python/perl/tar/gdb). Serve a mappare capability → primitiva (setuid vs read vs write).
+- **Esercizio locale (VM personale)**: assegna `setcap cap_setuid+ep /usr/bin/python3` e ottieni root con l'one-liner; poi prova `cap_dac_read_search+ep` su `tar` per leggere `/etc/shadow`. Infine `setcap -r` e verifica con auditd (`setxattr` chiave `capabilities`) che la modifica venga registrata.
+- **[[HackTheBox]] – HTB Academy, modulo *Linux Privilege Escalation***: sezione dedicata alle capabilities all'interno di scenari completi.
 
 ## Collegamenti
 

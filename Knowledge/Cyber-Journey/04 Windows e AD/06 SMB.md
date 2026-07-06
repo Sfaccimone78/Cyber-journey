@@ -3,7 +3,7 @@ tipo: entita
 tag: [windows]
 fase: 2
 fonti: 4
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["SMB"]
 
@@ -13,7 +13,7 @@ aliases: ["SMB"]
 
 > Nota etica: le tecniche di sfruttamento di SMB sono spiegate a scopo difensivo. Usare solo in ambienti lab autorizzati.
 
-## Cos'è
+## In breve
 
 SMB (Server Message Block) è un protocollo di rete Windows per la condivisione di file, stampanti e risorse tra computer. Funziona sulla porta **445/TCP** (e storicamente sulla 139/TCP via NetBIOS). È il protocollo alla base delle share di rete Windows (`\\server\condivisione`) e dell'autenticazione NTLM/Kerberos in Active Directory.
 
@@ -54,6 +54,18 @@ Versioni SMB e sicurezza:
 - SMB Signing disabilitato consente attacchi di tipo **NTLM Relay** (un attaccante intercetta l'autenticazione e la redirige).
 - Controllare se SMBv1 è attivo: `Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol`.
 - Porta 445 non deve mai essere esposta direttamente su internet.
+
+## Lab
+- [[TryHackMe]] → room **Network Services** (sezione SMB): enumerazione delle share con `enum4linux` e `smbclient`, connessione anonima e lettura di file sensibili esposti.
+- [[HackTheBox]] → macchine AD entry-level dove SMB è il vettore d'ingresso (enumerazione share con [[CrackMapExec]] `--shares`, individuazione di file di configurazione con credenziali).
+- Lab locale/GOAD: verifica lo stato di **SMB Signing** con `crackmapexec smb <rete> --gen-relay-list out.txt`; gli host senza signing sono candidati per [[NTLM Relay]]. Controlla anche se SMBv1 è attivo con `Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol`.
+
+## Domande
+1. **D:** Su quale porta TCP lavora SMB moderno e quale porta usava storicamente via NetBIOS?  **R:** 445/TCP oggi, 139/TCP storicamente.
+2. **D:** Perché SMBv1 va disabilitato?  **R:** È obsoleto e vulnerabile; exploit come EternalBlue (CVE-2017-0144, usato da WannaCry) lo sfruttano.
+3. **D:** Quali sono le share amministrative nascoste presenti su ogni Windows?  **R:** `C$`, `ADMIN$` e `IPC$`.
+4. **D:** Quale condizione di SMB abilita gli attacchi [[NTLM Relay]]?  **R:** SMB Signing disabilitato.
+5. **D:** A cosa serve la share `IPC$`?  **R:** Alla comunicazione tra processi (inter-process communication), usata dai tool di enumerazione.
 
 ## Collegamenti
 

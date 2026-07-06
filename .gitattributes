@@ -1,0 +1,14 @@
+# Normalizza i fine-riga: stop al churn CRLF su Windows/OneDrive/Obsidian.
+# Testo -> LF nel repo, checkout nativo sul working tree.
+* text=auto eol=lf
+
+# File binari: nessuna conversione EOL, nessun diff testuale.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+
+# Canvas Obsidian = JSON, trattali come testo LF.
+*.canvas text eol=lf

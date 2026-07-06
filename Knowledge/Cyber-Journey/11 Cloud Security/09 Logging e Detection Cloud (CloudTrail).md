@@ -3,12 +3,15 @@ tipo: entita
 tag: [cloud, blue-team, tool]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Logging e Detection Cloud (CloudTrail)"]
 ---
 
 # Logging e Detection Cloud (CloudTrail)
+
+## In breve
+Nel cloud ogni azione è una **chiamata API**, quindi ogni azione è un **evento loggabile**: **CloudTrail** (AWS), **Activity Log** + log Entra ID (Azure) e **Cloud Audit Logs** (GCP) registrano chi ha fatto cosa, quando e da dove. È la pagina lato blue team che ribalta in detection tutto ciò che le precedenti hanno visto dal lato offensivo. Gli eventi si normalizzano in un SIEM per hunting e alerting su segnali di privesc/anti-forensics (`AssumeRole`, `AttachUserPolicy`, `StopLogging`), mappati su MITRE ATT&CK.
 
 ## Definizione
 Nel cloud ogni azione è una **chiamata API**, quindi **ogni azione è un evento loggabile**.

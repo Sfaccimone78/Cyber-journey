@@ -2,13 +2,16 @@
 tipo: concetto
 tag: [os]
 fase: 0
-fonti: 2
-aggiornato: 2026-06-28
+fonti: 5
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["I/O e Storage"]
 ---
 
 # I/O e Storage: DMA, RAID, SSD vs HDD
+
+## In breve
+Questo tema copre come l'OS parla con i dispositivi (polling → interrupt → **DMA**, device driver, memory-mapped I/O) e le caratteristiche dei supporti di storage: geometria e disk scheduling degli **HDD**, asimmetria lettura/scrittura e FTL/wear-leveling degli **SSD**, e i livelli **RAID** per capacità/affidabilità/performance. Ha risvolti di sicurezza rilevanti, dal DMA attack (mitigato da IOMMU) alla data remanence e al fatto che RAID non è un backup.
 
 ## Definizione
 Un OS deve comunicare con i **dispositivi I/O** (dischi, rete, tastiera) in modo efficiente e device-neutral. Un dispositivo canonico espone tre registri: **status**, **command**, **data**. Il protocollo base e: il CPU fa polling dello status (attesa "not busy"), scrive i dati e il comando, attende il completamento. *Crux: come comunicare con i dispositivi e ridurre l'overhead del CPU?* [Fonte: OSTEP, cap. 36]

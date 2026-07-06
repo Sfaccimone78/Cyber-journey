@@ -3,7 +3,7 @@ tipo: concetto
 tag: [linux]
 fase: 1
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["SUID e SGID"]
 
@@ -142,6 +142,13 @@ Cercando un binario su GTFOBins sotto la funzione **`suid`**, i pattern tipici:
 3. **SUID su script non funziona** → il kernel lo ignora sugli interpretati. Serve un wrapper ELF.
 4. **`gcc` assente per la .so** → compila la libreria altrove (stessa arch, `uname -m`) e trasferiscila.
 5. **`-perm -4000` vs `-perm /4000` vs `-perm 4000`** → `-4000` = ha *almeno* SUID (corretto). `/4000` = SUID *o* altro. `4000` = esattamente quei bit (sbaglia quasi sempre).
+
+## Lab
+
+- **[[OverTheWire Bandit]] – livelli 19-20**: il livello 19 usa un binario SUID (`bandit20-do`) per eseguire comandi come un altro utente e leggere una password protetta; è il primo contatto pratico con l'euid ereditato dal proprietario del file.
+- **[[TryHackMe]] – Linux PrivEsc** (`tryhackme.com/room/linuxprivesc`): il task **SUID** ti fa enumerare con `find / -perm -4000`, sfruttare binari GTFOBins (`nano`, `base64`, `find`) e provare la **shared-object injection** su un SUID custom — l'intero walkthrough di questa nota.
+- **pwn.college – modulo *Program Misuse***: serie sistematica di binari SUID da sfruttare (read/write primitive, shell escape). Ottimo per interiorizzare "quale primitiva mi dà questo binario".
+- **[[GTFOBins]] (a secco)**: dopo `find / -perm -4000 -type f`, cerca ogni binario trovato sotto la funzione `suid` e verifica la tecnica su una VM. Nota bene il ruolo di `-p` in `/bin/sh -p`.
 
 ## Domande da colloquio
 > **D: Cosa fa esattamente il bit SUID a livello di processo?**

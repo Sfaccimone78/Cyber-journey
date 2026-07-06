@@ -3,12 +3,15 @@ tipo: concetto
 tag: [blue-team]
 fase: 3
 fonti: 4
-aggiornato: 2026-06-28
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Threat Intelligence (Diamond Model, Pyramid of Pain)", "Diamond Model", "Pyramid of Pain"]
 ---
 
 # Threat Intelligence (Diamond Model, Pyramid of Pain)
+
+## In breve
+La **Cyber Threat Intelligence** (CTI) trasforma dati grezzi sulle minacce in conoscenza azionabile (chi attacca, come, con cosa, come rilevarlo). Si articola su tre livelli — strategico, operativo, tattico — e usa due modelli concettuali chiave: il **Diamond Model** (lega adversary, capability, infrastructure, victim per il pivoting e l'attribuzione) e la **Pyramid of Pain** (ordina gli indicatori per quanto "fa male" all'attaccante cambiarli, spingendo la detection verso le TTP invece che verso hash/IP effimeri).
 
 La **Cyber Threat Intelligence** (CTI) trasforma dati grezzi su minacce in **conoscenza azionabile**:
 chi attacca, come, con quali strumenti, e cosa fare per rilevarlo e bloccarlo. Questa pagina copre i

@@ -3,7 +3,7 @@ tipo: concetto
 tag: [web, owasp]
 fase: 3
 fonti: 3
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["Insecure Deserialization", "Deserializzazione Insicura"]
 ---
@@ -59,12 +59,27 @@ Modificarli con [[Burp Suite]]; estensione **Java Deserialization Scanner**.
 3. **Allow-list** delle classi deserializzabili; evitare `pickle`/`BinaryFormatter` su input esterni.
 4. Monitorare gadget noti; aggiornare le librerie.
 
+## Lab
+- [[PortSwigger Web Academy]] → categoria **Insecure deserialization**. Percorso dal livello APPRENTICE:
+  - *Modifying serialized objects* — tampering di stato PHP (`isAdmin` come nell'esempio sopra).
+  - *Modifying serialized data types* e *Using application functionality to exploit insecure deserialization*.
+  - *Arbitrary object injection in PHP* e *Exploiting Java deserialization with Apache Commons* (PRACTITIONER) — introduce le **gadget chain** e `ysoserial`.
+- Cosa esercitare: riconoscere i formati serializzati (`O:4:"User"`, base64 `rO0AB...`), manometterli con [[Burp Suite]] (estensione *Java Deserialization Scanner*) e generare payload RCE con **ysoserial**.
+
+## Domande
+1. **D:** Perché la deserializzazione di dati non fidati può portare a RCE e non solo a tampering?  **R:** Molti linguaggi invocano automaticamente **magic method** durante la deserializzazione (`__wakeup`/`__destruct`, `readObject`, `__reduce__`); concatenando classi già presenti (gadget chain) si arriva a eseguire comandi.
+2. **D:** Cos'è una gadget chain e a cosa serve ysoserial?  **R:** È una sequenza di classi di libreria che, deserializzate in ordine, finiscono per eseguire codice; ysoserial (Java) genera automaticamente questi payload per librerie note come Commons-Collections.
+3. **D:** Come si riconosce un oggetto Java serializzato in transito?  **R:** Dai magic bytes `0xAC 0xED`, che in base64 iniziano con `rO0AB`.
+4. **D:** Qual è la mitigazione primaria?  **R:** Non deserializzare dati non fidati: usare formati dati puri (JSON) con parser che non istanziano classi arbitrarie; in subordine, firma/HMAC per l'integrità e allow-list delle classi.
+5. **D:** In che modo un semplice tampering PHP può dare privilege escalation senza RCE?  **R:** Modificando un attributo nell'oggetto serializzato nel cookie (es. `isAdmin;b:0` → `b:1`) si altera lo stato che l'app ricostruisce fidandosi del dato client.
+
 ## Collegamenti
 - [[OWASP Top 10]]
 - [[Cookie e JWT]]
 - [[Command Injection]]
 - [[Reverse Shell e Bind Shell]]
 - [[Burp Suite]]
+- [[PortSwigger Web Academy]]
 
 ## Fonti
 - PortSwigger — Insecure deserialization: https://portswigger.net/web-security/deserialization

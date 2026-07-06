@@ -3,13 +3,17 @@ tipo: entita
 tag: [linux]
 fase: 1
 fonti: 6
-aggiornato: 2026-06-21
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["sudo"]
 
 ---
 
 # sudo
+
+## In breve
+
+**sudo** è il meccanismo standard di Linux per delegare l'esecuzione di comandi con i privilegi di un altro utente (di norma **root**), governato dalla policy in `/etc/sudoers`. È un binario **SUID-root** e, dal lato offensivo, `sudo -l` è uno dei primissimi comandi di enumerazione: una singola regola `NOPASSWD` su un binario sfruttabile porta spesso a [[Privilege Escalation Linux]] immediata.
 
 ## Cos'è
 
@@ -156,6 +160,13 @@ Il linker dinamico carica `/tmp/evil.so` **prima** del binario; il costruttore `
 
 > **D: Come blocchi il PATH hijack e LD_PRELOAD via sudo?**
 > `Defaults secure_path=...` (PATH fisso, ignora quello utente) ed `env_reset` senza `env_keep` per LD_PRELOAD/LD_LIBRARY_PATH. Così l'ambiente dell'attaccante non sopravvive alla transizione sudo.
+
+## Lab
+
+- **[[TryHackMe]] – Linux PrivEsc** (`tryhackme.com/room/linuxprivesc`): il task dedicato a **sudo** ti fa partire da `sudo -l`, poi sfruttare binari consentiti (`nano`, `find`, `env`, `nmap`) e l'abuso di `LD_PRELOAD` tramite `env_keep`. Pratica: mappare ogni riga di `sudo -l` al pattern GTFOBins corrispondente.
+- **[[TryHackMe]] – Linux Privilege Escalation** (percorso Jr Penetration Tester): laboratorio più ampio dove `sudo` è uno dei vettori accanto a SUID e cron; utile per allenare la scelta del vettore giusto.
+- **[[OverTheWire Bandit]] – livelli 19-20**: pur essendo basati su [[SUID e SGID]] e non su `sudo`, allenano lo stesso concetto di "eseguire un comando con l'identità di un altro utente" e la logica di drop/mantenimento privilegi.
+- **[[GTFOBins]] (esercizio a secco)**: prendi 5 binari a caso della tua VM (`sudo -l` in un lab), cercali sotto la funzione `sudo` su GTFOBins e verifica se e come diventano una shell root. Serve a costruire il riflesso "binario → escape".
 
 ## Collegamenti
 

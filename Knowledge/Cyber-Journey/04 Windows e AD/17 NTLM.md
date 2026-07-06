@@ -3,7 +3,7 @@ tipo: concetto
 tag: [windows, ad]
 fase: 2
 fonti: 3
-aggiornato: 2026-06-20
+aggiornato: 2026-07-02
 stato: maturo
 aliases: ["NTLM"]
 ---
@@ -38,6 +38,18 @@ Gli hash NetNTLMv2 catturati si possono anche craccare con [[Hashcat]] (`-m 5600
 - Abilitare **SMB Signing** e **LDAP Signing/Channel Binding** (bloccano il relay).
 - Disabilitare **LLMNR/NBT-NS** (tolgono a Responder il vettore di cattura).
 - Monitorare Event ID 4624/4776 con tipo di logon NTLM anomalo.
+
+## Lab
+- [[TryHackMe]] → room **Attacking Kerberos** / **Post-Exploitation Basics**: contesto dominio dove NTLM è il fallback e abilita [[Pass-the-Hash]] e [[NTLM Relay]].
+- [[HackTheBox]] → macchine/GOAD con SMB signing disabilitato: cattura NetNTLMv2 con [[Responder]] e inoltralo con `ntlmrelayx.py -t smb://<host> -smb2support`.
+- Lab locale: avvelena LLMNR/NBT-NS con `responder -I eth0`, forza un client ad autenticarsi, cracca il NetNTLMv2 catturato con `hashcat -m 5600`; poi disabilita LLMNR via GPO e verifica che la cattura non avvenga più. Monitora **Event ID 4624/4776** con package NTLM sul DC.
+
+## Domande
+1. **D:** Quando viene usato NTLM al posto di [[Kerberos]]?  **R:** Come fallback: accesso per IP, workgroup, sistemi legacy o quando Kerberos non è disponibile.
+2. **D:** Quali sono i tre passi del meccanismo challenge-response?  **R:** Negotiate, Challenge (nonce del server), Response (challenge cifrata con l'hash NT).
+3. **D:** Perché NTLM è vulnerabile a [[Pass-the-Hash]]?  **R:** L'hash NT non è salato ed è la credenziale effettiva: chi lo possiede si autentica senza conoscere la password.
+4. **D:** Qual è la differenza tra craccare e rilanciare un NetNTLMv2?  **R:** Craccare = brute-force offline (`hashcat -m 5600`); rilanciare (relay) = inoltrare l'autenticazione a un altro servizio con `ntlmrelayx`.
+5. **D:** Quali due misure bloccano il relay NTLM?  **R:** SMB Signing e LDAP Signing/Channel Binding (oltre a disabilitare LLMNR/NBT-NS per togliere il vettore di cattura).
 
 ## Collegamenti
 - [[Kerberos]]

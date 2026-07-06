@@ -3,14 +3,15 @@ tipo: concetto
 tag:
   - fondamenti
 fase: 0
-fonti: 1
-aggiornato: 2026-06-22
+fonti: 2
+aggiornato: 2026-07-02
 stato: maturo
 aliases:
   - Cos'è la Sicurezza Informatica
 ---
 # Cos'è la Sicurezza Informatica
 
+## In breve
 La **sicurezza informatica** è l'insieme di pratiche, tecnologie e processi che proteggono sistemi,
 reti e dati da accessi non autorizzati, alterazioni o interruzioni. Detta così sembra astratta; il
 suo nucleo concreto è uno solo: **gestire il rischio** verso i tre pilastri della [[Triade CIA]]
@@ -57,6 +58,18 @@ Una banca protegge i conti con: firewall e segmentazione (perimetro), cifratura 
 (riservatezza), backup giornalieri e ridondanza (disponibilità), firme sulle transazioni (integrità),
 MFA (accesso), un SOC che monitora i log (rilevamento). Periodicamente ingaggia pentester per
 *testare se queste difese reggono davvero* — chiudendo il ciclo offensiva→difesa.
+
+## Lab
+- **[[TryHackMe]]** → percorso *Pre Security* e *Introduction to Cyber Security*: inquadra i domini (offensive, defensive, GRC) e il ciclo attacco→difesa descritto qui.
+- **[[TryHackMe]]** → room *Careers in Cyber* / *Security Principles*: pratica la mappatura di un controllo di sicurezza sui tre pilastri della [[Triade CIA]] e sui ruoli Red/Blue/Purple.
+- Esercizio guidato: per un servizio noto (es. home banking), elenca 5 controlli e classifica ciascuno come offensive/defensive/GRC e su quale asse CIA agisce.
+
+## Domande
+1. **D:** Qual è il fine ultimo di tutte le pratiche di sicurezza secondo la nota? **R:** Gestire il rischio verso i tre pilastri della Triade CIA (Riservatezza, Integrità, Disponibilità); tool, ruoli e certificazioni sono mezzi per questo fine.
+2. **D:** Perché non esiste la sicurezza "al 100%"? **R:** Perché la sicurezza non rende l'attacco impossibile ma solo più costoso del suo guadagno; esiste solo un livello di rischio *accettabile* per un dato contesto.
+3. **D:** Quali sono le tre grandi anime operative della cybersecurity? **R:** Offensive Security (Red Team), Defensive Security (Blue Team) e Governance, Risk & Compliance (GRC).
+4. **D:** Cos'è il Purple Team? **R:** Non un team separato ma la collaborazione tra Red e Blue: l'offensiva che alimenta la difesa.
+5. **D:** Qual è il principio strategico che sta "sopra" i singoli domini tecnici? **R:** La Difesa in Profondità: nessun controllo singolo regge, servono più strati.
 
 ## Collegamenti
 - [[Triade CIA]] · [[Difesa in Profondità]] · [[Vulnerabilità Exploit e Minaccia]] · [[Pentester vs SOC]]
